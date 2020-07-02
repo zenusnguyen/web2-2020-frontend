@@ -15,7 +15,7 @@ import Button from "./styled";
 import React from "react";
 
 export default function index({onClick,title}) {
-    console.log('onClick: ', onClick);
+   
   return (
     <Button>
       <button onClick={onClick} className="">

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-const SignInForm = styled.div`
+const Register = styled.div`
+margin-top:50px;
   display: flex;
   flex-direction: column;
   width: 462px;
@@ -26,6 +27,14 @@ const SignInForm = styled.div`
     margin-left: 5px;
     color: blue;
   }
+  .dualColumn{
+    width:350px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    /* padding-top:20px; */
+  }
 `;
 
-export default SignInForm;
+export default Register;
