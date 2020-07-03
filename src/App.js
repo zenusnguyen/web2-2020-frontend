@@ -1,14 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import SignInPage from "./containers/SignInPage"
-import RegisterPage from "./containers/RegisterPage"
-import './App.css';
+import React from "react";
+import ProfilePage from "./containers/ProfilePage"
+import SignInPage from "./containers/SignInPage";
+import RegisterPage from "./containers/RegisterPage";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import SideMenu from "./components/SideMenu";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-     {/* <SignInPage></SignInPage> */}
-     <RegisterPage></RegisterPage>
+      {/* <SignInPage></SignInPage>
+     <RegisterPage></RegisterPage> */}
+
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <ProfilePage />
+          </Route>
+          <Route path="/register">
+            <RegisterPage />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
