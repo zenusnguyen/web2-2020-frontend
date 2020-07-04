@@ -3,6 +3,7 @@ import ProfilePage from "./containers/ProfilePage";
 import SignInPage from "./containers/SignInPage";
 import RegisterPage from "./containers/RegisterPage";
 import MaganerAccountPage from "./containers/MaganerAccountPage";
+import CreateCardPage from "./containers/CreateCardPage";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import SideMenu from "./components/SideMenu";
 import "./App.css";
@@ -16,7 +17,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <MaganerAccountPage />
+            <CreateCardPage />
           </Route>
           <Route path="/register">
             <RegisterPage />
