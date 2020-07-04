@@ -3,7 +3,7 @@ import styled from "styled-components";
 const MaganerAccountStyled = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #e5e5e5;
+  background-color: #EFF1F2;
   width: 100%;
   font-size: 16;
   font-weight: 500;
@@ -71,6 +71,24 @@ const MaganerAccountStyled = styled.div`
   .selectCard {
     font-size: 16px;
     font-weight: 400;
+  }
+  .dualColumn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: space-between; */
+  }
+  .example {
+    margin-top:-150px;
+    margin-left: 220px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    background-color: #E5E5E5;
+    /* background-color:#EFF1F2; */
+    height: 350px;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
