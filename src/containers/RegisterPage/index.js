@@ -3,19 +3,20 @@ import SignInPageStyle from "./styled";
 import PropTypes from "prop-types";
 import Header from "../../components/Header";
 import RegisterForm from "../../components/RegisterForm";
-export default class index extends Component {
-  static propTypes = {
-    prop: PropTypes,
-  };
+import { useHistory } from "react-router-dom";
+export default function Register() {
+  let history = useHistory();
+  let token = localStorage.getItem("token");
 
-  render() {
-    return (
-      <div style={{ width: "100%", height: "100%" }}>
-        <Header></Header>
-        <SignInPageStyle>
-          <RegisterForm></RegisterForm>
-        </SignInPageStyle>
-      </div>
-    );
+  if(!token) {
+  history.push("/");
   }
+  return (
+    <div style={{ width: "100%", height: "100%" }}>
+      <Header></Header>
+      <SignInPageStyle>
+        <RegisterForm></RegisterForm>
+      </SignInPageStyle>
+    </div>
+  );
 }

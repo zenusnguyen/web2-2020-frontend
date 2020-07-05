@@ -3,6 +3,7 @@ import SignInPageStyle from "./styled";
 import PropTypes from "prop-types";
 import Header from "../../components/Header";
 import SignInForm from "../../components/SignInForm";
+import {axios} from "axios";
 export default class index extends Component {
   static propTypes = {
     prop: PropTypes,

@@ -17,10 +17,19 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <CreateCardPage />
+            <SignInPage />
           </Route>
           <Route path="/register">
             <RegisterPage />
+          </Route>
+          <Route path="/profile">
+            <ProfilePage />
+          </Route>
+          <Route path="/maganer">
+            <MaganerAccountPage />
+          </Route>
+          <Route path="/create">
+            <CreateCardPage />
           </Route>
         </Switch>
       </Router>
