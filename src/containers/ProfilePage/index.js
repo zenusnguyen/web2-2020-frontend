@@ -1,23 +1,12 @@
 import React, { Component, useEffect, useState } from "react";
 import Register from "./styled";
 import InputForm from "../../components/InputForm";
-import Button from "../../components/Button";
-import DatePicker from "../../components/DatePicker";
 import TextArea from "../../components/TextArea";
 import PhotoUpload from "../../components/PhotoUpload";
 import SideMenu from "../../components/SideMenu";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
+
 import * as _ from "lodash";
 export default function Profile() {
-  let history = useHistory();
-  useEffect(() => {
-    // Update the document title using the browser API
-    if (!localStorage.getItem("token")) {
-      history.push("/");
-    }
-  });
-
   return (
     <Register>
       <SideMenu></SideMenu>

@@ -5,7 +5,7 @@ const SideMenuStyle = styled.div`
   padding-left: 24px;
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: 300px;
   min-height: 508px;
   background-color: #ffffff;
 

@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import MaganerAccountStyled from "./styled";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import MaganerAccountStyled from "./styled";  
 import Button from "../../components/Button";
-import AddIcon from "../../assets/add-circle.png";
 import SideMenu from "../../components/SideMenu";
-import Card from "../../components/Card";
+
 import InputForm from "../../components/InputForm";
-import crypto from "crypto";
 import moment from "moment";
 import axios from "axios";
+
 function SpendCard() {
   const [accountType, setAccountType] = useState(1);
   const [currency, setCurrency] = useState("VND");
@@ -25,9 +23,12 @@ function SpendCard() {
         type: accountType,
         card_number: id.toString(),
         account_id: JSON.parse(localStorage.getItem("userAccount")).id,
+        status: "pending",
+        created_date: new Date(),
       }
     );
     if (createCard.status === 200) {
+      setID(Math.floor(100000000000 + Math.random() * 900000000000));
       alert("Create Card success");
     } else {
       alert("Create Card fail");
@@ -61,15 +62,43 @@ function SpendCard() {
 }
 
 function SavingCard() {
-  const [currency, setCurrency] = useState(null);
-  const [term, setTerm] = useState(null);
-  const [interest, setInterest] = useState(null);
+  const [currency, setCurrency] = useState("VND");
+  const [term, setTerm] = useState(1);
+  const [interest, setInterest] = useState("1");
   const [id, setID] = useState(
     Math.floor(100000000000 + Math.random() * 900000000000)
   );
-  const [maturityDate, setMaturityDate] = useState(
-    moment().format("DD-MM-YYYY")
-  );
+  const [maturityDate, setMaturityDate] = useState(moment().add(1, "M"));
+  const originDate = moment();
+  const handlerDate = (value) => {
+    if (value == "1") {
+      setMaturityDate(moment(originDate).add(1, "M"));
+    } else if (value == "2") {
+      setMaturityDate(moment(originDate).add(6, "M"));
+    } else {
+      setMaturityDate(moment(originDate).add(12, "M"));
+    }
+  };
+
+  const handleClick = async () => {
+    const createCard = await axios.post(
+      "http://localhost:1337/spend-accounts",
+      {
+        currency_unit: currency,
+        term_deposit_id: parseInt(term),
+        card_number: id.toString(),
+        account_id: JSON.parse(localStorage.getItem("userAccount")).id,
+        status: "pending",
+        created_date: new Date(),
+      }
+    );
+    if (createCard.status === 200) {
+      setID(Math.floor(100000000000 + Math.random() * 900000000000));
+      alert("Create Card success");
+    } else {
+      alert("Create Card fail");
+    }
+  };
 
   return (
     <div className="dualColumn">
@@ -83,7 +112,7 @@ function SavingCard() {
         </div>
         <div className="selector">
           <p>Term</p>
-          <select onChange={(e) => setCurrency(e.target)}>
+          <select onChange={(e) => handlerDate(e.target.value)}>
             <option value="1">1 month - Interest rate 4.6%</option>
             <option value="2">6 month - Interest rate 6.6%</option>
             <option value="3">12 month - Interest rate 8.6%</option>
@@ -92,7 +121,7 @@ function SavingCard() {
         <InputForm
           Top="24px"
           title="Maturity date"
-          value={maturityDate}
+          value={moment(maturityDate).format("DD-MM-YYYY")}
         ></InputForm>
         <p>Interest payment option </p>
         <form className="selectCard">
@@ -106,7 +135,7 @@ function SavingCard() {
           <p>Your account number</p>
           <input type="text" disabled={true} value={id}></input>
         </div>
-        <Button Width="190px" title="Open Card"></Button>
+        <Button onClick={handleClick} Width="190px" title="Open Card"></Button>
       </div>
       <div className="example">
         <InputForm

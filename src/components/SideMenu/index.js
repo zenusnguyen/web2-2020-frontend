@@ -9,7 +9,7 @@ export default function index() {
       key: 1,
       title: "Home",
       src: "../../assets/home.png",
-      link: "/register",
+      link: "/",
     },
     {
       key: 2,
@@ -33,7 +33,7 @@ export default function index() {
       key: 5,
       title: "Sign out",
       src: "../../assets/signout.png",
-      link:"/signout",
+      link: "/signout",
     },
   ];
   const RenderMenu = () => {

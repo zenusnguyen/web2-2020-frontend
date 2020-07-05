@@ -2,7 +2,7 @@ import React from "react";
 import CardStyled from "./styled";
 import SpendCard from "../../assets/spend.png";
 import Button from "../Button";
-export default function index({ Src, Number, Type, Created }) {
+export default function index({ Src, Number, Type, Created,Status }) {
   return (
     <CardStyled>
       <div className="Card">
@@ -12,6 +12,7 @@ export default function index({ Src, Number, Type, Created }) {
         <p> Number : {Number} </p>
         <p> Type : {Type} </p>
         <p> Created : {Created} </p>
+        <p> Status: {Status} </p>
         <Button
           Width="140px"
           Height="40px"
