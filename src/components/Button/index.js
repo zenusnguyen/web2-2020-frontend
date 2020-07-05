@@ -2,28 +2,20 @@ import Button from "./styled";
 // import Icon from "../../../public/assets/add-circle.png"
 import React from "react";
 
-export default function index({
-  onClick,
-  title,
-  Top,
-  Width,
-  Height,
-  BackgroundColor,
-  Src,
-  Display,
-}) {
-  console.log("onClick: ", onClick);
+export default function index(props) {
+  console.log('props: ', props);
+  
   return (
     <Button
-      Display={Display}
-      onClick={onClick}
-      Top={Top}
-      Width={Width}
-      Height={Height}
-      BackgroundColor={BackgroundColor}
+      Display={props.Display}
+      onClick={props.onClick}
+      Top={props.Top}
+      Width={props.Width}
+      Height={props.Height}
+      BackgroundColor={props.BackgroundColor}
     >
-      <img src={Src || null}></img>
-      <p>{title} </p>
+      <img src={props.Src || null}></img>
+      <p>{props.title} </p>
     </Button>
   );
 }

@@ -11,7 +11,7 @@ const UploadPhotoStyled = styled.div`
    #file-upload-button{
 background-color:black
    } */
-
+   
   button {
     border-radius: 4px;
     width: 130px;
