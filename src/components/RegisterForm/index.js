@@ -9,6 +9,7 @@ import MyDatePickerStyle from "../DatePicker/styled";
 import styled from "styled-components";
 import AddIcon from "../../assets/add-outline.png";
 import Calendar from "../../assets/calendar.png";
+import axios from "axios";
 export default function RegisterForm() {
   const [DateOfBirth, setDateOfBirth] = useState(new Date());
   const [DateOfIssue, setDateOfIssue] = useState(new Date());
@@ -46,6 +47,7 @@ export default function RegisterForm() {
     } else {
       if (pic === "pic1") {
         setPic1(e.target.files[0]);
+        console.log("e.target.files[0]: ", e.target.files[0]);
         setImgUrl1(URL.createObjectURL(e.target.files[0]));
       } else if (pic === "pic2") {
         setPic2(e.target.files[0]);
@@ -75,9 +77,18 @@ export default function RegisterForm() {
     const fileUploaded = event.target.files[0];
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("event: ", event);
+    let data = new FormData();
+    data.append("files", pic1);
+    data.append("files", pic2);
+    
+    const uploadRes = await axios({
+      method: "POST",
+      url: "http://localhost:1337/upload",
+      data,
+    });
+    console.log("uploadRes: ", uploadRes.data);
   };
   return (
     <Register>
