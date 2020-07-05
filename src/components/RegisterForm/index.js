@@ -1,13 +1,20 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import Register from "./styled";
 import InputForm from "../InputForm";
 import Button from "../Button";
-import DatePicker from "../DatePicker";
+import DatePicker from "react-datepicker";
 import TextArea from "../TextArea";
 import PhotoUpload from "../PhotoUpload";
+import MyDatePickerStyle from "../DatePicker/styled";
+import Calendar from "../../assets/calendar.png";
 export default function RegisterForm() {
+  const [DateOfBirth, setDateOfBirth] = useState(new Date());
+  const [DateOfIssue, setDateOfIssue] = useState(new Date());
   const onChangeEmail = (e) => {
     console.log("e: ", e.target.value);
+  };
+  const onChangeDateOfBirth = (e) => {
+    console.log("e: ", e);
   };
 
   return (
@@ -28,7 +35,18 @@ export default function RegisterForm() {
           title=" Phone number  "
           Width="160px"
         ></InputForm>
-        <DatePicker title="Date of birth"></DatePicker>
+        {/* <DatePicker title="Date of birth"></DatePicker> */}
+
+        <MyDatePickerStyle>
+          <div>
+            <p></p>
+            <DatePicker
+              selected={DateOfBirth}
+              onChange={(e) => setDateOfBirth(e)}
+            ></DatePicker>
+          </div>
+          <img src={Calendar}></img>
+        </MyDatePickerStyle>
       </div>
       <TextArea type="text" title="Current address "></TextArea>
       <div className="dualColumn" style={{ marginTop: "20px" }}>
@@ -37,7 +55,16 @@ export default function RegisterForm() {
           title=" ID/ Passport number  "
           Width="160px"
         ></InputForm>
-        <DatePicker title="Date of birth"></DatePicker>
+        <MyDatePickerStyle>
+          <div>
+            <p></p>
+            <DatePicker
+              selected={DateOfIssue}
+              onChange={(e) => setDateOfIssue(e)}
+            ></DatePicker>
+          </div>
+          <img src={Calendar}></img>
+        </MyDatePickerStyle>
       </div>
       <PhotoUpload></PhotoUpload>
       <Button Top="36px" title="Request"></Button>
