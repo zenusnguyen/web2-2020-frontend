@@ -65,7 +65,7 @@ const MaganerAccountStyled = styled.div`
 
       font-size: 24px;
       font-weight: bold;
-      padding-left: 30%;
+      padding-left: 25%;
     }
   }
   .selectCard {

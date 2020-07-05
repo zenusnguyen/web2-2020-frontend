@@ -3,7 +3,6 @@ import SignInForm from "./styled";
 import InputForm from "../InputForm";
 import Button from "../Button";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import auth from "../../utils/auth";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 export default function SignIn() {
@@ -17,18 +16,16 @@ export default function SignIn() {
       password: password,
     });
     if (data.jwt) {
+   
       const userTemp = await axios.get(
         `http://localhost:1337/customer-infors/?id=${data.user.user_info}`
       );
-      console.log("userTemp: ", userTemp);
       await localStorage.setItem("token", data.jwt);
-      await localStorage.setItem("userId", data.user.user_info);
-      await localStorage.setItem("username", data.user.username);
-      await localStorage.setItem("email", data.user.email);
-
+      await localStorage.setItem("userAccount", JSON.stringify(data.user));
+      await localStorage.setItem("userInfo", JSON.stringify(userTemp.data[0]));
       history.push("/profile");
     }
-  };
+  }
 
   return (
     <SignInForm>

@@ -6,75 +6,83 @@ import DatePicker from "../../components/DatePicker";
 import TextArea from "../../components/TextArea";
 import PhotoUpload from "../../components/PhotoUpload";
 import SideMenu from "../../components/SideMenu";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import * as _ from "lodash";
 export default function Profile() {
-  const user = [];
-
-  // const loadUserProfile = async () => {
-    // const userId = localStorage.getItem("userId");
-
-  // const userTemp = await axios.get(
-  //   `http://localhost:1337/customer-infors/?id=${userId}`
-  // );
-
-  // user.push(userTemp.data[0]);
-  // };
-
+  let history = useHistory();
   useEffect(() => {
-    async function loadUserProfile() {
-      const userId = localStorage.getItem("userId");
-      const userTemp = await axios.get(
-        `http://localhost:1337/customer-infors/?id=${userId}`
-      );
-
-      user.push(userTemp.data[0]);
+    // Update the document title using the browser API
+    if (!localStorage.getItem("token")) {
+      history.push("/");
     }
-    loadUserProfile();
   });
 
-  console.log("user", user);
   return (
     <Register>
       <SideMenu></SideMenu>
       <div className="containerForm">
         <p className="SignInTitle">Edit Profile</p>
         <InputForm
-          value={localStorage.getItem("email")}
+          value={JSON.parse(localStorage.getItem("userAccount")).email}
           type="email"
           title="Email "
         ></InputForm>
         <InputForm
           type="text"
-          value={localStorage.getItem("username")}
+          value={JSON.parse(localStorage.getItem("userAccount")).username}
           title="User Name "
         ></InputForm>
-        <InputForm type="password" title="Password "></InputForm>
-        <InputForm type="password" title="Confirm Password "></InputForm>
+        {/* <InputForm type="password" title="Password "></InputForm>
+        <InputForm type="password" title="Confirm Password "></InputForm> */}
         <InputForm
-          value={_.get(user[0], "full_name")}
+          value={JSON.parse(localStorage.getItem("userInfo")).full_name}
           type="text"
           title="Full Name "
         ></InputForm>
         <div className="dualColumn">
           <InputForm
+            value={JSON.parse(localStorage.getItem("userInfo")).phone_number}
             type="number"
             title=" Phone number  "
             Width="160px"
           ></InputForm>
-          <DatePicker title="Date of birth"></DatePicker>
+          {/* <DatePicker title="Date of birth"></DatePicker> */}
+          <InputForm
+            value={JSON.parse(localStorage.getItem("userInfo")).date_of_birth}
+            type="text"
+            title=" Data of issue  "
+            Width="160px"
+          ></InputForm>
         </div>
-        <TextArea type="text" title="Current address "></TextArea>
+        <TextArea
+          value={JSON.parse(localStorage.getItem("userInfo")).address}
+          type="text"
+          title="Current address "
+        ></TextArea>
         <div className="dualColumn" style={{ marginTop: "20px" }}>
           <InputForm
+            value={
+              JSON.parse(localStorage.getItem("userInfo")).identificationNumber
+            }
             type="number"
             title=" ID/ Passport number  "
             Width="160px"
           ></InputForm>
-          <DatePicker title="Date of birth"></DatePicker>
+          {/* <DatePicker value= {JSON.parse(localStorage.getItem("userInfo")).date_of_birth} title="Date of birth"></DatePicker> */}
+
+          <InputForm
+            value={JSON.parse(localStorage.getItem("userInfo")).date_of_issue}
+            type="text"
+            title=" Data of issue  "
+            Width="160px"
+          ></InputForm>
         </div>
-        <PhotoUpload></PhotoUpload>
-        <Button Top="36px" title="Update"></Button>
+        <PhotoUpload
+          value1={JSON.parse(localStorage.getItem("userInfo")).img1}
+          value2={JSON.parse(localStorage.getItem("userInfo")).img2}
+        ></PhotoUpload>
+        {/* <Button Top="36px" title="Update"></Button> */}
       </div>
     </Register>
   );

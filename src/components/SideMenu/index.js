@@ -15,21 +15,25 @@ export default function index() {
       key: 2,
       title: "Transfer funds",
       src: "../../assets/transfer.png",
+      // link: "/home",
     },
     {
       key: 3,
       title: "Manage accounts",
       src: "../../assets/card.png",
+      link: "/manage",
     },
     {
       key: 4,
-      title: "Edit profile",
+      title: "Profile",
       src: "../../assets/person.png",
+      link: "/profile",
     },
     {
       key: 5,
       title: "Sign out",
       src: "../../assets/signout.png",
+      link:"/signout",
     },
   ];
   const RenderMenu = () => {

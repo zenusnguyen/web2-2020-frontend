@@ -6,57 +6,93 @@ import AddIcon from "../../assets/add-circle.png";
 import SideMenu from "../../components/SideMenu";
 import Card from "../../components/Card";
 import InputForm from "../../components/InputForm";
-
+import crypto from "crypto";
+import moment from "moment";
+import axios from "axios";
 function SpendCard() {
+  const [accountType, setAccountType] = useState(1);
+  const [currency, setCurrency] = useState("VND");
+
+  const [id, setID] = useState(
+    Math.floor(100000000000 + Math.random() * 900000000000)
+  );
+
+  const handleClick = async () => {
+    const createCard = await axios.post(
+      "http://localhost:1337/spend-accounts",
+      {
+        currency_unit: currency,
+        type: accountType,
+        card_number: id.toString(),
+        account_id: JSON.parse(localStorage.getItem("userAccount")).id,
+      }
+    );
+    if (createCard.status === 200) {
+      alert("Create Card success");
+    } else {
+      alert("Create Card fail");
+    }
+  };
+
   return (
     <div className="spendCard">
       <div className="selector">
         <p>Account type</p>
-        <select>
-          <option value="Silver">Silver</option>
-          <option value="Gold">Gold</option>
-          <option value="Platinum">Platinum</option>
+        <select onChange={(e) => setAccountType(parseInt(e.target.value))}>
+          <option value="1">Silver</option>
+          <option value="2">Gold</option>
+          <option value="3">Platinum</option>
         </select>
       </div>
       <div className="selector">
         <p>Currency unit</p>
-        <select>
+        <select onChange={(e) => setAccountType(e.target)}>
           <option value="VND">₫ VND - Vietnamese Dong</option>
           <option value="USD"> $ USD- Dollar</option>
         </select>
       </div>
       <div className="accountNumber">
         <p>Your account number</p>
-        <input type="text" disabled={true} value="01234567890"></input>
+        <input type="text" disabled={true} value={id}></input>
       </div>
-      <Button Width="190px" title="Open Card"></Button>
+      <Button onClick={handleClick} Width="190px" title="Open Card"></Button>
     </div>
   );
 }
 
 function SavingCard() {
+  const [currency, setCurrency] = useState(null);
+  const [term, setTerm] = useState(null);
+  const [interest, setInterest] = useState(null);
+  const [id, setID] = useState(
+    Math.floor(100000000000 + Math.random() * 900000000000)
+  );
+  const [maturityDate, setMaturityDate] = useState(
+    moment().format("DD-MM-YYYY")
+  );
+
   return (
     <div className="dualColumn">
       <div className="spendCard">
         <div className="selector">
           <p>Currency unit</p>
-          <select>
+          <select id="currency">
             <option value="VND">₫ VND - Vietnamese Dong</option>
-            <option value="USD"> $ USD- Dollar</option>
+            <option value="USD">$ USD- Dollar</option>
           </select>
         </div>
         <div className="selector">
           <p>Term</p>
-          <select>
-            <option value="Silver">1 month - Interest rate 4.6%</option>
-            <option value="Gold">6 month - Interest rate 6.6%</option>
-            <option value="Platinum">12 month - Interest rate 8.6%</option>
+          <select onChange={(e) => setCurrency(e.target)}>
+            <option value="1">1 month - Interest rate 4.6%</option>
+            <option value="2">6 month - Interest rate 6.6%</option>
+            <option value="3">12 month - Interest rate 8.6%</option>
           </select>
         </div>
         <InputForm
           Top="24px"
           title="Maturity date"
-          value=" 23/12/2020"
+          value={maturityDate}
         ></InputForm>
         <p>Interest payment option </p>
         <form className="selectCard">
@@ -68,7 +104,7 @@ function SavingCard() {
         </form>
         <div className="accountNumber">
           <p>Your account number</p>
-          <input type="text" disabled={true} value="01234567890"></input>
+          <input type="text" disabled={true} value={id}></input>
         </div>
         <Button Width="190px" title="Open Card"></Button>
       </div>
@@ -93,7 +129,6 @@ function SavingCard() {
 export default function CreateCard() {
   const [isSaving, setIsSaving] = useState(false);
   const Handler = () => {
-    console.log("isSaving: ", isSaving);
     setIsSaving(!isSaving);
   };
   if (isSaving)
@@ -106,18 +141,19 @@ export default function CreateCard() {
           <form className="selectCard">
             <input
               type="radio"
-              name="gender"
+              name="spend"
               onClick={Handler}
               defaultValue="spend"
-            />{" "}
+            />
             Spend account
             <br />
             <input
+              checked={true}
               type="radio"
-              name="gender"
+              name="saving"
               onClick={Handler}
-              defaultValue="saving"
-            />{" "}
+              defaultValue="spend"
+            />
             Savings account
           </form>
 
@@ -149,7 +185,6 @@ export default function CreateCard() {
             />{" "}
             Savings account
           </form>
-
 
           <SpendCard></SpendCard>
         </div>

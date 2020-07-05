@@ -13,7 +13,7 @@ export default class index extends Component {
         <div className="containerForm">
           <div className="titleWithButton">
             <p className="SignInTitle"> Manage accounts</p>
-            <Link to="/register">
+            <Link to="/create">
               <Button
                 key="1"
                 Top="0px"

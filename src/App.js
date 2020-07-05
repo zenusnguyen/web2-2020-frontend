@@ -2,11 +2,26 @@ import React from "react";
 import ProfilePage from "./containers/ProfilePage";
 import SignInPage from "./containers/SignInPage";
 import RegisterPage from "./containers/RegisterPage";
-import MaganerAccountPage from "./containers/MaganerAccountPage";
+import ManageAccountPage from "./containers/MaganerAccountPage";
 import CreateCardPage from "./containers/CreateCardPage";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import SideMenu from "./components/SideMenu";
 import "./App.css";
+
+function SignOut() {
+  let history = useHistory();
+
+  history.push("/");
+  if (localStorage) {
+    localStorage.clear();
+  }
+
+  if (sessionStorage) {
+    sessionStorage.clear();
+  }
+  return <SignInPage></SignInPage>;
+}
 
 function App() {
   return (
@@ -25,11 +40,14 @@ function App() {
           <Route path="/profile">
             <ProfilePage />
           </Route>
-          <Route path="/maganer">
-            <MaganerAccountPage />
+          <Route path="/manage">
+            <ManageAccountPage />
           </Route>
           <Route path="/create">
             <CreateCardPage />
+          </Route>
+          <Route path="/signout">
+            <SignOut />
           </Route>
         </Switch>
       </Router>

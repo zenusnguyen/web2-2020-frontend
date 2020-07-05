@@ -23,7 +23,7 @@ export default class MyDatePicker extends React.Component {
         <div>
           <p>{this.props.title}</p>
           <DatePicker
-            selected={this.state.startDate}
+            selected={new Date()}
             onChange={this.handleChange}
           ></DatePicker>
         </div>
