@@ -4,7 +4,7 @@ const Register = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #e5e5e5;
-  padding-left: 75px;
+
   width: 100%;
   /* justify-content: flex-start; */
   .containerForm {

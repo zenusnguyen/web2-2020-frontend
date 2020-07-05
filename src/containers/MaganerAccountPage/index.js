@@ -25,7 +25,6 @@ export default function MaganeAccount() {
   const [data, setData] = useState(temp);
 
   data.forEach((item) => {
-    console.log("item: ", item);
     if (item.type === "1") {
       item.type = "Silver";
     } else if (item.type === "2") {
@@ -35,15 +34,17 @@ export default function MaganeAccount() {
     }
   });
 
-  useEffect(async () => {
-    const result = await axios.post(
-      "http://localhost:1337/spend-accounts/findByAccount",
-      {
-        account_id: JSON.parse(localStorage.getItem("userAccount")).id,
-      }
-    );
-    console.log("result: ", result);
-    setData(result.data);
+  useEffect(() => {
+    async function Fecth() {
+      const result = await axios.post(
+        "http://localhost:1337/spend-accounts/findByAccount",
+        {
+          account_id: JSON.parse(localStorage.getItem("userAccount")).id,
+        }
+      );
+      setData(result.data);
+    }
+    Fecth();
   }, []);
   const RenderCard = () => {
     return data.map((items) => (
@@ -53,6 +54,7 @@ export default function MaganeAccount() {
         Type={items.type}
         Status={items.status}
         Created={items.created_date}
+        TypeCard={items.term_deposit_id}
       ></Card>
     ));
   };

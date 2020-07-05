@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MaganerAccountStyled from "./styled";  
+import MaganerAccountStyled from "./styled";
 import Button from "../../components/Button";
 import SideMenu from "../../components/SideMenu";
 
@@ -125,8 +125,13 @@ function SavingCard() {
         ></InputForm>
         <p>Interest payment option </p>
         <form className="selectCard">
-          <input type="radio" name="gender" defaultValue="spend" /> Add into my
-          Spend account
+          <input
+            checked="true"
+            type="radio"
+            name="gender"
+            defaultValue="spend"
+          />{" "}
+          Add into my Spend account
           <br />
           <input type="radio" name="gender" defaultValue="saving" /> Add to the
           balance and renew for another term
@@ -169,6 +174,7 @@ export default function CreateCard() {
           <p>I want to open </p>
           <form className="selectCard">
             <input
+              checked={!isSaving}
               type="radio"
               name="spend"
               onClick={Handler}
@@ -177,11 +183,11 @@ export default function CreateCard() {
             Spend account
             <br />
             <input
-              checked={true}
+              checked={isSaving}
               type="radio"
               name="saving"
               onClick={Handler}
-              defaultValue="spend"
+              defaultValue="saving"
             />
             Savings account
           </form>
@@ -199,16 +205,18 @@ export default function CreateCard() {
           <p>I want to open </p>
           <form className="selectCard">
             <input
+               checked={!isSaving}
               type="radio"
-              name="gender"
+              name="spend"
               onClick={Handler}
               defaultValue="spend"
             />{" "}
             Spend account
             <br />
             <input
+              checked={isSaving}
               type="radio"
-              name="gender"
+              name="saving"
               onClick={Handler}
               defaultValue="saving"
             />{" "}

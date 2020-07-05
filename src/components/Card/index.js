@@ -1,8 +1,21 @@
 import React from "react";
 import CardStyled from "./styled";
 import SpendCard from "../../assets/spend.png";
+import SavingCard from "../../assets/deposit.png";
 import Button from "../Button";
-export default function index({ Src, Number, Type, Created,Status }) {
+export default function index({
+  Src,
+  Number,
+  Type,
+  Created,
+  Status,
+  TypeCard,
+}) {
+  if (TypeCard === null) {
+    Src = SpendCard;
+  } else {
+    Src = SavingCard;
+  }
   return (
     <CardStyled>
       <div className="Card">
