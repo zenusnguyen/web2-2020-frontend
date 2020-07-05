@@ -19,8 +19,8 @@ export default function RegisterForm() {
   const [confirmPassword, setConfirmPassword] = useState(null);
   const [fullName, setFullName] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
-  const [address, SetAddress] = useState(null);
-  const [passport, SetPassport] = useState(null);
+  const [address, setAddress] = useState(null);
+  const [passport, setPassport] = useState(null);
   let history = useHistory();
 
   const onChangeEmail = (e) => {
@@ -71,6 +71,9 @@ export default function RegisterForm() {
     }
   };
 
+  const handleAdress = (event) => {
+    console.log("event: ", event);
+  };
   const Button = styled.button`
     /* Insert your favorite CSS code to style a button */
 
@@ -91,9 +94,9 @@ export default function RegisterForm() {
     const fileUploaded = event.target.files[0];
   };
   function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
-  
+
   async function handleSubmit() {
     let data = new FormData();
     data.append("files", pic1);
@@ -129,12 +132,11 @@ export default function RegisterForm() {
       }
     );
     if (createAccount.data.jwt) {
-      alert("Register Success")
-      await sleep(2000);
+      alert("Register Success");
+      await sleep(1000);
       history.push("/");
-    }
-    else{
-      // alert("Check your input")
+    } else {
+      alert("Check your input");
     }
   }
 
@@ -186,14 +188,14 @@ export default function RegisterForm() {
           <img src={Calendar}></img>
         </MyDatePickerStyle>
       </div>
-      <TextArea
-        onChange={(e) => SetAddress(e.target.value)}
-        type="text"
-        title="Current address "
-      ></TextArea>
+
+      <div className="address">
+        <p>Current address</p>
+        <textarea onChange={(e) => setAddress(e.target.value)}></textarea>
+      </div>
       <div className="dualColumn">
         <InputForm
-          onChange={(e) => SetPassport(e.target.value)}
+          onChange={(e) => setPassport(e.target.value)}
           type="number"
           title=" ID/ Passport number  "
           Width="160px"
