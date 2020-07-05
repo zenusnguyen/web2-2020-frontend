@@ -5,6 +5,7 @@ export default function index(props) {
     <InputForm Top={props.Top} Width={props.Width}>
       <p>{props.title}</p>
       <input
+        // required
         onChange={props.onChange}
         type={props.type}
         value={props.value}

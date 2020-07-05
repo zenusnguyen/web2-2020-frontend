@@ -28,6 +28,7 @@ const Register = styled.div`
     color: blue;
   }
   .dualColumn {
+    margin-top: 40px;
     width: 350px;
     display: flex;
     flex-direction: row;

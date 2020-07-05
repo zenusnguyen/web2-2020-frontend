@@ -5,7 +5,7 @@ const MyDatePicker = styled.div`
   /* position: absolute; */
   display: flex;
   flex-direction: row;
-    margin-top: 25px;
+    margin-top: 0px;
   p {
     font-size: 16px;
     font-weight: 500;
@@ -22,7 +22,7 @@ const MyDatePicker = styled.div`
     width: 20px;
     height: 20px;
     margin-left: 120px;
-    margin-top: 15px;
+    margin-top: 38px;
     position: absolute;
     border-color: #D9DADB
   }
