@@ -30,6 +30,9 @@ const MaganerAccountStyled = styled.div`
     height: 55px;
     width: 100%;
   }
+  .listCard{
+    
+  }
 `;
 
 export default MaganerAccountStyled;

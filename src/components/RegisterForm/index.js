@@ -2,9 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import Register from "./styled";
 import { useHistory } from "react-router-dom";
 import InputForm from "../InputForm";
-import Button from "../Button";
 import DatePicker from "react-datepicker";
-import TextArea from "../TextArea";
 import MyDatePickerStyle from "../DatePicker/styled";
 import styled from "styled-components";
 import AddIcon from "../../assets/add-outline.png";
@@ -22,14 +20,6 @@ export default function RegisterForm() {
   const [address, setAddress] = useState(null);
   const [passport, setPassport] = useState(null);
   let history = useHistory();
-
-  const onChangeEmail = (e) => {
-    console.log("e: ", e.target.value);
-  };
-  const onChangeDateOfBirth = (e) => {
-    console.log("e: ", e);
-  };
-  // pic
 
   const [pic1, setPic1] = useState(null);
   const [pic2, setPic2] = useState(null);
@@ -59,20 +49,14 @@ export default function RegisterForm() {
     } else {
       if (pic === "pic1") {
         setPic1(e.target.files[0]);
-        console.log("e.target.files[0]: ", e.target.files[0]);
 
         setImgUrl1(URL.createObjectURL(e.target.files[0]));
       } else if (pic === "pic2") {
         setPic2(e.target.files[0]);
-        console.log("e.target.files[0]: ", e.target.files[0]);
 
         setImgUrl2(URL.createObjectURL(e.target.files[0]));
       }
     }
-  };
-
-  const handleAdress = (event) => {
-    console.log("event: ", event);
   };
   const Button = styled.button`
     /* Insert your favorite CSS code to style a button */
