@@ -7,6 +7,7 @@ import MyDatePickerStyle from "../DatePicker/styled";
 import styled from "styled-components";
 import AddIcon from "../../assets/add-outline.png";
 import Calendar from "../../assets/calendar.png";
+import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 export default function RegisterForm() {
   const [DateOfBirth, setDateOfBirth] = useState(new Date());
