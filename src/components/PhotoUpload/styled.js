@@ -13,12 +13,14 @@ background-color:black
    } */
    
   button {
+    padding:0px;
     border-radius: 4px;
     width: 130px;
     height: 130px;
-    border: 1px;
+    border: 5px;
     background-color: white;
-    border-style: dashed;
+    border-style: dashed dotted;
+    box-sizing:border-box;
   }
   img {
     width: 30px;
