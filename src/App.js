@@ -32,7 +32,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <SignInPage />
+            <RegisterPage />
           </Route>
           <Route path="/register">
             <RegisterPage />
