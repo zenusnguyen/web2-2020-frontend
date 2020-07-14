@@ -4,6 +4,7 @@ import SignInPage from "./containers/SignInPage";
 import RegisterPage from "./containers/RegisterPage";
 import ManageAccountPage from "./containers/MaganerAccountPage";
 import CreateCardPage from "./containers/CreateCardPage";
+import TransferPage from "./containers/TransferPage";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import SideMenu from "./components/SideMenu";
@@ -32,7 +33,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <RegisterPage />
+            <SignInPage />
           </Route>
           <Route path="/register">
             <RegisterPage />
@@ -48,6 +49,9 @@ function App() {
           </Route>
           <Route path="/signout">
             <SignOut />
+          </Route>
+          <Route path="/transfer">
+            <TransferPage />
           </Route>
         </Switch>
       </Router>

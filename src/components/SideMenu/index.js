@@ -15,7 +15,7 @@ export default function index() {
       key: 2,
       title: "Transfer funds",
       src: "../../assets/transfer.png",
-      // link: "/home",
+      link: "/transfer",
     },
     {
       key: 3,
