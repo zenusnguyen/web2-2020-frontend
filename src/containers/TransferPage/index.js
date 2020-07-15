@@ -17,21 +17,21 @@ export default function TransferPage(){
                 <h3 className="title">Transfer funds</h3>
                 <br />
                 <div>
-                    <p>Transfer style </p>
+                    <p>Transfer tyle </p>
                     <input
                         defaultChecked
                         type="radio"
                         name="transferstyle"
                         defaultValue="intra"
                         />{" "}
-                        Intra bank 
+                        Intra-bank transfer (Same bank)
                         <br />
                         <input
                         type="radio"
                         name="transferstyle"
                         defaultValue="inter"
                         />{" "}
-                        Inter Bank
+                        Inter-bank transfer (Across banks)
                 </div>
                 <br />
                 <div>
@@ -49,6 +49,7 @@ export default function TransferPage(){
                         type="text"
                         title="Beneficiary account"
                         name={"bankaccount"}
+                        placeholder = {"Enter account number"}
                     ></InputForm>
                     <InputForm
                         defaultValue={0}
@@ -56,7 +57,7 @@ export default function TransferPage(){
                         type="text"
                         title="Amount"
                         name={"amount"}
-                        
+                        placeholder = {"Enter amount"}
                     ></InputForm>
                       <TextArea
                         value={"Tien HP"}
@@ -65,7 +66,7 @@ export default function TransferPage(){
                         name={"remark"}
                       
                         ></TextArea>
-                    <Button  Width="190px" title="Tranfer" BackgroundColor={"#4F6EF6"} ></Button>
+                    <Button  Width="190px" title="Transfer" BackgroundColor={"#4F6EF6"} ></Button>
                 </div>
                 
 
