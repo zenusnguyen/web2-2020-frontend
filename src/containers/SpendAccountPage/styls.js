@@ -37,5 +37,18 @@ const SpedingAccuontStyled = styled
     }
     .div button:hover{
     	background-color: #66ccff !important;
+    }
+    
+    }
+   	.type{
+    width:90%;
+    border-radius: 5px;
+    padding: 5px 12px;
+    
+    }
+ 	.bor{
+    	font-size: 15px;
+    	border:1px solid black;
+        padding-left: 12px;
     }`
     export default SpendingAccountStyled;
