@@ -3,7 +3,7 @@ import styled from "styled-components";
 const MaganerAccountStyled = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #e5e5e5;
+  background-color: #F5F7F9;
   width: 100%;
   /* justify-content: flex-start; */
   .containerForm {

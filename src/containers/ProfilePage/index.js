@@ -7,6 +7,7 @@ import SideMenu from "../../components/SideMenu";
 
 import * as _ from "lodash";
 export default function Profile() {
+  const User = JSON.parse(localStorage.getItem("userAccount"));
   return (
     <Register>
       <SideMenu></SideMenu>
@@ -54,7 +55,8 @@ export default function Profile() {
             value={
               JSON.parse(localStorage.getItem("userInfo")).identificationNumber
             }
-            type="number"
+            pattern="[0-9]"
+            type="tel"
             title=" ID/ Passport number  "
             Width="160px"
           ></InputForm>

@@ -15,7 +15,7 @@ const InputForm = styled.div`
     font-size: 16px;
     width: 100%;
     height: 48px;
-    border: 1px solid #D9DADB;
+    border: 1px solid #d9dadb;
     border-radius: 5px;
   }
 `;
