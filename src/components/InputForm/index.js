@@ -8,7 +8,9 @@ export default function index(props) {
         // required
         onChange={props.onChange}
         type={props.type}
-        value={props.value}
+        defaultValue={props.value}
+        name = {props.name}
+        placeholder={props.placeholder}
       ></input>
     </InputForm>
   );

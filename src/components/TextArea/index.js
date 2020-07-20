@@ -5,7 +5,7 @@ export default function Editor(props) {
   return (
     <TextAreaForm Width={props.Width}>
       <p>{props.title}</p>
-      <textarea value={props.value} onchange={props.onChange}></textarea>
+      <textarea defaultValue={props.value} onChange={props.onChange}></textarea>
     </TextAreaForm>
   );
 }
