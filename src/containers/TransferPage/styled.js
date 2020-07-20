@@ -3,7 +3,7 @@ import styled from "styled-components";
 const TransferStyled = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #e5e5e5;
+  background-color: #f5f7f9;
   width: 100%;
   /* justify-content: flex-start; */
   .containerForm {
@@ -23,8 +23,18 @@ const TransferStyled = styled.div`
     font-size: 32px;
     font-weight: bold;
   }
-
- 
+  .extraBanking {
+    width: 350px;
+    /* height: 50px; */
+    padding-bottom: 20px;
+    p {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    input {
+      height: 35px;
+    }
+  }
 `;
 
 export default TransferStyled;

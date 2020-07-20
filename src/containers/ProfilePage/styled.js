@@ -3,8 +3,7 @@ import styled from "styled-components";
 const Register = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #e5e5e5;
-
+  background-color: #f5f7f9;
   width: 100%;
   /* justify-content: flex-start; */
   .containerForm {

@@ -27,9 +27,6 @@ function SignOut() {
 function App() {
   return (
     <div className="App">
-      {/* <SignInPage></SignInPage>
-     <RegisterPage></RegisterPage> */}
-
       <Router>
         <Switch>
           <Route exact path="/">
@@ -37,7 +34,7 @@ function App() {
           </Route>
           <Route path="/register">
             <RegisterPage />
-          </Route>
+          </Route>s
           <Route path="/profile">
             <ProfilePage />
           </Route>
