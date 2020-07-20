@@ -9,18 +9,7 @@ import axios from "axios";
 
 export default function MaganeAccount() {
   const temp = [
-    {
-      account_id: 17,
-      balance: null,
-      card_number: "825962638187",
-      closed_date: null,
-      created_date: "2020-07-05",
-      currency_unit: "VND",
-      id: 10,
-      status: "pending",
-      term_deposit_id: null,
-      type: 1,
-    },
+   
   ];
   const [data, setData] = useState(temp);
 

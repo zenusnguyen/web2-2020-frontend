@@ -12,6 +12,7 @@ import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
 import Calendar from "../../assets/calendar.png";
 
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 export default function Register() {
   let history = useHistory();
   let token = localStorage.getItem("token");
@@ -213,7 +214,7 @@ export default function Register() {
             <p style={{ fontSize: "16px", fontWeight: "500" }}>Upload photo</p>
             <div className="uploadImage">
               <div>
-                <Button onClick={handleClick1}>
+                <Button style={{ padding: "0px" }} onClick={handleClick1}>
                   <img style={getPreview(img1)}></img>
                 </Button>
                 <input
@@ -227,7 +228,7 @@ export default function Register() {
                 <p style={{ marginLeft: "50px", marginTop: "10px" }}>Front</p>
               </div>
               <div>
-                <Button onClick={handleClick2}>
+                <Button style={{ padding: "0px" }} onClick={handleClick2}>
                   <img style={getPreview(img2)}></img>
                 </Button>
                 <input
@@ -244,12 +245,13 @@ export default function Register() {
           </div>
 
           <button onClick={handleSubmit} className="registerButton">
-            {" "}
-            Request{" "}
+            Request
           </button>
           <div className="create">
-            <p>Don’t have an account? </p>
-            <p className="createHere">Create here</p>
+            <p>Already have an account? </p>
+            <p className="createHere">
+              <Link to="/"> Sign in here</Link>
+            </p>
           </div>
         </div>
       </SignInPageStyle>
