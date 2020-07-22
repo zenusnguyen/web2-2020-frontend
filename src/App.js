@@ -5,6 +5,7 @@ import RegisterPage from "./containers/RegisterPage";
 import ManageAccountPage from "./containers/MaganerAccountPage";
 import CreateCardPage from "./containers/CreateCardPage";
 import TransferPage from "./containers/TransferPage";
+import AccountDetailPage from "./containers/AccountDetailPage";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import SideMenu from "./components/SideMenu";
@@ -50,6 +51,9 @@ function App() {
           </Route>
           <Route path="/transfer">
             <TransferPage />
+          </Route>
+          <Route path="/detail">
+            <AccountDetailPage />
           </Route>
         </Switch>
       </Router>
