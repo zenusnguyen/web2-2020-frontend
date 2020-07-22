@@ -1,4 +1,7 @@
 .App {
-  width: 100%;
-  min-height: 979px;
+  /* width: 100%;
+  min-height: 700px; */
+  display: flex;
+  flex: 1;
+ 
 }

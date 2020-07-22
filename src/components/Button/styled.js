@@ -10,7 +10,7 @@ const Button = styled.div`
   border-radius: 5px;
   align-items: center;
   justify-content: space-around;
-  padding:20px;
+  padding: 20px;
   p {
     margin: 0px;
     color: ${(props) => props.Color || "white"};

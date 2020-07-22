@@ -25,7 +25,7 @@ export default function index() {
     },
     {
       key: 4,
-      title: "Profile",
+      title: "My profile",
       src: "../../assets/person.png",
       link: "/profile",
     },
