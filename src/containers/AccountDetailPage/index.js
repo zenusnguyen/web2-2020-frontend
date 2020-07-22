@@ -2,8 +2,8 @@ import React, { Component, useEffect, useState } from "react";
 import Register from "./styled";
 import InputForm from "../../components/InputForm";
 import TextArea from "../../components/TextArea";
-import PhotoUpload from "../../components/PhotoUpload";
 import SideMenu from "../../components/SideMenu";
+import Card from "../../components/Card";
 
 import * as _ from "lodash";
 export default function AccountDetail() {
@@ -14,6 +14,13 @@ export default function AccountDetail() {
       <SideMenu></SideMenu>
       <div className="containerForm">
         <p className="SignInTitle">Account Detail</p>
+        <Card>
+          <Card
+            Number={"1760457"}
+            Type={"Gold"}
+            Status={"Active"}
+          ></Card>
+        </Card>
         <InputForm
           value={UserAccount.email}
           type="email"
