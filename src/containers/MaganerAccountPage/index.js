@@ -8,9 +8,7 @@ import Card from "../../components/Card";
 import axios from "axios";
 
 export default function MaganeAccount() {
-  const temp = [
-   
-  ];
+  const temp = [];
   const [data, setData] = useState(temp);
 
   data.forEach((item) => {
@@ -35,9 +33,11 @@ export default function MaganeAccount() {
     }
     Fecth();
   }, []);
+
   const RenderCard = () => {
     return data.map((items) => (
       <Card
+        // Onclick={HandlerClick}
         key={items.key}
         Number={items.card_number}
         Type={items.type}

@@ -51,7 +51,9 @@ export default function SignIn() {
             type="password"
             title="Password "
           ></InputForm>
-          <Button onClick={handleClick} Top="36px" title="Sign In"></Button>
+          <button onClick={handleClick} className="registerButton">
+            Sign in
+          </button>
           <div className="create">
             <p>Don’t have an account? </p>
             <p className="createHere">

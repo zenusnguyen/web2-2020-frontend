@@ -18,7 +18,14 @@ const SignInPageStyle = styled.div`
     border-radius: 15px;
     align-items: center;
   }
-
+  .registerButton {
+    width: 350px;
+    height: 50px;
+    background-color: #feba46;
+    border: 0px;
+    color: white;
+    border-radius: 5px;
+  }
   .SignInTitle {
     margin-top: 60px;
     font-size: 32px;

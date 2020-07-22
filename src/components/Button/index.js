@@ -3,12 +3,12 @@ import Button from "./styled";
 import React from "react";
 
 export default function index(props) {
- 
-  
+  console.log("propsssssssssss: ", props);
+
   return (
     <Button
       Display={props.Display}
-      onClick={props.onClick}
+      onClick={props.onclick}
       Top={props.Top}
       Width={props.Width}
       Height={props.Height}

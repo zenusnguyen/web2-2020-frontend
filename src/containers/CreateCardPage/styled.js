@@ -84,7 +84,7 @@ const MaganerAccountStyled = styled.div`
     display: flex;
     flex-direction: column;
     width: 400px;
-    background-color: #E5E5E5;
+    background-color: #F7D46E;
     /* background-color:#EFF1F2; */
     height: 350px;
     align-items: center;
