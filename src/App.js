@@ -34,7 +34,8 @@ function App() {
           </Route>
           <Route path="/register">
             <RegisterPage />
-          </Route>s
+          </Route>
+          s
           <Route path="/profile">
             <ProfilePage />
           </Route>

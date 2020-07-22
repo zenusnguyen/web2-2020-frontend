@@ -10,12 +10,19 @@ export default function index({
   Created,
   Status,
   TypeCard,
+  Onclick,
 }) {
   if (TypeCard === null) {
     Src = SpendCard;
   } else {
     Src = SavingCard;
   }
+
+  const HandlerClick = () => {
+    console.log("??????????????????");
+    return <div></div>;
+  };
+
   return (
     <CardStyled>
       <div className="Card">
@@ -27,6 +34,7 @@ export default function index({
         <p> Created : {Created} </p>
         <p> Status: {Status} </p>
         <Button
+          onclick={HandlerClick}
           Width="140px"
           Height="40px"
           Top="0px"
