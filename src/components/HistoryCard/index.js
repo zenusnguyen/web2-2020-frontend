@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import CardStyled from "./styled";
 import Icon from "../../assets/wallet.svg";
-export default function HistoryCard({
-  TypeCard,
-  Onclick,
-  Status,
-  TransferType,
-  Date,
-  Amount,
-  RemainingBalance,
-}) {
-  let Style, Style2 = "";
-  if (Amount < 0) {
+// {
+//   TypeCard,
+//   Onclick,
+//   Status,
+//   TransferType,
+//   Date,
+//   Amount,
+//   RemainingBalance,
+// }
+export default function HistoryCard(props) {
+  let Style,
+    Style2 = "";
+  if (props.Amount < 0) {
     Style = "#F45C59";
   } else {
     Style = "#56CD67";
@@ -23,12 +25,12 @@ export default function HistoryCard({
         <img src={Icon}></img>
       </div>
       <div className="detail-left">
-        <p>{TransferType} </p>
-        <p className="subtext"> {Date} </p>
+        <p>{props.TransferType} </p>
+        <p className="subtext"> {props.Date} </p>
       </div>
       <div className="detail-right">
-        <p style={{ color: Style }}> {Amount} </p>
-        <p className="subtext"> {RemainingBalance} </p>
+        <p style={{ color: Style }}> {props.Amount} </p>
+        <p className="subtext"> {props.RemainingBalance} </p>
       </div>
     </CardStyled>
   );

@@ -14,9 +14,9 @@ function InforLine(props) {
   );
 }
 export default function index(props) {
-  console.log('props: ', props);
+  // console.log('props: ', props);
   const { UserAccount, UserInfo } = props;
-  console.log('UserAccount, UserInfo: ', UserAccount, UserInfo);
+  // console.log('UserAccount, UserInfo: ', UserAccount, UserInfo);
   return (
     <CardStyled>
       <InforLine title="Fullname" detail={UserInfo.full_name}></InforLine>

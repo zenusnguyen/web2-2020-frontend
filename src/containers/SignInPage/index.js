@@ -25,17 +25,29 @@ export default function SignIn() {
       password: password,
     });
     if (data.jwt) {
+      console.log("data: ", data);
       const userTemp = await axios.get(
         `http://localhost:1337/customer-infors/?id=${data.user.user_info}`
       );
       await localStorage.setItem("token", data.jwt);
       await localStorage.setItem("userAccount", JSON.stringify(data.user));
       await localStorage.setItem("userInfo", JSON.stringify(userTemp.data[0]));
-      history.push("/profile");
+      if (data.user.role.name === "Admin") {
+        history.push("/all-customers");
+      } else {
+        history.push("/profile");
+      }
     }
   };
   return (
-    <div style={{ width: "100%", height: "100vh", flexDirection: 'column', display: 'flex' }}>
+    <div
+      style={{
+        width: "100%",
+        height: "100vh",
+        flexDirection: "column",
+        display: "flex",
+      }}
+    >
       <Header></Header>
       <SignInPageStyle>
         {/* <SignInForm></SignInForm> */}

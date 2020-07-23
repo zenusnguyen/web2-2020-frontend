@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
 const MaganerAccountStyled = styled.div`
+  position: absolute;
+  z-index: 2;
   display: flex;
   flex-direction: row;
-  background-color: #F5F7F9;
+  background-color: #f5f7f9;
   width: 100%;
+  height: 100%;
   /* justify-content: flex-start; */
   .containerForm {
     padding-top: 40px;
@@ -30,8 +33,10 @@ const MaganerAccountStyled = styled.div`
     height: 55px;
     width: 100%;
   }
-  .listCard{
-    
+  .listCard {
+  }
+  .detailCard {
+    position: absolute;
   }
 `;
 
