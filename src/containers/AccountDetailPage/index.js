@@ -7,22 +7,63 @@ import Select from "react-select";
 import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
 import Calendar from "../../assets/calendar.png";
-
-
 import * as _ from "lodash";
+const DATA = [
+  {
+    key: 1,
+    TransferType: "Transfer",
+    Date: "01/07/2020 10:55 AM",
+    Amount: "+1000000",
+    RemainingBalance: "4250000",
+  },
+  {
+    key: 2,
+    TransferType: "Transfer",
+    Date: "01/07/2020 10:55 AM",
+    Amount: "-1000000",
+    RemainingBalance: "4250000",
+  },
+  {
+    key: 3,
+    TransferType: "Transfer",
+    Date: "01/07/2020 10:55 AM",
+    Amount: "+1000000",
+    RemainingBalance: "4250000",
+  },
+  {
+    key: 4,
+    TransferType: "Transfer",
+    Date: "01/07/2020 10:55 AM",
+    Amount: "-1000000",
+    RemainingBalance: "4250000",
+  },
+];
+
+function RenderHistory() {
+  return DATA.map((item) => (
+    <HistoryCard
+      key={item.key}
+      TransferType={item.TransferType}
+      Date={item.Date}
+      Amount={item.Amount}
+      RemainingBalance={item.RemainingBalance}
+    ></HistoryCard>
+  ));
+}
+
 export default function AccountDetail() {
   // const UserAccount = JSON.parse(localStorage.getItem("userAccount"));
   // const UserInfor = JSON.parse(localStorage.getItem("userInfo"));
   const transactionTypes = [
-      { label: "All types", value: 1 },
-      { label: "Transfer", value: 2 },
-      { label: "Deposit", value: 3 },
+    { label: "All types", value: 1 },
+    { label: "Transfer", value: 2 },
+    { label: "Deposit", value: 3 },
   ];
   const statuses = [
-      { label: "All statuses", value: 1 },
-      { label: "Successful", value: 2 },
-      { label: "Failed", value: 3 },
-    ];
+    { label: "All statuses", value: 1 },
+    { label: "Successful", value: 2 },
+    { label: "Failed", value: 3 },
+  ];
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date("2020/12/31"));
 
@@ -76,30 +117,7 @@ export default function AccountDetail() {
             <img src={Calendar}></img>
           </MyDatePickerStyle>
         </span>
-        <HistoryCard
-          TransferType="Transfer"
-          Date="01/07/2020 10:55 AM"
-          Amount="-1000000"
-          RemainingBalance="4250000"
-        ></HistoryCard>
-        <HistoryCard
-          TransferType="Transfer"
-          Date="30/05/2020 11:30 AM"
-          Amount="+500000"
-          RemainingBalance="5250000"
-        ></HistoryCard>
-        <HistoryCard
-          TransferType="Transfer"
-          Date="28/05/2020 04:00 PM"
-          Amount="-250000"
-          RemainingBalance="4750000"
-        ></HistoryCard>
-        <HistoryCard
-          TransferType="Deposit"
-          Date="19/05/2020 09:00 AM"
-          Amount="+5000000"
-          RemainingBalance="5000000"
-        ></HistoryCard>
+        <RenderHistory></RenderHistory>
       </div>
     </AccountDetailPage>
   );
