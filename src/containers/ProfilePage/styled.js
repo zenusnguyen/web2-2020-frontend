@@ -1,47 +1,28 @@
 import styled from "styled-components";
 
-const Register = styled.div`
+const PersonalPage = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
+  margin-bottom: 40px;
   /* justify-content: flex-start; */
-  .containerForm {
-    padding-top: 40px;
-    padding-left: 75px;
+  .bodyContainer {
+    margin-top: 65px;
     display: flex;
     flex-direction: column;
-
-    min-height: 508px;
-    width: 350px;
-    border-radius: 15px;
-    /* align-items: center; */
-    padding-bottom: 100px;
-    /* justify-content: flex-start; */
+    padding-left: 75px;
+    margin-bottom: 60px;
   }
-  .SignInTitle {
+
+  .pageTitle {
     font-size: 32px;
     font-weight: bold;
   }
-  .create {
-    margin-top: 32px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-  .createHere {
-    margin-left: 5px;
-    color: blue;
-  }
-  .dualColumn {
-    width: 350px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    /* padding-top:20px; */
+  .title {
+    font-size: 24px;
+    font-weight: 600;
   }
 `;
 
-export default Register;
+export default PersonalPage;
