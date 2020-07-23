@@ -35,7 +35,7 @@ export default function SignIn() {
     }
   };
   return (
-    <div style={{ width: "100%", height: Height, minHeight: "500px" }}>
+    <div style={{ width: "100%", height: "100vh", flexDirection: 'column', display: 'flex' }}>
       <Header></Header>
       <SignInPageStyle>
         {/* <SignInForm></SignInForm> */}

@@ -17,9 +17,8 @@ export default function index(props) {
         <img src={Src || SpendCard}></img>
       </div>
       <div className="detail">
-        <p> Number : {props.Number} </p>
-        <p> Type : {props.Type} </p>
-        <p> Created : {props.Created} </p>
+        <p> Number : {Number} </p>
+        <p> Type : {props.TypeCard} </p>
         <p> Status: {props.Status} </p>
         <Button
           // onclick={}
