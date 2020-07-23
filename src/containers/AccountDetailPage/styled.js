@@ -1,16 +1,15 @@
 import styled from "styled-components";
 
-const MaganerAccountStyled = styled.div`
+const AccountDetailPage = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #EFF1F2;
+  background-color: #eff1f2;
   width: 100%;
   font-size: 16;
   font-weight: 500;
   /* justify-content: flex-start; */
   .containerForm {
-    padding-top: 40px;
-    padding-left: 75px;
+    padding: 40px 75px 0;
     display: flex;
     flex-direction: column;
 
@@ -21,75 +20,36 @@ const MaganerAccountStyled = styled.div`
     padding-bottom: 100px;
     /* justify-content: flex-start; */
   }
-  .SignInTitle {
+  .pageTitle {
     font-size: 32px;
     font-weight: bold;
+    margin-bottom: 32px;
   }
-  .titleWithButton {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    height: 55px;
-    width: 100%;
-  }
-  .crateBody {
-    display: flex;
-    flex-direction: column;
-  }
-  .spendCard {
-    display: flex;
-    flex-direction: column;
-  }
-  .selector {
-    display: flex;
-    flex-direction: column;
-    select {
-      width: 350px;
-      height: 50px;
-      padding: 10px;
-    }
-  }
-  .accountNumber {
-    display: flex;
-    flex-direction: column;
-    width: 350px;
-    height: 100px;
-    input {
-      width: 100%;
-      height: 100%;
-      background-color: white;
-      border: 0px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
 
-      font-size: 24px;
-      font-weight: bold;
-      padding-left: 25%;
+  .itemTitle {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .selectInput {
+    width: 350px;
+    padding-bottom: 20px;
+    p {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    input {
+      height: 34px;
     }
   }
-  .selectCard {
-    font-size: 16px;
-    font-weight: 400;
-  }
-  .dualColumn {
+
+  .filterSection {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    /* justify-content: space-between; */
-  }
-  .example {
-    margin-top:-150px;
-    margin-left: 220px;
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    background-color: #F7D46E;
-    /* background-color:#EFF1F2; */
-    height: 350px;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
   }
 `;
 
-export default MaganerAccountStyled;
+export default AccountDetailPage;
