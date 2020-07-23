@@ -8,7 +8,7 @@ const InputForm = styled.div`
   p {
     font-size: 16px;
     font-weight: 500;
-    margin-bottom: 0px;
+    margin-bottom: 4px;
   }
   input {
     padding-left: 16px;
@@ -16,7 +16,7 @@ const InputForm = styled.div`
     width: 100%;
     height: 48px;
     border: 1px solid #d9dadb;
-    border-radius: 5px;
+    border-radius: 4px;
   }
 `;
 

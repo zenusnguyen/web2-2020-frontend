@@ -8,9 +8,11 @@ const TextAreaForm = styled.div`
   p {
     font-size: 16px;
     font-weight: 500;
-    margin-bottom: 0px;
+    margin-bottom: 4px;
   }
   textarea {
+    border: 1px solid #d9dadb;
+    border-radius: 4px;
     padding-left: 16px;
     padding-top: 10px;
     font-size: 16px;

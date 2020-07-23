@@ -31,7 +31,6 @@ export default function index({
       <div className="detail">
         <p> Number : {Number} </p>
         <p> Type : {Type} </p>
-        <p> Created : {Created} </p>
         <p> Status: {Status} </p>
         <Button
           onclick={HandlerClick}
