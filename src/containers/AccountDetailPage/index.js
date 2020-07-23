@@ -7,6 +7,7 @@ import Select from "react-select";
 import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
 import Calendar from "../../assets/calendar.png";
+import Back from "../../assets/back.svg";
 import * as _ from "lodash";
 const DATA = [
   {
@@ -51,7 +52,8 @@ function RenderHistory() {
   ));
 }
 
-export default function AccountDetail() {
+export default function AccountDetail(props) {
+  console.log('props: ', props);
   // const UserAccount = JSON.parse(localStorage.getItem("userAccount"));
   // const UserInfor = JSON.parse(localStorage.getItem("userInfo"));
   const transactionTypes = [
@@ -71,6 +73,10 @@ export default function AccountDetail() {
     <AccountDetailPage>
       <SideMenu></SideMenu>
       <div className="containerForm">
+        <div onClick={props.onClick} className="back">
+          <img src={Back}></img>
+          Manage accounts
+        </div>
         <p className="pageTitle">1760457</p>
         <p className="itemTitle">Information</p>
         <AccountCard

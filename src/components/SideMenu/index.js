@@ -1,10 +1,12 @@
 import React from "react";
 import SideMenuStyle from "./styled";
-import YellowIcon from "../../assets/yellow.png";
-import TabMenu from "../TabMenu";
 
+import TabMenu from "../TabMenu";
+let YellowIcon = "../../assets/yellow.png";
 export default function index() {
-  const ListMenu = [
+  const UserInfo = JSON.parse(localStorage.getItem("userAccount"));
+  // console.log("UserInfo: ", UserInfo);
+  const ListMenuUser = [
     {
       key: 1,
       title: "Home",
@@ -36,6 +38,39 @@ export default function index() {
       link: "/signout",
     },
   ];
+
+  const ListMenuAdmin = [
+    {
+      key: 1,
+      title: " All customers ",
+      src: "../../assets/all-cus.svg",
+      link: "/all-customers",
+    },
+    {
+      key: 2,
+      title: "Pending requests",
+      src: "../../assets/pen-req.svg",
+      link: "/pending-requests",
+    },
+    {
+      key: 3,
+      title: "Configuration",
+      src: "../../assets/all-cus.svg",
+      link: "/configuration",
+    },
+    {
+      key: 4,
+      title: "Sign out",
+      src: "../../assets/signout.png",
+      link: "/signout",
+    },
+  ];
+  let ListMenu = ListMenuUser;
+
+  if (UserInfo.role.name === "Admin") {
+    ListMenu = ListMenuAdmin;
+    YellowIcon = "../../assets/yellow. ADMIN.svg";
+  }
   const RenderMenu = () => {
     return ListMenu.map((items) => (
       <TabMenu
@@ -49,7 +84,9 @@ export default function index() {
   return (
     <SideMenuStyle>
       <img src={YellowIcon}></img>
-      <RenderMenu ListMenu></RenderMenu>
+      <div className="listMenu">
+        <RenderMenu ListMenu></RenderMenu>
+      </div>
     </SideMenuStyle>
   );
 }
