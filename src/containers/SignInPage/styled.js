@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
 const SignInPageStyle = styled.div`
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(#283180 0%, #5272ff 100%);
+  background: linear-gradient(46.25deg, #283180 0%, #5272ff 100%);
   display: flex;
-  /* flex: 1; */
   align-items: center;
   justify-content: center;
+  flex: 1;
 
   .SignInForm {
     display: flex;

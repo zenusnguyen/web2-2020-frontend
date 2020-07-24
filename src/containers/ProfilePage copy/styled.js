@@ -1,13 +1,10 @@
 import styled from "styled-components";
 
-const MaganerAccountStyled = styled.div`
-  position: absolute;
-  z-index: 2;
+const Register = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
-  height: 100%;
   /* justify-content: flex-start; */
   .containerForm {
     padding-top: 40px;
@@ -16,7 +13,7 @@ const MaganerAccountStyled = styled.div`
     flex-direction: column;
 
     min-height: 508px;
-    width: 100%;
+    width: 350px;
     border-radius: 15px;
     /* align-items: center; */
     padding-bottom: 100px;
@@ -26,18 +23,25 @@ const MaganerAccountStyled = styled.div`
     font-size: 32px;
     font-weight: bold;
   }
-  .titleWithButton {
+  .create {
+    margin-top: 32px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    height: 55px;
-    width: 100%;
+    align-items: center;
+    justify-content: center;
   }
-  .listCard {
+  .createHere {
+    margin-left: 5px;
+    color: blue;
   }
-  .detailCard {
-    position: absolute;
+  .dualColumn {
+    width: 350px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    /* padding-top:20px; */
   }
 `;
 
-export default MaganerAccountStyled;
+export default Register;
