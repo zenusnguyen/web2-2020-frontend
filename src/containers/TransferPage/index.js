@@ -11,12 +11,18 @@ import axios from "axios";
 
 export default function TransferPage() {
   const techCompanies = [
-    { label: "Apple", value: 1 },
-    { label: "Facebook", value: 2 },
-    { label: "Netflix", value: 3 },
-    { label: "Tesla", value: 4 },
-    { label: "Amazon", value: 5 },
-    { label: "Alphabet", value: 6 },
+    { label: "Bank 1", value: 1 },
+    { label: "Bank 2", value: 2 },
+    { label: "Bank 3", value: 3 },
+    { label: "Bank 4", value: 4 },
+    { label: "Bank 5", value: 5 },
+    { label: "Bank 6", value: 6 },
+  ];
+  const spendAccounts = [
+    { label: "123456 - Nguyen Van A", value: 1 },
+    { label: "123452 - Nguyen Van B", value: 2 },
+    { label: "123453 - Nguyen Van C", value: 3 }
+   
   ];
   //   const HandlerClick =
   const [isExtra, SetIsExtra] = useState("none");
@@ -37,6 +43,7 @@ export default function TransferPage() {
           />{" "}
           Intra-bank transfer (Same bank)
           <br />
+         
           <input
             onChange={(e) => SetIsExtra("")}
             type="radio"
@@ -46,13 +53,19 @@ export default function TransferPage() {
           Inter-bank transfer (Across banks)
         </div>
         <br />
+        <div className="extraBanking" style={{ display: isExtra }}>
+            <p>Select a Spend account</p>
+            <Select style={{ height: "100%" }} options={spendAccounts} />
+          </div>
+          <br />
         <div>
           <InputForm
             defaultValue={0}
-            value={0}
-            type="number"
+            value={"20,000,000"}
+            type="text"
             title="Available Balance"
             name={"balance"}
+            readonly = {"readonly"}
           ></InputForm>
           <InputForm
             defaultValue={""}
@@ -69,7 +82,7 @@ export default function TransferPage() {
           <InputForm
             defaultValue={0}
             value={0}
-            type="text"
+            type="number"
             title="Amount"
             name={"amount"}
             placeholder={"Enter amount"}
