@@ -27,7 +27,7 @@ export default function index() {
       key: 4,
       title: "Transactions history",
       src: "../../assets/card.png",
-      link: "/profile",
+      link: "/history",
     },
     {
       key: 5,
