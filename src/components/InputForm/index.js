@@ -10,6 +10,7 @@ export default function index(props) {
         type={props.type}
         defaultValue={props.value}
         name = {props.name}
+        readonly ={props.readonly}
         placeholder={props.placeholder}
       ></input>
     </InputForm>
