@@ -4,13 +4,15 @@ const HeaderStyle = styled.div`
   width: 100%;
   height: 64px;
   background-color: #ffffff;
-  display:flex;
- 
+  display: flex;
+  box-shadow: 0px 4px 16px rgba(35, 35, 35, 0.06);
+  display: flex;
+  align-items: center;
+
   .logo {
-    margin-left:64px;
-    margin-top: 8px;
-    width: 130px;
-    height: 42px;
+    margin-left: 64px;
+    width: 118px;
+    height: 48px;
   }
 `;
 

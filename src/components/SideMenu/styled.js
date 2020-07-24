@@ -12,8 +12,11 @@ const SideMenuStyle = styled.div`
   /* align-items: center; */
   justify-content: flex-start;
   img {
-    width: 130px;
-    height: 42px;
+    width: 118px;
+    height: 48px;
+  }
+  .logo {
+    margin-bottom: 24px;
   }
   .ListMenu {
     margin-top: 24px;

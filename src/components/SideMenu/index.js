@@ -1,15 +1,15 @@
 import React from "react";
 import SideMenuStyle from "./styled";
-import YellowIcon from "../../assets/yellow.png";
+import YellowIcon from "../../assets/yellow.svg";
 import TabMenu from "../TabMenu";
 
 export default function index() {
   const ListMenu = [
     {
       key: 1,
-      title: "Home",
-      src: "../../assets/home.png",
-      link: "/",
+      title: "My profile",
+      src: "../../assets/person.png",
+      link: "/profile",
     },
     {
       key: 2,
@@ -25,8 +25,8 @@ export default function index() {
     },
     {
       key: 4,
-      title: "Profile",
-      src: "../../assets/person.png",
+      title: "Transactions history",
+      src: "../../assets/card.png",
       link: "/profile",
     },
     {
@@ -48,7 +48,7 @@ export default function index() {
   };
   return (
     <SideMenuStyle>
-      <img src={YellowIcon}></img>
+      <img className="logo" src={YellowIcon}></img>
       <RenderMenu ListMenu></RenderMenu>
     </SideMenuStyle>
   );
