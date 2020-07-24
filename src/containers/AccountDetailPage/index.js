@@ -53,7 +53,7 @@ function RenderHistory() {
 }
 
 export default function AccountDetail(props) {
-  console.log('props: ', props);
+
   // const UserAccount = JSON.parse(localStorage.getItem("userAccount"));
   // const UserInfor = JSON.parse(localStorage.getItem("userInfo"));
   const transactionTypes = [

@@ -22,7 +22,7 @@ export default function Profile(props) {
         </div>
         <div className="titleWithButton">
           <p className="pageTitle">{props.userName || "My profile"}</p>
-          {/* <div className="buttonGroup">
+          <div className="buttonGroup">
             <Button
               key="1"
               Top="0px"
@@ -39,7 +39,7 @@ export default function Profile(props) {
               // Src={AddIcon}
               Display="none"
             ></Button>
-          </div> */}
+          </div>
         </div>
         <p className="title">Personal information</p>
         <PersonalDetailCard

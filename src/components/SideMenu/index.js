@@ -9,9 +9,9 @@ export default function index() {
   const ListMenuUser = [
     {
       key: 1,
-      title: "Home",
-      src: "../../assets/home.png",
-      link: "/",
+      title: "My profile",
+      src: "../../assets/person.png",
+      link: "/profile",
     },
     {
       key: 2,
@@ -27,9 +27,9 @@ export default function index() {
     },
     {
       key: 4,
-      title: "My profile",
-      src: "../../assets/person.png",
-      link: "/profile",
+      title: "Transactions history",
+      src: "../../assets/time-outline.svg",
+      link: "/manage",
     },
     {
       key: 5,

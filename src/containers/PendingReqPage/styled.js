@@ -8,6 +8,7 @@ const MaganerAccountStyled = styled.div`
   background-color: #f5f7f9;
   width: 100%;
   height: 100%;
+  padding-right: 15%;
   /* justify-content: flex-start; */
   .containerForm {
     padding-top: 40px;
@@ -29,15 +30,15 @@ const MaganerAccountStyled = styled.div`
   .titleWithButton {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     height: 55px;
     width: 100%;
   }
+
   .listCard {
   }
   .detailCard {
     position: absolute;
-    
   }
 `;
 

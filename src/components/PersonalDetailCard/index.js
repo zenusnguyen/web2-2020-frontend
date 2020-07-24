@@ -14,9 +14,11 @@ function InforLine(props) {
   );
 }
 export default function index(props) {
-  // console.log('props: ', props);
   const { UserAccount, UserInfo } = props;
-  // console.log('UserAccount, UserInfo: ', UserAccount, UserInfo);
+  let display = "none";
+  if (UserAccount.role.name === "Admin") {
+    display = "";
+  }
   return (
     <CardStyled>
       <InforLine title="Fullname" detail={UserInfo.full_name}></InforLine>
@@ -39,6 +41,20 @@ export default function index(props) {
       <InforLine title="Current address " detail={UserInfo.address}></InforLine>
       <InforLine title="Username" detail={UserAccount.username}></InforLine>
       <InforLine title="Email" detail={UserAccount.email}></InforLine>
+      <div className="groupImage" style={{ display: display }}>
+        <img
+          className="identificationImage"
+          src={
+            "https://images.hdqwalls.com/download/small-memory-8k-2a-2048x2048.jpg"
+          }
+        ></img>
+        <img
+          className="identificationImage"
+          src={
+            "https://images.hdqwalls.com/download/small-memory-8k-2a-2048x2048.jpg"
+          }
+        ></img>
+      </div>
     </CardStyled>
   );
 }

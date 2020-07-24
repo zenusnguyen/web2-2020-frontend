@@ -6,9 +6,18 @@ import AddIcon from "../../assets/add-circle.png";
 import SideMenu from "../../components/SideMenu";
 import Card from "../../components/Card";
 import axios from "axios";
-import DetailCard from "../AccountDetailPage";
+import RequsetDetailPage from "../RequsetDetailPage";
+import PendingRequestCard from "../../components/ReqCard";
+
 function ShowDetail(HandlerClick) {
-  return <DetailCard onClick={HandlerClick}></DetailCard>;
+  return (
+    <RequsetDetailPage
+      userName="Nguyen Viet Anh"
+      onClick={HandlerClick}
+      backImg="../../assets/back.svg"
+      backTitle="Pending Request"
+    ></RequsetDetailPage>
+  );
 }
 
 export default function MaganeAccount() {
@@ -41,6 +50,7 @@ export default function MaganeAccount() {
     }
   });
 
+  const Temp = [{}, {}];
   const HandlerClick = (items) => {
     if (isDetail) {
       setStyled("");
@@ -54,18 +64,12 @@ export default function MaganeAccount() {
   };
 
   const RenderCard = () => {
-    return data.map((items) => (
-      <Card
+    return Temp.map((items) => (
+      <PendingRequestCard
         onClick={() => {
           HandlerClick((items = items.card_number));
         }}
-        key={items.key}
-        Number={items.card_number}
-        SpendType={items.SpendType}
-        Status={items.status}
-        Created={items.created_date}
-        TypeCard={items.TypeCard}
-      ></Card>
+      ></PendingRequestCard>
     ));
   };
 
@@ -73,19 +77,8 @@ export default function MaganeAccount() {
     <MaganerAccountStyled>
       <SideMenu></SideMenu>
       <div className="containerForm" style={{ display: styled }}>
-        <div className="titleWithButton">
-          <p className="SignInTitle"> Manage accounts</p>
-          <Link to="/create">
-            <Button
-              key="1"
-              Top="0px"
-              title="Add account"
-              Width="187px"
-              Src={AddIcon}
-              Display="flex"
-            ></Button>
-          </Link>
-        </div>
+        <p className="SignInTitle"> Pending requests</p>
+
         <div className="listCard">
           <RenderCard></RenderCard>
         </div>

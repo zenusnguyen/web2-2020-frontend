@@ -22,24 +22,26 @@ export default function Profile(props) {
         </div>
         <div className="titleWithButton">
           <p className="pageTitle">{props.userName || "My profile"}</p>
-          {/* <div className="buttonGroup">
+          <div className="buttonGroup">
             <Button
               key="1"
               Top="0px"
-              title="Add account"
+              title="Accept"
               Width="187px"
+              BackgroundColor="#4F6EF6"
               // Src={AddIcon}
               Display="none"
             ></Button>
             <Button
               key="1"
               Top="0px"
-              title="Add account"
+              title="Reject"
               Width="187px"
+              BackgroundColor="#BDBEBF"
               // Src={AddIcon}
               Display="none"
             ></Button>
-          </div> */}
+          </div>
         </div>
         <p className="title">Personal information</p>
         <PersonalDetailCard
