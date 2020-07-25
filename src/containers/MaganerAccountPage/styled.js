@@ -6,7 +6,7 @@ const MaganerAccountStyled = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #f5f7f9;
-  width: 100%;
+  /* width: 100%; */
   /* height: 100%; */
   /* justify-content: flex-start; */
   .containerForm {

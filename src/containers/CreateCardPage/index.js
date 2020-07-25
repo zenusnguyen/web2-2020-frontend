@@ -91,6 +91,7 @@ function SavingCard() {
         card_number: id.toString(),
         account_id: JSON.parse(localStorage.getItem("userAccount")).id,
         status: "pending",
+        balance:0,
         created_date: new Date(),
       }
     );

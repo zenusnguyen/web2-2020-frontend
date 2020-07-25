@@ -23,6 +23,10 @@ const TransferStyled = styled.div`
     font-size: 32px;
     font-weight: bold;
   }
+  .titleType{
+    font-size: 16px;
+    font-weight: 500;
+  }
   .extraBanking {
     width: 350px;
     /* height: 50px; */

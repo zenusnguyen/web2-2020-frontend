@@ -7,8 +7,8 @@ import SideMenu from "../../components/SideMenu";
 import Card from "../../components/Card";
 import axios from "axios";
 import DetailCard from "../AccountDetailPage";
-function ShowDetail(cardInfo) {
-  return <DetailCard cardInfo={cardInfo}></DetailCard>;
+function ShowDetail(cardInfo, HandlerClick) {
+  return <DetailCard cardInfo={cardInfo} onClick={HandlerClick}></DetailCard>;
 }
 
 export default function MaganeAccount() {
@@ -90,7 +90,7 @@ export default function MaganeAccount() {
         </div>
       </div>
       <div className="detailCard" style={{ display: styled2 }}>
-        {ShowDetail(CardID)}
+        {ShowDetail(CardID, HandlerClick)}
       </div>
     </MaganerAccountStyled>
   );
