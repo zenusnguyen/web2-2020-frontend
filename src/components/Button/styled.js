@@ -5,7 +5,6 @@ const Button = styled.div`
   display: flex;
   margin-top: ${(props) => props.Top || "36px"};
   margin-left: ${(props) => props.Left || "24px"};
-  
   width: ${(props) => props.Width || "350px"};
   height: ${(props) => props.Height || "48px"};
   background-color: ${(props) => props.BackgroundColor || "#FEBA46"};

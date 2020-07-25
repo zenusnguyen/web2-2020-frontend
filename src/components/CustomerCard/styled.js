@@ -4,13 +4,12 @@ const CardStyled = styled.div`
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
+  width: 75%;
   padding: 16px 32px;
   border-radius: 16px;
   margin-bottom: 16px;
   align-items: center;
   box-shadow: 0px 4px 16px rgba(35, 35, 35, 0.06);
-  height: 90px;
-  justify-content: space-between;
   .icon {
     width: 32px;
     height: 32px;
@@ -21,40 +20,52 @@ const CardStyled = styled.div`
   }
 
   p {
-    font-style: normal;
+    font-size: 20px;
     font-weight: 500;
-    font-size: 14px;
-    line-height: 140%;
-    /* color: #333435; */
-    padding: 0px;
+    line-height: 150%;
+    margin-bottom: 0;
+    color: #333435;
   }
 
   .detail-left {
     margin-left: 24px;
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
   }
 
   .detail-right {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 140%;
+    flex-direction: column;
+    text-align: right;
+    margin-left: auto;
   }
-  .left {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
+
   p.subtext {
     font-size: 14px;
     font-weight: 500;
     line-height: 140%;
     color: #828485;
+  }
+  .withStatus {
+    display: flex;
+    flex-direction: row;
+  }
+  .status {
+    width: 52px;
+    height: 24px;
+    background: #56cd67;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    p {
+      margin: auto;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 130%;
+      color: #ffffff;
+    }
   }
 `;
 

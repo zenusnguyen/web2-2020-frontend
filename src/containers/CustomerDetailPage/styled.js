@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const DepositStyled = styled.div`
+  display: flex;
+  flex-direction: row;
+  /* padding-left: 75px; */
+  /* padding-top: 40px; */
+`;
+
 const PersonalPage = styled.div`
   display: flex;
   flex-direction: row;
@@ -36,6 +43,7 @@ const PersonalPage = styled.div`
     }
   }
   .titleWithButton {
+    padding-right: 0px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
