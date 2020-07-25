@@ -3,11 +3,11 @@ import styled from "styled-components";
 const Button = styled.div`
   border: 0px;
   display: flex;
-  margin-top: ${(props) => props.Top || "36px"};
+  margin-top: ${(props) => props.Top || "30px"};
   width: ${(props) => props.Width || "350px"};
   height: ${(props) => props.Height || "48px"};
-  background-color: ${(props) => props.BackgroundColor || "#FEBA46"};
-  border-radius: 5px;
+  background-color: ${(props) => props.BackgroundColor || "#4F6EF6"};
+  border-radius: 8px;
   align-items: center;
   justify-content: space-around;
   padding: 20px;

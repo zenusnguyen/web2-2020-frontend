@@ -23,7 +23,8 @@ const MaganerAccountStyled = styled.div`
   }
   .SignInTitle {
     font-size: 32px;
-    font-weight: bold;
+    font: bold;
+    margin: 0px 0px 40px 0px;
   }
   .titleWithButton {
     display: flex;
@@ -39,14 +40,18 @@ const MaganerAccountStyled = styled.div`
   .spendCard {
     display: flex;
     flex-direction: column;
+    margin: -10px 0px;
   }
   .selector {
     display: flex;
     flex-direction: column;
+    margin: 10px 0px 20px 0px;
     select {
       width: 350px;
       height: 50px;
       padding: 10px;
+      margin: -10px 0px;
+      border-radius: 4px;
     }
   }
   .accountNumber {
@@ -54,9 +59,11 @@ const MaganerAccountStyled = styled.div`
     flex-direction: column;
     width: 350px;
     height: 100px;
+    margin: 10px 0px 20px 0px;
     input {
       width: 100%;
       height: 100%;
+      margin: -10px 0px;
       background-color: white;
       border: 0px;
       display: flex;
@@ -66,11 +73,13 @@ const MaganerAccountStyled = styled.div`
       font-size: 24px;
       font-weight: bold;
       padding-left: 25%;
+      border-radius: 4px;
     }
   }
   .selectCard {
     font-size: 16px;
     font-weight: 400;
+    margin: -10px 0px 20px 0px;
   }
   .dualColumn {
     display: flex;
@@ -79,8 +88,8 @@ const MaganerAccountStyled = styled.div`
     /* justify-content: space-between; */
   }
   .example {
-    margin-top:-150px;
-    margin-left: 220px;
+    margin-top:-340px;
+    margin-left: 200px;
     display: flex;
     flex-direction: column;
     width: 400px;
@@ -89,6 +98,7 @@ const MaganerAccountStyled = styled.div`
     height: 350px;
     align-items: center;
     justify-content: center;
+    border-radius: 16px;
   }
 `;
 
