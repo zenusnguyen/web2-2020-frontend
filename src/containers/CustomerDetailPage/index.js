@@ -8,9 +8,98 @@ import SideMenu from "../../components/SideMenu";
 import Button from "../../components/Button";
 import PersonalDetailCard from "../../components/PersonalDetailCard";
 import Back from "../../assets/back.svg";
+import DatePicker from "react-datepicker";
+import MyDatePickerStyle from "../../components/DatePicker/styled";
+import Calendar from "../../assets/calendar.png";
 import * as _ from "lodash";
-import { DepositStyled } from "./styled";
+import { DepositStyled, Register } from "./styled";
 import Select from "react-select";
+
+function EditProfile(props) {
+  const UserAccount = JSON.parse(localStorage.getItem("userAccount"));
+  const UserInfor = JSON.parse(localStorage.getItem("userInfo"));
+
+  const [DateOfBirth, setDateOfBirth] = useState(new Date());
+  const [DateOfIssue, setDateOfIssue] = useState(new Date());
+  return (
+    <Register>
+      <SideMenu></SideMenu>
+      <div className="containerForm">
+        <p className="SignInTitle">Edit Profile</p>
+        <InputForm
+          value={UserAccount.email}
+          type="email"
+          title="Email "
+        ></InputForm>
+        <InputForm
+          type="text"
+          value={UserAccount.username}
+          title="User Name "
+        ></InputForm>
+
+        <InputForm
+          value={UserInfor.full_name}
+          type="text"
+          title="Full Name "
+        ></InputForm>
+        <div className="dualColumn">
+          <InputForm
+            value={UserInfor.phone_number}
+            type="number"
+            title=" Phone number  "
+            Width="160px"
+          ></InputForm>
+          <MyDatePickerStyle>
+            <div>
+              <p>Date of birth</p>
+              <DatePicker
+                selected={DateOfBirth}
+                onChange={(e) => setDateOfBirth(e)}
+              ></DatePicker>
+            </div>
+            <img src={Calendar}></img>
+          </MyDatePickerStyle>
+        </div>
+        <TextArea
+          value={UserInfor.address}
+          type="text"
+          title="Current address "
+        ></TextArea>
+        <div className="dualColumn" style={{ marginTop: "20px" }}>
+          <InputForm
+            value={UserInfor.identificationNumber}
+            pattern="[0-9]"
+            type="tel"
+            title=" ID/ Passport number  "
+            Width="160px"
+          ></InputForm>
+
+          <MyDatePickerStyle>
+            <div>
+              <p>Date of birth</p>
+              <DatePicker
+                selected={DateOfBirth}
+                onChange={(e) => setDateOfBirth(e)}
+              ></DatePicker>
+            </div>
+            <img src={Calendar}></img>
+          </MyDatePickerStyle>
+        </div>
+        <PhotoUpload
+          value1={UserInfor.img1}
+          value2={UserInfor.img2}
+        ></PhotoUpload>
+        <Button
+          BackgroundColor="#4F6EF6"
+          Width=" 187px"
+          Top="36px"
+          title="Save"
+        ></Button>
+      </div>
+    </Register>
+  );
+}
+
 function Deposit(props) {
   const techCompanies = [
     { label: "Bank 1", value: 1 },
@@ -28,7 +117,7 @@ function Deposit(props) {
   return (
     <DepositStyled>
       <SideMenu></SideMenu>
-      <div>
+      <div className="containerDeposit">
         <div onClick={props.onClick} className="back">
           <img src={Back}></img>
           {props.backTitle || "Nguyễn Việt Anh"}
@@ -36,17 +125,20 @@ function Deposit(props) {
         <div className="titleWithButton">
           <p className="pageTitle">{props.userName || "Deposit"}</p>
         </div>
-        <div className="extraBanking">
+        <div className="selectAccount">
           <p>Select an account</p>
-          <Select style={{ height: "100%" }} options={techCompanies} />
+          <Select
+            style={{ height: "100%", fontSize: "16px", fontWeight: "500" }}
+            options={techCompanies}
+          />
         </div>
         <InputForm
-          defaultValue={0}
-          value={"20,000,000"}
-          type="text"
+          // defaultValue={0}
+          // value={"20,000,000"}
+          type="number"
           title="Amount"
           name={"balance"}
-          readonly={"readonly"}
+          // readonly={"readonly"}
         ></InputForm>
 
         <TextArea
@@ -120,6 +212,6 @@ export default function Profile(props) {
       </PersonalPage>
     );
   else {
-    return <Deposit></Deposit>;
+    return <EditProfile></EditProfile>;
   }
 }

@@ -29,7 +29,7 @@ export default function index() {
       key: 4,
       title: "Transactions history",
       src: "../../assets/time-outline.svg",
-      link: "/manage",
+      link: "/history",
     },
     {
       key: 5,

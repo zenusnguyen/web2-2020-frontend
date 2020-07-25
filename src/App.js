@@ -7,7 +7,8 @@ import CreateCardPage from "./containers/CreateCardPage";
 import TransferPage from "./containers/TransferPage";
 import AccountDetailPage from "./containers/AccountDetailPage";
 import PendingRequestPage from "./containers/PendingReqPage";
-import AllCardsPage from "./containers/AllCustomerPage"
+import AllCardsPage from "./containers/AllCustomerPage";
+import TransactionHistoryPage from "./containers/TransactionPage";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import SideMenu from "./components/SideMenu";
@@ -65,6 +66,9 @@ function App() {
           </Route>
           <Route path="/configuration">
             <AccountDetailPage />
+          </Route>{" "}
+          <Route path="/history">
+            <TransactionHistoryPage />
           </Route>
         </Switch>
       </Router>
