@@ -7,41 +7,40 @@ import SideMenu from "../../components/SideMenu";
 import Card from "../../components/Card";
 import axios from "axios";
 import DetailCard from "../AccountDetailPage";
-function ShowDetail(HandlerClick) {
-  return <DetailCard onClick={HandlerClick}></DetailCard>;
+function ShowDetail(cardInfo) {
+  return <DetailCard cardInfo={cardInfo}></DetailCard>;
 }
 
 export default function MaganeAccount() {
-  const temp = [];
-  const [data, setData] = useState(temp);
-
+  const [data, setData] = useState([]);
+  const [CardID, SetCardID] = useState("");
   const [isDetail, setIsDetail] = useState(false);
   const [styled, setStyled] = useState("");
   const [styled2, setStyled2] = useState("none");
   useEffect(() => {
     async function Fecth() {
-      const result = await axios.post(
-        "http://localhost:1337/spend-accounts/findByAccount",
-        {
-          account_id: JSON.parse(localStorage.getItem("userAccount")).id,
-        }
+      const result = await axios.get(
+        `http://localhost:1337/spend-accounts-by-owneraccount?id=${
+          JSON.parse(localStorage.getItem("userAccount")).id
+        }`
       );
       setData(result.data);
     }
     Fecth();
   }, []);
-
+  // console.log("data: ", data);
   data.forEach((item) => {
-    if (item.SpendType === "1") {
-      item.SpendType = "Silver";
-    } else if (item.type === "2") {
-      item.SpendType = "Gold";
-    } else {
-      item.SpendType = "Platinum";
+    if (item.spend_type == "1") {
+      item.spend_type = "Silver";
+    } else if (item.spend_type == "2") {
+      item.spend_type = "Gold";
+    } else if (item.spend_type == "3") {
+      item.spend_type = "Platinum";
     }
   });
 
-  const HandlerClick = (items) => {
+  const HandlerClick = (cardInfo) => {
+    SetCardID(cardInfo);
     if (isDetail) {
       setStyled("");
       setStyled2("none");
@@ -57,14 +56,14 @@ export default function MaganeAccount() {
     return data.map((items) => (
       <Card
         onClick={() => {
-          HandlerClick((items = items.card_number));
+          HandlerClick(items);
         }}
         key={items.key}
         Number={items.card_number}
-        SpendType={items.SpendType}
+        Balance={items.balance || 0}
         Status={items.status}
         Created={items.created_date}
-        TypeCard={items.TypeCard}
+        TypeCard={items.card_type}
       ></Card>
     ));
   };
@@ -91,7 +90,7 @@ export default function MaganeAccount() {
         </div>
       </div>
       <div className="detailCard" style={{ display: styled2 }}>
-        {ShowDetail(HandlerClick)}
+        {ShowDetail(CardID)}
       </div>
     </MaganerAccountStyled>
   );

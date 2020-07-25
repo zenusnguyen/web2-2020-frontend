@@ -19,8 +19,9 @@ function SpendCard() {
     const createCard = await axios.post(
       "http://localhost:1337/spend-accounts",
       {
+        card_type: "spend",
         currency_unit: currency,
-        type: accountType,
+        spend_type: accountType,
         card_number: id.toString(),
         account_id: JSON.parse(localStorage.getItem("userAccount")).id,
         status: "pending",
@@ -47,7 +48,7 @@ function SpendCard() {
       </div>
       <div className="selector">
         <p>Currency unit</p>
-        <select onChange={(e) => setAccountType(e.target)}>
+        <select onChange={(e) => setCurrency(e.target.value)}>
           <option value="VND">₫ VND - Vietnamese Dong</option>
           <option value="USD"> $ USD- Dollar</option>
         </select>
@@ -84,6 +85,7 @@ function SavingCard() {
     const createCard = await axios.post(
       "http://localhost:1337/spend-accounts",
       {
+        card_type: "saving",
         currency_unit: currency,
         term_deposit_id: parseInt(term),
         card_number: id.toString(),
@@ -205,7 +207,7 @@ export default function CreateCard() {
           <p>I want to open </p>
           <form className="selectCard">
             <input
-               checked={!isSaving}
+              checked={!isSaving}
               type="radio"
               name="spend"
               onClick={Handler}

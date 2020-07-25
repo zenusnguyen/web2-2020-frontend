@@ -2,7 +2,7 @@ import React from "react";
 import SideMenuStyle from "./styled";
 
 import TabMenu from "../TabMenu";
-let YellowIcon = "../../assets/yellow.png";
+let YellowIcon = "../../assets/yellow..svg";
 export default function index() {
   const UserInfo = JSON.parse(localStorage.getItem("userAccount"));
   // console.log("UserInfo: ", UserInfo);

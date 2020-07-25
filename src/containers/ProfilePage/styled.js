@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 const PersonalPage = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
-  margin-bottom: 40px;
-  /* justify-content: flex-start; */
+  min-height: 100vh;
+
   .bodyContainer {
     margin-top: 65px;
     display: flex;

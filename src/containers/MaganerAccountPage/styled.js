@@ -7,7 +7,7 @@ const MaganerAccountStyled = styled.div`
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   /* justify-content: flex-start; */
   .containerForm {
     padding-top: 40px;
@@ -15,7 +15,7 @@ const MaganerAccountStyled = styled.div`
     display: flex;
     flex-direction: column;
 
-    min-height: 508px;
+    /* min-height: 508px; */
     width: 100%;
     border-radius: 15px;
     /* align-items: center; */
@@ -29,15 +29,16 @@ const MaganerAccountStyled = styled.div`
   .titleWithButton {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     height: 55px;
     width: 100%;
+    padding-right: 25%;
   }
   .listCard {
+    height: 100%;
   }
   .detailCard {
     position: absolute;
-    
   }
 `;
 

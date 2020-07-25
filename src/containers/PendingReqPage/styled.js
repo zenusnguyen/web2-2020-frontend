@@ -36,6 +36,7 @@ const MaganerAccountStyled = styled.div`
   }
 
   .listCard {
+    padding-right: 20%;
   }
   .detailCard {
     position: absolute;

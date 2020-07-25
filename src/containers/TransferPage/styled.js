@@ -26,9 +26,14 @@ const TransferStyled = styled.div`
   .extraBanking {
     width: 350px;
     /* height: 50px; */
+    /* height: 80px; */
+
     p {
       font-size: 16px;
       font-weight: 500;
+    }
+    .css-yk16xz-control {
+      height: 50px;
     }
   }
 `;

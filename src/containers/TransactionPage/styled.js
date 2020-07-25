@@ -7,6 +7,7 @@ const TransactionHistoryPage = styled.div`
   width: 100%;
   font-size: 16;
   font-weight: 500;
+  min-height: 100vh;
   /* justify-content: flex-start; */
   .containerForm {
     padding: 40px 75px 0;

@@ -8,6 +8,8 @@ import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
 import Calendar from "../../assets/calendar.png";
 import Back from "../../assets/back.svg";
+import axios from "axios";
+
 import * as _ from "lodash";
 const DATA = [
   {
@@ -53,9 +55,27 @@ function RenderHistory() {
 }
 
 export default function AccountDetail(props) {
-
-  // const UserAccount = JSON.parse(localStorage.getItem("userAccount"));
-  // const UserInfor = JSON.parse(localStorage.getItem("userInfo"));
+  console.log("props: ", props);
+  const { cardInfo } = props;
+  if (cardInfo.spend_type == 1) {
+    cardInfo.displayType = "Silver";
+  } else if (cardInfo.spend_type == 2) {
+    cardInfo.displayType = "Gold";
+  } else if (cardInfo.spend_type == 3) {
+    cardInfo.displayType = "Platinum";
+  }
+  const [cardData, setCardData] = useState("");
+  useEffect(() => {
+    async function Fecth() {
+      const result = await axios.get(
+        `http://localhost:1337/spend-accounts-by-owneraccount?id=${
+          JSON.parse(localStorage.getItem("userAccount")).id
+        }`
+      );
+      setCardData(result.data);
+    }
+    Fecth();
+  }, []);
   const transactionTypes = [
     { label: "All types", value: 1 },
     { label: "Transfer", value: 2 },
@@ -77,13 +97,14 @@ export default function AccountDetail(props) {
           <img src={Back}></img>
           Manage accounts
         </div>
-        <p className="pageTitle">1760457</p>
+        <p className="pageTitle">{cardInfo.card_number}</p>
+
         <p className="itemTitle">Information</p>
         <AccountCard
-          AccountNumber="1760457"
-          CurrentBalance="50000"
-          Status="Active"
-          AccountType="Gold"
+          AccountNumber={cardInfo.card_number}
+          CurrentBalance={cardInfo.balance || 0}
+          Status={cardInfo.status}
+          AccountType={cardInfo.displayType}
           //Term="6"
         ></AccountCard>
         <p className="itemTitle">History</p>

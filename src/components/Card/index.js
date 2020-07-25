@@ -20,7 +20,7 @@ export default function index(props) {
       </div>
       <div className="detail">
         <p> Number : {props.Number} </p>
-        <p> Type : {props.SpendType} </p>
+        <p>  Current balance : {props.Balance} </p>
         <p> Status: {props.Status} </p>
         <Button
           onClick={props.onClick}
