@@ -62,6 +62,9 @@ function SpendCard() {
 }
 
 function SavingCard() {
+
+  const [isExtra, SetIsExtra] = useState("none");
+
   const [currency, setCurrency] = useState("VND");
   const [term, setTerm] = useState(1);
   const [interest, setInterest] = useState("1");
@@ -99,7 +102,6 @@ function SavingCard() {
       alert("Create Card fail");
     }
   };
-  const [isExtra, SetIsExtra] = useState("none");
 
   return (
     <div className="dualColumn">
@@ -127,7 +129,7 @@ function SavingCard() {
         <p>Interest payment option </p>
         <form className="selectCard">
           <input
-            onChange={(e) => SetIsExtra("")}
+            onChange={(e) => SetIsExtra("none")}
             checked="true"
             type="radio"
             name="gender"
@@ -135,20 +137,22 @@ function SavingCard() {
           />{" "}
           Add into a Spend account and close this account
           <br />
-          <input 
-            onChange={(e) => SetIsExtra("none")}
-            type="radio" 
-            name="gender" 
+          <input
+            onChange={(e) => SetIsExtra("")}
+            type="radio"
+            name="gender"
             defaultValue="saving" /> Add to the
           balance and renew for another term
         </form>
-          <div className="selector">
+        <div className="selector">
+          <div className="extraBanking" style={{ display: isExtra }}>
             <p>Selection your Spend account</p>
             <select >
               <option value="1">Account 1</option>
               <option value="2">Account 2</option>
             </select>
           </div>
+        </div>
         <div className="accountNumber">
           <p>Your account number</p>
           <input type="text" disabled={true} value={id}></input>
@@ -218,7 +222,7 @@ export default function CreateCard() {
           <p>I want to open </p>
           <form className="selectCard">
             <input
-               checked={!isSaving}
+              checked={!isSaving}
               type="radio"
               name="spend"
               onClick={Handler}

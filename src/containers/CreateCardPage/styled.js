@@ -43,7 +43,7 @@ const MaganerAccountStyled = styled.div`
     margin: -10px 0px;
   }
   .selector {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     margin: 10px 0px 20px 0px;
     select {
