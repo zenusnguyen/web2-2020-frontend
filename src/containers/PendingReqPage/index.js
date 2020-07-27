@@ -21,25 +21,21 @@ function ShowDetail(HandlerClick) {
 }
 
 export default function MaganeAccount() {
-  const temp = [];
-  const [data, setData] = useState(temp);
+  const [data, setData] = useState([]);
 
   const [isDetail, setIsDetail] = useState(false);
   const [styled, setStyled] = useState("");
   const [styled2, setStyled2] = useState("none");
   useEffect(() => {
     async function Fecth() {
-      const result = await axios.post(
-        "http://localhost:1337/spend-accounts/findByAccount",
-        {
-          account_id: JSON.parse(localStorage.getItem("userAccount")).id,
-        }
+      const result = await axios.get(
+        "http://localhost:1337/users-permissions/users-unactive?status=pending"
       );
       setData(result.data);
     }
     Fecth();
   }, []);
-
+  console.log("data: ", data);
   data.forEach((item) => {
     if (item.SpendType === "1") {
       item.SpendType = "Silver";
@@ -50,7 +46,6 @@ export default function MaganeAccount() {
     }
   });
 
-  const Temp = [{}, {}];
   const HandlerClick = (items) => {
     if (isDetail) {
       setStyled("");
@@ -64,7 +59,7 @@ export default function MaganeAccount() {
   };
 
   const RenderCard = () => {
-    return Temp.map((items) => (
+    return data.map((items) => (
       <PendingRequestCard
         onClick={() => {
           HandlerClick((items = items.card_number));
