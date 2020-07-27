@@ -57,13 +57,13 @@ function RenderHistory() {
 export default function AccountDetail(props) {
   console.log("props: ", props);
   const { cardInfo } = props;
-  if (cardInfo.spend_type == 1) {
-    cardInfo.displayType = "Silver";
-  } else if (cardInfo.spend_type == 2) {
-    cardInfo.displayType = "Gold";
-  } else if (cardInfo.spend_type == 3) {
-    cardInfo.displayType = "Platinum";
-  }
+  // if (cardInfo.spend_type == 1) {
+  //   cardInfo.displayType = "Silver";
+  // } else if (cardInfo.spend_type == 2) {
+  //   cardInfo.displayType = "Gold";
+  // } else if (cardInfo.spend_type == 3) {
+  //   cardInfo.displayType = "Platinum";
+  // }
   const [cardData, setCardData] = useState("");
   useEffect(() => {
     async function Fecth() {
@@ -104,7 +104,7 @@ export default function AccountDetail(props) {
           AccountNumber={cardInfo.card_number}
           CurrentBalance={cardInfo.balance || 0}
           Status={cardInfo.status}
-          AccountType={cardInfo.displayType}
+          AccountType={cardInfo.spend_type}
           //Term="6"
         ></AccountCard>
         <p className="itemTitle">History</p>

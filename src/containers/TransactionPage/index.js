@@ -6,11 +6,23 @@ import Select from "react-select";
 import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
 import Calendar from "../../assets/calendar.png";
-
+import axios from "axios";
 import * as _ from "lodash";
 export default function TransactionHistory() {
-  // const UserAccount = JSON.parse(localStorage.getItem("userAccount"));
-  // const UserInfor = JSON.parse(localStorage.getItem("userInfo"));
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function Fecth() {
+      const result = await axios.get(
+        `http://localhost:1337/spend-accounts-by-owneraccount?id=${
+          JSON.parse(localStorage.getItem("userAccount")).id
+        }`
+      );
+      setData(result.data);
+    }
+    Fecth();
+  }, []);
+
   const transactionTypes = [
     { label: "All types", value: 1 },
     { label: "Transfer", value: 2 },
@@ -70,24 +82,6 @@ export default function TransactionHistory() {
           Date="01/07/2020 10:55 AM"
           Amount="-1000000"
           RemainingBalance="4250000"
-        ></HistoryCard>
-        <HistoryCard
-          TransferType="Transfer"
-          Date="30/05/2020 11:30 AM"
-          Amount="+500000"
-          RemainingBalance="5250000"
-        ></HistoryCard>
-        <HistoryCard
-          TransferType="Transfer"
-          Date="28/05/2020 04:00 PM"
-          Amount="-250000"
-          RemainingBalance="4750000"
-        ></HistoryCard>
-        <HistoryCard
-          TransferType="Deposit"
-          Date="19/05/2020 09:00 AM"
-          Amount="+5000000"
-          RemainingBalance="5000000"
         ></HistoryCard>
       </div>
     </TransactionHistoryPage>

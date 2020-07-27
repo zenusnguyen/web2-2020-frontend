@@ -27,12 +27,12 @@ export default function HistoryCard(props) {
       </div>
       <div className="detail-left">
         <div className="withStatus">
-          <p>{props.TransferType || " Nguyễn Việt Anh"} </p>
+          <p>{props.username || " zenusnguyen"} </p>
           <div className="status">
             <p>{props.status || "Active"}</p>
           </div>
         </div>
-        <p className="subtext"> {props.Date || "zenusnguyen"} </p>
+        <p className="subtext"> {props.email || "zenusnguyen@gmail.com"} </p>
       </div>
       <div className="detail-right">
         <Button

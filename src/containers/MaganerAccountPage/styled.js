@@ -1,20 +1,19 @@
 import styled from "styled-components";
 
 const MaganerAccountStyled = styled.div`
-  position: absolute;
-  z-index: 2;
+  /* position: absolute; */
+  /* z-index: 2; */
   display: flex;
   flex-direction: row;
   background-color: #f5f7f9;
-  /* width: 100%; */
-  /* height: 100%; */
+  width: 100%;
+  height: 100vh;
   /* justify-content: flex-start; */
   .containerForm {
     padding-top: 40px;
     padding-left: 75px;
     display: flex;
     flex-direction: column;
-
     /* min-height: 508px; */
     width: 100%;
     border-radius: 15px;

@@ -120,6 +120,7 @@ export default function Register() {
     const createAccount = await axios.post(
       "http://localhost:1337/auth/local/register",
       {
+        status: "pending",
         username: userName,
         email: email,
         password: password,

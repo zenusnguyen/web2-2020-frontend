@@ -5,6 +5,7 @@ const TransactionHistoryPage = styled.div`
   flex-direction: row;
   background-color: #eff1f2;
   width: 100%;
+  padding-right: 20%;
   font-size: 16;
   font-weight: 500;
   min-height: 100vh;

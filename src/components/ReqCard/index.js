@@ -6,7 +6,7 @@ import Button from "../Button";
 function ShowDetail(HandlerClick) {}
 
 export default function HistoryCard(props) {
-  console.log("props: ", props);
+  // console.log("props: ", props);
   let Style,
     Style2 = "";
   if (props.Amount < 0) {

@@ -16,6 +16,7 @@ export default function TransferPage() {
   const [remark, setRemark] = useState("");
   const [spendArrays, setSpendArrays] = useState([]);
   const [currentAccount, setCurrentAccount] = useState("");
+  const [reLoad, setReload] = useState(new Date());
   // const [transferType, setTransferType] = useState("Intra");
   let transferType = "intra";
   function getAvailableBalance(cardNumber) {
@@ -28,11 +29,7 @@ export default function TransferPage() {
   }
   async function handleCheckBeneficiary() {}
   async function handleTransfer() {
-    console.log("currentAccount: ", currentAccount);
-    console.log("remark: ", remark);
-    console.log("amount: ", amount);
-    console.log("beneficiary: ", beneficiary);
-
+    // console.log("beneficiary: ", beneficiary);
     await axios
       .post(`http://localhost:1337/spend-accounts-transfer-intra`, {
         data: {
@@ -47,7 +44,10 @@ export default function TransferPage() {
         // },
       })
       .then(function (response) {
-        console.log("response: ", response);
+        if (response.status === 200) {
+          alert("Transfer Successful");
+          setReload(new Date());
+        }
       })
 
       .catch(function (error) {
@@ -65,7 +65,7 @@ export default function TransferPage() {
       setSpendArrays(result.data);
 
       _.forEach(result.data, (item) => {
-        if (item.status === "active") {
+        if (item.status === "active" && item.card_type === "spend") {
           spendAccountsArray.push({
             label: `${item.card_number}`,
             value: `${item.card_number}`,

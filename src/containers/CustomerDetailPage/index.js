@@ -14,50 +14,69 @@ import Calendar from "../../assets/calendar.png";
 import * as _ from "lodash";
 import { DepositStyled, Register } from "./styled";
 import Select from "react-select";
-
+import axios from "axios";
 export default function Profile(props) {
-  const UserAccount = JSON.parse(localStorage.getItem("userAccount"));
-  const UserInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const accountInfo = props.data;
+
   const [state, setState] = useState("detail");
   const _onClick = (state) => {
     setState(state);
   };
   function EditProfile(props) {
-    const UserAccount = JSON.parse(localStorage.getItem("userAccount"));
-    const UserInfor = JSON.parse(localStorage.getItem("userInfo"));
+    console.log("props: ", props);
+    const accountInfo = props.data;
 
     const [DateOfBirth, setDateOfBirth] = useState(new Date());
+
     const [DateOfIssue, setDateOfIssue] = useState(new Date());
+    const [userInfo, setUserInfo] = useState("");
+    console.log("userInfo: ", userInfo);
+
+    useEffect(() => {
+      async function Fecth() {
+        const result = await axios.get(
+          `http://localhost:1337/customer-infors/?id=${props.data.user_info}`
+        );
+        setUserInfo(result.data[0]);
+        setDateOfBirth(new Date(result.data[0].date_of_birth));
+        setDateOfIssue(new Date(result.data[0].date_of_issue));
+      }
+      Fecth();
+    }, []);
+
     return (
       <Register>
         <SideMenu></SideMenu>
         <div className="containerForm">
-        <div onClick={()=>{
-            setState("detail")
-          }} className="back">
+          <div
+            onClick={() => {
+              setState("detail");
+            }}
+            className="back"
+          >
             <img src={Back}></img>
             {props.backTitle || "All customers"}
           </div>
           <p className="SignInTitle">Edit Profile</p>
           <InputForm
-            value={UserAccount.email}
+            value={accountInfo.email}
             type="email"
             title="Email "
           ></InputForm>
           <InputForm
             type="text"
-            value={UserAccount.username}
+            value={accountInfo.username}
             title="User Name "
           ></InputForm>
 
           <InputForm
-            value={UserInfor.full_name}
+            placeholder={userInfo.full_name}
             type="text"
             title="Full Name "
           ></InputForm>
           <div className="dualColumn">
             <InputForm
-              value={UserInfor.phone_number}
+              placeholder={userInfo.phone_number}
               type="number"
               title=" Phone number  "
               Width="160px"
@@ -74,13 +93,13 @@ export default function Profile(props) {
             </MyDatePickerStyle>
           </div>
           <TextArea
-            value={UserInfor.address}
+            value={userInfo.address}
             type="text"
             title="Current address "
           ></TextArea>
           <div className="dualColumn" style={{ marginTop: "20px" }}>
             <InputForm
-              value={UserInfor.identificationNumber}
+              placeholder={userInfo.identificationNumber}
               pattern="[0-9]"
               type="tel"
               title=" ID/ Passport number  "
@@ -99,8 +118,8 @@ export default function Profile(props) {
             </MyDatePickerStyle>
           </div>
           <PhotoUpload
-            value1={UserInfor.img1}
-            value2={UserInfor.img2}
+            value1={JSON.parse(localStorage.getItem("userInfo")).img1}
+            value2={JSON.parse(localStorage.getItem("userInfo")).img2}
           ></PhotoUpload>
           <Button
             BackgroundColor="#4F6EF6"
@@ -131,9 +150,12 @@ export default function Profile(props) {
       <DepositStyled>
         <SideMenu></SideMenu>
         <div className="containerDeposit">
-          <div onClick={()=>{
-            setState("detail")
-          }} className="back">
+          <div
+            onClick={() => {
+              setState("detail");
+            }}
+            className="back"
+          >
             <img src={Back}></img>
             {props.backTitle || "Nguyễn Việt Anh"}
           </div>
@@ -220,15 +242,12 @@ export default function Profile(props) {
             </div>
           </div>
           <p className="title">Personal information</p>
-          <PersonalDetailCard
-            UserAccount={UserAccount}
-            UserInfo={UserInfo}
-          ></PersonalDetailCard>
+          <PersonalDetailCard accountInfo={accountInfo}></PersonalDetailCard>
         </div>
       </PersonalPage>
     );
   else if (state === "edit") {
-    return <EditProfile></EditProfile>;
+    return <EditProfile data={accountInfo}></EditProfile>;
   } else if (state === "deposit") {
     return <Deposit></Deposit>;
   }

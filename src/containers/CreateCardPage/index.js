@@ -19,6 +19,7 @@ function SpendCard() {
     const createCard = await axios.post(
       "http://localhost:1337/spend-accounts",
       {
+        balance: 0,
         card_type: "spend",
         currency_unit: currency,
         spend_type: accountType,
@@ -91,7 +92,7 @@ function SavingCard() {
         card_number: id.toString(),
         account_id: JSON.parse(localStorage.getItem("userAccount")).id,
         status: "pending",
-        balance:0,
+        balance: 0,
         created_date: new Date(),
       }
     );

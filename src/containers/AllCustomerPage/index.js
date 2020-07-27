@@ -7,16 +7,6 @@ import SideMenu from "../../components/SideMenu";
 import CustomerCard from "../../components/CustomerCard";
 import axios from "axios";
 import CustomerDetailPage from "../CustomerDetailPage";
-function ShowDetail(HandlerClick) {
-  return (
-    <CustomerDetailPage
-    userName="Nguyen Viet Anh"
-      backImg="../../assets/back.svg"
-      backTitle="All customers"
-      onClick={HandlerClick}
-    ></CustomerDetailPage>
-  );
-}
 
 export default function MaganeAccount() {
   const temp = [];
@@ -25,7 +15,27 @@ export default function MaganeAccount() {
   const [isDetail, setIsDetail] = useState(false);
   const [styled, setStyled] = useState("");
   const [styled2, setStyled2] = useState("none");
-  const temp2 = [{}, {}];
+  const [cardInfo, setcardInfo] = useState("");
+  useEffect(() => {
+    async function Fecth() {
+      const result = await axios.get(`http://localhost:1337/users`);
+      setData(result.data);
+    }
+    Fecth();
+  }, []);
+  console.log("data: ", data);
+  function ShowDetail(cardInfo) {
+    // console.log("cardInfo: ", cardInfo);
+    // console.log("HandlerClick: ", HandlerClick);
+    return (
+      <CustomerDetailPage
+        data={cardInfo}
+        backImg="../../assets/back.svg"
+        backTitle="All customers"
+        onClick={HandlerClick}
+      ></CustomerDetailPage>
+    );
+  }
   useEffect(() => {
     async function Fecth() {
       const result = await axios.post(
@@ -39,17 +49,8 @@ export default function MaganeAccount() {
     Fecth();
   }, []);
 
-  data.forEach((item) => {
-    if (item.SpendType === "1") {
-      item.SpendType = "Silver";
-    } else if (item.type === "2") {
-      item.SpendType = "Gold";
-    } else {
-      item.SpendType = "Platinum";
-    }
-  });
-
   const HandlerClick = (items) => {
+    setcardInfo(items);
     if (isDetail) {
       setStyled("");
       setStyled2("none");
@@ -62,17 +63,16 @@ export default function MaganeAccount() {
   };
 
   const RenderCard = () => {
-    return temp2.map((items) => (
+    return data.map((items, index) => (
       <CustomerCard
         onClick={() => {
-          HandlerClick((items = items.card_number));
+          HandlerClick(items);
         }}
-        key={items.key}
-        Number={items.card_number}
-        SpendType={items.SpendType}
+        key={index}
+        email={items.email}
+        username={items.username}
         Status={items.status}
         Created={items.created_date}
-        TypeCard={items.TypeCard}
       ></CustomerCard>
     ));
   };
@@ -93,7 +93,7 @@ export default function MaganeAccount() {
         </div>
       </div>
       <div className="detailCard" style={{ display: styled2 }}>
-        {ShowDetail(HandlerClick)}
+        {ShowDetail(cardInfo)}
       </div>
     </MaganerAccountStyled>
   );

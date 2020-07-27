@@ -44,10 +44,7 @@ export default function Profile(props) {
           </div>
         </div>
         <p className="title">Personal information</p>
-        <PersonalDetailCard
-          UserAccount={UserAccount}
-          UserInfo={UserInfo}
-        ></PersonalDetailCard>
+        <PersonalDetailCard accountInfo={UserAccount}></PersonalDetailCard>
 
         {/* <p className="title">Change password</p> */}
         {/* <InputForm title="New password" type="password"></InputForm>

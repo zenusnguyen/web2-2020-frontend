@@ -65,7 +65,7 @@ function App() {
             <PendingRequestPage />
           </Route>
           <Route path="/configuration">
-            <AccountDetailPage />
+            {/* <AccountDetailPage /> */}
           </Route>{" "}
           <Route path="/history">
             <TransactionHistoryPage />
