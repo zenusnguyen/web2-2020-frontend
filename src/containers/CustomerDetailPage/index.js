@@ -21,7 +21,7 @@ import AddIcon from "../../assets/add-outline.png";
 import Card from "../../components/Card";
 export default function Profile(props) {
   const accountInfo = props.data;
-  
+
   const [dataCard, setDataCard] = useState([]);
 
   const [state, setState] = useState("detail");
@@ -39,7 +39,16 @@ export default function Profile(props) {
   }, []);
   console.log("dataCard: ", dataCard);
   function RenderListCard() {
-    return dataCard.map((items) => <Card></Card>);
+    return dataCard.map((items, index) => (
+      <Card
+        key={index}
+        Number={items.card_number}
+        Balance={items.balance || 0}
+        Status={items.status}
+        Created={items.created_date}
+        TypeCard={items.spend_type}
+      ></Card>
+    ));
   }
   function ListCard() {
     return (
