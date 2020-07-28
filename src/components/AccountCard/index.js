@@ -2,31 +2,19 @@ import React, { useState } from "react";
 import CardStyled from "./styled";
 import SpendCard from "../../assets/spend-gold.svg";
 import SavingCard from "../../assets/savings.svg";
-export default function AccountCard({
-  Src,
-  TypeCard,
-  Onclick,
-  //share
-  AccountNumber,
-  CurrentBalance,
-  Status,
-  //spend account only
-  AccountType,
-  //savings account only
-  Term,
-  MaturityDate,
-  InterestRate,
-  TotalInterest,
-}) {
-  let Style, Style2 = "";
-  if (Term === undefined) {
+
+export default function AccountCard(props) {
+  let Style,
+    Style2 = "";
+  if (props.Term === undefined) {
     Style2 = "";
     Style = "none";
   } else {
     Style2 = "none";
     Style = "";
   }
-  if (TypeCard === null) {
+  let Src = "";
+  if (props.TypeCard === null) {
     Src = SpendCard;
   } else {
     Src = SavingCard;
@@ -38,17 +26,20 @@ export default function AccountCard({
         <img src={Src || SpendCard}></img>
       </div>
       <div className="detail">
-        <p> Account number: {AccountNumber} </p>
+        <p> Account number: {props.AccountNumber} </p>
 
-        <p style={{ display: Style2 }}> Account type: {AccountType} </p>
+        <p style={{ display: Style2 }}> Account type: {props.AccountType} </p>
 
-        <p style={{ display: Style }}> Term: {Term} </p>
-        <p style={{ display: Style }}> Maturity date: {MaturityDate} </p>
-        <p style={{ display: Style }}> Interest rate: {InterestRate} </p>
-        <p style={{ display: Style }}> Total interest: {TotalInterest} </p>
+        <p style={{ display: Style }}> Term: {props.Term} </p>
+        <p style={{ display: Style }}> Maturity date: {props.MaturityDate} </p>
+        <p style={{ display: Style }}> Interest rate: {props.InterestRate} </p>
+        <p style={{ display: Style }}>
+          {" "}
+          Total interest: {props.TotalInterest}{" "}
+        </p>
 
-        <p> Current balance: {CurrentBalance} </p>
-        <p> Status: {Status} </p>
+        <p> Current balance: {props.CurrentBalance} </p>
+        <p> Status: {props.Status} </p>
       </div>
     </CardStyled>
   );

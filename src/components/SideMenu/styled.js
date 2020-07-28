@@ -6,20 +6,18 @@ const SideMenuStyle = styled.div`
   display: flex;
   flex-direction: column;
   width: 300px;
+  min-width: 260px;
   min-height: 508px;
   background-color: #ffffff;
 
   /* align-items: center; */
   justify-content: flex-start;
   img {
-    width: 118px;
-    height: 48px;
+    /* width: 130px; */
+    height: 42px;
   }
-  .logo {
-    margin-bottom: 24px;
-  }
-  .ListMenu {
-    margin-top: 24px;
+  .listMenu {
+    margin-top: 42px;
     width: 250px;
     display: flex;
     flex-direction: column;

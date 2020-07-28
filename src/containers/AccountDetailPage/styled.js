@@ -3,7 +3,7 @@ import styled from "styled-components";
 const AccountDetailPage = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #eff1f2;
+  background-color: #f5f7f9;
   width: 100%;
   font-size: 16;
   font-weight: 500;
@@ -31,7 +31,18 @@ const AccountDetailPage = styled.div`
     font-weight: 600;
     margin-bottom: 16px;
   }
-
+  .back {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+      margin-right: 10px;
+    }
+    .button {
+      border: 0px;
+      background-color: transparent;
+    }
+  }
   .selectInput {
     width: 350px;
     padding-bottom: 20px;

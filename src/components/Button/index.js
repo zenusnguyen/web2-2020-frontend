@@ -3,9 +3,6 @@ import Button from "./styled";
 import React from "react";
 
 export default function index(props) {
-  // console.log('propsssssssssss: ', props.onClick);
- 
-
   return (
     <Button
       Display={props.Display}
@@ -15,7 +12,7 @@ export default function index(props) {
       Height={props.Height}
       BackgroundColor={props.BackgroundColor}
     >
-      {/* <img src={props.Src || null}></img> */}
+      <img src={props.Src || null}></img>
       <p>{props.title} </p>
     </Button>
   );
