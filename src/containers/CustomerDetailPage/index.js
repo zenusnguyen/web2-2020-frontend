@@ -24,6 +24,7 @@ export default function Profile(props) {
   const _onClick = (state) => {
     setState(state);
   };
+
   function EditProfile(props) {
     const accountInfo = props.data;
 
@@ -50,6 +51,7 @@ export default function Profile(props) {
         setImgUrl1(`http://localhost:1337${result.data[0].img1}`);
         setImgUrl2(`http://localhost:1337${result.data[0].img2}`);
       }
+
       Fecth();
     }, []);
 
@@ -215,7 +217,7 @@ export default function Profile(props) {
           ></TextArea>
           <div className="dualColumn" style={{ marginTop: "20px" }}>
             <InputForm
-               onChange={(e) => {
+              onChange={(e) => {
                 setPassport(e.target.value);
               }}
               placeholder={userInfo.identificationNumber}
@@ -278,19 +280,43 @@ export default function Profile(props) {
   }
 
   function Deposit(props) {
-    const techCompanies = [
-      { label: "Bank 1", value: 1 },
-      { label: "Bank 2", value: 2 },
-      { label: "Bank 3", value: 3 },
-      { label: "Bank 4", value: 4 },
-      { label: "Bank 5", value: 5 },
-      { label: "Bank 6", value: 6 },
-    ];
-    const spendAccounts = [
-      { label: "123456 - Nguyen Van A", value: 1 },
-      { label: "123452 - Nguyen Van B", value: 2 },
-      { label: "123453 - Nguyen Van C", value: 3 },
-    ];
+    console.log("props: ", props);
+    const [listSpend, setListSpend] = useState([]);
+    const [spendAccounts, setSpendAccount] = useState([]);
+    let spendAccountsArray = [];
+
+    useEffect(() => {
+      async function Fecth() {
+        const result = await axios.get(
+          `http://localhost:1337/spend-accounts-by-owneraccount?id=${props.accountInfo.id}`
+        );
+        setListSpend(result.data);
+        _.forEach(result.data, (item) => {
+          if (item.status === "active" && item.card_type === "spend") {
+            spendAccountsArray.push({
+              label: `${item.card_number}`,
+              value: `${item.card_number}`,
+            });
+          }
+        });
+        setSpendAccount(spendAccountsArray);
+      }
+      Fecth();
+    }, []);
+    console.log("listSpend: ", listSpend);
+    // const techCompanies = [
+    //   { label: "Bank 1", value: 1 },
+    //   { label: "Bank 2", value: 2 },
+    //   { label: "Bank 3", value: 3 },
+    //   { label: "Bank 4", value: 4 },
+    //   { label: "Bank 5", value: 5 },
+    //   { label: "Bank 6", value: 6 },
+    // ];
+    // const spendAccounts = [
+    //   { label: "123456 - Nguyen Van A", value: 1 },
+    //   { label: "123452 - Nguyen Van B", value: 2 },
+    //   { label: "123453 - Nguyen Van C", value: 3 },
+    // ];
     return (
       <DepositStyled>
         <SideMenu></SideMenu>
@@ -311,7 +337,7 @@ export default function Profile(props) {
             <p>Select an account</p>
             <Select
               style={{ height: "100%", fontSize: "16px", fontWeight: "500" }}
-              options={techCompanies}
+              options={spendAccounts}
             />
           </div>
           <InputForm
@@ -394,6 +420,6 @@ export default function Profile(props) {
   else if (state === "edit") {
     return <EditProfile data={accountInfo}></EditProfile>;
   } else if (state === "deposit") {
-    return <Deposit></Deposit>;
+    return <Deposit accountInfo={accountInfo}></Deposit>;
   }
 }
