@@ -25,8 +25,6 @@ export default function MaganeAccount() {
   }, []);
   console.log("data: ", data);
   function ShowDetail(cardInfo) {
-    // console.log("cardInfo: ", cardInfo);
-    // console.log("HandlerClick: ", HandlerClick);
     return (
       <CustomerDetailPage
         data={cardInfo}

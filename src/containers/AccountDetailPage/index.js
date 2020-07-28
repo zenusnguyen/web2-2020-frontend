@@ -55,7 +55,7 @@ function RenderHistory() {
 }
 
 export default function AccountDetail(props) {
-  console.log("props: ", props);
+  
   const { cardInfo } = props;
   // if (cardInfo.spend_type == 1) {
   //   cardInfo.displayType = "Silver";

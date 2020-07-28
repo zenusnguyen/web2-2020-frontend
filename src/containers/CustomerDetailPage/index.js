@@ -27,7 +27,8 @@ export default function Profile(props) {
     const accountInfo = props.data;
 
     const [DateOfBirth, setDateOfBirth] = useState(new Date());
-
+    const [img1, setimg1] = useState("");
+    const [img2, setimg2] = useState("");
     const [DateOfIssue, setDateOfIssue] = useState(new Date());
     const [userInfo, setUserInfo] = useState("");
     console.log("userInfo: ", userInfo);
@@ -40,6 +41,8 @@ export default function Profile(props) {
         setUserInfo(result.data[0]);
         setDateOfBirth(new Date(result.data[0].date_of_birth));
         setDateOfIssue(new Date(result.data[0].date_of_issue));
+        setimg2(result.data[0].img2);
+        setimg1(result.data[0].img1);
       }
       Fecth();
     }, []);
@@ -117,10 +120,8 @@ export default function Profile(props) {
               <img src={Calendar}></img>
             </MyDatePickerStyle>
           </div>
-          <PhotoUpload
-            value1={JSON.parse(localStorage.getItem("userInfo")).img1}
-            value2={JSON.parse(localStorage.getItem("userInfo")).img2}
-          ></PhotoUpload>
+          <PhotoUpload value1={img1} value2={img2}></PhotoUpload>
+          {/* <img src={img1}></img> */}
           <Button
             BackgroundColor="#4F6EF6"
             Width=" 187px"

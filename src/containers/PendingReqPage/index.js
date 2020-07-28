@@ -35,7 +35,7 @@ export default function MaganeAccount() {
     }
     Fecth();
   }, []);
-  console.log("data: ", data);
+  
   data.forEach((item) => {
     if (item.SpendType === "1") {
       item.SpendType = "Silver";
