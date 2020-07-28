@@ -16,14 +16,17 @@ export default function MaganeAccount() {
   const [styled, setStyled] = useState("");
   const [styled2, setStyled2] = useState("none");
   const [cardInfo, setcardInfo] = useState("");
+  const [state, setState] = useState("detail");
   useEffect(() => {
     async function Fecth() {
-      const result = await axios.get("http://localhost:1337/users-permissions/users-active");
+      const result = await axios.get(
+        "http://localhost:1337/users-permissions/users-active"
+      );
       setData(result.data);
     }
     Fecth();
   }, []);
-  console.log("data: ", data);
+
   function ShowDetail(cardInfo) {
     return (
       <CustomerDetailPage
@@ -34,30 +37,10 @@ export default function MaganeAccount() {
       ></CustomerDetailPage>
     );
   }
-  // useEffect(() => {
-  //   async function Fecth() {
-  //     const result = await axios.post(
-  //       "http://localhost:1337/spend-accounts/findByAccount",
-  //       {
-  //         account_id: JSON.parse(localStorage.getItem("userAccount")).id,
-  //       }
-  //     );
-  //     setData(result.data);
-  //   }
-  //   Fecth();
-  // }, []);
 
   const HandlerClick = (items) => {
     setcardInfo(items);
-    if (isDetail) {
-      setStyled("");
-      setStyled2("none");
-      setIsDetail(!isDetail);
-    } else {
-      setIsDetail(!isDetail);
-      setStyled("none");
-      setStyled2("");
-    }
+    setState("card");
   };
 
   const RenderCard = () => {
@@ -74,25 +57,37 @@ export default function MaganeAccount() {
       ></CustomerCard>
     ));
   };
-
-  return (
-    <MaganerAccountStyled>
-      <SideMenu></SideMenu>
-      <div className="containerForm" style={{ display: styled }}>
-        <div className="titleWithButton">
-          <p className="SignInTitle"> All customers </p>
-          <div className="searchBar">
-            <img src={Search}></img>
-            <input placeholder="Search" type="text"></input>
+  if (state === "detail") {
+    return (
+      <MaganerAccountStyled>
+        <SideMenu></SideMenu>
+        <div className="containerForm" style={{ display: styled }}>
+          <div className="titleWithButton">
+            <p className="SignInTitle"> All customers </p>
+            <div className="searchBar">
+              <img src={Search}></img>
+              <input placeholder="Search" type="text"></input>
+            </div>
+          </div>
+          <div className="listCard">
+            <RenderCard></RenderCard>
           </div>
         </div>
-        <div className="listCard">
-          <RenderCard></RenderCard>
-        </div>
-      </div>
-      <div className="detailCard" style={{ display: styled2 }}>
+        {/* <div className="detailCard">
         {ShowDetail(cardInfo)}
-      </div>
-    </MaganerAccountStyled>
-  );
+      </div> */}
+      </MaganerAccountStyled>
+    );
+  } else {
+    return (
+      <CustomerDetailPage
+        data={cardInfo}
+        backImg="../../assets/back.svg"
+        backTitle="All customers"
+        onClick={() => {
+          setState("detail");
+        }}
+      ></CustomerDetailPage>
+    );
+  }
 }

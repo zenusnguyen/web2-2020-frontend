@@ -54,6 +54,20 @@ export const DepositStyled = styled.div`
   }
 `;
 
+export const ListCardStyled = styled.div`
+  .title {
+    p {
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 150%;
+    }
+  }
+  .containerListCard {
+  }
+`;
+
 const PersonalPage = styled.div`
   display: flex;
   flex-direction: row;
@@ -61,6 +75,7 @@ const PersonalPage = styled.div`
   width: 100%;
   margin-bottom: 40px;
   /* justify-content: flex-start; */
+
   .bodyContainer {
     margin-top: 65px;
     display: flex;

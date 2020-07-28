@@ -12,19 +12,45 @@ import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
 import Calendar from "../../assets/calendar.png";
 import * as _ from "lodash";
-import { DepositStyled, Register } from "./styled";
+import { DepositStyled, ListCardStyled } from "./styled";
 import Select from "react-select";
 import axios from "axios";
 import EditProfile from "../editProfile-admin";
 import styled from "styled-components";
 import AddIcon from "../../assets/add-outline.png";
+import Card from "../../components/Card";
 export default function Profile(props) {
   const accountInfo = props.data;
+  
+  const [dataCard, setDataCard] = useState([]);
 
   const [state, setState] = useState("detail");
   const _onClick = (state) => {
     setState(state);
   };
+  useEffect(() => {
+    async function Fecth() {
+      const result = await axios.get(
+        `http://localhost:1337/spend-accounts-by-owneraccount?id=${accountInfo.id}`
+      );
+      setDataCard(result.data);
+    }
+    Fecth();
+  }, []);
+  console.log("dataCard: ", dataCard);
+  function RenderListCard() {
+    return dataCard.map((items) => <Card></Card>);
+  }
+  function ListCard() {
+    return (
+      <ListCardStyled>
+        <p className="title"> Account</p>
+        <div className="containerListCard">
+          <RenderListCard></RenderListCard>
+        </div>
+      </ListCardStyled>
+    );
+  }
 
   function Deposit(props) {
     console.log("props: ", props);
@@ -148,6 +174,7 @@ export default function Profile(props) {
           </div>
           <p className="title">Personal information</p>
           <PersonalDetailCard accountInfo={accountInfo}></PersonalDetailCard>
+          <ListCard></ListCard>
         </div>
       </PersonalPage>
     );
