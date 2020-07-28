@@ -21,7 +21,7 @@ export default function Profile(props) {
         </div>
         <p className="title">Personal information</p>
         <PersonalDetailCard
-          UserAccount={UserAccount}
+          accountInfo={UserAccount}
           UserInfo={UserInfo}
         ></PersonalDetailCard>
       </div>

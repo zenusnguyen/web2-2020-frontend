@@ -18,7 +18,7 @@ export default function MaganeAccount() {
   const [cardInfo, setcardInfo] = useState("");
   useEffect(() => {
     async function Fecth() {
-      const result = await axios.get(`http://localhost:1337/users`);
+      const result = await axios.get("http://localhost:1337/users-permissions/users-active");
       setData(result.data);
     }
     Fecth();
@@ -34,18 +34,18 @@ export default function MaganeAccount() {
       ></CustomerDetailPage>
     );
   }
-  useEffect(() => {
-    async function Fecth() {
-      const result = await axios.post(
-        "http://localhost:1337/spend-accounts/findByAccount",
-        {
-          account_id: JSON.parse(localStorage.getItem("userAccount")).id,
-        }
-      );
-      setData(result.data);
-    }
-    Fecth();
-  }, []);
+  // useEffect(() => {
+  //   async function Fecth() {
+  //     const result = await axios.post(
+  //       "http://localhost:1337/spend-accounts/findByAccount",
+  //       {
+  //         account_id: JSON.parse(localStorage.getItem("userAccount")).id,
+  //       }
+  //     );
+  //     setData(result.data);
+  //   }
+  //   Fecth();
+  // }, []);
 
   const HandlerClick = (items) => {
     setcardInfo(items);

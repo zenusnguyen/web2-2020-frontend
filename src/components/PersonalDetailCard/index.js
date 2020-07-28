@@ -13,9 +13,12 @@ function InforLine(props) {
   );
 }
 export default function PersonalDetailCard(props) {
-  console.log('props: ', props);
+  console.log("props: ", props);
   const { accountInfo } = props;
   const [userInfo, setUserInfo] = useState("");
+  const [img1, setImg1] = useState("");
+  const [img2, setImg2] = useState("");
+  console.log("userInfo: ", userInfo);
 
   useEffect(() => {
     async function Fecth() {
@@ -23,11 +26,11 @@ export default function PersonalDetailCard(props) {
         `http://localhost:1337/customer-infors/?id=${props.accountInfo.user_info}`
       );
       setUserInfo(result.data[0]);
+      setImg1(result.data[0].img1);
+      setImg2(result.data[0].img2);
     }
     Fecth();
   }, [props.accountInfo.user_info]);
-
-  let display = "none";
 
   return (
     <CardStyled>
@@ -51,18 +54,14 @@ export default function PersonalDetailCard(props) {
       <InforLine title="Current address " detail={userInfo.address}></InforLine>
       <InforLine title="Username" detail={accountInfo.username}></InforLine>
       <InforLine title="Email" detail={accountInfo.email}></InforLine>
-      <div className="groupImage" style={{ display: display }}>
+      <div className="groupImage">
         <img
           className="identificationImage"
-          src={
-            "https://images.hdqwalls.com/download/small-memory-8k-2a-2048x2048.jpg"
-          }
+          src={`http://localhost:1337${img1}`}
         ></img>
         <img
           className="identificationImage"
-          src={
-            "https://images.hdqwalls.com/download/small-memory-8k-2a-2048x2048.jpg"
-          }
+          src={`http://localhost:1337${img2}`}
         ></img>
       </div>
     </CardStyled>

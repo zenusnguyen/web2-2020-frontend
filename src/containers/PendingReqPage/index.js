@@ -35,16 +35,6 @@ export default function MaganeAccount() {
     }
     Fecth();
   }, []);
-  
-  data.forEach((item) => {
-    if (item.SpendType === "1") {
-      item.SpendType = "Silver";
-    } else if (item.type === "2") {
-      item.SpendType = "Gold";
-    } else {
-      item.SpendType = "Platinum";
-    }
-  });
 
   const HandlerClick = (items) => {
     if (isDetail) {
@@ -61,6 +51,9 @@ export default function MaganeAccount() {
   const RenderCard = () => {
     return data.map((items) => (
       <PendingRequestCard
+        UserName={items.username}
+        email={items.email}
+        Date={items.created_at}
         onClick={() => {
           HandlerClick((items = items.card_number));
         }}

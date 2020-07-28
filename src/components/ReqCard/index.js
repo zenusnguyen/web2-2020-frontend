@@ -23,6 +23,7 @@ export default function HistoryCard(props) {
         </div>
         <div className="detail-left">
           <p>{props.UserName || "Nguyễn Việt Anh"} </p>
+          <p>{props.email || "Nguyễn Việt Anh"} </p>
           <p className="subtext"> {props.Date || new Date().toISOString()} </p>
         </div>
       </div>

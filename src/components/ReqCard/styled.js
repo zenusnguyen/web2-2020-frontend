@@ -27,13 +27,16 @@ const CardStyled = styled.div`
     line-height: 140%;
     /* color: #333435; */
     padding: 0px;
+    margin: 2px;
   }
 
   .detail-left {
+    /* top: 10px; */
     margin-left: 24px;
     display: flex;
     flex-direction: column;
     margin-top: 20px;
+    justify-content: space-around;
   }
 
   .detail-right {
@@ -45,6 +48,7 @@ const CardStyled = styled.div`
     line-height: 140%;
   }
   .left {
+    margin-top: 0px;
     display: flex;
     flex-direction: row;
     align-items: center;
