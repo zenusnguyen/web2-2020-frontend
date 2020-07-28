@@ -10,6 +10,7 @@ export const DepositStyled = styled.div`
     padding-left: 75px;
     padding-top: 40px;
   }
+
   .selectAccount {
     p {
       /* font-family: Inter; */
@@ -108,6 +109,13 @@ export const Register = styled.div`
   background-color: #f5f7f9;
   width: 100%;
   /* justify-content: flex-start; */
+
+  .uploadImage {
+    width: 350px;
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+  }
   .containerForm {
     padding-top: 40px;
     padding-left: 75px;
@@ -143,6 +151,14 @@ export const Register = styled.div`
     align-items: center;
     justify-content: space-between;
     /* padding-top:20px; */
+  }
+  .registerButton {
+    width: 350px;
+    height: 50px;
+    background-color: #feba46;
+    border: 0px;
+    color: white;
+    border-radius: 5px;
   }
 `;
 

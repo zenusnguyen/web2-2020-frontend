@@ -8,10 +8,6 @@ export default function UpdatePage(props) {
   const [img1, setImgUrl1] = useState(`http://localhost:1337${props.value1}`);
   const [img2, setImgUrl2] = useState(`http://localhost:1337${props.value2}`);
 
-  useEffect(() => {
-    setImgUrl1(`http://localhost:1337${props.value1}`);
-    setImgUrl2(`http://localhost:1337${props.value2}`);
-  });
   const getPreview = (img) =>
     img !== null
       ? {

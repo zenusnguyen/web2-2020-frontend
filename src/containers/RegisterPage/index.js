@@ -210,7 +210,7 @@ export default function Register() {
               <img src={Calendar}></img>
             </MyDatePickerStyle>
           </div>
-          {/* <PhotoUpload></PhotoUpload> */}
+       
           <div style={{ marginBottom: "40px" }}>
             <p style={{ fontSize: "16px", fontWeight: "500" }}>Upload photo</p>
             <div className="uploadImage">
