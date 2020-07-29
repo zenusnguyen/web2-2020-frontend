@@ -9,7 +9,7 @@ import AccountDetailPage from "./containers/AccountDetailPage";
 import TransactionHistoryPage from "./containers/TransactionPage";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import SideMenu from "./components/SideMenu";
+import LandingPage from "./containers/LandingPage";
 import "./App.css";
 
 function SignOut() {
@@ -32,6 +32,9 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
+            <LandingPage />
+          </Route>
+          <Route path="/signin">
             <SignInPage />
           </Route>
           <Route path="/register">
