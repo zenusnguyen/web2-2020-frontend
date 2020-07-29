@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import CardStyled from "./styled";
-import SpendCard from "../../assets/spend-gold.svg";
+import SpendCardGold from "../../assets/spend-gold.svg";
+import SpendCardSilver from "../../assets/silver.svg";
+import SpendCardPlatinum from "../../assets/platinum.svg";
 import SavingCard from "../../assets/savings.svg";
 
 export default function AccountCard(props) {
+  console.log("props: ", props);
   let Style,
     Style2 = "";
   if (props.Term === undefined) {
@@ -13,9 +16,19 @@ export default function AccountCard(props) {
     Style2 = "none";
     Style = "";
   }
+  let cardType = "";
   let Src = "";
-  if (props.TypeCard === null) {
-    Src = SpendCard;
+  if (props.Card_type === "spend") {
+    if (props.Spend_type == 1) {
+      cardType = "silver";
+      Src = SpendCardSilver;
+    } else if (props.Spend_type == 2) {
+      cardType = "Gold";
+      Src = SpendCardGold;
+    } else {
+      cardType = "Platinum";
+      Src = SpendCardPlatinum;
+    }
   } else {
     Src = SavingCard;
   }
@@ -23,12 +36,12 @@ export default function AccountCard(props) {
   return (
     <CardStyled>
       <div className="Card">
-        <img src={Src || SpendCard}></img>
+        <img src={Src}></img>
       </div>
       <div className="detail">
         <p> Account number: {props.AccountNumber} </p>
 
-        <p style={{ display: Style2 }}> Account type: {props.AccountType} </p>
+        <p style={{ display: Style2 }}> Account type: {cardType} </p>
 
         <p style={{ display: Style }}> Term: {props.Term} </p>
         <p style={{ display: Style }}> Maturity date: {props.MaturityDate} </p>

@@ -3,21 +3,16 @@ import React, { Component, useEffect, useState } from "react";
 import PersonalPage from "./styled";
 import InputForm from "../../components/InputForm";
 import TextArea from "../../components/TextArea";
-import PhotoUpload from "../../components/PhotoUpload";
 import SideMenu from "../../components/SideMenu";
 import Button from "../../components/Button";
 import PersonalDetailCard from "../../components/PersonalDetailCard";
 import Back from "../../assets/back.svg";
-import DatePicker from "react-datepicker";
-import MyDatePickerStyle from "../../components/DatePicker/styled";
-import Calendar from "../../assets/calendar.png";
 import * as _ from "lodash";
 import { DepositStyled, ListCardStyled } from "./styled";
 import Select from "react-select";
 import axios from "axios";
 import EditProfile from "../editProfile-admin";
-import styled from "styled-components";
-import AddIcon from "../../assets/add-outline.png";
+import Deposit from "../Deposit-admin";
 import Card from "../../components/Card";
 export default function Profile(props) {
   const accountInfo = props.data;
@@ -37,7 +32,7 @@ export default function Profile(props) {
     }
     Fecth();
   }, []);
-  console.log("dataCard: ", dataCard);
+
   function RenderListCard() {
     return dataCard.map((items, index) => (
       <Card
@@ -58,80 +53,6 @@ export default function Profile(props) {
           <RenderListCard></RenderListCard>
         </div>
       </ListCardStyled>
-    );
-  }
-
-  function Deposit(props) {
-    console.log("props: ", props);
-    const [listSpend, setListSpend] = useState([]);
-    const [spendAccounts, setSpendAccount] = useState([]);
-    let spendAccountsArray = [];
-
-    useEffect(() => {
-      async function Fecth() {
-        const result = await axios.get(
-          `http://localhost:1337/spend-accounts-by-owneraccount?id=${props.accountInfo.id}`
-        );
-        setListSpend(result.data);
-        _.forEach(result.data, (item) => {
-          if (item.status === "active" && item.card_type === "spend") {
-            spendAccountsArray.push({
-              label: `${item.card_number}`,
-              value: `${item.card_number}`,
-            });
-          }
-        });
-        setSpendAccount(spendAccountsArray);
-      }
-      Fecth();
-    }, []);
-
-    return (
-      <DepositStyled>
-        <SideMenu></SideMenu>
-        <div className="containerDeposit">
-          <div
-            onClick={() => {
-              setState("detail");
-            }}
-            className="back"
-          >
-            <img src={Back}></img>
-            {props.backTitle || "Nguyễn Việt Anh"}
-          </div>
-          <div className="titleWithButton">
-            <p className="pageTitle">{props.userName || "Deposit"}</p>
-          </div>
-          <div className="selectAccount">
-            <p>Select an account</p>
-            <Select
-              style={{ height: "100%", fontSize: "16px", fontWeight: "500" }}
-              options={spendAccounts}
-            />
-          </div>
-          <InputForm
-            // defaultValue={0}
-            // value={"20,000,000"}
-            type="number"
-            title="Amount"
-            name={"balance"}
-            // readonly={"readonly"}
-          ></InputForm>
-
-          <TextArea
-            value={"Tien HP"}
-            type="text"
-            title="Remark "
-            name={"remark"}
-          ></TextArea>
-          <Button
-            Top="55px"
-            Width="190px"
-            title="Deposit"
-            BackgroundColor={"#4F6EF6"}
-          ></Button>
-        </div>
-      </DepositStyled>
     );
   }
 
@@ -197,6 +118,13 @@ export default function Profile(props) {
       ></EditProfile>
     );
   } else if (state === "deposit") {
-    return <Deposit accountInfo={accountInfo}></Deposit>;
+    return (
+      <Deposit
+        accountInfo={accountInfo}
+        onClick={() => {
+          setState("detail");
+        }}
+      ></Deposit>
+    );
   }
 }

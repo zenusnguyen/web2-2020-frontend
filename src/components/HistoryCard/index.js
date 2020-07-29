@@ -4,14 +4,14 @@ import Icon from "../../assets/wallet.svg";
 
 export default function HistoryCard(props) {
   let { Amount, Date, transferType } = props;
-  let Style,
-    Style2 = "";
+  let Style;
+
   if (props.TransferType === "deposit") {
-    Amount = "-" + props.Amount.toString();
-    Style = "#F45C59";
-  } else {
     Amount = "+" + props.Amount.toString();
     Style = "#56CD67";
+  } else {
+    Amount = "-" + props.Amount.toString();
+    Style = "#F45C59";
   }
 
   return (

@@ -28,16 +28,6 @@ export default function MaganeAccount() {
     }
     Fecth();
   }, []);
-  // console.log("data: ", data);
-  // data.forEach((item) => {
-  //   if (item.spend_type == "1") {
-  //     item.spend_type = "Silver";
-  //   } else if (item.spend_type == "2") {
-  //     item.spend_type = "Gold";
-  //   } else if (item.spend_type == "3") {
-  //     item.spend_type = "Platinum";
-  //   }
-  // });
 
   const HandlerClick = (cardInfo) => {
     SetCardID(cardInfo);
@@ -63,7 +53,8 @@ export default function MaganeAccount() {
         Balance={items.balance || 0}
         Status={items.status}
         Created={items.created_date}
-        TypeCard={items.spend_type}
+        Spend_type={items.spend_type}
+        Card_type={items.card_type}
       ></Card>
     ));
   };
