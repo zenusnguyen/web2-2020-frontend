@@ -123,13 +123,20 @@ export default function LandingPage() {
                 flexDirection: "row",
                 margin: "0 165px",
                 alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <div>
-                <img src={Spend} style={{ margin: "60px 30px" }}></img>
+                <img
+                  src={Spend}
+                  style={{ textAlign: "center", margin: "60px 30px" }}
+                ></img>
               </div>
               <div>
-                <img src={Savings} style={{ margin: "60px 30px" }}></img>
+                <img
+                  src={Savings}
+                  style={{ textAlign: "center", margin: "60px 30px" }}
+                ></img>
               </div>
             </div>
           </div>
@@ -140,8 +147,10 @@ export default function LandingPage() {
             </button>
           </div>
 
-          <div style={{ textAlign: "center"}}>
-            <h4 style={{ textAlign: "center", marginBottom: "32px" }}>Copyright © 2020 Yellow</h4>
+          <div style={{ textAlign: "center" }}>
+            <h4 style={{ textAlign: "center", marginBottom: "32px" }}>
+              Copyright © 2020 Yellow
+            </h4>
           </div>
         </div>
       </div>
