@@ -32,12 +32,11 @@ export default function TransferPage() {
     // console.log("beneficiary: ", beneficiary);
     await axios
       .post(`http://localhost:1337/spend-accounts-transfer-intra`, {
-        data: {
-          currentAccount: currentAccount,
-          remark: remark,
-          amount: amount,
-          beneficiaryAccount: beneficiary,
-        },
+        currentAccount: currentAccount,
+        remark: remark,
+        amount: amount,
+        beneficiaryAccount: beneficiary,
+
         // headers: {
         //   Authorization:
         //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTc2OTM4MTUwLCJleHAiOjE1Nzk1MzAxNTB9.UgsjjXkAZ-anD257BF7y1hbjuY3ogNceKfTAQtzDEsU",

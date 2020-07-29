@@ -1,21 +1,16 @@
 import React, { useState } from "react";
 import CardStyled from "./styled";
 import Icon from "../../assets/wallet.svg";
-// {
-//   TypeCard,
-//   Onclick,
-//   Status,
-//   TransferType,
-//   Date,
-//   Amount,
-//   RemainingBalance,
-// }
+
 export default function HistoryCard(props) {
+  let { Amount, Date, transferType } = props;
   let Style,
     Style2 = "";
-  if (props.Amount < 0) {
+  if (props.TransferType === "deposit") {
+    Amount = "-" + props.Amount.toString();
     Style = "#F45C59";
   } else {
+    Amount = "+" + props.Amount.toString();
     Style = "#56CD67";
   }
 
@@ -29,7 +24,7 @@ export default function HistoryCard(props) {
         <p className="subtext"> {props.Date} </p>
       </div>
       <div className="detail-right">
-        <p style={{ color: Style }}> {props.Amount} </p>
+        <p style={{ color: Style }}> {Amount} </p>
         <p className="subtext"> {props.RemainingBalance} </p>
       </div>
     </CardStyled>

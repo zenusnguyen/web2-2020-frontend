@@ -14,7 +14,7 @@ export default function TransactionHistory() {
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `http://localhost:1337/spend-accounts-by-owneraccount?id=${
+        `http://localhost:1337/transaction-logs-by-account?account_id=${
           JSON.parse(localStorage.getItem("userAccount")).id
         }`
       );
@@ -22,7 +22,17 @@ export default function TransactionHistory() {
     }
     Fecth();
   }, []);
-
+  console.log("data: ", data);
+  function RenderHistory() {
+    return data.map((items) => (
+      <HistoryCard
+        TransferType={items.transaction_type}
+        Date={items.created_at}
+        Amount={items.amount}
+        RemainingBalance={items.remaining_balance}
+      ></HistoryCard>
+    ));
+  }
   const transactionTypes = [
     { label: "All types", value: 1 },
     { label: "Transfer", value: 2 },
@@ -77,12 +87,7 @@ export default function TransactionHistory() {
             <img src={Calendar}></img>
           </MyDatePickerStyle>
         </span>
-        <HistoryCard
-          TransferType="Transfer"
-          Date="01/07/2020 10:55 AM"
-          Amount="-1000000"
-          RemainingBalance="4250000"
-        ></HistoryCard>
+        <RenderHistory></RenderHistory>
       </div>
     </TransactionHistoryPage>
   );
