@@ -20,9 +20,7 @@ export default function Profile(props) {
   const [dataCard, setDataCard] = useState([]);
 
   const [state, setState] = useState("detail");
-  const _onClick = (state) => {
-    setState(state);
-  };
+
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
@@ -32,7 +30,15 @@ export default function Profile(props) {
     }
     Fecth();
   }, []);
-
+  const HandlerBlock = async () => {
+    const block = await axios.put(
+      `http://localhost:1337/users/${accountInfo.id}`,
+      {
+        status: "block",
+      }
+    );
+    console.log("block: ", block);
+  };
   function RenderListCard() {
     return dataCard.map((items, index) => (
       <Card
@@ -41,7 +47,7 @@ export default function Profile(props) {
         Balance={items.balance || 0}
         Status={items.status}
         Created={items.created_date}
-        TypeCard={items.spend_type}
+        Card_type={items.card_type}
       ></Card>
     ));
   }
@@ -96,7 +102,7 @@ export default function Profile(props) {
                 Top="0px"
                 title="Block"
                 Width="187px"
-                // Src={AddIcon}
+                onClick={HandlerBlock}
                 BackgroundColor="#BDBEBF"
                 Display="none"
               ></Button>

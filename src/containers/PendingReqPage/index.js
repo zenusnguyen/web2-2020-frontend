@@ -9,23 +9,14 @@ import axios from "axios";
 import RequsetDetailPage from "../RequsetDetailPage";
 import PendingRequestCard from "../../components/ReqCard";
 
-function ShowDetail(HandlerClick) {
-  return (
-    <RequsetDetailPage
-      userName="Nguyen Viet Anh"
-      onClick={HandlerClick}
-      backImg="../../assets/back.svg"
-      backTitle="Pending Request"
-    ></RequsetDetailPage>
-  );
-}
-
 export default function MaganeAccount() {
   const [data, setData] = useState([]);
 
   const [isDetail, setIsDetail] = useState(false);
   const [styled, setStyled] = useState("");
   const [styled2, setStyled2] = useState("none");
+  const [state, setState] = useState("all");
+  const [request, setRequest] = useState([]);
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
@@ -37,15 +28,8 @@ export default function MaganeAccount() {
   }, []);
 
   const HandlerClick = (items) => {
-    if (isDetail) {
-      setStyled("");
-      setStyled2("none");
-      setIsDetail(!isDetail);
-    } else {
-      setIsDetail(!isDetail);
-      setStyled("none");
-      setStyled2("");
-    }
+    setState("default");
+    setRequest(items);
   };
 
   const RenderCard = () => {
@@ -55,25 +39,34 @@ export default function MaganeAccount() {
         email={items.email}
         Date={items.created_at}
         onClick={() => {
-          HandlerClick((items = items.card_number));
+          HandlerClick(items);
         }}
       ></PendingRequestCard>
     ));
   };
 
-  return (
-    <MaganerAccountStyled>
-      <SideMenu></SideMenu>
-      <div className="containerForm" style={{ display: styled }}>
-        <p className="SignInTitle"> Pending requests</p>
-
-        <div className="listCard">
-          <RenderCard></RenderCard>
+  if (state == "all")
+    return (
+      <MaganerAccountStyled>
+        <SideMenu></SideMenu>
+        <div className="containerForm" style={{ display: styled }}>
+          <p className="SignInTitle"> Pending requests</p>
+          <div className="listCard">
+            <RenderCard></RenderCard>
+          </div>
         </div>
-      </div>
-      <div className="detailCard" style={{ display: styled2 }}>
-        {ShowDetail(HandlerClick)}
-      </div>
-    </MaganerAccountStyled>
-  );
+      </MaganerAccountStyled>
+    );
+  else {
+    return (
+      <RequsetDetailPage
+        data={request}
+        onClick={() => {
+          setState("all");
+        }}
+        backImg="../../assets/back.svg"
+        backTitle="Pending Request"
+      ></RequsetDetailPage>
+    );
+  }
 }

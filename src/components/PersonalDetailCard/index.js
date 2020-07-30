@@ -13,12 +13,10 @@ function InforLine(props) {
   );
 }
 export default function PersonalDetailCard(props) {
-  console.log("props: ", props);
   const { accountInfo } = props;
   const [userInfo, setUserInfo] = useState("");
   const [img1, setImg1] = useState("");
   const [img2, setImg2] = useState("");
-  console.log("userInfo: ", userInfo);
 
   useEffect(() => {
     async function Fecth() {
@@ -58,10 +56,12 @@ export default function PersonalDetailCard(props) {
         <img
           className="identificationImage"
           src={`http://localhost:1337${img1}`}
+          alt=""
         ></img>
         <img
           className="identificationImage"
           src={`http://localhost:1337${img2}`}
+          alt=""
         ></img>
       </div>
     </CardStyled>

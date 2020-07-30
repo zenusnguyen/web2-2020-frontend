@@ -8,10 +8,27 @@ import SideMenu from "../../components/SideMenu";
 import Button from "../../components/Button";
 import PersonalDetailCard from "../../components/PersonalDetailCard";
 import Back from "../../assets/back.svg";
+import axios from "axios";
 import * as _ from "lodash";
 export default function Profile(props) {
-  const UserAccount = JSON.parse(localStorage.getItem("userAccount"));
-  const UserInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const UserAccount = props.data;
+  console.log("UserAccount: ", UserAccount);
+  const HandlerAccept = async () => {
+    const active = await axios.put(
+      `http://localhost:1337/users/${UserAccount.id}`,
+      {
+        status: "active",
+      }
+    );
+  };
+  const HandlerReject = async () => {
+    const reject = await axios.put(
+      `http://localhost:1337/users/${UserAccount.id}`,
+      {
+        status: "reject",
+      }
+    );
+  };
   return (
     <PersonalPage>
       <SideMenu></SideMenu>
@@ -29,32 +46,22 @@ export default function Profile(props) {
               title="Accept"
               Width="187px"
               BackgroundColor="#4F6EF6"
-              // Src={AddIcon}
               Display="none"
+              onClick={HandlerAccept}
             ></Button>
             <Button
-              key="1"
+              onClick={HandlerReject}
+              key="2"
               Top="0px"
               title="Reject"
               Width="187px"
               BackgroundColor="#BDBEBF"
-              // Src={AddIcon}
               Display="none"
             ></Button>
           </div>
         </div>
         <p className="title">Personal information</p>
         <PersonalDetailCard accountInfo={UserAccount}></PersonalDetailCard>
-
-        {/* <p className="title">Change password</p> */}
-        {/* <InputForm title="New password" type="password"></InputForm>
-        <InputForm title=" Confirm new password" type="password"></InputForm>
-        <Button
-          Top="36px"
-          Width="187px"
-          BackgroundColor="#4F6EF6"
-          title="Save"
-        ></Button> */}
       </div>
     </PersonalPage>
   );

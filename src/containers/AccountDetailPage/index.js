@@ -11,39 +11,10 @@ import Back from "../../assets/back.svg";
 import axios from "axios";
 
 import * as _ from "lodash";
-const DATA = [
-  {
-    key: 1,
-    TransferType: "Transfer",
-    Date: "01/07/2020 10:55 AM",
-    Amount: "+1000000",
-    RemainingBalance: "4250000",
-  },
-  {
-    key: 2,
-    TransferType: "Transfer",
-    Date: "01/07/2020 10:55 AM",
-    Amount: "-1000000",
-    RemainingBalance: "4250000",
-  },
-  {
-    key: 3,
-    TransferType: "Transfer",
-    Date: "01/07/2020 10:55 AM",
-    Amount: "+1000000",
-    RemainingBalance: "4250000",
-  },
-  {
-    key: 4,
-    TransferType: "Transfer",
-    Date: "01/07/2020 10:55 AM",
-    Amount: "-1000000",
-    RemainingBalance: "4250000",
-  },
-];
 
 function RenderHistory() {
-  return DATA.map((item) => (
+  const [data, setData] = useState([]);
+  return data.map((item) => (
     <HistoryCard
       key={item.key}
       TransferType={item.TransferType}
@@ -56,8 +27,7 @@ function RenderHistory() {
 
 export default function AccountDetail(props) {
   const { cardInfo } = props;
-
-  const [cardData, setCardData] = useState("");
+  const [history, setHistory] = useState([]);
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
@@ -65,10 +35,11 @@ export default function AccountDetail(props) {
           JSON.parse(localStorage.getItem("userAccount")).id
         }`
       );
-      setCardData(result.data);
+      setHistory(result.data);
     }
     Fecth();
   }, []);
+
   const transactionTypes = [
     { label: "All types", value: 1 },
     { label: "Transfer", value: 2 },
@@ -94,6 +65,7 @@ export default function AccountDetail(props) {
 
         <p className="itemTitle">Information</p>
         <AccountCard
+          Term={cardInfo.term_deposit_id}
           AccountNumber={cardInfo.card_number}
           CurrentBalance={cardInfo.balance || 0}
           Status={cardInfo.status}

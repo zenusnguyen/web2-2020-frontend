@@ -9,7 +9,7 @@ export default function AccountCard(props) {
   console.log("props: ", props);
   let Style,
     Style2 = "";
-  if (props.Term === undefined) {
+  if (props.Term === null) {
     Style2 = "";
     Style = "none";
   } else {
