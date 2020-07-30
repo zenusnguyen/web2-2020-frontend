@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const MaganerAccountStyled = styled.div`
-  position: absolute;
-  z-index: 2;
+  /* position: absolute; */
+  /* z-index: 2; */
   display: flex;
   flex-direction: row;
   background-color: #f5f7f9;

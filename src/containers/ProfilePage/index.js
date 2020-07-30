@@ -10,7 +10,7 @@ export default function Profile(props) {
   const UserInfo = JSON.parse(localStorage.getItem("userInfo"));
   return (
     <PersonalPage>
-      <SideMenu></SideMenu>
+    
       <div className="bodyContainer">
         <div onClick={props.onClick} className="back">
           <img src={props.backImg}></img>

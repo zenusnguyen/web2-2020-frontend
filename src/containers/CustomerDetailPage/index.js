@@ -65,7 +65,7 @@ export default function Profile(props) {
   if (state === "detail")
     return (
       <PersonalPage>
-        <SideMenu></SideMenu>
+      
         <div className="bodyContainer">
           <div onClick={props.onClick} className="back">
             <img src={props.backImg}></img>

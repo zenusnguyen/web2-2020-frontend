@@ -62,7 +62,7 @@ export default function Deposit(props) {
 
   return (
     <DepositStyled>
-      <SideMenu></SideMenu>
+    
       <div className="containerDeposit">
         <div onClick={props.onClick} className="back">
           <img src={Back}></img>

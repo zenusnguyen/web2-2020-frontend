@@ -55,7 +55,7 @@ export default function AccountDetail(props) {
 
   return (
     <AccountDetailPage>
-      <SideMenu></SideMenu>
+    
       <div className="containerForm">
         <div onClick={props.onClick} className="back">
           <img src={Back}></img>

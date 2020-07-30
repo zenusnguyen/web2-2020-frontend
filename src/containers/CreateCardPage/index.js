@@ -172,7 +172,7 @@ export default function CreateCard() {
   if (isSaving)
     return (
       <MaganerAccountStyled>
-        <SideMenu></SideMenu>
+      
         <div className="containerForm">
           <p className="SignInTitle"> Open new account</p>
           <p>I want to open </p>
@@ -203,7 +203,7 @@ export default function CreateCard() {
   else {
     return (
       <MaganerAccountStyled>
-        <SideMenu></SideMenu>
+      
         <div className="containerForm">
           <p className="SignInTitle"> Open new account</p>
           <p>I want to open </p>

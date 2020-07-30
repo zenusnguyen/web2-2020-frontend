@@ -4,7 +4,7 @@ const PersonalPage = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #f5f7f9;
-  width: 100%;
+  /* width: 100%; */
   margin-bottom: 40px;
   /* justify-content: flex-start; */
   .bodyContainer {

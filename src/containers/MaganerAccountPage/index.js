@@ -61,7 +61,7 @@ export default function MaganeAccount() {
 
   return (
     <MaganerAccountStyled>
-      <SideMenu></SideMenu>
+    
       <div className="containerForm" style={{ display: styled }}>
         <div className="titleWithButton">
           <p className="SignInTitle"> Manage accounts</p>
