@@ -43,12 +43,15 @@ export default function TransactionHistory() {
     { label: "Successful", value: 2 },
     { label: "Failed", value: 3 },
   ];
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date("2020/12/31"));
 
   return (
     <TransactionHistoryPage>
-        <SideMenu></SideMenu>
+
+      <SideMenu></SideMenu>
+
       <div className="containerForm">
         <p className="pageTitle">Transactions history</p>
         <span className="filterSection">
@@ -87,7 +90,9 @@ export default function TransactionHistory() {
             <img src={Calendar}></img>
           </MyDatePickerStyle>
         </span>
+
         <RenderHistory></RenderHistory>
+
       </div>
     </TransactionHistoryPage>
   );

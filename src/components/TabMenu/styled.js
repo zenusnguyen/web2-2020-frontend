@@ -14,10 +14,11 @@ const TabStyle = styled.div`
     height: 24px;
   }
   p {
-    margin-left: 30px;
+    margin-left: 16px;
     margin-top: 13px;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
+    color: #333435;
   }
 `;
 

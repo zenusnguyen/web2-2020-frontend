@@ -8,9 +8,13 @@ import ManageAccountPage from "./containers/MaganerAccountPage";
 import CreateCardPage from "./containers/CreateCardPage";
 import TransferPage from "./containers/TransferPage";
 import AccountDetailPage from "./containers/AccountDetailPage";
-import PendingRequestPage from "./containers/PendingReqPage";
-import AllCardsPage from "./containers/AllCustomerPage";
+
 import TransactionHistoryPage from "./containers/TransactionPage";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import LandingPage from "./containers/LandingPage";
+
+
 import "./App.css";
 
 function SignOut() {
@@ -33,6 +37,9 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
+            <LandingPage />
+          </Route>
+          <Route path="/signin">
             <SignInPage />
           </Route>
           <Route path="/signout">
@@ -41,6 +48,8 @@ function App() {
           <Route path="/register">
             <RegisterPage />
           </Route>
+
+
           <Route path="/manage">
             <ManageAccountPage />
           </Route>
@@ -56,6 +65,8 @@ function App() {
           <Route path="/detail">
             <AccountDetailPage />
           </Route>
+
+
           <Route path="/all-customers">
             <AllCardsPage />
           </Route>
@@ -63,6 +74,7 @@ function App() {
             <PendingRequestPage />
           </Route>
           <Route path="/configuration">{/* <AccountDetailPage /> */}</Route>{" "}
+
           <Route path="/history">
             <TransactionHistoryPage />
           </Route>
