@@ -33,7 +33,6 @@ function Dashborad() {
     <div className="App">
       <Router>
         <SideMenu></SideMenu>
-
         <Switch>
           <Route exact path="/">
             <SignInPage />
@@ -46,9 +45,6 @@ function Dashborad() {
           </Route>
           <Route path="/create">
             <CreateCardPage />
-          </Route>
-          <Route path="/signout">
-            <SignOut />
           </Route>
           <Route path="/transfer">
             <TransferPage />

@@ -98,7 +98,7 @@ export default function TransferPage() {
 
   return (
     <TransferStyled>
-    
+        <SideMenu></SideMenu>
       <div className="containerForm">
         <h3 className="title">Transfer funds</h3>
         <br />

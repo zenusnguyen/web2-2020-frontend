@@ -33,14 +33,9 @@ function Dashborad() {
     <div className="App">
       <Router>
         <SideMenu></SideMenu>
-        {/* <ProfilePage></ProfilePage> */}
+        <AllCardsPage />
+        {/* <SignInPage></SignInPage> */}
         <Switch>
-          <Route exact path="/">
-            <SignInPage />
-          </Route>
-          <Route path="/profile">
-            <ProfilePage />
-          </Route>
           <Route path="/manage">
             <ManageAccountPage />
           </Route>

@@ -42,9 +42,9 @@ export default function SignIn() {
             JSON.stringify(userTemp.data[0])
           );
           if (data.user.role.name === "Admin") {
-            history.push("/admin");
+            history.push("/all-customers");
           } else {
-            history.push("/dashboard");
+            history.push("/profile");
           }
         }
       })

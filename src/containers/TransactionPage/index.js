@@ -48,7 +48,7 @@ export default function TransactionHistory() {
 
   return (
     <TransactionHistoryPage>
-    
+        <SideMenu></SideMenu>
       <div className="containerForm">
         <p className="pageTitle">Transactions history</p>
         <span className="filterSection">

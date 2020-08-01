@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 const SideMenuStyle = styled.div`
-/* position: absolute; */
+  /* position: absolute; */
   padding-top: 24px;
   padding-left: 24px;
   display: flex;
   flex-direction: column;
   width: 300px;
-  
+  /* position: absolute; */
   min-height: 508px;
   background-color: #ffffff;
 

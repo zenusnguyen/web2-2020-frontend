@@ -48,7 +48,7 @@ export default function MaganeAccount() {
   if (state == "all")
     return (
       <MaganerAccountStyled>
-      
+        <SideMenu></SideMenu>
         <div className="containerForm" style={{ display: styled }}>
           <p className="SignInTitle"> Pending requests</p>
           <div className="listCard">

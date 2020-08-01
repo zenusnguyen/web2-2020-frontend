@@ -139,7 +139,7 @@ export default function EditProfile(props) {
 
   return (
     <Register>
-    
+        <SideMenu></SideMenu>
       <div className="containerForm">
         <div
           onClick={props.onClick}
