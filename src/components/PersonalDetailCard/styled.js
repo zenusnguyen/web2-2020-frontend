@@ -25,6 +25,16 @@ const CardStyled = styled.div`
   border-radius: 16px;
   padding: 32px;
   margin-bottom: 40px;
+  .groupImage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .identificationImage {
+    width: 472px;
+    height: 300px;
+    border-radius: 8px;
+  }
 `;
 
 export default CardStyled;

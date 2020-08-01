@@ -5,13 +5,17 @@ const TransactionHistoryPage = styled.div`
   flex-direction: row;
   background-color: #eff1f2;
   width: 100%;
+
   font-size: 16;
   font-weight: 500;
+
   /* justify-content: flex-start; */
   .containerForm {
     padding: 40px 75px 0;
     display: flex;
     flex-direction: column;
+
+
 
     min-height: 508px;
     width: 100%;
@@ -25,6 +29,9 @@ const TransactionHistoryPage = styled.div`
     font-weight: bold;
     margin-bottom: 32px;
   }
+
+
+
 
   .selectInput {
     width: 350px;

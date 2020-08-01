@@ -1,17 +1,17 @@
 import React from "react";
 import SideMenuStyle from "./styled";
-
+import { useHistory } from "react-router-dom";
 import TabMenu from "../TabMenu";
-let YellowIcon = "../../assets/yellow.png";
-export default function index() {
+let YellowIcon = "../../assets/yellow..svg";
+export default function SideMenu() {
   const UserInfo = JSON.parse(localStorage.getItem("userAccount"));
-  // console.log("UserInfo: ", UserInfo);
+
   const ListMenuUser = [
     {
       key: 1,
-      title: "Home",
-      src: "../../assets/home.png",
-      link: "/",
+      title: "My profile",
+      src: "../../assets/person.png",
+      link: "/profile",
     },
     {
       key: 2,
@@ -27,9 +27,9 @@ export default function index() {
     },
     {
       key: 4,
-      title: "My profile",
-      src: "../../assets/person.png",
-      link: "/profile",
+      title: "Transactions history",
+      src: "../../assets/time-outline.svg",
+      link: "/history",
     },
     {
       key: 5,
@@ -71,9 +71,16 @@ export default function index() {
     ListMenu = ListMenuAdmin;
     YellowIcon = "../../assets/yellow. ADMIN.svg";
   }
+  let history = useHistory();
+  const HandlerClick = (items) => {
+    history.push(items.link);
+  };
   const RenderMenu = () => {
     return ListMenu.map((items) => (
       <TabMenu
+        onClick={() => {
+          HandlerClick(items);
+        }}
         key={items.key}
         title={items.title}
         src={items.src}
@@ -85,7 +92,7 @@ export default function index() {
     <SideMenuStyle>
       <img src={YellowIcon}></img>
       <div className="listMenu">
-        <RenderMenu ListMenu></RenderMenu>
+        <RenderMenu ListMenu HandlerClick></RenderMenu>
       </div>
     </SideMenuStyle>
   );

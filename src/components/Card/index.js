@@ -4,15 +4,20 @@ import SpendCard from "../../assets/spend.png";
 import SavingCard from "../../assets/deposit.png";
 import Button from "../Button";
 export default function index(props) {
-  
+  console.log("props: ", props);
   // console.log('props: ', props);
   let Src = SpendCard;
-  if (props.TypeCard === null) {
+  if (props.Card_type === "spend") {
     Src = SpendCard;
   } else {
     Src = SavingCard;
   }
 
+
+
+
+
+  
   return (
     <CardStyled>
       <div className="Card">
@@ -20,7 +25,7 @@ export default function index(props) {
       </div>
       <div className="detail">
         <p> Number : {props.Number} </p>
-        <p> Type : {props.SpendType} </p>
+        <p> Current balance : {props.Balance} </p>
         <p> Status: {props.Status} </p>
         <Button
           onClick={props.onClick}

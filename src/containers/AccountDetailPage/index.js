@@ -8,40 +8,13 @@ import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
 import Calendar from "../../assets/calendar.png";
 import Back from "../../assets/back.svg";
+import axios from "axios";
+
 import * as _ from "lodash";
-const DATA = [
-  {
-    key: 1,
-    TransferType: "Transfer",
-    Date: "01/07/2020 10:55 AM",
-    Amount: "+1000000",
-    RemainingBalance: "4250000",
-  },
-  {
-    key: 2,
-    TransferType: "Transfer",
-    Date: "01/07/2020 10:55 AM",
-    Amount: "-1000000",
-    RemainingBalance: "4250000",
-  },
-  {
-    key: 3,
-    TransferType: "Transfer",
-    Date: "01/07/2020 10:55 AM",
-    Amount: "+1000000",
-    RemainingBalance: "4250000",
-  },
-  {
-    key: 4,
-    TransferType: "Transfer",
-    Date: "01/07/2020 10:55 AM",
-    Amount: "-1000000",
-    RemainingBalance: "4250000",
-  },
-];
 
 function RenderHistory() {
-  return DATA.map((item) => (
+  const [data, setData] = useState([]);
+  return data.map((item) => (
     <HistoryCard
       key={item.key}
       TransferType={item.TransferType}
@@ -53,9 +26,20 @@ function RenderHistory() {
 }
 
 export default function AccountDetail(props) {
-  console.log('props: ', props);
-  // const UserAccount = JSON.parse(localStorage.getItem("userAccount"));
-  // const UserInfor = JSON.parse(localStorage.getItem("userInfo"));
+  const { cardInfo } = props;
+  const [history, setHistory] = useState([]);
+  useEffect(() => {
+    async function Fecth() {
+      const result = await axios.get(
+        `http://localhost:1337/spend-accounts-by-owneraccount?id=${
+          JSON.parse(localStorage.getItem("userAccount")).id
+        }`
+      );
+      setHistory(result.data);
+    }
+    Fecth();
+  }, []);
+
   const transactionTypes = [
     { label: "All types", value: 1 },
     { label: "Transfer", value: 2 },
@@ -77,14 +61,16 @@ export default function AccountDetail(props) {
           <img src={Back}></img>
           Manage accounts
         </div>
-        <p className="pageTitle">1760457</p>
+        <p className="pageTitle">{cardInfo.card_number}</p>
+
         <p className="itemTitle">Information</p>
         <AccountCard
-          AccountNumber="1760457"
-          CurrentBalance="50000"
-          Status="Active"
-          AccountType="Gold"
-          //Term="6"
+          Term={cardInfo.term_deposit_id}
+          AccountNumber={cardInfo.card_number}
+          CurrentBalance={cardInfo.balance || 0}
+          Status={cardInfo.status}
+          Spend_type={cardInfo.spend_type}
+          Card_type={cardInfo.card_type}
         ></AccountCard>
         <p className="itemTitle">History</p>
         <span className="filterSection">

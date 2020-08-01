@@ -9,7 +9,6 @@ export default function index(props) {
       <div className="top">
         <p className="title">{props.Title || "Confirmation"} </p>
         <p className="detail">
-          {" "}
           {props.Detail ||
             "Are you sure you want to close this account? This action cannot be undone. "}
         </p>

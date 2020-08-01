@@ -5,12 +5,13 @@ export default function index(props) {
     <InputForm Top={props.Top} Width={props.Width}>
       <p>{props.title}</p>
       <input
-        // required
+        onComplete={props.onComplete}
+        value={props.value}
         onChange={props.onChange}
         type={props.type}
         defaultValue={props.value}
-        name = {props.name}
-        readonly ={props.readonly}
+        name={props.name}
+        readOnly={props.readonly}
         placeholder={props.placeholder}
       ></input>
     </InputForm>

@@ -7,6 +7,7 @@ export default function UpdatePage(props) {
   const [pic2, setPic2] = useState(null);
   const [img1, setImgUrl1] = useState(`http://localhost:1337${props.value1}`);
   const [img2, setImgUrl2] = useState(`http://localhost:1337${props.value2}`);
+
   const getPreview = (img) =>
     img !== null
       ? {

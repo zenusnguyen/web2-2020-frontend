@@ -6,28 +6,52 @@ import Select from "react-select";
 import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
 import Calendar from "../../assets/calendar.png";
-
-
+import axios from "axios";
 import * as _ from "lodash";
 export default function TransactionHistory() {
-  // const UserAccount = JSON.parse(localStorage.getItem("userAccount"));
-  // const UserInfor = JSON.parse(localStorage.getItem("userInfo"));
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function Fecth() {
+      const result = await axios.get(
+        `http://localhost:1337/transaction-logs-by-account?account_id=${
+          JSON.parse(localStorage.getItem("userAccount")).id
+        }`
+      );
+      setData(result.data);
+    }
+    Fecth();
+  }, []);
+  console.log("data: ", data);
+  function RenderHistory() {
+    return data.map((items) => (
+      <HistoryCard
+        TransferType={items.transaction_type}
+        Date={items.created_at}
+        Amount={items.amount}
+        RemainingBalance={items.remaining_balance}
+      ></HistoryCard>
+    ));
+  }
   const transactionTypes = [
-      { label: "All types", value: 1 },
-      { label: "Transfer", value: 2 },
-      { label: "Deposit", value: 3 },
+    { label: "All types", value: 1 },
+    { label: "Transfer", value: 2 },
+    { label: "Deposit", value: 3 },
   ];
   const statuses = [
-      { label: "All statuses", value: 1 },
-      { label: "Successful", value: 2 },
-      { label: "Failed", value: 3 },
-    ];
+    { label: "All statuses", value: 1 },
+    { label: "Successful", value: 2 },
+    { label: "Failed", value: 3 },
+  ];
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date("2020/12/31"));
 
   return (
     <TransactionHistoryPage>
+
       <SideMenu></SideMenu>
+
       <div className="containerForm">
         <p className="pageTitle">Transactions history</p>
         <span className="filterSection">
@@ -66,30 +90,9 @@ export default function TransactionHistory() {
             <img src={Calendar}></img>
           </MyDatePickerStyle>
         </span>
-        <HistoryCard
-          TransferType="Transfer"
-          Date="01/07/2020 10:55 AM"
-          Amount="-1000000"
-          RemainingBalance="4250000"
-        ></HistoryCard>
-        <HistoryCard
-          TransferType="Transfer"
-          Date="30/05/2020 11:30 AM"
-          Amount="+500000"
-          RemainingBalance="5250000"
-        ></HistoryCard>
-        <HistoryCard
-          TransferType="Transfer"
-          Date="28/05/2020 04:00 PM"
-          Amount="-250000"
-          RemainingBalance="4750000"
-        ></HistoryCard>
-        <HistoryCard
-          TransferType="Deposit"
-          Date="19/05/2020 09:00 AM"
-          Amount="+5000000"
-          RemainingBalance="5000000"
-        ></HistoryCard>
+
+        <RenderHistory></RenderHistory>
+
       </div>
     </TransactionHistoryPage>
   );
