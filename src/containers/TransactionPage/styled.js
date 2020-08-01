@@ -1,17 +1,19 @@
 import styled from "styled-components";
 
-const TransferStyled = styled.div`
+const TransactionHistoryPage = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #f5f7f9;
+  background-color: #eff1f2;
   width: 100%;
+  padding-right: 20%;
+  font-size: 16;
+  font-weight: 500;
+  min-height: 100vh;
   /* justify-content: flex-start; */
   .containerForm {
-    padding-top: 40px;
-    padding-left: 75px;
+    padding: 40px 75px 0;
     display: flex;
     flex-direction: column;
-
     min-height: 508px;
     width: 100%;
     border-radius: 15px;
@@ -19,27 +21,28 @@ const TransferStyled = styled.div`
     padding-bottom: 100px;
     /* justify-content: flex-start; */
   }
-  .title {
+  .pageTitle {
     font-size: 32px;
     font-weight: bold;
+    margin-bottom: 32px;
   }
-  .titleType{
-    font-size: 16px;
-    font-weight: 500;
-  }
-  .extraBanking {
+  .selectInput {
     width: 350px;
-    /* height: 50px; */
-    /* height: 80px; */
-
+    padding-bottom: 20px;
     p {
       font-size: 16px;
       font-weight: 500;
+      margin-bottom: 4px;
     }
-    .css-yk16xz-control {
-      height: 50px;
+    input {
+      height: 34px;
     }
+  }
+  .filterSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 `;
 
-export default TransferStyled;
+export default TransactionHistoryPage;

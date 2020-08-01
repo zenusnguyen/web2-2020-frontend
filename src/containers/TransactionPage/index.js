@@ -1,45 +1,38 @@
 import React, { Component, useEffect, useState } from "react";
-import AccountDetailPage from "./styled";
+import TransactionHistoryPage from "./styled";
 import SideMenu from "../../components/SideMenu";
-import AccountCard from "../../components/AccountCard";
 import HistoryCard from "../../components/HistoryCard";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
 import Calendar from "../../assets/calendar.png";
-import Back from "../../assets/back.svg";
 import axios from "axios";
-
 import * as _ from "lodash";
-
-function RenderHistory() {
+export default function TransactionHistory() {
   const [data, setData] = useState([]);
-  return data.map((item) => (
-    <HistoryCard
-      key={item.key}
-      TransferType={item.TransferType}
-      Date={item.Date}
-      Amount={item.Amount}
-      RemainingBalance={item.RemainingBalance}
-    ></HistoryCard>
-  ));
-}
 
-export default function AccountDetail(props) {
-  const { cardInfo } = props;
-  const [history, setHistory] = useState([]);
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `http://localhost:1337/spend-accounts-by-owneraccount?id=${
+        `http://localhost:1337/transaction-logs-by-account?account_id=${
           JSON.parse(localStorage.getItem("userAccount")).id
         }`
       );
-      setHistory(result.data);
+      setData(result.data);
     }
     Fecth();
   }, []);
-
+  console.log("data: ", data);
+  function RenderHistory() {
+    return data.map((items) => (
+      <HistoryCard
+        TransferType={items.transaction_type}
+        Date={items.created_at}
+        Amount={items.amount}
+        RemainingBalance={items.remaining_balance}
+      ></HistoryCard>
+    ));
+  }
   const transactionTypes = [
     { label: "All types", value: 1 },
     { label: "Transfer", value: 2 },
@@ -54,25 +47,10 @@ export default function AccountDetail(props) {
   const [endDate, setEndDate] = useState(new Date("2020/12/31"));
 
   return (
-    <AccountDetailPage>
-      <SideMenu></SideMenu>
+    <TransactionHistoryPage>
+        <SideMenu></SideMenu>
       <div className="containerForm">
-        <div onClick={props.onClick} className="back">
-          <img src={Back}></img>
-          Manage accounts
-        </div>
-        <p className="pageTitle">{cardInfo.card_number}</p>
-
-        <p className="itemTitle">Information</p>
-        <AccountCard
-          Term={cardInfo.term_deposit_id}
-          AccountNumber={cardInfo.card_number}
-          CurrentBalance={cardInfo.balance || 0}
-          Status={cardInfo.status}
-          Spend_type={cardInfo.spend_type}
-          Card_type={cardInfo.card_type}
-        ></AccountCard>
-        <p className="itemTitle">History</p>
+        <p className="pageTitle">Transactions history</p>
         <span className="filterSection">
           <div className="selectInput">
             <p>Transaction type</p>
@@ -111,6 +89,6 @@ export default function AccountDetail(props) {
         </span>
         <RenderHistory></RenderHistory>
       </div>
-    </AccountDetailPage>
+    </TransactionHistoryPage>
   );
 }

@@ -5,10 +5,9 @@ import { useHistory } from "react-router-dom";
 import InputForm from "../../components/InputForm";
 import Button from "../../components/Button";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import alertify from "alertifyjs";
 import axios from "axios";
 export default function SignIn() {
-  const Height = `${window.innerHeight - 64}px`;
-
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
@@ -20,24 +19,39 @@ export default function SignIn() {
     }
   });
   const handleClick = async () => {
-    const { data } = await axios.post("http://localhost:1337/auth/local", {
-      identifier: email,
-      password: password,
-    });
-    if (data.jwt) {
-      console.log("data: ", data);
-      const userTemp = await axios.get(
-        `http://localhost:1337/customer-infors/?id=${data.user.user_info}`
-      );
-      await localStorage.setItem("token", data.jwt);
-      await localStorage.setItem("userAccount", JSON.stringify(data.user));
-      await localStorage.setItem("userInfo", JSON.stringify(userTemp.data[0]));
-      if (data.user.role.name === "Admin") {
-        history.push("/all-customers");
-      } else {
-        history.push("/profile");
-      }
-    }
+    await axios
+      .post("http://localhost:1337/auth/local", {
+        identifier: email,
+        password: password,
+      })
+      .then(async function (response) {
+        const data = response.data;
+        if (response.data.jwt) {
+          const userTemp = await axios.get(
+            `http://localhost:1337/customer-infors/?id=${data.user.user_info}`,
+            {
+              headers: {
+                Authorization: `Bearer ${data.jwt}`,
+              },
+            }
+          );
+          await localStorage.setItem("token", data.jwt);
+          await localStorage.setItem("userAccount", JSON.stringify(data.user));
+          await localStorage.setItem(
+            "userInfo",
+            JSON.stringify(userTemp.data[0])
+          );
+          if (data.user.role.name === "Admin") {
+            history.push("/all-customers");
+          } else {
+            history.push("/profile");
+          }
+        }
+      })
+      .catch(function (error) {
+        // handle error
+        alert(error);
+      });
   };
   return (
     <div
