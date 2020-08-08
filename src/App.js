@@ -12,6 +12,7 @@ import TransactionHistoryPage from "./containers/TransactionPage";
 import LandingPage from "./containers/LandingPage";
 import AllCardsPage from "./containers/AllCustomerPage";
 import PendingRequestPage from "./containers/PendingReqPage";
+import ConfigPage from "./containers/configPage";
 import "./App.css";
 
 function SignOut() {
@@ -66,7 +67,9 @@ function App() {
           <Route path="/pending-requests">
             <PendingRequestPage />
           </Route>
-          <Route path="/configuration">{/* <AccountDetailPage /> */}</Route>{" "}
+          <Route path="/configuration">
+            <ConfigPage />
+          </Route>{" "}
           <Route path="/history">
             <TransactionHistoryPage />
           </Route>
