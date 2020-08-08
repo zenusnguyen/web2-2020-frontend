@@ -7,6 +7,7 @@ const AccountDetailPage = styled.div`
   width: 100%;
   font-size: 16;
   font-weight: 500;
+
   /* justify-content: flex-start; */
   .containerForm {
     padding: 40px 75px 0;
@@ -45,7 +46,6 @@ const AccountDetailPage = styled.div`
   }
   .selectInput {
     width: 350px;
-    padding-bottom: 20px;
     p {
       font-size: 16px;
       font-weight: 500;
@@ -58,8 +58,18 @@ const AccountDetailPage = styled.div`
 
   .filterSection {
     display: flex;
+    min-height: 508px;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .filterButton {
+    width: 228px;
+    height: 48px;
+    background-color: #feba46;
+    border: 0px;
+    color: white;
+    border-radius: 5px;
   }
 `;
 

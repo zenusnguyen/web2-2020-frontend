@@ -2,23 +2,22 @@ import styled from "styled-components";
 
 const SideMenuStyle = styled.div`
   /* position: absolute; */
-  padding-top: 24px;
-  padding-left: 24px;
+  padding-top: 40px;
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 260px;
   /* position: absolute; */
   min-height: 508px;
   background-color: #ffffff;
 
   /* align-items: center; */
-  /* justify-content: flex-start; */
+  justify-content: flex-start;
   img {
-    /* width: 130px; */
-    height: 42px;
+    height: 48px;
   }
   .listMenu {
-    margin-top: 42px;
+    margin-top: 24px;
+    padding-left: 24px;
     width: 250px;
     display: flex;
     flex-direction: column;

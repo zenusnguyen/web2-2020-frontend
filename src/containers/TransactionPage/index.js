@@ -5,11 +5,26 @@ import HistoryCard from "../../components/HistoryCard";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
+import Button from "../../components/Button";
 import Calendar from "../../assets/calendar.png";
 import axios from "axios";
 import * as _ from "lodash";
 export default function TransactionHistory() {
   const [data, setData] = useState([]);
+  const tempDate = new Date();
+  const [fromDate, setFromDate] = useState(
+    new Date(
+      tempDate.getFullYear().toString(),
+      tempDate.getMonth().toString(),
+      tempDate.getDate().toString(),
+      "0",
+      "0",
+      "0"
+    )
+  );
+  const [toDate, setToDate] = useState(new Date("2020/12/31"));
+  const [type, setType] = useState("all");
+
 
   useEffect(() => {
     async function Fecth() {
@@ -22,6 +37,16 @@ export default function TransactionHistory() {
     }
     Fecth();
   }, []);
+
+  const handleClick = async () => {
+    const result = await axios.get(
+      `http://localhost:1337/transaction-logs-filter?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}`
+    );
+    console.log("result.data: ", result.data);
+    setData(result.data);
+    
+  };
+
   console.log("data: ", data);
   function RenderHistory() {
     return data.map((items) => (
@@ -34,22 +59,13 @@ export default function TransactionHistory() {
     ));
   }
   const transactionTypes = [
-    { label: "All types", value: 1 },
-    { label: "Transfer", value: 2 },
-    { label: "Deposit", value: 3 },
+    { label: "All types", value: "all" },
+    { label: "Transfer", value: "transfer" },
+    { label: "Deposit", value: "deposit" },
   ];
-  const statuses = [
-    { label: "All statuses", value: 1 },
-    { label: "Successful", value: 2 },
-    { label: "Failed", value: 3 },
-  ];
-
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date("2020/12/31"));
 
   return (
     <TransactionHistoryPage>
-
       <SideMenu></SideMenu>
 
       <div className="containerForm">
@@ -59,22 +75,16 @@ export default function TransactionHistory() {
             <p>Transaction type</p>
             <Select
               options={transactionTypes}
-              defaultValue={{ label: "All types", value: "1" }}
-            />
-          </div>
-          <div className="selectInput">
-            <p>Status</p>
-            <Select
-              options={statuses}
-              defaultValue={{ label: "All statuses", value: "1" }}
+              onChange={(e) => setType(e.value)}
+              defaultValue={{ label: "All types", value: "all" }}
             />
           </div>
           <MyDatePickerStyle>
             <div>
               <p>Start date</p>
               <DatePicker
-                selected={startDate}
-                onChange={(e) => setStartDate(e)}
+                selected={fromDate}
+                onChange={(e) => setFromDate(e)}             
               ></DatePicker>
             </div>
             <img src={Calendar}></img>
@@ -83,16 +93,22 @@ export default function TransactionHistory() {
             <div>
               <p>End date</p>
               <DatePicker
-                selected={endDate}
-                onChange={(e) => setEndDate(e)}
+                selected={toDate}
+                onChange={(e) => setToDate(e)}
               ></DatePicker>
             </div>
             <img src={Calendar}></img>
           </MyDatePickerStyle>
+          <button
+            onClick={handleClick}
+            className="filterButton"
+            style={{ marginTop: "28px" }}
+          >
+            Apply
+          </button>
         </span>
 
         <RenderHistory></RenderHistory>
-
       </div>
     </TransactionHistoryPage>
   );

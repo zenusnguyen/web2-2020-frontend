@@ -5,7 +5,6 @@ const TransactionHistoryPage = styled.div`
   flex-direction: row;
   background-color: #eff1f2;
   width: 100%;
-
   font-size: 16;
   font-weight: 500;
 
@@ -14,8 +13,6 @@ const TransactionHistoryPage = styled.div`
     padding: 40px 75px 0;
     display: flex;
     flex-direction: column;
-
-
 
     min-height: 508px;
     width: 100%;
@@ -30,12 +27,8 @@ const TransactionHistoryPage = styled.div`
     margin-bottom: 32px;
   }
 
-
-
-
   .selectInput {
     width: 350px;
-    padding-bottom: 20px;
     p {
       font-size: 16px;
       font-weight: 500;
@@ -47,9 +40,19 @@ const TransactionHistoryPage = styled.div`
   }
 
   .filterSection {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .filterButton {
+    width: 128px;
+    height: 48px;
+    background-color: #feba46;
+    border: 0px;
+    color: white;
+    border-radius: 5px;
   }
 `;
 

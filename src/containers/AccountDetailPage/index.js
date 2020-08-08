@@ -27,7 +27,8 @@ function RenderHistory() {
 
 export default function AccountDetail(props) {
   const { cardInfo } = props;
-  const [history, setHistory] = useState([]);
+  console.log('cardInfo: ', cardInfo);
+  const [ history, setHistory ] = useState([]);
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
@@ -40,18 +41,34 @@ export default function AccountDetail(props) {
     Fecth();
   }, []);
 
+  const tempDate = new Date();
+  const [fromDate, setFromDate] = useState(
+    new Date(
+      tempDate.getFullYear().toString(),
+      tempDate.getMonth().toString(),
+      tempDate.getDate().toString(),
+      "0",
+      "0",
+      "0"
+    )
+  );
+  const [toDate, setToDate] = useState(new Date("2020/12/31"));
+  const [type, setType] = useState("all");
+  const [cardID, setID] = useState("all");
+
+
   const transactionTypes = [
-    { label: "All types", value: 1 },
-    { label: "Transfer", value: 2 },
-    { label: "Deposit", value: 3 },
+    { label: "All types", value: "all" },
+    { label: "Transfer", value: "transfer" },
+    { label: "Deposit", value: "deposit" },
   ];
-  const statuses = [
-    { label: "All statuses", value: 1 },
-    { label: "Successful", value: 2 },
-    { label: "Failed", value: 3 },
-  ];
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date("2020/12/31"));
+
+  const handleClick = async () => {
+    const result = await axios.get(
+      `http://localhost:1337/transaction-logs-filter?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}`
+    );
+    setHistory(result.history);
+  };
 
   return (
     <AccountDetailPage>
@@ -78,22 +95,16 @@ export default function AccountDetail(props) {
             <p>Transaction type</p>
             <Select
               options={transactionTypes}
-              defaultValue={{ label: "All types", value: "1" }}
-            />
-          </div>
-          <div className="selectInput">
-            <p>Status</p>
-            <Select
-              options={statuses}
-              defaultValue={{ label: "All statuses", value: "1" }}
+              onChange={(e) => setType(e.value)}
+              defaultValue={{ label: "All types", value: "all" }}
             />
           </div>
           <MyDatePickerStyle>
             <div>
               <p>Start date</p>
               <DatePicker
-                selected={startDate}
-                onChange={(e) => setStartDate(e)}
+                selected={fromDate}
+                onChange={(e) => setFromDate(e)}
               ></DatePicker>
             </div>
             <img src={Calendar}></img>
@@ -102,12 +113,19 @@ export default function AccountDetail(props) {
             <div>
               <p>End date</p>
               <DatePicker
-                selected={endDate}
-                onChange={(e) => setEndDate(e)}
+                selected={toDate}
+                onChange={(e) => setToDate(e)}
               ></DatePicker>
             </div>
             <img src={Calendar}></img>
           </MyDatePickerStyle>
+          <button
+            onClick={handleClick}
+            className="filterButton"
+            style={{ marginTop: "28px" }}
+          >
+            Apply
+          </button>
         </span>
         <RenderHistory></RenderHistory>
       </div>
