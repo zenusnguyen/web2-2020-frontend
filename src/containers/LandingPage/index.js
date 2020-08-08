@@ -24,8 +24,8 @@ export default function LandingPage() {
         </div>
 
         <div style={{ textAlign: "center" }}>
-          <a href="/register">
-          <button className="CTAbutton">Join now</button>
+          <a href="/signin">
+            <button className="CTAbutton">Join now</button>
           </a>
         </div>
 
@@ -130,12 +130,14 @@ export default function LandingPage() {
             >
               <div>
                 <img
+                  alt=""
                   src={Spend}
                   style={{ textAlign: "center", margin: "60px 30px" }}
                 ></img>
               </div>
               <div>
                 <img
+                  alt=""
                   src={Savings}
                   style={{ textAlign: "center", margin: "60px 30px" }}
                 ></img>
@@ -144,9 +146,11 @@ export default function LandingPage() {
           </div>
 
           <div style={{ textAlign: "center" }}>
-            <button className="CTAbutton" style={{ marginBottom: "120px" }}>
-              Join now
-            </button>
+            <a href="/signin">
+              <button className="CTAbutton" style={{ marginBottom: "120px" }}>
+                Join now
+              </button>
+            </a>
           </div>
 
           <div style={{ textAlign: "center" }}>
