@@ -12,12 +12,7 @@ export default function SignIn() {
   const [password, setPassword] = useState(null);
 
   let history = useHistory();
-  useEffect(() => {
-    // Update the document title using the browser API
-    if (!localStorage.getItem("token")) {
-      history.push("/");
-    }
-  });
+
   const handleClick = async () => {
     await axios
       .post("http://localhost:1337/auth/local", {
