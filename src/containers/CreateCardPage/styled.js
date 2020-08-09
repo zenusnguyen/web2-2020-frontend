@@ -3,7 +3,7 @@ import styled from "styled-components";
 const MaganerAccountStyled = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #EFF1F2;
+  background-color: #eff1f2;
   width: 100%;
   font-size: 16;
   font-weight: 500;
@@ -43,6 +43,7 @@ const MaganerAccountStyled = styled.div`
   .selector {
     display: flex;
     flex-direction: column;
+    width: 350px;
     select {
       width: 350px;
       height: 50px;
@@ -79,12 +80,12 @@ const MaganerAccountStyled = styled.div`
     /* justify-content: space-between; */
   }
   .example {
-    margin-top:-150px;
+    margin-top: -150px;
     margin-left: 220px;
     display: flex;
     flex-direction: column;
     width: 400px;
-    background-color: #F7D46E;
+    background-color: #f7d46e;
     /* background-color:#EFF1F2; */
     height: 350px;
     align-items: center;

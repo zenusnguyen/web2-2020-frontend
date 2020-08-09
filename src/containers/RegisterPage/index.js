@@ -128,9 +128,26 @@ export default function Register() {
       }
     );
     if (createAccount.data.jwt) {
+      console.log("createAccount: ", createAccount);
+      const createCard = await axios.post(
+        "http://localhost:1337/spend-accounts",
+        {
+          balance: 0,
+          card_type: "spend",
+          currency_unit: "VND",
+          spend_type: "1",
+          card_number: Math.floor(
+            100000000000 + Math.random() * 900000000000
+          ).toString(),
+          account_id: createAccount.data.user.id,
+          status: "active",
+          created_date: new Date(),
+        }
+      );
       alert("Register Success");
+
       await sleep(1000);
-      history.push("/");
+      history.push("/signin");
     } else {
       alert("Check your input");
     }

@@ -27,7 +27,7 @@ function RenderHistory() {
 
 export default function AccountDetail(props) {
   const { cardInfo } = props;
-  console.log("cardInfo: ", cardInfo);
+  
   const [history, setHistory] = useState([]);
   useEffect(() => {
     async function Fecth() {
