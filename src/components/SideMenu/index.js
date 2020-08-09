@@ -90,7 +90,7 @@ export default function SideMenu() {
   };
   return (
     <SideMenuStyle>
-      <img src={YellowIcon}></img>
+      <img alt="" src={YellowIcon}></img>
       <div className="listMenu">
         <RenderMenu ListMenu HandlerClick></RenderMenu>
       </div>

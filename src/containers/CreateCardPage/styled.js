@@ -44,9 +44,9 @@ const MaganerAccountStyled = styled.div`
     display: flex;
     flex-direction: column;
     width: 350px;
-    select {
+    input {
       width: 350px;
-      height: 50px;
+      height: 35px;
       padding: 10px;
     }
   }
@@ -72,6 +72,7 @@ const MaganerAccountStyled = styled.div`
   .selectCard {
     font-size: 16px;
     font-weight: 400;
+    
   }
   .dualColumn {
     display: flex;

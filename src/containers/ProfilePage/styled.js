@@ -5,10 +5,10 @@ const PersonalPage = styled.div`
   /* flex: 1; */
   flex-direction: row;
   background-color: #f5f7f9;
-  /* width: 100%; */
+  width: 100%;
   min-height: 100vh;
   .bodyContainer {
-    margin-top: 65px;
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
     padding-left: 75px;

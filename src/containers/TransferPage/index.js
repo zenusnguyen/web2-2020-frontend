@@ -98,7 +98,7 @@ export default function TransferPage() {
 
   return (
     <TransferStyled>
-        <SideMenu></SideMenu>
+      <SideMenu></SideMenu>
       <div className="containerForm">
         <h3 className="title">Transfer funds</h3>
         <br />
@@ -163,7 +163,26 @@ export default function TransferPage() {
             type="text"
             title="Remark "
             name={"remark"}
+            Bot="50px"
           ></TextArea>
+          <div className="verify">
+            <InputForm
+              onChange={(e) => setAmount(e.target.value)}
+              defaultValue={0}
+              type="number"
+              title="Verification code"
+              name={"Verification code"}
+              Width="202px"
+              // placeholder={"Enter amount"}
+            ></InputForm>
+            <Button
+              // onClick={handleTransfer}
+              Top="28px"
+              Width="190px"
+              title=" Get code"
+              BackgroundColor=" #FEBA46"
+            ></Button>
+          </div>
           <Button
             onClick={handleTransfer}
             Width="190px"

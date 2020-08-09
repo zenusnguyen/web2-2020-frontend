@@ -1,51 +1,64 @@
 import React, { useEffect, useState } from "react";
 import MaganerAccountStyled, { ConfigRowStyled } from "./styled";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Button from "../../components/Button";
-import Search from "../../assets/search.svg";
 import InputForm from "../../components/InputForm";
 import SideMenu from "../../components/SideMenu";
-import CustomerCard from "../../components/CustomerCard";
 import axios from "axios";
-import CustomerDetailPage from "../CustomerDetailPage";
-
+import Select from "react-select";
+import * as _ from "lodash";
 function ConfigRow(props) {
   return (
     <ConfigRowStyled>
       <div className="title">{props.title} </div>
       <div className="containerInput">
-        <InputForm title={props.title1}></InputForm>
-        <InputForm title={props.title2}></InputForm>
-        <InputForm title={props.title3}></InputForm>
+        <InputForm
+          onChange={props.onChange1}
+          placeholder={props.placeholder1}
+          title={props.title1}
+        ></InputForm>
+        <InputForm
+          onChange={props.onChange2}
+          placeholder={props.placeholder2}
+          title={props.title2}
+        ></InputForm>
+        <InputForm
+          onChange={props.onChange3}
+          placeholder={props.placeholder3}
+          title={props.title3}
+        ></InputForm>
       </div>
     </ConfigRowStyled>
   );
 }
 
-export default function MaganeAccount() {
-  const temp = [];
-  const [data, setData] = useState(temp);
-
-  const [isDetail, setIsDetail] = useState(false);
-
-  const [styled2, setStyled2] = useState("none");
-  const [cardInfo, setcardInfo] = useState("");
-  const [state, setState] = useState("detail");
+export default function ConfigPage() {
+  const [spendData, setSpendData] = useState([]);
+  const [savingData, setSavingData] = useState([]);
+  const [listSaving, setListSaving] = useState([]);
+  let temp = [];
   useEffect(() => {
-    async function Fecth() {
+    async function FecthSpend() {
       const result = await axios.get(
-        "http://localhost:1337/users-permissions/users-active"
+        "http://localhost:1337/spend-account-types"
       );
-      setData(result.data);
+      setSpendData(result.data);
     }
-    Fecth();
+    FecthSpend();
+    async function FecthSaving() {
+      const result = await axios.get("http://localhost:1337/interest-rates");
+      _.forEach(result.data, (item) => {
+        temp.push({
+          label: ` ${item.period} month - Interest rate ${item.interest_rate} %`,
+          value: item.id,
+        });
+      });
+      setListSaving(temp);
+    }
+
+    FecthSaving();
   }, []);
-
-  const HandlerClick = (items) => {
-    setcardInfo(items);
-    setState("card");
-  };
-
+  console.log("spendData: ", spendData);
+  console.log("savingData: ", savingData);
   return (
     <MaganerAccountStyled>
       <SideMenu></SideMenu>
@@ -54,12 +67,18 @@ export default function MaganeAccount() {
           <p className="SignInTitle"> Configuration</p>
         </div>
         <ConfigRow
+          placeholder1={_.get(spendData[0], "limited_amount_per_transaction")}
+          placeholder2={_.get(spendData[1], "limited_amount_per_transaction")}
+          placeholder3={_.get(spendData[2], "limited_amount_per_transaction")}
           title="Single payment spending limit"
           title1=" Silver"
           title2=" Gold"
           title3=" Platinum"
         ></ConfigRow>
         <ConfigRow
+          placeholder1={_.get(spendData[0], "limited_amount_per_day")}
+          placeholder2={_.get(spendData[1], "limited_amount_per_day")}
+          placeholder3={_.get(spendData[2], "limited_amount_per_day")}
           title="Daily spending limit"
           title1=" Silver"
           title2=" Gold"
@@ -69,7 +88,17 @@ export default function MaganeAccount() {
           Savings annual interest rates
         </p>
         <div className="dualConfig">
-          <InputForm title="Term" Right="7%"></InputForm>
+          <div className="selectTerm">
+            <p>Term</p>
+            <Select
+              options={listSaving}
+              // onChange={(e) => handlerDate(e)}
+              defaultValue={{
+                label: " 1 month - Interest rate 4.6%",
+                value: "1",
+              }}
+            />
+          </div>
           <InputForm title="Rate (%)"></InputForm>
         </div>
         <Button

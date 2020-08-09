@@ -27,7 +27,7 @@ function RenderHistory() {
 
 export default function AccountDetail(props) {
   const { cardInfo } = props;
-  
+
   const [history, setHistory] = useState([]);
   useEffect(() => {
     async function Fecth() {
@@ -54,7 +54,7 @@ export default function AccountDetail(props) {
   );
   const [toDate, setToDate] = useState(new Date("2020/12/31"));
   const [type, setType] = useState("all");
-  const [cardID, setID] = useState("all");
+  // const [cardID, setID] = useState("all");
 
   const transactionTypes = [
     { label: "All types", value: "all" },
@@ -77,8 +77,14 @@ export default function AccountDetail(props) {
           <img src={Back}></img>
           Manage accounts
         </div>
-        <p className="pageTitle">{cardInfo.card_number}</p>
-
+        <div className="titleWithButton2">
+          <p className="pageTitle">{cardInfo.card_number}</p>
+          <div className="accountButton">
+            <button onClick={handleClick} className="blockButton">
+              Close account
+            </button>
+          </div>
+        </div>
         <p className="itemTitle">Information</p>
         <AccountCard
           Term={cardInfo.term_deposit_id}

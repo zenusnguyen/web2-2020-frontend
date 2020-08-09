@@ -26,6 +26,19 @@ const MaganerAccountStyled = styled.div`
     font-size: 32px;
     font-weight: bold;
   }
+  .dualConfig {
+    width: 350px;
+  }
+  .selectTerm {
+    width: 350px;
+    margin-right: 7.4%;
+    input {
+      height: 35px;
+    }
+    p {
+      margin-bottom: 5px;
+    }
+  }
   .titleWithButton {
     display: flex;
     flex-direction: row;
