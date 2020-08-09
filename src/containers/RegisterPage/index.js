@@ -140,7 +140,6 @@ export default function Register() {
     <div style={{ width: "100%", height: "100%" }}>
       <Header></Header>
       <SignInPageStyle>
-        {/* <RegisterForm></RegisterForm> */}
         <div className="Register">
           <p className="SignInTitle">Create Account</p>
           <InputForm
@@ -210,7 +209,7 @@ export default function Register() {
               <img src={Calendar}></img>
             </MyDatePickerStyle>
           </div>
-       
+
           <div style={{ marginBottom: "40px" }}>
             <p style={{ fontSize: "16px", fontWeight: "500" }}>Upload photo</p>
             <div className="uploadImage">

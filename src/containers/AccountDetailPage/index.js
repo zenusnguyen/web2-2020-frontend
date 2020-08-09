@@ -5,7 +5,7 @@ import AccountCard from "../../components/AccountCard";
 import HistoryCard from "../../components/HistoryCard";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
-import MyDatePickerStyle from "../../components/DatePicker/styled";
+import { MyDatePickerStyle } from "./styled";
 import Calendar from "../../assets/calendar.png";
 import Back from "../../assets/back.svg";
 import axios from "axios";
@@ -27,8 +27,8 @@ function RenderHistory() {
 
 export default function AccountDetail(props) {
   const { cardInfo } = props;
-  console.log('cardInfo: ', cardInfo);
-  const [ history, setHistory ] = useState([]);
+  console.log("cardInfo: ", cardInfo);
+  const [history, setHistory] = useState([]);
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
@@ -55,7 +55,6 @@ export default function AccountDetail(props) {
   const [toDate, setToDate] = useState(new Date("2020/12/31"));
   const [type, setType] = useState("all");
   const [cardID, setID] = useState("all");
-
 
   const transactionTypes = [
     { label: "All types", value: "all" },

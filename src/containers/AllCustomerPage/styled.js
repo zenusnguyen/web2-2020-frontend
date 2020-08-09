@@ -7,7 +7,7 @@ const MaganerAccountStyled = styled.div`
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   /* justify-content: flex-start; */
   .containerForm {
     padding-top: 40px;
@@ -37,6 +37,7 @@ const MaganerAccountStyled = styled.div`
   .listCard {
   }
   .detailCard {
+
     position: absolute;
   }
   .searchBar {

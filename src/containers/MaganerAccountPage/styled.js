@@ -37,6 +37,7 @@ const MaganerAccountStyled = styled.div`
     height: 100%;
   }
   .detailCard {
+    width:85%;
     position: absolute;
   }
 `;
