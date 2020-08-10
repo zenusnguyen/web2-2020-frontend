@@ -60,7 +60,7 @@ export default function MaganeAccount() {
   if (state === "detail") {
     return (
       <MaganerAccountStyled>
-            <SideMenu></SideMenu>
+        <SideMenu></SideMenu>
         <div className="containerForm" style={{ display: styled }}>
           <div className="titleWithButton">
             <p className="SignInTitle"> All customers </p>

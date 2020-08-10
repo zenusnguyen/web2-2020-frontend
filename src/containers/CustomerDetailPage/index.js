@@ -14,13 +14,14 @@ import axios from "axios";
 import EditProfile from "../editProfile-admin";
 import Deposit from "../Deposit-admin";
 import Card from "../../components/Card";
+import DetailCard from "../AccountDetailPage";
 export default function Profile(props) {
   const accountInfo = props.data;
 
   const [dataCard, setDataCard] = useState([]);
 
   const [state, setState] = useState("detail");
-
+  const [CardID, SetCardID] = useState("");
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
@@ -39,9 +40,17 @@ export default function Profile(props) {
     );
     console.log("block: ", block);
   };
+  function ShowDetail(cardInfo) {
+    SetCardID(cardInfo);
+    setState("cardDetail");
+  }
+
   function RenderListCard() {
     return dataCard.map((items, index) => (
       <Card
+        onClick={() => {
+          ShowDetail(items);
+        }}
         key={index}
         Number={items.card_number}
         Balance={items.balance || 0}
@@ -65,7 +74,7 @@ export default function Profile(props) {
   if (state === "detail")
     return (
       <PersonalPage>
-          <SideMenu></SideMenu>
+        <SideMenu></SideMenu>
         <div className="bodyContainer">
           <div onClick={props.onClick} className="back">
             <img src={props.backImg}></img>
@@ -131,6 +140,15 @@ export default function Profile(props) {
           setState("detail");
         }}
       ></Deposit>
+    );
+  } else if (state === "cardDetail") {
+    return (
+      <DetailCard
+        cardInfo={CardID}
+        onClick={() => {
+          setState("detail");
+        }}
+      ></DetailCard>
     );
   }
 }
