@@ -3,10 +3,11 @@ import styled from "styled-components";
 const PersonalPage = styled.div`
   display: flex;
   /* flex: 1; */
+  padding-right: 30%;
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   .bodyContainer {
     padding-top: 40px;
     display: flex;

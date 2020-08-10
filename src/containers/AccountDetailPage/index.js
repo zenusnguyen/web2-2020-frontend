@@ -81,7 +81,7 @@ export default function AccountDetail(props) {
           <p className="pageTitle">{cardInfo.card_number}</p>
           <div className="accountButton">
             <button onClick={handleClick} className="blockButton">
-              Close account
+              Close account 
             </button>
           </div>
         </div>

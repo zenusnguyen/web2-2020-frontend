@@ -6,8 +6,8 @@ const TextAreaForm = styled.div`
   height: 96px;
   /* margin-bottom: 20px; */
   /* padding-bottom:20px; */
-  p {
-    font-size: 16px;
+    p {
+      font-size: 16px;
     font-weight: 500;
     margin-bottom: 4px;
   }

@@ -13,6 +13,7 @@ export default function index(props) {
         name={props.name}
         readOnly={props.readonly}
         placeholder={props.placeholder}
+        required
       ></input>
     </InputForm>
   );
