@@ -9,7 +9,8 @@ import { MyDatePickerStyle } from "./styled";
 import Calendar from "../../assets/calendar.png";
 import Back from "../../assets/back.svg";
 import axios from "axios";
-
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
 import * as _ from "lodash";
 
 function RenderHistory() {
@@ -28,7 +29,8 @@ function RenderHistory() {
 export default function AccountDetail(props) {
   const { cardInfo } = props;
   console.log("cardInfo: ", cardInfo);
-
+  let historys = useHistory();
+  const alert = useAlert();
   const [history, setHistory] = useState([]);
   useEffect(() => {
     async function Fecth() {
@@ -70,14 +72,55 @@ export default function AccountDetail(props) {
     setHistory(result.history);
   };
   const handleBlock = async () => {
-    const block = await axios.put(
-      `http://localhost:1337/spend-accounts/${cardInfo.id}`,
-      {
+    const block = await axios
+      .put(`http://localhost:1337/spend-accounts/${cardInfo.id}`, {
         status: "block",
-      }
-    );
-    console.log("block: ", block);
+      })
+      .then((result) => {
+        alert.success("Action success");
+
+        setTimeout(function () {
+          historys.go(0);
+        }, 1500);
+      })
+      .catch((err) => {
+        alert.error("Action Error");
+      });
   };
+
+  const handleUnBlock = async () => {
+    const block = await axios
+      .put(`http://localhost:1337/spend-accounts/${cardInfo.id}`, {
+        status: "active",
+      })
+      .then((result) => {
+        alert.success("Action success");
+
+        setTimeout(function () {
+          historys.go(0);
+        }, 1500);
+      })
+      .catch((err) => {
+        alert.error("Action Error");
+      });
+  };
+
+  const RenderButton = () => {
+    if (cardInfo.status === "active") {
+      return (
+        <button onClick={handleBlock} className="blockButton">
+          Close account
+        </button>
+      );
+    } else {
+      return (
+        <button onClick={handleUnBlock} className="unblockButton">
+          UnBlock account
+        </button>
+      );
+    }
+  };
+
   return (
     <AccountDetailPage>
       <SideMenu></SideMenu>
@@ -88,11 +131,7 @@ export default function AccountDetail(props) {
         </div>
         <div className="titleWithButton2">
           <p className="pageTitle">{cardInfo.card_number}</p>
-          <div className="accountButton">
-            <button onClick={handleBlock} className="blockButton">
-              Close account
-            </button>
-          </div>
+          <div className="accountButton">{RenderButton()}</div>
         </div>
         <p className="itemTitle">Information</p>
         <AccountCard

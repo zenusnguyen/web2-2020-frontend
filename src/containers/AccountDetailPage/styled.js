@@ -40,6 +40,13 @@ const AccountDetailPage = styled.div`
     background: #bdbebf;
     border-radius: 8px;
   }
+  .unblockButton {
+    width: 187px;
+    height: 48px;
+    border: 0px;
+    background: green;
+    border-radius: 8px;
+  }
   .pageTitle {
     font-size: 32px;
     font-weight: bold;

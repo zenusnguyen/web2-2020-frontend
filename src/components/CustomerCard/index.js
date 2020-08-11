@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import CardStyled from "./styled";
 import Icon from "../../assets/person.png";
 import Button from "../Button";
-// {
-//   TypeCard,
-//   Onclick,
-//   Status,
-//   TransferType,
-//   Date,
-//   Amount,
-//   RemainingBalance,
-// }
+
 export default function HistoryCard(props) {
   let Style,
     Style2 = "";

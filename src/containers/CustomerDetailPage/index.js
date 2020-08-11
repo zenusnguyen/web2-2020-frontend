@@ -15,7 +15,11 @@ import EditProfile from "../editProfile-admin";
 import Deposit from "../Deposit-admin";
 import Card from "../../components/Card";
 import DetailCard from "../AccountDetailPage";
+import { useHistory } from "react-router-dom";
+import { useAlert } from "react-alert";
 export default function Profile(props) {
+  let history = useHistory();
+  const alert = useAlert();
   const accountInfo = props.data;
 
   const [dataCard, setDataCard] = useState([]);
@@ -38,7 +42,22 @@ export default function Profile(props) {
         status: "block",
       }
     );
-    console.log("block: ", block);
+    alert.success("Action success");
+    setTimeout(function () {
+      history.go(0);
+    }, 1500);
+  };
+  const HandlerUnblock = async () => {
+    const block = await axios.put(
+      `http://localhost:1337/users/${accountInfo.id}`,
+      {
+        status: "active",
+      }
+    );
+    alert.success("Action success");
+    setTimeout(function () {
+      history.go(0);
+    }, 1500);
   };
   function ShowDetail(cardInfo) {
     SetCardID(cardInfo);
@@ -70,7 +89,33 @@ export default function Profile(props) {
       </ListCardStyled>
     );
   }
-
+  function RenderBlockAtive() {
+    if (accountInfo.status === "active") {
+      return (
+        <Button
+          key="1"
+          Top="0px"
+          title="Block"
+          Width="187px"
+          onClick={HandlerBlock}
+          BackgroundColor="#BDBEBF"
+          Display="none"
+        ></Button>
+      );
+    } else {
+      return (
+        <Button
+          key="1"
+          Top="0px"
+          title="unlock"
+          Width="187px"
+          onClick={HandlerUnblock}
+          BackgroundColor="green"
+          Display="none"
+        ></Button>
+      );
+    }
+  }
   if (state === "detail")
     return (
       <PersonalPage>
@@ -106,15 +151,7 @@ export default function Profile(props) {
                 BackgroundColor="#4F6EF6"
                 Display="none"
               ></Button>
-              <Button
-                key="1"
-                Top="0px"
-                title="Block"
-                Width="187px"
-                onClick={HandlerBlock}
-                BackgroundColor="#BDBEBF"
-                Display="none"
-              ></Button>
+              {RenderBlockAtive()}
             </div>
           </div>
           <p className="title">Personal information</p>

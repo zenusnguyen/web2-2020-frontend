@@ -73,9 +73,6 @@ export default function MaganeAccount() {
             <RenderCard></RenderCard>
           </div>
         </div>
-        {/* <div className="detailCard">
-        {ShowDetail(cardInfo)}
-      </div> */}
       </MaganerAccountStyled>
     );
   } else {

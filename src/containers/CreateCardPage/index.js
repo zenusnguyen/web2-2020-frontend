@@ -34,7 +34,7 @@ function SpendCard() {
         spend_type: accountType,
         card_number: id.toString(),
         account_id: JSON.parse(localStorage.getItem("userAccount")).id,
-        status: "pending",
+        status: "active",
         created_date: new Date(),
       }
     );
