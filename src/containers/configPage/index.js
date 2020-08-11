@@ -33,8 +33,49 @@ function ConfigRow(props) {
 
 export default function ConfigPage() {
   const [spendData, setSpendData] = useState([]);
-  const [savingData, setSavingData] = useState([]);
+  const [savingData, setSavingData] = useState(0);
   const [listSaving, setListSaving] = useState([]);
+  const handleChangeSpend1 = (value) => {
+    let temp = spendData;
+    temp[0].limited_amount_per_transaction = value;
+    setSpendData(temp);
+  };
+  const handleChangeSpend2 = (value) => {
+    let temp = spendData;
+    temp[1].limited_amount_per_transaction = value;
+    setSpendData(temp);
+  };
+
+  const handleChangeSpend3 = (value) => {
+    let temp = spendData;
+    temp[2].limited_amount_per_transaction = value;
+    setSpendData(temp);
+  };
+  const handleChangeSpend4 = (value) => {
+    let temp = spendData;
+    temp[0].limited_amount_per_date = value;
+    setSpendData(temp);
+  };
+
+  const handleChangeSpend5 = (value) => {
+    let temp = spendData;
+    temp[1].limited_amount_per_date = value;
+    setSpendData(temp);
+  };
+
+  const handleChangeSpend6 = (value) => {
+    let temp = spendData;
+    temp[2].limited_amount_per_date = value;
+    setSpendData(temp);
+  };
+  const handlerChangSaving = (value) => {
+    let temp = listSaving;
+
+    console.log("temp: ", temp);
+
+    temp[savingData - 1].newRate = value;
+    console.log(" temp[index - 1]: ", temp[savingData - 1]);
+  };
   let temp = [];
   useEffect(() => {
     async function FecthSpend() {
@@ -67,6 +108,9 @@ export default function ConfigPage() {
           <p className="SignInTitle"> Configuration</p>
         </div>
         <ConfigRow
+          onChange1={handleChangeSpend1}
+          onChange2={handleChangeSpend3}
+          onChange3={handleChangeSpend5}
           placeholder1={_.get(spendData[0], "limited_amount_per_transaction")}
           placeholder2={_.get(spendData[1], "limited_amount_per_transaction")}
           placeholder3={_.get(spendData[2], "limited_amount_per_transaction")}
@@ -76,6 +120,9 @@ export default function ConfigPage() {
           title3=" Platinum"
         ></ConfigRow>
         <ConfigRow
+          onChange1={handleChangeSpend2}
+          onChange2={handleChangeSpend4}
+          onChange3={handleChangeSpend6}
           placeholder1={_.get(spendData[0], "limited_amount_per_day")}
           placeholder2={_.get(spendData[1], "limited_amount_per_day")}
           placeholder3={_.get(spendData[2], "limited_amount_per_day")}
@@ -92,14 +139,17 @@ export default function ConfigPage() {
             <p>Term</p>
             <Select
               options={listSaving}
-              // onChange={(e) => handlerDate(e)}
+              onChange={(e) => setSavingData(e.value)}
               defaultValue={{
                 label: " 1 month - Interest rate 4.6%",
                 value: "1",
               }}
             />
           </div>
-          <InputForm title="Rate (%)"></InputForm>
+          <InputForm
+            onChange={(e) => handlerChangSaving(e.target.value)}
+            title="Rate (%)"
+          ></InputForm>
         </div>
         <Button
           Left="0px"

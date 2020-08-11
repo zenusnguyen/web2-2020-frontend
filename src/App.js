@@ -14,7 +14,8 @@ import AllCardsPage from "./containers/AllCustomerPage";
 import PendingRequestPage from "./containers/PendingReqPage";
 import ConfigPage from "./containers/configPage";
 import "./App.css";
-
+import { transitions, positions, Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 function SignOut() {
   let history = useHistory();
 

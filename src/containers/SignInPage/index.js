@@ -7,7 +7,9 @@ import Button from "../../components/Button";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import alertify from "alertifyjs";
 import axios from "axios";
+import { useAlert } from "react-alert";
 export default function SignIn() {
+  const alert = useAlert();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
@@ -45,7 +47,7 @@ export default function SignIn() {
       })
       .catch(function (error) {
         // handle error
-        alert(error);
+        alert.error(error.toString());
       });
   };
   return (

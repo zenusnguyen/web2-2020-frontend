@@ -267,7 +267,7 @@ export default function Register() {
           <div className="create">
             <p>Already have an account? </p>
             <p className="createHere">
-              <Link to="/"> Sign in here</Link>
+              <Link to="/signin"> Sign in here</Link>
             </p>
           </div>
         </div>

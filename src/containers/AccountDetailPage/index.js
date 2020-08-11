@@ -27,6 +27,7 @@ function RenderHistory() {
 
 export default function AccountDetail(props) {
   const { cardInfo } = props;
+  console.log("cardInfo: ", cardInfo);
 
   const [history, setHistory] = useState([]);
   useEffect(() => {
@@ -68,7 +69,15 @@ export default function AccountDetail(props) {
     );
     setHistory(result.history);
   };
-
+  const handleBlock = async () => {
+    const block = await axios.put(
+      `http://localhost:1337/spend-accounts/${cardInfo.id}`,
+      {
+        status: "block",
+      }
+    );
+    console.log("block: ", block);
+  };
   return (
     <AccountDetailPage>
       <SideMenu></SideMenu>
@@ -80,8 +89,8 @@ export default function AccountDetail(props) {
         <div className="titleWithButton2">
           <p className="pageTitle">{cardInfo.card_number}</p>
           <div className="accountButton">
-            <button onClick={handleClick} className="blockButton">
-              Close account 
+            <button onClick={handleBlock} className="blockButton">
+              Close account
             </button>
           </div>
         </div>

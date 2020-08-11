@@ -7,16 +7,16 @@ import axios from "axios";
 function InforLine(props) {
   return (
     <InforLineStyled>
-      <p className="title">{props.title}</p>
+      <p className="title2">{props.title}</p>
       <p className="detail">{props.detail}</p>
     </InforLineStyled>
   );
 }
 export default function PersonalDetailCard(props) {
   const { accountInfo } = props;
-  console.log('accountInfo: ', accountInfo);
+  console.log("accountInfo: ", accountInfo);
   const [userInfo, setUserInfo] = useState("");
-  
+
   const [img1, setImg1] = useState("");
   const [img2, setImg2] = useState("");
 
@@ -31,7 +31,7 @@ export default function PersonalDetailCard(props) {
     }
     Fecth();
   }, [props.accountInfo.user_info]);
-  console.log('userInfo: ', userInfo);
+  console.log("userInfo: ", userInfo);
   return (
     <CardStyled>
       <InforLine title="Fullname" detail={userInfo.full_name}></InforLine>

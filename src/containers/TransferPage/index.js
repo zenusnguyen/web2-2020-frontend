@@ -21,6 +21,7 @@ export default function TransferPage() {
   const [currentAccount, setCurrentAccount] = useState("");
   const [reLoad, setReload] = useState(new Date());
   const [otp, setOtp] = useState("");
+  const [otp2, setOtp2] = useState("");
   let transferType = "intra";
   function getAvailableBalance(cardNumber) {
     setCurrentAccount(cardNumber);
@@ -35,8 +36,7 @@ export default function TransferPage() {
       email: JSON.parse(localStorage.getItem("userAccount")).email,
       card_number: currentAccount,
     });
-    setOtp(result.data);
-    console.log("result: ", result);
+    setOtp2(result.data);
   }
 
   const submit = (beneficiary) => {
@@ -77,8 +77,6 @@ export default function TransferPage() {
         `http://localhost:1337/spend-accounts-findbycardid?id${beneficiary}`
       );
       if (beneficiaryAccount.status !== 200 || !beneficiaryAccount.data) {
-        console.log("beneficiaryAccount.data: ", beneficiaryAccount.data);
-        console.log("beneficiaryAccount.status: ", beneficiaryAccount.status);
         alert("something went wrong");
       } else {
         submit(beneficiaryAccount.data[1].full_name, amount);
@@ -105,7 +103,6 @@ export default function TransferPage() {
           setReload(new Date());
         }
       })
-
       .catch(function (error) {
         alert(error);
       });
@@ -224,7 +221,7 @@ export default function TransferPage() {
           ></TextArea>
           <div className="verify">
             <InputForm
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => setOtp(e.target.value)}
               defaultValue={0}
               type="number"
               title="Verification code"
