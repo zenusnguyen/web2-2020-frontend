@@ -10,7 +10,8 @@ import axios from "axios";
 import * as _ from "lodash";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
-
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
 export default function TransferPage() {
   const [spendAccounts, setSpendAccount] = useState([]);
   const [availableBalance, setAvailableBalance] = useState(0);
@@ -19,7 +20,8 @@ export default function TransferPage() {
   const [remark, setRemark] = useState("");
   const [spendArrays, setSpendArrays] = useState([]);
   const [currentAccount, setCurrentAccount] = useState("");
-  const [reLoad, setReload] = useState(new Date());
+  let history = useHistory();
+  const alert = useAlert();
   const [otp, setOtp] = useState("");
   const [otp2, setOtp2] = useState("");
   let transferType = "intra";
@@ -39,10 +41,10 @@ export default function TransferPage() {
     setOtp2(result.data);
   }
 
-  const submit = (beneficiary) => {
+  const submit = (fullname, amount) => {
     confirmAlert({
       title: "Confirm to submit",
-      message: `Are you sure to do transfer to ${beneficiary}. Amount: ${amount} .`,
+      message: `Are you sure to do transfer to ${fullname}. Amount: ${amount} .`,
       buttons: [
         {
           label: "Yes",
@@ -58,7 +60,7 @@ export default function TransferPage() {
 
   const handlerAmount = (value) => {
     if (value > availableBalance) {
-      alert("your amount is lager than current balance");
+      alert.error("your amount is lager than current balance");
       setAmount(0);
     }
     setAmount(value);
@@ -71,16 +73,16 @@ export default function TransferPage() {
       amount <= 0 ||
       otp.length < 5
     ) {
-      alert("please check your input");
+      alert.error("please check your input");
     } else {
-      const beneficiaryAccount = await axios.get(
-        `http://localhost:1337/spend-accounts-findbycardid?id${beneficiary}`
-      );
-      if (beneficiaryAccount.status !== 200 || !beneficiaryAccount.data) {
-        alert("something went wrong");
-      } else {
-        submit(beneficiaryAccount.data[1].full_name, amount);
-      }
+      await axios
+        .get(
+          `http://localhost:1337/spend-accounts-findbycardid?id=${beneficiary}`
+        )
+        .then((response) => {
+          submit(response.data[1].full_name, amount);
+        })
+        .catch((error) => alert.error(" beneficiary account invalid"));
     }
   }
 
@@ -99,12 +101,11 @@ export default function TransferPage() {
       })
       .then(function (response) {
         if (response.status === 200) {
-          alert("Transfer Successful");
-          setReload(new Date());
+          alert.success("Transfer Successful");
         }
       })
       .catch(function (error) {
-        alert(error);
+        alert.error(error);
       });
   }
   let spendAccountsArray = [];

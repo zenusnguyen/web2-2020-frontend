@@ -32,17 +32,19 @@ export default function AccountDetail(props) {
   let historys = useHistory();
   const alert = useAlert();
   const [history, setHistory] = useState([]);
+  const [term, setTerm] = useState([{}, {}]);
+  // http://localhost:1337/term-deposits-by-account?id=18
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `http://localhost:1337/spend-accounts-by-owneraccount?id=${
-          JSON.parse(localStorage.getItem("userAccount")).id
-        }`
+        `http://localhost:1337/term-deposits-by-account?id=${cardInfo.term_deposit_id}`
       );
-      setHistory(result.data);
+      setTerm(result.data);
     }
-    Fecth();
-  }, []);
+    if (cardInfo.card_type === "saving") {
+      Fecth();
+    }
+  }, [cardInfo.id]);
 
   const tempDate = new Date();
   const [fromDate, setFromDate] = useState(
@@ -112,7 +114,9 @@ export default function AccountDetail(props) {
           Close account
         </button>
       );
-    } else {
+    } else if (
+      JSON.parse(localStorage.getItem("userAccount")).role.name === "admin"
+    ) {
       return (
         <button onClick={handleUnBlock} className="unblockButton">
           UnBlock account
@@ -135,12 +139,17 @@ export default function AccountDetail(props) {
         </div>
         <p className="itemTitle">Information</p>
         <AccountCard
-          Term={cardInfo.term_deposit_id}
+          Term={_.get(term[1], "period")}
           AccountNumber={cardInfo.card_number}
-          CurrentBalance={cardInfo.balance || 0}
+          CurrentBalance={
+            _.get(cardInfo, "balance") + " " + cardInfo.currency_unit || 0
+          }
           Status={cardInfo.status}
           Spend_type={cardInfo.spend_type}
           Card_type={cardInfo.card_type}
+          InterestRate={_.get(term[1], "interest_rate")}
+          MaturityDate={_.get(term[0], "maturity_date")}
+          // TotalInterest=
         ></AccountCard>
         <p className="itemTitle">History</p>
         <span className="filterSection">

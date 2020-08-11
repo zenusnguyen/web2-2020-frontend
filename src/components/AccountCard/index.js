@@ -7,15 +7,7 @@ import SavingCard from "../../assets/savings.svg";
 
 export default function AccountCard(props) {
   console.log("props: ", props);
-  let Style,
-    Style2 = "";
-  if (props.Term === null) {
-    Style2 = "";
-    Style = "none";
-  } else {
-    Style2 = "none";
-    Style = "";
-  }
+
   let cardType = "";
   let Src = "";
   if (props.Card_type === "spend") {
@@ -32,28 +24,39 @@ export default function AccountCard(props) {
   } else {
     Src = SavingCard;
   }
+  if (props.Card_type === "saving") {
+    return (
+      <CardStyled>
+        <div className="Card">
+          <img src={Src}></img>
+        </div>
+        <div className="detail">
+          <p> Account number: {props.AccountNumber} </p>
+          <p> Account type: {cardType} </p>
+          <p> Term: {props.Term} month</p>
+          <p>Maturity date: {props.MaturityDate} </p>
+          <p>Interest rate: {props.InterestRate}% </p>
 
-  return (
-    <CardStyled>
-      <div className="Card">
-        <img src={Src}></img>
-      </div>
-      <div className="detail">
-        <p> Account number: {props.AccountNumber} </p>
+          <p> Current balance: {props.CurrentBalance} </p>
+          <p> Status: {props.Status} </p>
+          <p></p>
+        </div>
+      </CardStyled>
+    );
+  } else {
+    return (
+      <CardStyled>
+        <div className="Card">
+          <img src={Src}></img>
+        </div>
+        <div className="detail">
+          <p> Account number: {props.AccountNumber} </p>
+          <p> Account type: {cardType} </p>
 
-        <p style={{ display: Style2 }}> Account type: {cardType} </p>
-
-        <p style={{ display: Style }}> Term: {props.Term} </p>
-        <p style={{ display: Style }}> Maturity date: {props.MaturityDate} </p>
-        <p style={{ display: Style }}> Interest rate: {props.InterestRate} </p>
-        <p style={{ display: Style }}>
-          {" "}
-          Total interest: {props.TotalInterest}{" "}
-        </p>
-
-        <p> Current balance: {props.CurrentBalance} </p>
-        <p> Status: {props.Status} </p>
-      </div>
-    </CardStyled>
-  );
+          <p> Current balance: {props.CurrentBalance} </p>
+          <p> Status: {props.Status} </p>
+        </div>
+      </CardStyled>
+    );
+  }
 }

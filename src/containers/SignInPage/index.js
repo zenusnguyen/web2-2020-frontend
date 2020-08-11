@@ -53,8 +53,9 @@ export default function SignIn() {
         }
       })
       .catch(function (error) {
+        console.log("error: ", error);
         // handle error
-        alert.error(error.toString());
+        alert.error("invalid email or password");
       });
   };
   return (
