@@ -12,6 +12,7 @@ import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
+import { config } from "../../configs/server";
 export default function TransferPage() {
   const [spendAccounts, setSpendAccount] = useState([]);
   const [availableBalance, setAvailableBalance] = useState(0);
@@ -34,7 +35,7 @@ export default function TransferPage() {
     });
   }
   async function getOTP() {
-    const result = await axios.post("http://localhost:1337/getotp", {
+    const result = await axios.post(`${config.server}/getotp`, {
       email: JSON.parse(localStorage.getItem("userAccount")).email,
       card_number: currentAccount,
     });
@@ -76,9 +77,7 @@ export default function TransferPage() {
       alert.error("please check your input");
     } else {
       await axios
-        .get(
-          `http://localhost:1337/spend-accounts-findbycardid?id=${beneficiary}`
-        )
+        .get(`${config.server}/spend-accounts-findbycardid?id=${beneficiary}`)
         .then((response) => {
           submit(response.data[1].full_name, amount);
         })
@@ -88,7 +87,7 @@ export default function TransferPage() {
 
   async function handleTransfer() {
     await axios
-      .post(`http://localhost:1337/spend-accounts-transfer-intra`, {
+      .post(`${config.server}/spend-accounts-transfer-intra`, {
         currentAccount: currentAccount,
         remark: remark,
         amount: amount,
@@ -112,7 +111,7 @@ export default function TransferPage() {
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `http://localhost:1337/spend-accounts-by-owneraccount?id=${
+        `${config.server}/spend-accounts-by-owneraccount?id=${
           JSON.parse(localStorage.getItem("userAccount")).id
         }`
       );

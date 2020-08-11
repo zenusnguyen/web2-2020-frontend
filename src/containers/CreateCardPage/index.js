@@ -6,6 +6,7 @@ import Select from "react-select";
 import InputForm from "../../components/InputForm";
 import moment from "moment";
 import axios from "axios";
+import {config} from "../../configs/server"
 import * as _ from "lodash";
 function SpendCard() {
   const [accountType, setAccountType] = useState(1);
@@ -26,7 +27,7 @@ function SpendCard() {
   ];
   const handleClick = async () => {
     const createCard = await axios.post(
-      "http://localhost:1337/spend-accounts",
+      `${config.server}/spend-accounts`,
       {
         balance: 0,
         card_type: "spend",
@@ -112,7 +113,7 @@ function SavingCard() {
   const [interestExample, setInterestExample] = useState(4600);
   useEffect(() => {
     async function Fecth() {
-      const result = await axios.get(`http://localhost:1337/interest-rates`);
+      const result = await axios.get(`${config.server}/interest-rates`);
 
       _.forEach(result.data, (item) => {
         tempOptions.push({
@@ -125,7 +126,7 @@ function SavingCard() {
     Fecth();
     async function FecthSpendAccount() {
       const result = await axios.get(
-        `http://localhost:1337/spend-accounts-by-owneraccount?id=${
+        `${config.server}/spend-accounts-by-owneraccount?id=${
           JSON.parse(localStorage.getItem("userAccount")).id
         }`
       );
@@ -166,7 +167,7 @@ function SavingCard() {
 
   const handleClick = async () => {
     const createCard = await axios.post(
-      "http://localhost:1337/spend-accounts-saving",
+      `${config.server}/spend-accounts-saving`,
       {
         card_type: "saving",
         currency_unit: currency,

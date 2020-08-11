@@ -6,6 +6,7 @@ import SideMenu from "../../components/SideMenu";
 import axios from "axios";
 import Select from "react-select";
 import * as _ from "lodash";
+import {config} from "../../configs/server"
 function ConfigRow(props) {
   return (
     <ConfigRowStyled>
@@ -80,13 +81,13 @@ export default function ConfigPage() {
   useEffect(() => {
     async function FecthSpend() {
       const result = await axios.get(
-        "http://localhost:1337/spend-account-types"
+        `${config.server}/spend-account-types`
       );
       setSpendData(result.data);
     }
     FecthSpend();
     async function FecthSaving() {
-      const result = await axios.get("http://localhost:1337/interest-rates");
+      const result = await axios.get(`${config.server}/interest-rates`);
       _.forEach(result.data, (item) => {
         temp.push({
           label: ` ${item.period} month - Interest rate ${item.interest_rate} %`,

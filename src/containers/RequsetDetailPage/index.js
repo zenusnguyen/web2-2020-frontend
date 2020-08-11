@@ -8,7 +8,7 @@ import SideMenu from "../../components/SideMenu";
 import Button from "../../components/Button";
 import PersonalDetailCard from "../../components/PersonalDetailCard";
 import Back from "../../assets/back.svg";
-
+import {config} from "../../configs/server"
 import axios from "axios";
 import * as _ from "lodash";
 import { useAlert } from "react-alert";
@@ -19,7 +19,7 @@ export default function Profile(props) {
   const UserAccount = props.data;
   const HandlerAccept = async () => {
     const active = await axios
-      .put(`http://localhost:1337/users/${UserAccount.id}`, {
+      .put(`${config.server}/users/${UserAccount.id}`, {
         status: "active",
       })
       .then((data) => {
@@ -37,7 +37,7 @@ export default function Profile(props) {
   };
   const HandlerReject = async () => {
     const reject = await axios
-      .put(`http://localhost:1337/users/${UserAccount.id}`, {
+      .put(`${config.server}/users/${UserAccount.id}`, {
         status: "reject",
       })
       .then((data) => {

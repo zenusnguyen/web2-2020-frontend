@@ -17,6 +17,7 @@ import Card from "../../components/Card";
 import DetailCard from "../AccountDetailPage";
 import { useHistory } from "react-router-dom";
 import { useAlert } from "react-alert";
+import { config } from "../../configs/server";
 export default function Profile(props) {
   let history = useHistory();
   const alert = useAlert();
@@ -29,31 +30,25 @@ export default function Profile(props) {
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `http://localhost:1337/spend-accounts-by-owneraccount?id=${accountInfo.id}`
+        `${config.server}/spend-accounts-by-owneraccount?id=${accountInfo.id}`
       );
       setDataCard(result.data);
     }
     Fecth();
   }, []);
   const HandlerBlock = async () => {
-    const block = await axios.put(
-      `http://localhost:1337/users/${accountInfo.id}`,
-      {
-        status: "block",
-      }
-    );
+    const block = await axios.put(`${config.server}/users/${accountInfo.id}`, {
+      status: "block",
+    });
     alert.success("Action success");
     setTimeout(function () {
       history.go(0);
     }, 1500);
   };
   const HandlerUnblock = async () => {
-    const block = await axios.put(
-      `http://localhost:1337/users/${accountInfo.id}`,
-      {
-        status: "active",
-      }
-    );
+    const block = await axios.put(`${config.server}/users/${accountInfo.id}`, {
+      status: "active",
+    });
     alert.success("Action success");
     setTimeout(function () {
       history.go(0);

@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import alertify from "alertifyjs";
 import axios from "axios";
 import { useAlert } from "react-alert";
+import { config } from "../../configs/server";
 export default function SignIn() {
   const alert = useAlert();
   const [email, setEmail] = useState(null);
@@ -17,7 +18,7 @@ export default function SignIn() {
 
   const handleClick = async () => {
     await axios
-      .post("http://localhost:1337/auth/local", {
+      .post(`${config.server}/auth/local`, {
         identifier: email,
         password: password,
       })
@@ -28,7 +29,7 @@ export default function SignIn() {
         } else {
           if (response.data.jwt) {
             const userTemp = await axios.get(
-              `http://localhost:1337/customer-infors/?id=${data.user.user_info}`,
+              `${config.server}/customer-infors/?id=${data.user.user_info}`,
               {
                 headers: {
                   Authorization: `Bearer ${data.jwt}`,
@@ -53,8 +54,6 @@ export default function SignIn() {
         }
       })
       .catch(function (error) {
-        console.log("error: ", error);
-        // handle error
         alert.error("invalid email or password");
       });
   };

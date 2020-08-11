@@ -12,7 +12,7 @@ import axios from "axios";
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 import * as _ from "lodash";
-
+import {config} from "../../configs/server"
 function RenderHistory() {
   const [data, setData] = useState([]);
   return data.map((item) => (
@@ -33,11 +33,11 @@ export default function AccountDetail(props) {
   const alert = useAlert();
   const [history, setHistory] = useState([]);
   const [term, setTerm] = useState([{}, {}]);
-  // http://localhost:1337/term-deposits-by-account?id=18
+  // ${config.server}/term-deposits-by-account?id=18
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `http://localhost:1337/term-deposits-by-account?id=${cardInfo.term_deposit_id}`
+        `${config.server}/term-deposits-by-account?id=${cardInfo.term_deposit_id}`
       );
       setTerm(result.data);
     }
@@ -69,13 +69,13 @@ export default function AccountDetail(props) {
 
   const handleClick = async () => {
     const result = await axios.get(
-      `http://localhost:1337/transaction-logs-filter?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}`
+      `${config.server}/transaction-logs-filter?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}`
     );
     setHistory(result.history);
   };
   const handleBlock = async () => {
     const block = await axios
-      .put(`http://localhost:1337/spend-accounts/${cardInfo.id}`, {
+      .put(`${config.server}/spend-accounts/${cardInfo.id}`, {
         status: "block",
       })
       .then((result) => {
@@ -92,7 +92,7 @@ export default function AccountDetail(props) {
 
   const handleUnBlock = async () => {
     const block = await axios
-      .put(`http://localhost:1337/spend-accounts/${cardInfo.id}`, {
+      .put(`${config.server}/spend-accounts/${cardInfo.id}`, {
         status: "active",
       })
       .then((result) => {

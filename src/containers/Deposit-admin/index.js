@@ -15,6 +15,7 @@ import Select from "react-select";
 import * as _ from "lodash";
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
+import {config} from "../../configs/server"
 export default function Deposit(props) {
   let history = useHistory();
   const alert = useAlert();
@@ -30,7 +31,7 @@ export default function Deposit(props) {
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `http://localhost:1337/spend-accounts-by-owneraccount?id=${props.accountInfo.id}`
+        `${config.server}/spend-accounts-by-owneraccount?id=${props.accountInfo.id}`
       );
       setListSpend(result.data);
       _.forEach(result.data, (item) => {
@@ -47,7 +48,7 @@ export default function Deposit(props) {
   }, []);
   async function handleDeposit(cardID, amount, remark) {
     const result = await axios
-      .post(`http://localhost:1337/spend-accounts-deposit`, {
+      .post(`${config.server}/spend-accounts-deposit`, {
         remark: remark,
         amount: amount,
         beneficiaryAccount: cardID,

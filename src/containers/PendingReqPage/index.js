@@ -8,7 +8,7 @@ import Card from "../../components/Card";
 import axios from "axios";
 import RequsetDetailPage from "../RequsetDetailPage";
 import PendingRequestCard from "../../components/ReqCard";
-
+import { config } from "../../configs/server";
 export default function MaganeAccount() {
   const [data, setData] = useState([]);
 
@@ -20,7 +20,7 @@ export default function MaganeAccount() {
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        "http://localhost:1337/users-permissions/users-unactive?status=pending"
+        `${config.server}/users-permissions/users-unactive?status=pending`
       );
       setData(result.data);
     }

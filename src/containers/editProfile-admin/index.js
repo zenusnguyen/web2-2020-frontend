@@ -12,6 +12,7 @@ import Back from "../../assets/back.svg";
 import TextArea from "../../components/TextArea";
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
+import { config } from "../../configs/server";
 export default function EditProfile(props) {
   const accountInfo = props.data;
   const [DateOfBirth, setDateOfBirth] = useState(new Date());
@@ -25,18 +26,19 @@ export default function EditProfile(props) {
   const [phoneNumber, setPhoneNumber] = useState(userInfo.phone_number);
   const [address, setAddress] = useState(userInfo.address);
   const [passport, setPassport] = useState(userInfo.identificationNumber);
+
   let history = useHistory();
   const alert = useAlert();
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `http://localhost:1337/customer-infors/?id=${props.data.user_info}`
+        `${config.server}/customer-infors/?id=${props.data.user_info}`
       );
       setUserInfo(result.data[0]);
       setDateOfBirth(new Date(result.data[0].date_of_birth));
       setDateOfIssue(new Date(result.data[0].date_of_issue));
-      setImgUrl1(`http://localhost:1337${result.data[0].img1}`);
-      setImgUrl2(`http://localhost:1337${result.data[0].img2}`);
+      setImgUrl1(`${config.server}${result.data[0].img1}`);
+      setImgUrl2(`${config.server}${result.data[0].img2}`);
     }
 
     Fecth();
@@ -51,12 +53,12 @@ export default function EditProfile(props) {
 
       uploadRes = await axios({
         method: "POST",
-        url: "http://localhost:1337/upload",
+        url: "${config.server}/upload",
         data,
       });
 
       const createUserInfor = await axios.put(
-        `http://localhost:1337/customer-infors/${accountInfo.user_info}`,
+        `${config.server}/customer-infors/${accountInfo.user_info}`,
         {
           full_name: fullName,
           phone_number: phoneNumber,
@@ -75,7 +77,7 @@ export default function EditProfile(props) {
       }, 1500);
     } else if (!pic1 && !pic2) {
       const createUserInfor = await axios.put(
-        `http://localhost:1337/customer-infors/${accountInfo.user_info}`,
+        `${config.server}/customer-infors/${accountInfo.user_info}`,
         {
           full_name: fullName,
           phone_number: phoneNumber,

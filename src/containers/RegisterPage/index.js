@@ -13,6 +13,7 @@ import MyDatePickerStyle from "../../components/DatePicker/styled";
 import Calendar from "../../assets/calendar.png";
 import { useAlert } from "react-alert";
 import * as _ from "lodash";
+import { config } from "../../configs/server";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 export default function Register() {
   const alert = useAlert();
@@ -125,14 +126,14 @@ export default function Register() {
 
       const uploadRes = await axios({
         method: "POST",
-        url: "http://localhost:1337/upload",
+        url: `${config.server}/upload`,
         data,
       })
         .then()
         .catch((err) => alert.error(err.message));
 
       const createUserInfor = await axios
-        .post("http://localhost:1337/customer-infors", {
+        .post(`${config.server}/customer-infors`, {
           full_name: fullName,
           phone_number: phoneNumber,
           address: address,
@@ -145,7 +146,7 @@ export default function Register() {
         .then()
         .catch((err) => alert.error(err.message));
       const createAccount = await axios
-        .post("http://localhost:1337/auth/local/register", {
+        .post(`${config.server}/auth/local/register`, {
           status: "pending",
           username: userName,
           email: email,
@@ -160,21 +161,18 @@ export default function Register() {
 
       if (_.get(createAccount, "data.jwt")) {
         console.log("createAccount: ", createAccount);
-        const createCard = await axios.post(
-          "http://localhost:1337/spend-accounts",
-          {
-            balance: 0,
-            card_type: "spend",
-            currency_unit: "VND",
-            spend_type: "1",
-            card_number: Math.floor(
-              100000000000 + Math.random() * 900000000000
-            ).toString(),
-            account_id: createAccount.data.user.id,
-            status: "active",
-            created_date: new Date(),
-          }
-        );
+        const createCard = await axios.post(`${config.server}/spend-accounts`, {
+          balance: 0,
+          card_type: "spend",
+          currency_unit: "VND",
+          spend_type: "1",
+          card_number: Math.floor(
+            100000000000 + Math.random() * 900000000000
+          ).toString(),
+          account_id: createAccount.data.user.id,
+          status: "active",
+          created_date: new Date(),
+        });
         alert.success("Register Success");
 
         await sleep(1000);

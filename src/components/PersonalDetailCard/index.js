@@ -1,6 +1,6 @@
 import React from "react";
 import CardStyled from "./styled";
-
+import { config } from "../../configs/server";
 import { InforLineStyled } from "./styled";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -23,7 +23,7 @@ export default function PersonalDetailCard(props) {
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `http://localhost:1337/customer-infors/?id=${props.accountInfo.user_info}`
+        `${config.server}/customer-infors/?id=${props.accountInfo.user_info}`
       );
       setUserInfo(result.data[0]);
       setImg1(result.data[0].img1);
@@ -31,7 +31,7 @@ export default function PersonalDetailCard(props) {
     }
     Fecth();
   }, [props.accountInfo.user_info]);
-  console.log("userInfo: ", userInfo);
+
   return (
     <CardStyled>
       <InforLine title="Fullname" detail={userInfo.full_name}></InforLine>
@@ -57,12 +57,12 @@ export default function PersonalDetailCard(props) {
       <div className="groupImage">
         <img
           className="identificationImage"
-          src={`http://localhost:1337${img1}`}
+          src={`${config.server}${img1}`}
           alt=""
         ></img>
         <img
           className="identificationImage"
-          src={`http://localhost:1337${img2}`}
+          src={`${config.server}${img2}`}
           alt=""
         ></img>
       </div>
