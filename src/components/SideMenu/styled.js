@@ -10,11 +10,10 @@ const SideMenuStyle = styled.div`
   min-height: 508px;
   background-color: #ffffff;
   justify-content: flex-start;
-  align-items: center;
-
+  
   img {
     height: 48px;
-    width: 186px;
+    width: 118px;
     text-align: left;
   }
 

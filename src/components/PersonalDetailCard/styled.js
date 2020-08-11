@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const InforLineStyled = styled.div`
   display: flex;
   flex-direction: row;
-  .title {
+  .title2 {
     width: 200px;
     font-size: 16px;
     font-weight: 500;
