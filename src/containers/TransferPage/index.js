@@ -98,12 +98,12 @@ export default function TransferPage() {
 
   return (
     <TransferStyled>
-        <SideMenu></SideMenu>
+      <SideMenu></SideMenu>
       <div className="containerForm">
         <h3 className="title">Transfer funds</h3>
         <br />
         <div>
-          <p className="titleType">Transfer type </p>
+          <p className="titleType" style={{marginBottom: "4px"}}>Transfer type </p>
           <input
             onChange={(e) => SetIsExtra(!isExtra)}
             defaultChecked
@@ -127,9 +127,9 @@ export default function TransferPage() {
           <Select
             options={spendAccounts}
             onChange={(e) => getAvailableBalance(e.value)}
+            placeholder={"Select"}
           />
         </div>
-        <br />
         <div>
           <InputForm
             value={availableBalance}
@@ -140,7 +140,7 @@ export default function TransferPage() {
           ></InputForm>
           <div className="extraBanking" style={{ display: display }}>
             <p>Beneficiary bank</p>
-            <Select options={techCompanies} />
+            <Select options={techCompanies} placeholder={"Select"} />
           </div>
           <InputForm
             onChange={(e) => setBeneficiary(e.target.value)}
@@ -168,6 +168,8 @@ export default function TransferPage() {
             onClick={handleTransfer}
             Width="190px"
             title="Transfer"
+            Top="32px"
+            Left="0px"
             BackgroundColor={"#4F6EF6"}
           ></Button>
         </div>

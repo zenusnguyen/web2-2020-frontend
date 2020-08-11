@@ -7,6 +7,7 @@ const LandingPageStyle = styled.div`
   flex-direction: column;
   flex: 1;
   font-family: "Red Hat Display", sans-serif;
+  background: #ffffff;
 
   h1 {
     margin: auto;
@@ -83,6 +84,10 @@ const LandingPageStyle = styled.div`
     flex-direction: column;
     text-align: right;
     margin-left: auto;
+  }
+
+  #container-limit {
+    width: 1440px;
   }
 `;
 

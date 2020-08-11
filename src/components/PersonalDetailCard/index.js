@@ -57,11 +57,13 @@ export default function PersonalDetailCard(props) {
           className="identificationImage"
           src={`http://localhost:1337${img1}`}
           alt=""
+          style={{ marginRight: "16px" }}
         ></img>
         <img
           className="identificationImage"
           src={`http://localhost:1337${img2}`}
           alt=""
+          style={{ marginLeft: "16px" }}
         ></img>
       </div>
     </CardStyled>

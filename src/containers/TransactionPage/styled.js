@@ -3,23 +3,20 @@ import styled from "styled-components";
 const TransactionHistoryPage = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #eff1f2;
+  background-color: #f5f7f9;
   width: 100%;
+  height: 100vh;
   font-size: 16;
   font-weight: 500;
 
-  /* justify-content: flex-start; */
   .containerForm {
     padding: 40px 75px 0;
     display: flex;
     flex-direction: column;
-
     min-height: 508px;
     width: 100%;
     border-radius: 15px;
-    /* align-items: center; */
     padding-bottom: 100px;
-    /* justify-content: flex-start; */
   }
   .pageTitle {
     font-size: 32px;

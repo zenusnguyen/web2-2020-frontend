@@ -14,8 +14,8 @@ const TabStyle = styled.div`
     height: 24px;
   }
   p {
-    margin-left: 16px;
-    margin-top: 13px;
+    margin-left: 12px;
+    margin-top: 14px;
     font-size: 16px;
     font-weight: 500;
     color: #333435;

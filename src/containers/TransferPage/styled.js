@@ -5,39 +5,33 @@ const TransferStyled = styled.div`
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
-  /* justify-content: flex-start; */
+  height: 100vh;
+
   .containerForm {
-    padding-top: 40px;
-    padding-left: 75px;
+    padding: 40px 75px 0;
     display: flex;
     flex-direction: column;
-
-    min-height: 508px;
     width: 100%;
-    border-radius: 15px;
-    /* align-items: center; */
-    padding-bottom: 100px;
-    /* justify-content: flex-start; */
   }
   .title {
     font-size: 32px;
     font-weight: bold;
+    line-height: 48px;
   }
-  .titleType{
+  .titleType {
     font-size: 16px;
     font-weight: 500;
   }
   .extraBanking {
     width: 350px;
-    /* height: 50px; */
-    /* height: 80px; */
-
+    margin-bottom: 20px;
     p {
       font-size: 16px;
       font-weight: 500;
+      margin-bottom: 4px;
     }
-    .css-yk16xz-control {
-      height: 50px;
+    input {
+      height: 34px;
     }
   }
 `;

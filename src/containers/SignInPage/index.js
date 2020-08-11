@@ -8,8 +8,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import alertify from "alertifyjs";
 import axios from "axios";
 export default function SignIn() {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+const [email, setEmail] = useState(null);
+const [password, setPassword] = useState(null);
 
   let history = useHistory();
 
@@ -72,9 +72,14 @@ export default function SignIn() {
             type="password"
             title="Password "
           ></InputForm>
-          <button onClick={handleClick} className="registerButton">
-            Sign in
-          </button>
+          <Button
+            onClick={handleClick}
+            Width="350px"
+            title="Sign in"
+            Top="12px"
+            Left="0px"
+            BackgroundColor={"#feba46"}
+          ></Button>
           <div className="create">
             <p>Don’t have an account? </p>
             <p className="createHere">
