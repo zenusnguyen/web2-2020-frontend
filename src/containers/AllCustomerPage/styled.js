@@ -35,6 +35,7 @@ const MaganerAccountStyled = styled.div`
   .listCard {
   }
   .detailCard {
+
     position: absolute;
   }
   .searchBar {

@@ -14,34 +14,57 @@ import axios from "axios";
 import EditProfile from "../editProfile-admin";
 import Deposit from "../Deposit-admin";
 import Card from "../../components/Card";
+import DetailCard from "../AccountDetailPage";
+import { useHistory } from "react-router-dom";
+import { useAlert } from "react-alert";
+import { config } from "../../configs/server";
 export default function Profile(props) {
+  let history = useHistory();
+  const alert = useAlert();
   const accountInfo = props.data;
 
   const [dataCard, setDataCard] = useState([]);
 
   const [state, setState] = useState("detail");
-
+  const [CardID, SetCardID] = useState("");
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `http://localhost:1337/spend-accounts-by-owneraccount?id=${accountInfo.id}`
+        `${config.server}/spend-accounts-by-owneraccount?id=${accountInfo.id}`
       );
       setDataCard(result.data);
     }
     Fecth();
   }, []);
   const HandlerBlock = async () => {
-    const block = await axios.put(
-      `http://localhost:1337/users/${accountInfo.id}`,
-      {
-        status: "block",
-      }
-    );
-    console.log("block: ", block);
+    const block = await axios.put(`${config.server}/users/${accountInfo.id}`, {
+      status: "block",
+    });
+    alert.success("Action success");
+    setTimeout(function () {
+      history.go(0);
+    }, 1500);
   };
+  const HandlerUnblock = async () => {
+    const block = await axios.put(`${config.server}/users/${accountInfo.id}`, {
+      status: "active",
+    });
+    alert.success("Action success");
+    setTimeout(function () {
+      history.go(0);
+    }, 1500);
+  };
+  function ShowDetail(cardInfo) {
+    SetCardID(cardInfo);
+    setState("cardDetail");
+  }
+
   function RenderListCard() {
     return dataCard.map((items, index) => (
       <Card
+        onClick={() => {
+          ShowDetail(items);
+        }}
         key={index}
         Number={items.card_number}
         Balance={items.balance || 0}
@@ -61,11 +84,37 @@ export default function Profile(props) {
       </ListCardStyled>
     );
   }
-
+  function RenderBlockAtive() {
+    if (accountInfo.status === "active") {
+      return (
+        <Button
+          key="1"
+          Top="0px"
+          title="Block"
+          Width="187px"
+          onClick={HandlerBlock}
+          BackgroundColor="#BDBEBF"
+          Display="none"
+        ></Button>
+      );
+    } else {
+      return (
+        <Button
+          key="1"
+          Top="0px"
+          title="unlock"
+          Width="187px"
+          onClick={HandlerUnblock}
+          BackgroundColor="green"
+          Display="none"
+        ></Button>
+      );
+    }
+  }
   if (state === "detail")
     return (
       <PersonalPage>
-          <SideMenu></SideMenu>
+        <SideMenu></SideMenu>
         <div className="bodyContainer">
           <div onClick={props.onClick} className="back">
             <img src={props.backImg}></img>
@@ -97,15 +146,7 @@ export default function Profile(props) {
                 BackgroundColor="#4F6EF6"
                 Display="none"
               ></Button>
-              <Button
-                key="1"
-                Top="0px"
-                title="Block"
-                Width="187px"
-                onClick={HandlerBlock}
-                BackgroundColor="#BDBEBF"
-                Display="none"
-              ></Button>
+              {RenderBlockAtive()}
             </div>
           </div>
           <p className="title">Personal information</p>
@@ -131,6 +172,15 @@ export default function Profile(props) {
           setState("detail");
         }}
       ></Deposit>
+    );
+  } else if (state === "cardDetail") {
+    return (
+      <DetailCard
+        cardInfo={CardID}
+        onClick={() => {
+          setState("detail");
+        }}
+      ></DetailCard>
     );
   }
 }

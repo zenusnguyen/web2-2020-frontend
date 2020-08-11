@@ -7,45 +7,54 @@ import Button from "../../components/Button";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import alertify from "alertifyjs";
 import axios from "axios";
+import { useAlert } from "react-alert";
+import { config } from "../../configs/server";
 export default function SignIn() {
-const [email, setEmail] = useState(null);
-const [password, setPassword] = useState(null);
+  const alert = useAlert();
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
   let history = useHistory();
 
   const handleClick = async () => {
     await axios
-      .post("http://localhost:1337/auth/local", {
+      .post(`${config.server}/auth/local`, {
         identifier: email,
         password: password,
       })
       .then(async function (response) {
         const data = response.data;
-        if (response.data.jwt) {
-          const userTemp = await axios.get(
-            `http://localhost:1337/customer-infors/?id=${data.user.user_info}`,
-            {
-              headers: {
-                Authorization: `Bearer ${data.jwt}`,
-              },
+        if (response.data.user.status != "active") {
+          alert.error("Your account is not active");
+        } else {
+          if (response.data.jwt) {
+            const userTemp = await axios.get(
+              `${config.server}/customer-infors/?id=${data.user.user_info}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${data.jwt}`,
+                },
+              }
+            );
+            await localStorage.setItem("token", data.jwt);
+            await localStorage.setItem(
+              "userAccount",
+              JSON.stringify(data.user)
+            );
+            await localStorage.setItem(
+              "userInfo",
+              JSON.stringify(userTemp.data[0])
+            );
+            if (data.user.role.name === "Admin") {
+              history.push("/all-customers");
+            } else {
+              history.push("/profile");
             }
-          );
-          await localStorage.setItem("token", data.jwt);
-          await localStorage.setItem("userAccount", JSON.stringify(data.user));
-          await localStorage.setItem(
-            "userInfo",
-            JSON.stringify(userTemp.data[0])
-          );
-          if (data.user.role.name === "Admin") {
-            history.push("/all-customers");
-          } else {
-            history.push("/profile");
           }
         }
       })
       .catch(function (error) {
-        // handle error
-        alert(error);
+        alert.error("invalid email or password");
       });
   };
   return (

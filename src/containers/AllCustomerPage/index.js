@@ -7,7 +7,7 @@ import SideMenu from "../../components/SideMenu";
 import CustomerCard from "../../components/CustomerCard";
 import axios from "axios";
 import CustomerDetailPage from "../CustomerDetailPage";
-
+import { config } from "../../configs/server";
 export default function MaganeAccount() {
   const temp = [];
   const [data, setData] = useState(temp);
@@ -20,23 +20,12 @@ export default function MaganeAccount() {
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        "http://localhost:1337/users-permissions/users-active"
+        `${config.server}/users-permissions/users-active`
       );
       setData(result.data);
     }
     Fecth();
   }, []);
-
-  function ShowDetail(cardInfo) {
-    return (
-      <CustomerDetailPage
-        data={cardInfo}
-        backImg="../../assets/back.svg"
-        backTitle="All customers"
-        onClick={HandlerClick}
-      ></CustomerDetailPage>
-    );
-  }
 
   const HandlerClick = (items) => {
     setcardInfo(items);
@@ -60,7 +49,7 @@ export default function MaganeAccount() {
   if (state === "detail") {
     return (
       <MaganerAccountStyled>
-            <SideMenu></SideMenu>
+        <SideMenu></SideMenu>
         <div className="containerForm" style={{ display: styled }}>
           <div className="titleWithButton">
             <p className="SignInTitle"> All customers </p>
@@ -73,9 +62,6 @@ export default function MaganeAccount() {
             <RenderCard></RenderCard>
           </div>
         </div>
-        {/* <div className="detailCard">
-        {ShowDetail(cardInfo)}
-      </div> */}
       </MaganerAccountStyled>
     );
   } else {

@@ -4,10 +4,11 @@ import SideMenu from "../../components/SideMenu";
 import HistoryCard from "../../components/HistoryCard";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
-import MyDatePickerStyle from "../../components/DatePicker/styled";
+import { MyDatePickerStyle } from "./styled";
 import Button from "../../components/Button";
 import Calendar from "../../assets/calendar.png";
 import axios from "axios";
+import {config} from "../../configs/server"
 import * as _ from "lodash";
 export default function TransactionHistory() {
   const [data, setData] = useState([]);
@@ -25,11 +26,10 @@ export default function TransactionHistory() {
   const [toDate, setToDate] = useState(new Date("2020/12/31"));
   const [type, setType] = useState("all");
 
-
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `http://localhost:1337/transaction-logs-by-account?account_id=${
+        `${config.server}/transaction-logs-by-account?account_id=${
           JSON.parse(localStorage.getItem("userAccount")).id
         }`
       );
@@ -40,14 +40,12 @@ export default function TransactionHistory() {
 
   const handleClick = async () => {
     const result = await axios.get(
-      `http://localhost:1337/transaction-logs-filter?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}`
+      `${config.server}/transaction-logs-filter?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}`
     );
-    console.log("result.data: ", result.data);
+
     setData(result.data);
-    
   };
 
-  console.log("data: ", data);
   function RenderHistory() {
     return data.map((items) => (
       <HistoryCard
@@ -84,7 +82,7 @@ export default function TransactionHistory() {
               <p>Start date</p>
               <DatePicker
                 selected={fromDate}
-                onChange={(e) => setFromDate(e)}             
+                onChange={(e) => setFromDate(e)}
               ></DatePicker>
             </div>
             <img src={Calendar}></img>

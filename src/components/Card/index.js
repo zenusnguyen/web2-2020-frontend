@@ -4,8 +4,7 @@ import SpendCard from "../../assets/spend.png";
 import SavingCard from "../../assets/deposit.png";
 import Button from "../Button";
 export default function index(props) {
-  console.log("props: ", props);
-  // console.log('props: ', props);
+  
   let Src = SpendCard;
   if (props.Card_type === "spend") {
     Src = SpendCard;
@@ -13,11 +12,6 @@ export default function index(props) {
     Src = SavingCard;
   }
 
-
-
-
-
-  
   return (
     <CardStyled>
       <div className="Card">

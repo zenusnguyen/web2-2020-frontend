@@ -13,25 +13,12 @@ import TextArea from "../../components/TextArea";
 import Button from "../../components/Button";
 import Select from "react-select";
 import * as _ from "lodash";
-
-async function handleDeposit(cardID, amount, remark) {
-  console.log("remark: ", remark);
-  console.log("amount: ", amount);
-  console.log("cardID: ", cardID);
-  // console.log("props: ", props);
-
-  const result = await axios.post(
-    `http://localhost:1337/spend-accounts-deposit`,
-    {
-      remark: remark,
-      amount: amount,
-      beneficiaryAccount: cardID,
-    }
-  );
-  console.log("result: ", result);
-}
-
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
+import {config} from "../../configs/server"
 export default function Deposit(props) {
+  let history = useHistory();
+  const alert = useAlert();
   const [listSpend, setListSpend] = useState([]);
   const [spendAccounts, setSpendAccount] = useState([]);
   const [cardID, setCardID] = useState("");
@@ -44,11 +31,11 @@ export default function Deposit(props) {
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `http://localhost:1337/spend-accounts-by-owneraccount?id=${props.accountInfo.id}`
+        `${config.server}/spend-accounts-by-owneraccount?id=${props.accountInfo.id}`
       );
       setListSpend(result.data);
       _.forEach(result.data, (item) => {
-        if (item.status === "active" && item.card_type === "spend") {
+        if (item.status === "active") {
           spendAccountsArray.push({
             label: `${item.card_number}`,
             value: `${item.card_number}`,
@@ -59,10 +46,26 @@ export default function Deposit(props) {
     }
     Fecth();
   }, []);
+  async function handleDeposit(cardID, amount, remark) {
+    const result = await axios
+      .post(`${config.server}/spend-accounts-deposit`, {
+        remark: remark,
+        amount: amount,
+        beneficiaryAccount: cardID,
+      })
+      .then((response) => {
+        alert.success("Action success");
+
+        setTimeout(function () {
+          history.go(0);
+        }, 1500);
+      })
+      .catch((err) => alert.error("Action Error"));
+  }
 
   return (
     <DepositStyled>
-    
+      <SideMenu></SideMenu>
       <div className="containerDeposit">
         <div onClick={props.onClick} className="back">
           <img src={Back}></img>

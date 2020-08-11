@@ -66,11 +66,12 @@ const LandingPageStyle = styled.div`
     margin: 0;
   }
 
-  .card {
+  .cardPlus {
     display: flex;
     flex-direction: row;
     margin: 120px 165px;
     align-items: center;
+    justify-content: center;
     border: none;
   }
 

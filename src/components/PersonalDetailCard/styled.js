@@ -32,6 +32,8 @@ const CardStyled = styled.div`
     width: 472px;
     height: 300px;
     border-radius: 8px;
+
+    object-fit: cover !important;
   }
 `;
 

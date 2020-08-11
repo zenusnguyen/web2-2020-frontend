@@ -5,11 +5,12 @@ const SideMenuStyle = styled.div`
   padding-top: 40px;
   display: flex;
   flex-direction: column;
-  width: 260px;
+  width: 260px !important;
   /* position: absolute; */
   min-height: 508px;
   background-color: #ffffff;
   justify-content: flex-start;
+  align-items: center;
 
   img {
     height: 48px;

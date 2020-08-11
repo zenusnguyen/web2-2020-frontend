@@ -8,6 +8,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TransferStyled from "./styled";
 import axios from "axios";
 import * as _ from "lodash";
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
+import { config } from "../../configs/server";
 export default function TransferPage() {
   const [spendAccounts, setSpendAccount] = useState([]);
   const [availableBalance, setAvailableBalance] = useState(0);
@@ -16,8 +21,10 @@ export default function TransferPage() {
   const [remark, setRemark] = useState("");
   const [spendArrays, setSpendArrays] = useState([]);
   const [currentAccount, setCurrentAccount] = useState("");
-  const [reLoad, setReload] = useState(new Date());
-  // const [transferType, setTransferType] = useState("Intra");
+  let history = useHistory();
+  const alert = useAlert();
+  const [otp, setOtp] = useState("");
+  const [otp2, setOtp2] = useState("");
   let transferType = "intra";
   function getAvailableBalance(cardNumber) {
     setCurrentAccount(cardNumber);
@@ -27,16 +34,65 @@ export default function TransferPage() {
       }
     });
   }
-  async function handleCheckBeneficiary() {}
+  async function getOTP() {
+    const result = await axios.post(`${config.server}/getotp`, {
+      email: JSON.parse(localStorage.getItem("userAccount")).email,
+      card_number: currentAccount,
+    });
+    setOtp2(result.data);
+  }
+
+  const submit = (fullname, amount) => {
+    confirmAlert({
+      title: "Confirm to submit",
+      message: `Are you sure to do transfer to ${fullname}. Amount: ${amount} .`,
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => handleTransfer(),
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
+  };
+
+  const handlerAmount = (value) => {
+    if (value > availableBalance) {
+      alert.error("your amount is lager than current balance");
+      setAmount(0);
+    }
+    setAmount(value);
+  };
+
+  async function handlerConfirm() {
+    if (
+      beneficiary.length < 5 ||
+      remark.length < 1 ||
+      amount <= 0 ||
+      otp.length < 5
+    ) {
+      alert.error("please check your input");
+    } else {
+      await axios
+        .get(`${config.server}/spend-accounts-findbycardid?id=${beneficiary}`)
+        .then((response) => {
+          submit(response.data[1].full_name, amount);
+        })
+        .catch((error) => alert.error(" beneficiary account invalid"));
+    }
+  }
+
   async function handleTransfer() {
-    // console.log("beneficiary: ", beneficiary);
     await axios
-      .post(`http://localhost:1337/spend-accounts-transfer-intra`, {
+      .post(`${config.server}/spend-accounts-transfer-intra`, {
         currentAccount: currentAccount,
         remark: remark,
         amount: amount,
         beneficiaryAccount: beneficiary,
-
+        otp: otp,
         // headers: {
         //   Authorization:
         //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTc2OTM4MTUwLCJleHAiOjE1Nzk1MzAxNTB9.UgsjjXkAZ-anD257BF7y1hbjuY3ogNceKfTAQtzDEsU",
@@ -44,20 +100,18 @@ export default function TransferPage() {
       })
       .then(function (response) {
         if (response.status === 200) {
-          alert("Transfer Successful");
-          setReload(new Date());
+          alert.success("Transfer Successful");
         }
       })
-
       .catch(function (error) {
-        alert(error);
+        alert.error(error);
       });
   }
   let spendAccountsArray = [];
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `http://localhost:1337/spend-accounts-by-owneraccount?id=${
+        `${config.server}/spend-accounts-by-owneraccount?id=${
           JSON.parse(localStorage.getItem("userAccount")).id
         }`
       );
@@ -151,7 +205,7 @@ export default function TransferPage() {
           ></InputForm>
 
           <InputForm
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) => handlerAmount(e.target.value)}
             defaultValue={0}
             type="number"
             title="Amount"
@@ -163,14 +217,34 @@ export default function TransferPage() {
             type="text"
             title="Remark "
             name={"remark"}
+            Bot="50px"
           ></TextArea>
+          <div className="verify">
+            <InputForm
+              onChange={(e) => setOtp(e.target.value)}
+              defaultValue={0}
+              type="number"
+              title="Verification code"
+              name={"Verification code"}
+              Width="202px"
+              // placeholder={"Enter amount"}
+            ></InputForm>
+            <Button
+              onClick={getOTP}
+              Top="28px"
+              Width="128px"
+              title=" Get code"
+              BackgroundColor=" #FEBA46"
+            ></Button>
+          </div>
           <Button
-            onClick={handleTransfer}
+            onClick={handlerConfirm}
             Width="190px"
             title="Transfer"
             Top="32px"
             Left="0px"
             BackgroundColor={"#4F6EF6"}
+            Left="0px"
           ></Button>
         </div>
       </div>

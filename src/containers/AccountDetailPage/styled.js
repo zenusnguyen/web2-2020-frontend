@@ -8,8 +8,19 @@ const AccountDetailPage = styled.div`
   height: 100%;
   font-size: 16;
   font-weight: 500;
+  .titleWithButton2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* padding-right: 25%; */
+    height: 55px;
+    width: 100%;
+  }
+  .accountButton {
+    width: 187px;
+    height: 48px;
+  }
 
-  /* justify-content: flex-start; */
   .containerForm {
     padding: 40px 75px 0;
     display: flex;
@@ -21,6 +32,20 @@ const AccountDetailPage = styled.div`
     /* align-items: center; */
     padding-bottom: 100px;
     /* justify-content: flex-start; */
+  }
+  .blockButton {
+    width: 187px;
+    height: 48px;
+    border: 0px;
+    background: #bdbebf;
+    border-radius: 8px;
+  }
+  .unblockButton {
+    width: 187px;
+    height: 48px;
+    border: 0px;
+    background: green;
+    border-radius: 8px;
   }
   .pageTitle {
     font-size: 32px;
@@ -71,6 +96,35 @@ const AccountDetailPage = styled.div`
     border: 0px;
     color: white;
     border-radius: 5px;
+  }
+`;
+
+export const MyDatePickerStyle = styled.div`
+  margin-bottom: 20px;
+  /* position: absolute; */
+  display: flex;
+  flex-direction: row;
+  margin-top: 0px;
+  p {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  input {
+    padding-left: 16px;
+    font-size: 16px;
+    width: 280px;
+    height: 48px;
+    border: 1px solid #d9dadb;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+  img {
+    width: 20px;
+    height: 20px;
+    margin-left: 250px;
+    margin-top: 41px;
+    position: absolute;
   }
 `;
 

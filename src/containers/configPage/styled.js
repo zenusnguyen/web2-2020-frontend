@@ -7,15 +7,16 @@ const MaganerAccountStyled = styled.div`
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
+  min-height: 100%;
   height: 100vh;
-
   /* justify-content: flex-start; */
   .containerForm {
     padding-top: 40px;
     padding-left: 75px;
     display: flex;
     flex-direction: column;
-    /* min-height: 508px; */
+
+    min-height: 508px;
     width: 100%;
     border-radius: 15px;
     /* align-items: center; */
@@ -26,21 +27,47 @@ const MaganerAccountStyled = styled.div`
     font-size: 32px;
     font-weight: bold;
   }
+  .dualConfig {
+    width: 350px;
+  }
+  .selectTerm {
+    width: 350px;
+    margin-right: 7.4%;
+    input {
+      height: 35px;
+    }
+    p {
+      margin-bottom: 5px;
+    }
+  }
   .titleWithButton {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    padding-right: 25%;
     height: 55px;
     width: 100%;
-    padding-right: 25%;
   }
-  .listCard {
-    height: 100%;
-  }
-  .detailCard {
-    width:85%;
-    position: absolute;
+  .dualConfig {
+    padding-right: 20%;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
   }
 `;
-
+export const ConfigRowStyled = styled.div`
+  .title {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 150%;
+  }
+  .containerInput {
+    padding-right: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+`;
 export default MaganerAccountStyled;
