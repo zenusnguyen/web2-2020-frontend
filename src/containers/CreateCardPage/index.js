@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MaganerAccountStyled from "./styled";
 import Button from "../../components/Button";
 import SideMenu from "../../components/SideMenu";
-
+import Select from "react-select";
 import InputForm from "../../components/InputForm";
 import moment from "moment";
 import axios from "axios";
-
+import * as _ from "lodash";
 function SpendCard() {
   const [accountType, setAccountType] = useState(1);
   const [currency, setCurrency] = useState("VND");
@@ -14,7 +14,16 @@ function SpendCard() {
   const [id, setID] = useState(
     Math.floor(100000000000 + Math.random() * 900000000000)
   );
+  const currencyOption = [
+    { label: "VND", value: "VND" },
+    { label: "USD", value: "USD" },
+  ];
 
+  const accountOption = [
+    { label: "Silver", value: "1" },
+    { label: "Gold", value: "2" },
+    { label: "Platinum", value: "3" },
+  ];
   const handleClick = async () => {
     const createCard = await axios.post(
       "http://localhost:1337/spend-accounts",
@@ -25,7 +34,7 @@ function SpendCard() {
         spend_type: accountType,
         card_number: id.toString(),
         account_id: JSON.parse(localStorage.getItem("userAccount")).id,
-        status: "pending",
+        status: "active",
         created_date: new Date(),
       }
     );
@@ -41,18 +50,23 @@ function SpendCard() {
     <div className="spendCard">
       <div className="selector">
         <p>Account type</p>
-        <select onChange={(e) => setAccountType(parseInt(e.target.value))}>
-          <option value="1">Silver</option>
-          <option value="2">Gold</option>
-          <option value="3">Platinum</option>
-        </select>
+
+        <Select
+          options={accountOption}
+          onChange={(e) => setAccountType(e)}
+          defaultValue={{
+            label: "Silver",
+            value: "1",
+          }}
+        />
       </div>
       <div className="selector">
         <p>Currency unit</p>
-        <select onChange={(e) => setCurrency(e.target.value)}>
-          <option value="VND">₫ VND - Vietnamese Dong</option>
-          <option value="USD"> $ USD- Dollar</option>
-        </select>
+        <Select
+          options={currencyOption}
+          onChange={(e) => setCurrency(e.value)}
+          defaultValue={{ label: "VND", value: "VND" }}
+        />
       </div>
       <div className="accountNumber">
         <p>Your account number</p>
@@ -67,33 +81,103 @@ function SavingCard() {
   const [currency, setCurrency] = useState("VND");
   const [term, setTerm] = useState(1);
   const [interest, setInterest] = useState("1");
+  const [spendAccounts, setSpendAccounts] = useState();
+  const [spendAccountList, setSpendAccountList] = useState([]);
+  const [paymentOption, setPaymentOption] = useState(true);
+  const [isHidden, setIsHidden] = useState("");
+
   const [id, setID] = useState(
     Math.floor(100000000000 + Math.random() * 900000000000)
   );
+  const [interestOption, setInterestOption] = useState([]);
   const [maturityDate, setMaturityDate] = useState(moment().add(1, "M"));
   const originDate = moment();
-  const handlerDate = (value) => {
-    if (value == "1") {
-      setMaturityDate(moment(originDate).add(1, "M"));
-    } else if (value == "2") {
-      setMaturityDate(moment(originDate).add(6, "M"));
+  const handlePaymentOption = () => {
+    if (!paymentOption) {
+      setPaymentOption(!paymentOption);
+
+      setIsHidden("");
     } else {
-      setMaturityDate(moment(originDate).add(12, "M"));
+      setPaymentOption(!paymentOption);
+      setIsHidden("none");
     }
+  };
+
+  const currencyOption = [
+    { label: "VND", value: "VND" },
+    { label: "USD", value: "USD" },
+  ];
+  let tempOptions = [];
+  let spendAccountsArray = [];
+  const [interestExample, setInterestExample] = useState(4600);
+  useEffect(() => {
+    async function Fecth() {
+      const result = await axios.get(`http://localhost:1337/interest-rates`);
+
+      _.forEach(result.data, (item) => {
+        tempOptions.push({
+          label: ` ${item.period} month - Interest rate ${item.interest_rate} %`,
+          value: item.id,
+        });
+      });
+      setInterestOption(tempOptions);
+    }
+    Fecth();
+    async function FecthSpendAccount() {
+      const result = await axios.get(
+        `http://localhost:1337/spend-accounts-by-owneraccount?id=${
+          JSON.parse(localStorage.getItem("userAccount")).id
+        }`
+      );
+
+      _.forEach(result.data, (item) => {
+        if (item.status === "active" && item.card_type === "spend") {
+          spendAccountsArray.push({
+            label: `${item.card_number}`,
+            value: `${item.card_number}`,
+          });
+        }
+        setSpendAccountList(spendAccountsArray);
+      });
+    }
+    FecthSpendAccount();
+  }, []);
+  // eslint-disable-next-line no-extend-native
+
+  const handlerDate = (value) => {
+    setMaturityDate(
+      new Date(
+        moment(originDate).add(parseInt(value.label.trim().split(" ")[0])),
+        "M"
+      )
+    );
+    setInterestExample(
+      1000000 *
+        (parseFloat(
+          value.label.trim().split(" ")[
+            value.label.trim().split(" ").length - 2
+          ]
+        ) /
+          100)
+    );
+
+    setInterest(value);
   };
 
   const handleClick = async () => {
     const createCard = await axios.post(
-      "http://localhost:1337/spend-accounts",
+      "http://localhost:1337/spend-accounts-saving",
       {
         card_type: "saving",
         currency_unit: currency,
-        term_deposit_id: parseInt(term),
+        interest_rate_id: parseInt(term),
         card_number: id.toString(),
         account_id: JSON.parse(localStorage.getItem("userAccount")).id,
         status: "pending",
         balance: 0,
         created_date: new Date(),
+        final_settlement_type: paymentOption,
+        beneficiary_account: spendAccounts,
       }
     );
     if (createCard.status === 200) {
@@ -109,18 +193,22 @@ function SavingCard() {
       <div className="spendCard">
         <div className="selector">
           <p>Currency unit</p>
-          <select id="currency">
-            <option value="VND">₫ VND - Vietnamese Dong</option>
-            <option value="USD">$ USD- Dollar</option>
-          </select>
+          <Select
+            options={currencyOption}
+            onChange={(e) => setCurrency(e.value)}
+            defaultValue={{ label: "VND", value: "VND" }}
+          />
         </div>
         <div className="selector">
           <p>Term</p>
-          <select onChange={(e) => handlerDate(e.target.value)}>
-            <option value="1">1 month - Interest rate 4.6%</option>
-            <option value="2">6 month - Interest rate 6.6%</option>
-            <option value="3">12 month - Interest rate 8.6%</option>
-          </select>
+          <Select
+            options={interestOption}
+            onChange={(e) => handlerDate(e)}
+            defaultValue={{
+              label: " 1 month - Interest rate 4.6%",
+              value: "1",
+            }}
+          />
         </div>
         <InputForm
           Top="24px"
@@ -130,16 +218,39 @@ function SavingCard() {
         <p>Interest payment option </p>
         <form className="selectCard">
           <input
-            checked="true"
+            checked={paymentOption}
             type="radio"
             name="gender"
             defaultValue="spend"
-          />{" "}
+            onChange={(e) => {
+              handlePaymentOption();
+            }}
+          />
           Add into my Spend account
           <br />
-          <input type="radio" name="gender" defaultValue="saving" /> Add to the
-          balance and renew for another term
+          <input
+            checked={!paymentOption}
+            type="radio"
+            name="gender"
+            defaultValue="saving"
+            onChange={(e) => {
+              handlePaymentOption();
+            }}
+          />
+          Add to the balance and renew for another term
         </form>
+
+        <div className="selector" style={{ display: isHidden }}>
+          <p> Select a Spend account</p>
+          <Select
+            options={spendAccountList}
+            onChange={(e) => setSpendAccounts(e.value)}
+            defaultValue={{
+              label: spendAccountList[0],
+              value: spendAccountList[0],
+            }}
+          />
+        </div>
         <div className="accountNumber">
           <p>Your account number</p>
           <input type="text" disabled={true} value={id}></input>
@@ -153,11 +264,11 @@ function SavingCard() {
         ></InputForm>
         <InputForm
           title="So the total interest will be"
-          value=" ₫ 4,600"
+          value={interestExample}
         ></InputForm>
         <InputForm
           title="And your balance at maturity date will be"
-          value="₫ 1,004,600"
+          value={interestExample + 1000000}
         ></InputForm>
       </div>
     </div>

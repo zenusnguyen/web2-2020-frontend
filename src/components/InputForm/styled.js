@@ -4,7 +4,7 @@ const InputForm = styled.div`
   width: ${(props) => props.Width || "350px"};
   margin-bottom: 20px;
   margin-top: ${(props) => props.Top || "0px"};
-
+  margin-right: ${(props) => props.Right || "32px"};
   p {
     font-size: 16px;
     font-weight: 500;

@@ -40,7 +40,7 @@ export default function LandingPage() {
           </h2>
         </div>
 
-        <div className="card">
+        <div className="cardPlus">
           <div className="card-left">
             <h3 style={{ marginBottom: "16px" }}>Secure, fast and easy</h3>
             <h4 style={{ width: "475px", textAlign: "left" }}>
@@ -67,7 +67,7 @@ export default function LandingPage() {
           </div>
         </div>
 
-        <div className="card">
+        <div className="cardPlus">
           <img className="card-left" src={Img3} style={{}}></img>
           <div className="card-right">
             <h3 style={{ marginBottom: "16px" }}>Attractive benefits</h3>
@@ -79,7 +79,7 @@ export default function LandingPage() {
         </div>
 
         <div style={{ textAlign: "center", background: "#F3F7FB" }}>
-          <div className="card" style={{ background: "#F3F7FB" }}>
+          <div className="cardPlus" style={{ background: "#F3F7FB" }}>
             <div className="card-left">
               <h3
                 style={{

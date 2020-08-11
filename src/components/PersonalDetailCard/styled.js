@@ -4,7 +4,7 @@ export const InforLineStyled = styled.div`
   display: flex;
   flex-direction: row;
   width: 90%;
-  .title {
+  .title2 {
     width: 200px;
     font-size: 16px;
     font-weight: 500;
@@ -34,6 +34,8 @@ const CardStyled = styled.div`
     width: 472px;
     height: 300px;
     border-radius: 8px;
+
+    object-fit: cover !important;
   }
 `;
 

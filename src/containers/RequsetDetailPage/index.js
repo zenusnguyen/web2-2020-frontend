@@ -8,26 +8,47 @@ import SideMenu from "../../components/SideMenu";
 import Button from "../../components/Button";
 import PersonalDetailCard from "../../components/PersonalDetailCard";
 import Back from "../../assets/back.svg";
+
 import axios from "axios";
 import * as _ from "lodash";
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
 export default function Profile(props) {
+  let history = useHistory();
+  const alert = useAlert();
   const UserAccount = props.data;
-  console.log("UserAccount: ", UserAccount);
   const HandlerAccept = async () => {
-    const active = await axios.put(
-      `http://localhost:1337/users/${UserAccount.id}`,
-      {
+    const active = await axios
+      .put(`http://localhost:1337/users/${UserAccount.id}`, {
         status: "active",
-      }
-    );
+      })
+      .then((data) => {
+        console.log(data);
+        alert.success("Action success");
+
+        setTimeout(function () {
+          history.go(0);
+        }, 1500);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert.error("Action Error");
+      });
   };
   const HandlerReject = async () => {
-    const reject = await axios.put(
-      `http://localhost:1337/users/${UserAccount.id}`,
-      {
+    const reject = await axios
+      .put(`http://localhost:1337/users/${UserAccount.id}`, {
         status: "reject",
-      }
-    );
+      })
+      .then((data) => {
+        console.log(data);
+        alert.success("Action success");
+
+        setTimeout(function () {
+          history.go(0);
+        }, 1500);
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <PersonalPage>

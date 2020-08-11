@@ -8,6 +8,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TransferStyled from "./styled";
 import axios from "axios";
 import * as _ from "lodash";
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+
 export default function TransferPage() {
   const [spendAccounts, setSpendAccount] = useState([]);
   const [availableBalance, setAvailableBalance] = useState(0);
@@ -17,7 +20,8 @@ export default function TransferPage() {
   const [spendArrays, setSpendArrays] = useState([]);
   const [currentAccount, setCurrentAccount] = useState("");
   const [reLoad, setReload] = useState(new Date());
-  // const [transferType, setTransferType] = useState("Intra");
+  const [otp, setOtp] = useState("");
+  const [otp2, setOtp2] = useState("");
   let transferType = "intra";
   function getAvailableBalance(cardNumber) {
     setCurrentAccount(cardNumber);
@@ -27,16 +31,67 @@ export default function TransferPage() {
       }
     });
   }
-  async function handleCheckBeneficiary() {}
+  async function getOTP() {
+    const result = await axios.post("http://localhost:1337/getotp", {
+      email: JSON.parse(localStorage.getItem("userAccount")).email,
+      card_number: currentAccount,
+    });
+    setOtp2(result.data);
+  }
+
+  const submit = (beneficiary) => {
+    confirmAlert({
+      title: "Confirm to submit",
+      message: `Are you sure to do transfer to ${beneficiary}. Amount: ${amount} .`,
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => handleTransfer(),
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
+  };
+
+  const handlerAmount = (value) => {
+    if (value > availableBalance) {
+      alert("your amount is lager than current balance");
+      setAmount(0);
+    }
+    setAmount(value);
+  };
+
+  async function handlerConfirm() {
+    if (
+      beneficiary.length < 5 ||
+      remark.length < 1 ||
+      amount <= 0 ||
+      otp.length < 5
+    ) {
+      alert("please check your input");
+    } else {
+      const beneficiaryAccount = await axios.get(
+        `http://localhost:1337/spend-accounts-findbycardid?id${beneficiary}`
+      );
+      if (beneficiaryAccount.status !== 200 || !beneficiaryAccount.data) {
+        alert("something went wrong");
+      } else {
+        submit(beneficiaryAccount.data[1].full_name, amount);
+      }
+    }
+  }
+
   async function handleTransfer() {
-    // console.log("beneficiary: ", beneficiary);
     await axios
       .post(`http://localhost:1337/spend-accounts-transfer-intra`, {
         currentAccount: currentAccount,
         remark: remark,
         amount: amount,
         beneficiaryAccount: beneficiary,
-
+        otp: otp,
         // headers: {
         //   Authorization:
         //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTc2OTM4MTUwLCJleHAiOjE1Nzk1MzAxNTB9.UgsjjXkAZ-anD257BF7y1hbjuY3ogNceKfTAQtzDEsU",
@@ -48,7 +103,6 @@ export default function TransferPage() {
           setReload(new Date());
         }
       })
-
       .catch(function (error) {
         alert(error);
       });
@@ -98,7 +152,7 @@ export default function TransferPage() {
 
   return (
     <TransferStyled>
-        <SideMenu></SideMenu>
+      <SideMenu></SideMenu>
       <div className="containerForm">
         <h3 className="title">Transfer funds</h3>
         <br />
@@ -151,7 +205,7 @@ export default function TransferPage() {
           ></InputForm>
 
           <InputForm
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) => handlerAmount(e.target.value)}
             defaultValue={0}
             type="number"
             title="Amount"
@@ -163,12 +217,32 @@ export default function TransferPage() {
             type="text"
             title="Remark "
             name={"remark"}
+            Bot="50px"
           ></TextArea>
+          <div className="verify">
+            <InputForm
+              onChange={(e) => setOtp(e.target.value)}
+              defaultValue={0}
+              type="number"
+              title="Verification code"
+              name={"Verification code"}
+              Width="202px"
+              // placeholder={"Enter amount"}
+            ></InputForm>
+            <Button
+              onClick={getOTP}
+              Top="28px"
+              Width="128px"
+              title=" Get code"
+              BackgroundColor=" #FEBA46"
+            ></Button>
+          </div>
           <Button
-            onClick={handleTransfer}
+            onClick={handlerConfirm}
             Width="190px"
             title="Transfer"
             BackgroundColor={"#4F6EF6"}
+            Left="0px"
           ></Button>
         </div>
       </div>

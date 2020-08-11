@@ -3,9 +3,7 @@ import styled from "styled-components";
 export const DepositStyled = styled.div`
   display: flex;
   flex-direction: row;
-  /* padding-left: 75px; */
-  /* padding-top: 40px; */
-
+  min-height: 100vh;
   .containerDeposit {
     padding-left: 75px;
     padding-top: 40px;

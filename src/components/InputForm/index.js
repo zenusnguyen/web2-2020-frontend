@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import InputForm from "./styled";
 export default function index(props) {
   return (
-    <InputForm Top={props.Top} Width={props.Width}>
+    <InputForm Top={props.Top} Width={props.Width} Right={props.Right}>
       <p>{props.title}</p>
       <input
         onComplete={props.onComplete}
@@ -13,6 +13,7 @@ export default function index(props) {
         name={props.name}
         readOnly={props.readonly}
         placeholder={props.placeholder}
+        required
       ></input>
     </InputForm>
   );

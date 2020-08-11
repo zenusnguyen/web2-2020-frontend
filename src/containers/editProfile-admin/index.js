@@ -139,12 +139,9 @@ export default function EditProfile(props) {
 
   return (
     <Register>
-        <SideMenu></SideMenu>
+      <SideMenu></SideMenu>
       <div className="containerForm">
-        <div
-          onClick={props.onClick}
-          className="back"
-        >
+        <div onClick={props.onClick} className="back">
           <img src={Back}></img>
           {props.backTitle || "All customers"}
         </div>

@@ -23,7 +23,14 @@ const TransferStyled = styled.div`
     font-size: 32px;
     font-weight: bold;
   }
-  .titleType{
+  .verify {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* align-items: center; */
+    width: 350px;
+  }
+  .titleType {
     font-size: 16px;
     font-weight: 500;
   }

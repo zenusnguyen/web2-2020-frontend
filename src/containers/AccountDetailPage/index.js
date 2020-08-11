@@ -5,11 +5,12 @@ import AccountCard from "../../components/AccountCard";
 import HistoryCard from "../../components/HistoryCard";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
-import MyDatePickerStyle from "../../components/DatePicker/styled";
+import { MyDatePickerStyle } from "./styled";
 import Calendar from "../../assets/calendar.png";
 import Back from "../../assets/back.svg";
 import axios from "axios";
-
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
 import * as _ from "lodash";
 
 function RenderHistory() {
@@ -27,8 +28,10 @@ function RenderHistory() {
 
 export default function AccountDetail(props) {
   const { cardInfo } = props;
-  console.log('cardInfo: ', cardInfo);
-  const [ history, setHistory ] = useState([]);
+  console.log("cardInfo: ", cardInfo);
+  let historys = useHistory();
+  const alert = useAlert();
+  const [history, setHistory] = useState([]);
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
@@ -54,8 +57,7 @@ export default function AccountDetail(props) {
   );
   const [toDate, setToDate] = useState(new Date("2020/12/31"));
   const [type, setType] = useState("all");
-  const [cardID, setID] = useState("all");
-
+  // const [cardID, setID] = useState("all");
 
   const transactionTypes = [
     { label: "All types", value: "all" },
@@ -69,6 +71,55 @@ export default function AccountDetail(props) {
     );
     setHistory(result.history);
   };
+  const handleBlock = async () => {
+    const block = await axios
+      .put(`http://localhost:1337/spend-accounts/${cardInfo.id}`, {
+        status: "block",
+      })
+      .then((result) => {
+        alert.success("Action success");
+
+        setTimeout(function () {
+          historys.go(0);
+        }, 1500);
+      })
+      .catch((err) => {
+        alert.error("Action Error");
+      });
+  };
+
+  const handleUnBlock = async () => {
+    const block = await axios
+      .put(`http://localhost:1337/spend-accounts/${cardInfo.id}`, {
+        status: "active",
+      })
+      .then((result) => {
+        alert.success("Action success");
+
+        setTimeout(function () {
+          historys.go(0);
+        }, 1500);
+      })
+      .catch((err) => {
+        alert.error("Action Error");
+      });
+  };
+
+  const RenderButton = () => {
+    if (cardInfo.status === "active") {
+      return (
+        <button onClick={handleBlock} className="blockButton">
+          Close account
+        </button>
+      );
+    } else {
+      return (
+        <button onClick={handleUnBlock} className="unblockButton">
+          UnBlock account
+        </button>
+      );
+    }
+  };
 
   return (
     <AccountDetailPage>
@@ -78,8 +129,10 @@ export default function AccountDetail(props) {
           <img src={Back}></img>
           Manage accounts
         </div>
-        <p className="pageTitle">{cardInfo.card_number}</p>
-
+        <div className="titleWithButton2">
+          <p className="pageTitle">{cardInfo.card_number}</p>
+          <div className="accountButton">{RenderButton()}</div>
+        </div>
         <p className="itemTitle">Information</p>
         <AccountCard
           Term={cardInfo.term_deposit_id}

@@ -7,7 +7,8 @@ const MaganerAccountStyled = styled.div`
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   /* justify-content: flex-start; */
   .containerForm {
     padding-top: 40px;
@@ -37,6 +38,7 @@ const MaganerAccountStyled = styled.div`
     height: 100%;
   }
   .detailCard {
+    width:85%;
     position: absolute;
   }
 `;

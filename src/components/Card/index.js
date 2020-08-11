@@ -13,11 +13,6 @@ export default function index(props) {
     Src = SavingCard;
   }
 
-
-
-
-
-  
   return (
     <CardStyled>
       <div className="Card">
