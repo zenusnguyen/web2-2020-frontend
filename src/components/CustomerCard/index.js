@@ -11,32 +11,35 @@ export default function HistoryCard(props) {
   } else {
     Style = "#56CD67";
   }
-
-  return (
-    <CardStyled>
-      <div className="icon">
-        <img src={Icon}></img>
-      </div>
-      <div className="detail-left">
-        <div className="withStatus">
-          <p>{props.username || " zenusnguyen"} </p>
-          <div className="status">
-            <p>{props.Status || "Active"}</p>
-          </div>
+  if (props.username !== "admin") {
+    return (
+      <CardStyled>
+        <div className="icon">
+          <img src={Icon}></img>
         </div>
-        <p className="subtext"> {props.email || "zenusnguyen@gmail.com"} </p>
-      </div>
-      <div className="detail-right">
-        <Button
-          onClick={props.onClick}
-          Color="white"
-          title="Details"
-          BorderRadius="8px"
-          Top="0px"
-          Width="140px"
-          BackgroundColor="#4F6EF6"
-        ></Button>
-      </div>
-    </CardStyled>
-  );
+        <div className="detail-left">
+          <div className="withStatus">
+            <p>{props.username || " zenusnguyen"} </p>
+            <div className="status">
+              <p>{props.Status || "Active"}</p>
+            </div>
+          </div>
+          <p className="subtext"> {props.email || "zenusnguyen@gmail.com"} </p>
+        </div>
+        <div className="detail-right">
+          <Button
+            onClick={props.onClick}
+            Color="white"
+            title="Details"
+            BorderRadius="8px"
+            Top="0px"
+            Width="140px"
+            BackgroundColor="#4F6EF6"
+          ></Button>
+        </div>
+      </CardStyled>
+    );
+  } else {
+    return <div></div>;
+  }
 }

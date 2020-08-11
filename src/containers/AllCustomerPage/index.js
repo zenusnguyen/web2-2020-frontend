@@ -27,16 +27,16 @@ export default function MaganeAccount() {
     Fecth();
   }, []);
 
-  function ShowDetail(cardInfo) {
-    return (
-      <CustomerDetailPage
-        data={cardInfo}
-        backImg="../../assets/back.svg"
-        backTitle="All customers"
-        onClick={HandlerClick}
-      ></CustomerDetailPage>
-    );
-  }
+  // function ShowDetail(cardInfo) {
+  //   return (
+  //     <CustomerDetailPage
+  //       data={cardInfo}
+  //       backImg="../../assets/back.svg"
+  //       backTitle="All customers"
+  //       onClick={HandlerClick}
+  //     ></CustomerDetailPage>
+  //   );
+  // }
 
   const HandlerClick = (items) => {
     setcardInfo(items);

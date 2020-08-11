@@ -10,6 +10,8 @@ import InputForm from "../../components/InputForm";
 import { DepositStyled, Register } from "./styled";
 import Back from "../../assets/back.svg";
 import TextArea from "../../components/TextArea";
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
 export default function EditProfile(props) {
   const accountInfo = props.data;
   const [DateOfBirth, setDateOfBirth] = useState(new Date());
@@ -19,11 +21,12 @@ export default function EditProfile(props) {
   const [userInfo, setUserInfo] = useState("");
   const [pic1, setPic1] = useState(null);
   const [pic2, setPic2] = useState(null);
-  const [fullName, setFullName] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState(null);
-  const [address, setAddress] = useState(null);
-  const [passport, setPassport] = useState(null);
-
+  const [fullName, setFullName] = useState(userInfo.full_name);
+  const [phoneNumber, setPhoneNumber] = useState(userInfo.phone_number);
+  const [address, setAddress] = useState(userInfo.address);
+  const [passport, setPassport] = useState(userInfo.identificationNumber);
+  let history = useHistory();
+  const alert = useAlert();
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
@@ -65,7 +68,11 @@ export default function EditProfile(props) {
           img2: uploadRes.data[1].url,
         }
       );
-      console.log("createUserInfor: ", createUserInfor);
+      alert.success("Action success");
+
+      setTimeout(function () {
+        history.go(0);
+      }, 1500);
     } else if (!pic1 && !pic2) {
       const createUserInfor = await axios.put(
         `http://localhost:1337/customer-infors/${accountInfo.user_info}`,
@@ -78,8 +85,13 @@ export default function EditProfile(props) {
           identificationNumber: passport,
         }
       );
+      alert.success("Action success");
+
+      setTimeout(function () {
+        history.go(0);
+      }, 1500);
     } else {
-      alert("vui long upload ca 2 hinh ");
+      alert.error("please upload both of picture ");
     }
   }
 
@@ -201,7 +213,7 @@ export default function EditProfile(props) {
             }}
             placeholder={userInfo.identificationNumber}
             pattern="[0-9]"
-            type="tel"
+            type="number"
             title=" ID/ Passport number  "
             Width="160px"
           ></InputForm>
