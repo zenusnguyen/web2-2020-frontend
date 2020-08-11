@@ -34,7 +34,7 @@ export default function Deposit(props) {
       );
       setListSpend(result.data);
       _.forEach(result.data, (item) => {
-        if (item.status === "active" && item.card_type === "spend") {
+        if (item.status === "active") {
           spendAccountsArray.push({
             label: `${item.card_number}`,
             value: `${item.card_number}`,

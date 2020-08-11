@@ -8,9 +8,10 @@ import SideMenu from "../../components/SideMenu";
 import Button from "../../components/Button";
 import PersonalDetailCard from "../../components/PersonalDetailCard";
 import Back from "../../assets/back.svg";
-import { useAlert } from "react-alert";
+
 import axios from "axios";
 import * as _ from "lodash";
+import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 export default function Profile(props) {
   let history = useHistory();

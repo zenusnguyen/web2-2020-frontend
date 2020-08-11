@@ -146,7 +146,10 @@ function SavingCard() {
 
   const handlerDate = (value) => {
     setMaturityDate(
-      moment(originDate).add(parseInt(value.label.trim().split(" ")[0]), "M")
+      new Date(
+        moment(originDate).add(parseInt(value.label.trim().split(" ")[0])),
+        "M"
+      )
     );
     setInterestExample(
       1000000 *

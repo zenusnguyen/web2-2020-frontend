@@ -11,9 +11,11 @@ import InputForm from "../../components/InputForm";
 import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
 import Calendar from "../../assets/calendar.png";
-
+import { useAlert } from "react-alert";
+import * as _ from "lodash";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 export default function Register() {
+  const alert = useAlert();
   let history = useHistory();
   let token = localStorage.getItem("token");
 
@@ -31,7 +33,6 @@ export default function Register() {
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [address, setAddress] = useState(null);
   const [passport, setPassport] = useState(null);
-
   const [pic1, setPic1] = useState(null);
   const [pic2, setPic2] = useState(null);
   const [img1, setImgUrl1] = useState(null);
@@ -56,7 +57,7 @@ export default function Register() {
     // e.preventDefault();
 
     if (e.target.files[0].size >= 4 * 1024 * 1024) {
-      alert("Max size of an image: 4MB");
+      alert.error("Max size of an image: 4MB");
     } else {
       if (pic === "pic1") {
         setPic1(e.target.files[0]);
@@ -91,65 +92,98 @@ export default function Register() {
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
+  function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  function HandlerInput() {
+    if (
+      !validateEmail(email) ||
+      userName === null ||
+      password === null ||
+      confirmPassword === null ||
+      password !== confirmPassword ||
+      fullName === null ||
+      phoneNumber === null ||
+      address === null ||
+      password === null ||
+      img1 === null ||
+      img2 === null
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   async function handleSubmit() {
-    let data = new FormData();
-    data.append("files", pic1);
-    data.append("files", pic2);
+    if (HandlerInput()) {
+      let data = new FormData();
+      data.append("files", pic1);
+      data.append("files", pic2);
 
-    const uploadRes = await axios({
-      method: "POST",
-      url: "http://localhost:1337/upload",
-      data,
-    });
+      const uploadRes = await axios({
+        method: "POST",
+        url: "http://localhost:1337/upload",
+        data,
+      })
+        .then()
+        .catch((err) => alert.error(err.message));
 
-    const createUserInfor = await axios.post(
-      "http://localhost:1337/customer-infors",
-      {
-        full_name: fullName,
-        phone_number: phoneNumber,
-        address: address,
-        date_of_birth: DateOfBirth,
-        date_of_issue: DateOfIssue,
-        identificationNumber: passport,
-        img1: uploadRes.data[0].url,
-        img2: uploadRes.data[1].url,
+      const createUserInfor = await axios
+        .post("http://localhost:1337/customer-infors", {
+          full_name: fullName,
+          phone_number: phoneNumber,
+          address: address,
+          date_of_birth: DateOfBirth,
+          date_of_issue: DateOfIssue,
+          identificationNumber: passport,
+          img1: uploadRes.data[0].url,
+          img2: uploadRes.data[1].url,
+        })
+        .then()
+        .catch((err) => alert.error(err.message));
+      const createAccount = await axios
+        .post("http://localhost:1337/auth/local/register", {
+          status: "pending",
+          username: userName,
+          email: email,
+          password: password,
+          user_info: createUserInfor.data.id,
+        })
+        .then()
+        .catch((err) => {
+          console.log("err: ", err);
+          alert.error(err.message);
+        });
+
+      if (_.get(createAccount, "data.jwt")) {
+        console.log("createAccount: ", createAccount);
+        const createCard = await axios.post(
+          "http://localhost:1337/spend-accounts",
+          {
+            balance: 0,
+            card_type: "spend",
+            currency_unit: "VND",
+            spend_type: "1",
+            card_number: Math.floor(
+              100000000000 + Math.random() * 900000000000
+            ).toString(),
+            account_id: createAccount.data.user.id,
+            status: "active",
+            created_date: new Date(),
+          }
+        );
+        alert.success("Register Success");
+
+        await sleep(1000);
+        history.push("/signin");
+      } else {
+        alert.error("Check your input");
       }
-    );
-
-    const createAccount = await axios.post(
-      "http://localhost:1337/auth/local/register",
-      {
-        status: "pending",
-        username: userName,
-        email: email,
-        password: password,
-        user_info: createUserInfor.data.id,
-      }
-    );
-    if (createAccount.data.jwt) {
-      console.log("createAccount: ", createAccount);
-      const createCard = await axios.post(
-        "http://localhost:1337/spend-accounts",
-        {
-          balance: 0,
-          card_type: "spend",
-          currency_unit: "VND",
-          spend_type: "1",
-          card_number: Math.floor(
-            100000000000 + Math.random() * 900000000000
-          ).toString(),
-          account_id: createAccount.data.user.id,
-          status: "active",
-          created_date: new Date(),
-        }
-      );
-      alert("Register Success");
-
-      await sleep(1000);
-      history.push("/signin");
     } else {
-      alert("Check your input");
+      alert.error("check your input");
     }
   }
 
