@@ -1,3 +1,3 @@
 export const config = {
-  server: "http://localhost:1337",
+  server: "https://web2-2020-back-end.herokuapp.com",
 };
