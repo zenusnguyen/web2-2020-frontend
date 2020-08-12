@@ -1,31 +1,24 @@
 import styled from "styled-components";
 
 const MaganerAccountStyled = styled.div`
-  /* position: absolute; */
-  /* z-index: 2; */
   display: flex;
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
   min-height: 100%;
   height: 100vh;
-  /* justify-content: flex-start; */
+
   .containerForm {
-    padding-top: 40px;
-    padding-left: 75px;
+    padding: 64px 75px;
     display: flex;
     flex-direction: column;
-
-    min-height: 508px;
     width: 100%;
-    border-radius: 15px;
-    /* align-items: center; */
-    padding-bottom: 100px;
-    /* justify-content: flex-start; */
   }
   .SignInTitle {
+    font-weight: 600;
     font-size: 32px;
-    font-weight: bold;
+    line-height: 150%;
+    margin: 0;
   }
   .dualConfig {
     width: 350px;
@@ -44,9 +37,8 @@ const MaganerAccountStyled = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    padding-right: 25%;
-    height: 55px;
     width: 100%;
+    margin-bottom: 32px;
   }
   .dualConfig {
     padding-right: 20%;

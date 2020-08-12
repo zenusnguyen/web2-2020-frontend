@@ -16,7 +16,6 @@ import { config } from "../../configs/server";
 
 export default function AccountDetail(props) {
   const { cardInfo } = props;
-
   let historys = useHistory();
   const alert = useAlert();
   const [historyLog, setHistoryLog] = useState([]);
@@ -177,7 +176,7 @@ export default function AccountDetail(props) {
           <img src={Back}></img>
           Manage accounts
         </div>
-        <div className="titleWithButton2">
+        <div className="titleWithButton">
           <p className="pageTitle">{cardInfo.card_number}</p>
           <div className="accountButton">{RenderButton()}</div>
         </div>

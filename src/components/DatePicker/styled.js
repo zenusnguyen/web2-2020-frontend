@@ -4,7 +4,7 @@ const MyDatePicker = styled.div`
   margin-bottom: 20px;
   display: flex;
   flex-direction: row;
-  width: 100%;
+  margin-top: 0px;
 
   p {
     font-size: 16px;
@@ -14,6 +14,7 @@ const MyDatePicker = styled.div`
   input {
     padding-left: 16px;
     font-size: 16px;
+    width: 160px;
     height: 48px;
     border: 1px solid #d9dadb;
     box-sizing: border-box;

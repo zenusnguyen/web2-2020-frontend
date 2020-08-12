@@ -14,7 +14,6 @@ const TransactionHistoryPage = styled.div`
     padding: 64px 75px;
     display: flex;
     flex-direction: column;
-    min-height: 508px;
     width: 100%;
     border-radius: 15px;
     padding-bottom: 100px;

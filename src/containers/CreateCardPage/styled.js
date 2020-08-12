@@ -73,11 +73,8 @@ const MaganerAccountStyled = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* justify-content: space-between; */
   }
   .example {
-    margin-top: -150px;
-    margin-left: 220px;
     padding: 40px 32px 20px;
     display: flex;
     flex-direction: column;
@@ -86,6 +83,8 @@ const MaganerAccountStyled = styled.div`
     border-radius: 16px;
     align-items: center;
     justify-content: center;
+    margin-left: auto;
+    margin-bottom: auto;
     p {
       color: white;
     }
