@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import AddIcon from "../../assets/add-outline.png";
 import DatePicker from "react-datepicker";
-import MyDatePickerStyle from "../../components/DatePicker/styled";
+import {MyDatePickerStyle} from "./styled";
 import Calendar from "../../assets/calendar.png";
 import SideMenu from "../../components/SideMenu";
 import InputForm from "../../components/InputForm";

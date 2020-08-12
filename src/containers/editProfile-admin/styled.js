@@ -105,6 +105,35 @@ const PersonalPage = styled.div`
   }
 `;
 
+export const MyDatePickerStyle = styled.div`
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 0px;
+  /* justify-content: space-around; */
+  p {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  input {
+    padding-left: 16px;
+    font-size: 16px;
+    width: 160px;
+    height: 48px;
+    border: 1px solid #d9dadb;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+  img {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin-left: 120px;
+    margin-top: 41px;
+  }
+`;
+
 export const Register = styled.div`
   display: flex;
   flex-direction: row;
