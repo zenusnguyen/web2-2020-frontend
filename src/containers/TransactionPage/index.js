@@ -62,6 +62,7 @@ export default function TransactionHistory() {
   function RenderHistory() {
     return data.map((items) => (
       <HistoryCard
+        unit={items.unit}
         TransferType={items.transaction_type}
         Date={items.created_at}
         Amount={items.amount}
