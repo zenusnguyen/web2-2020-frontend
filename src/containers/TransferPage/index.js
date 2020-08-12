@@ -36,15 +36,18 @@ export default function TransferPage() {
   }
   async function getOTP() {
     const result = await axios
-      .post(`${config.server}/getotp`, {
-        data: {
+      .post(
+        `${config.server}/getotp`,
+        {
           email: JSON.parse(localStorage.getItem("userAccount")).email,
           card_number: currentAccount,
         },
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
 
       .then((response) => {
         setOtp2(response.data);
@@ -102,18 +105,21 @@ export default function TransferPage() {
 
   async function handleTransfer() {
     await axios
-      .post(`${config.server}/spend-accounts-transfer-intra`, {
-        data: {
+      .post(
+        `${config.server}/spend-accounts-transfer-intra`,
+        {
           currentAccount: currentAccount,
           remark: remark,
           amount: amount,
           beneficiaryAccount: beneficiary,
           otp: otp,
         },
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
       .then(function (response) {
         if (response.status === 200) {
           alert.success("Transfer Successful");

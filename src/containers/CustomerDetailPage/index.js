@@ -30,7 +30,12 @@ export default function Profile(props) {
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `${config.server}/spend-accounts-by-owneraccount?id=${accountInfo.id}`
+        `${config.server}/spend-accounts-by-owneraccount?id=${accountInfo.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       setDataCard(result.data);
     }

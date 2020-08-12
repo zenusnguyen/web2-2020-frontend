@@ -101,8 +101,9 @@ export default function ConfigPage() {
 
     // FecthSaving();
   }, []);
-  console.log("spendData: ", spendData);
-  console.log("savingData: ", savingData);
+const handleUpdate =async()=>{
+  
+}
   return (
     <MaganerAccountStyled>
       <SideMenu></SideMenu>
@@ -155,6 +156,7 @@ export default function ConfigPage() {
           ></InputForm>
         </div> */}
         <Button
+        onClick={handleUpdate}
           Left="0px"
           title="Save"
           Width="190px"
