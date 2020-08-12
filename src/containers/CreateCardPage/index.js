@@ -80,10 +80,19 @@ function SpendCard() {
         />
       </div>
       <div className="accountNumber">
-        <p>Your account number</p>
+        <p className="titleType" style={{ marginBottom: "4px" }}>
+          Your account number
+        </p>
         <input type="text" disabled={true} value={id}></input>
       </div>
-      <Button onClick={handleClick} Width="190px" title="Open Card"></Button>
+      <Button
+        onClick={handleClick}
+        Width="190px"
+        title="Opend Card"
+        Top="32px"
+        BackgroundColor={"#4F6EF6"}
+        Left="0px"
+      ></Button>
     </div>
   );
 }
@@ -244,33 +253,34 @@ function SavingCard() {
           />
         </div>
         <InputForm
-          Top="24px"
           title="Maturity date"
           value={moment(maturityDate).format("DD-MM-YYYY")}
         ></InputForm>
-        <div>
-          <p style={{ marginBottom: "4px" }}>Interest payment option </p>
-            <input
-              checked={paymentOption}
-              type="radio"
-              name="gender"
-              defaultValue="spend"
-              onChange={(e) => {
-                handlePaymentOption();
-              }}
-            />
-            Add into my Spend account
-            <br />
-            <input
-              checked={!paymentOption}
-              type="radio"
-              name="gender"
-              defaultValue="saving"
-              onChange={(e) => {
-                handlePaymentOption();
-              }}
-            />
-            Add to the balance and renew for another term
+        <div style={{ width: "450px", marginBottom: "20px" }}>
+          <p className="titleType" style={{ marginBottom: "4px" }}>
+            Interest payment option{" "}
+          </p>
+          <input
+            checked={!paymentOption}
+            type="radio"
+            name="gender"
+            defaultValue="saving"
+            onChange={(e) => {
+              handlePaymentOption();
+            }}
+          />{" "}
+          Add interest to the balance and renew for another term
+          <br />
+          <input
+            checked={paymentOption}
+            type="radio"
+            name="gender"
+            defaultValue="spend"
+            onChange={(e) => {
+              handlePaymentOption();
+            }}
+          />{" "}
+          Add into a Spend account and close this account
         </div>
 
         <div className="selector" style={{ display: isHidden }}>
@@ -285,10 +295,19 @@ function SavingCard() {
           />
         </div>
         <div className="accountNumber">
-          <p>Your account number</p>
+          <p className="titleType" style={{ marginBottom: "4px" }}>
+            Your account number
+          </p>
           <input type="text" disabled={true} value={id}></input>
         </div>
-        <Button onClick={handleClick} Width="190px" title="Open Card"></Button>
+        <Button
+          onClick={handleClick}
+          Width="190px"
+          title="Opend Card"
+          Top="32px"
+          BackgroundColor={"#4F6EF6"}
+          Left="0px"
+        ></Button>
       </div>
       <div className="example">
         <InputForm
@@ -319,15 +338,17 @@ export default function CreateCard() {
         <SideMenu></SideMenu>
         <div className="containerForm">
           <p className="SignInTitle"> Open new account</p>
-          <p>I want to open </p>
-          <form className="selectCard">
+          <div style={{ marginBottom: "20px" }}>
+            <p className="titleType" style={{ marginBottom: "4px" }}>
+              I want to open
+            </p>
             <input
               checked={!isSaving}
               type="radio"
               name="spend"
               onClick={Handler}
               defaultValue="spend"
-            />
+            />{" "}
             Spend account
             <br />
             <input
@@ -336,10 +357,9 @@ export default function CreateCard() {
               name="saving"
               onClick={Handler}
               defaultValue="saving"
-            />
+            />{" "}
             Savings account
-          </form>
-
+          </div>
           <SavingCard></SavingCard>
         </div>
       </MaganerAccountStyled>
@@ -350,8 +370,10 @@ export default function CreateCard() {
         <SideMenu></SideMenu>
         <div className="containerForm">
           <p className="SignInTitle"> Open new account</p>
-          <p>I want to open </p>
-          <form className="selectCard">
+          <div style={{ marginBottom: "20px" }}>
+            <p className="titleType" style={{ marginBottom: "4px" }}>
+              I want to open{" "}
+            </p>
             <input
               checked={!isSaving}
               type="radio"
@@ -369,8 +391,7 @@ export default function CreateCard() {
               defaultValue="saving"
             />{" "}
             Savings account
-          </form>
-
+          </div>
           <SpendCard></SpendCard>
         </div>
       </MaganerAccountStyled>

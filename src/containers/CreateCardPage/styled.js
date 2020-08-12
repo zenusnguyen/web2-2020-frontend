@@ -50,24 +50,24 @@ const MaganerAccountStyled = styled.div`
     display: flex;
     flex-direction: column;
     width: 350px;
-    height: 100px;
     input {
       width: 100%;
-      height: 100%;
+      height: 60px;
       background-color: white;
+      border-radius: 4px;
       border: 0px;
       display: flex;
       align-items: center;
       justify-content: center;
-
+      text-align: center;
+      font-weight: 600;
       font-size: 24px;
-      font-weight: bold;
-      padding-left: 25%;
+      line-height: 150%;
     }
   }
-  .selectCard {
+  .titleType {
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 500;
   }
   .dualColumn {
     display: flex;
@@ -78,14 +78,17 @@ const MaganerAccountStyled = styled.div`
   .example {
     margin-top: -150px;
     margin-left: 220px;
+    padding: 40px 32px 20px;
     display: flex;
     flex-direction: column;
     width: 400px;
-    background-color: #f7d46e;
-    /* background-color:#EFF1F2; */
-    height: 350px;
+    background: #feba46;
+    border-radius: 16px;
     align-items: center;
     justify-content: center;
+    p {
+      color: white;
+    }
   }
 `;
 

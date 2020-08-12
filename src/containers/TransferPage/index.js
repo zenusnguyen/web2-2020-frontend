@@ -273,7 +273,6 @@ export default function TransferPage() {
             Top="32px"
             Left="0px"
             BackgroundColor={"#4F6EF6"}
-            Left="0px"
           ></Button>
         </div>
       </div>

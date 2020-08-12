@@ -180,8 +180,8 @@ export default function AccountDetail(props) {
           // TotalInterest=
         ></AccountCard>
         <p className="itemTitle">History</p>
-        <span className="filterSection">
-          <div className="selectInput">
+               <span className="filterSection">
+          <div className="selectInput child">
             <p>Transaction type</p>
             <Select
               options={transactionTypes}
@@ -190,33 +190,35 @@ export default function AccountDetail(props) {
             />
           </div>
           <MyDatePickerStyle>
-            <div>
+            <div className="child customDatePickerWidth">
               <p>Start date</p>
               <DatePicker
+                dateFormat="dd/MM/yyyy"
                 selected={fromDate}
                 onChange={(e) => setFromDate(e)}
               ></DatePicker>
             </div>
-            <img src={Calendar}></img>
           </MyDatePickerStyle>
           <MyDatePickerStyle>
-            <div>
+            <div className="child customDatePickerWidth">
               <p>End date</p>
               <DatePicker
+                dateFormat="dd/MM/yyyy"
                 selected={toDate}
                 onChange={(e) => setToDate(e)}
               ></DatePicker>
             </div>
-            <img src={Calendar}></img>
           </MyDatePickerStyle>
-          <button
-            onClick={handleClick}
-            className="filterButton"
-            style={{ marginTop: "28px" }}
-          >
-            Apply
-          </button>
-        </span>
+          <div className="child1">
+            <button
+              onClick={handleClick}
+              className="filterButton"
+              style={{ marginTop: "28px" }}
+            >
+              Apply
+            </button>
+          </div>
+          </span>
         <RenderHistory></RenderHistory>
       </div>
     </AccountDetailPage>
