@@ -132,7 +132,7 @@ export default function Register() {
         data,
       })
         .then()
-        .catch((err) => alert.error(err.message));
+        .catch((err) => alert.error("some things went wrong"));
 
       const createUserInfor = await axios
         .post(`${config.server}/customer-infors`, {
@@ -146,7 +146,7 @@ export default function Register() {
           img2: uploadRes.data[1].url,
         })
         .then()
-        .catch((err) => alert.error(err.message));
+        .catch((err) => alert.error("some things went wrong"));
       const createAccount = await axios
         .post(`${config.server}/auth/local/register`, {
           status: "pending",
@@ -158,11 +158,10 @@ export default function Register() {
         .then()
         .catch((err) => {
           console.log("err: ", err);
-          alert.error(err.message);
+          alert.error("some things went wrong");
         });
 
       if (_.get(createAccount, "data.jwt")) {
-     
         const createCard = await axios.post(`${config.server}/spend-accounts`, {
           balance: 0,
           card_type: "spend",
@@ -264,7 +263,15 @@ export default function Register() {
           </div>
 
           <div>
-            <p style={{ fontSize: "16px", fontWeight: "500", marginBottom: "8px" }}>Upload photo</p>
+            <p
+              style={{
+                fontSize: "16px",
+                fontWeight: "500",
+                marginBottom: "8px",
+              }}
+            >
+              Upload photo
+            </p>
             <div className="uploadImage">
               <div style={{ marginRight: "10px" }}>
                 <Button style={{ padding: "0px" }} onClick={handleClick1}>
@@ -278,7 +285,15 @@ export default function Register() {
                   }}
                   style={{ display: "none" }}
                 />
-                <p style={{ textAlign: "center", margin: "8px 0 0 0", color: "#828485" }}>Front</p>
+                <p
+                  style={{
+                    textAlign: "center",
+                    margin: "8px 0 0 0",
+                    color: "#828485",
+                  }}
+                >
+                  Front
+                </p>
               </div>
               <div style={{ marginLeft: "10px" }}>
                 <Button style={{ padding: "0px" }} onClick={handleClick2}>
@@ -292,7 +307,15 @@ export default function Register() {
                   }}
                   style={{ display: "none" }}
                 />
-                <p style={{ textAlign: "center", margin: "8px 0 0 0", color: "#828485" }}>Back</p>
+                <p
+                  style={{
+                    textAlign: "center",
+                    margin: "8px 0 0 0",
+                    color: "#828485",
+                  }}
+                >
+                  Back
+                </p>
               </div>
             </div>
           </div>

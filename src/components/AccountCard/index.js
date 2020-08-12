@@ -32,11 +32,9 @@ export default function AccountCard(props) {
         </div>
         <div className="detail">
           <p> Account number: {props.AccountNumber} </p>
-          <p> Account type: {cardType} </p>
           <p> Term: {props.Term} month</p>
           <p>Maturity date: {props.MaturityDate} </p>
           <p>Interest rate: {props.InterestRate}% </p>
-
           <p> Current balance: {props.CurrentBalance} </p>
           <p> Status: {props.Status} </p>
           <p></p>
@@ -52,7 +50,6 @@ export default function AccountCard(props) {
         <div className="detail">
           <p> Account number: {props.AccountNumber} </p>
           <p> Account type: {cardType} </p>
-
           <p> Current balance: {props.CurrentBalance} </p>
           <p> Status: {props.Status} </p>
         </div>
