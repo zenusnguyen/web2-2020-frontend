@@ -8,6 +8,7 @@ import * as _ from "lodash";
 export default function Profile(props) {
   const UserAccount = JSON.parse(localStorage.getItem("userAccount"));
   const UserInfo = JSON.parse(localStorage.getItem("userInfo"));
+
   return (
     <PersonalPage>
       <SideMenu></SideMenu>
