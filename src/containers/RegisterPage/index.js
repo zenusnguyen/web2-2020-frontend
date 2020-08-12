@@ -234,7 +234,7 @@ export default function Register() {
                   onChange={(e) => setDateOfBirth(e)}
                 ></DatePicker>
               </div>
-              <img src={Calendar}></img>
+              {/* <img src={Calendar}></img> */}
             </MyDatePickerStyle>
           </div>
 
@@ -259,7 +259,7 @@ export default function Register() {
                   onChange={(e) => setDateOfIssue(e)}
                 ></DatePicker>
               </div>
-              <img src={Calendar}></img>
+              {/* <img src={Calendar}></img> */}
             </MyDatePickerStyle>
           </div>
 

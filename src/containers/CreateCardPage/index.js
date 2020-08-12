@@ -10,6 +10,8 @@ import { config } from "../../configs/server";
 import * as _ from "lodash";
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
+import Back from "../../assets/back.svg";
+
 function SpendCard() {
   const [accountType, setAccountType] = useState(1);
   const [currency, setCurrency] = useState("VND");

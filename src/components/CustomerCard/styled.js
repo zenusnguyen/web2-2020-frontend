@@ -4,7 +4,6 @@ const CardStyled = styled.div`
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
-  width: 75%;
   padding: 16px 32px;
   border-radius: 16px;
   margin-bottom: 16px;
@@ -49,6 +48,9 @@ const CardStyled = styled.div`
   .withStatus {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: auto;
   }
   .status {
     width: 52px;
@@ -58,9 +60,9 @@ const CardStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 20px;
+    margin-left: 12px;
     p {
-      margin: auto;
+      margin: 0;
       font-weight: normal;
       font-size: 12px;
       line-height: 130%;

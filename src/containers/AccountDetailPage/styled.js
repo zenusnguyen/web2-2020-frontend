@@ -8,11 +8,11 @@ const AccountDetailPage = styled.div`
   height: 100%;
   font-size: 16;
   font-weight: 500;
+
   .titleWithButton2 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* padding-right: 25%; */
     height: 55px;
     width: 100%;
   }
