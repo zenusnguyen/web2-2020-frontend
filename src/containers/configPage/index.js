@@ -7,23 +7,26 @@ import axios from "axios";
 import Select from "react-select";
 import * as _ from "lodash";
 import { config } from "../../configs/server";
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
 function ConfigRow(props) {
+  console.log("props: ", props);
   return (
     <ConfigRowStyled>
       <div className="title">{props.title} </div>
       <div className="containerInput">
         <InputForm
-          onChange={props.onChange1}
+          onChange={(e) => props.onChange1(e.target.value)}
           placeholder={props.placeholder1}
           title={props.title1}
         ></InputForm>
         <InputForm
-          onChange={props.onChange2}
+          onChange={(e) => props.onChange2(e.target.value)}
           placeholder={props.placeholder2}
           title={props.title2}
         ></InputForm>
         <InputForm
-          onChange={props.onChange3}
+          onChange={(e) => props.onChange3(e.target.value)}
           placeholder={props.placeholder3}
           title={props.title3}
         ></InputForm>
@@ -33,6 +36,8 @@ function ConfigRow(props) {
 }
 
 export default function ConfigPage() {
+  let history = useHistory();
+  const alert = useAlert();
   const [spendData, setSpendData] = useState([]);
   const [savingData, setSavingData] = useState(0);
   const [listSaving, setListSaving] = useState([]);
@@ -48,34 +53,32 @@ export default function ConfigPage() {
   };
 
   const handleChangeSpend3 = (value) => {
+    console.log("value: ", value);
     let temp = spendData;
     temp[2].limited_amount_per_transaction = value;
     setSpendData(temp);
   };
   const handleChangeSpend4 = (value) => {
     let temp = spendData;
-    temp[0].limited_amount_per_date = value;
+    temp[0].limited_amount_per_day = value;
     setSpendData(temp);
   };
 
   const handleChangeSpend5 = (value) => {
     let temp = spendData;
-    temp[1].limited_amount_per_date = value;
+    temp[1].limited_amount_per_day = value;
     setSpendData(temp);
   };
 
   const handleChangeSpend6 = (value) => {
     let temp = spendData;
-    temp[2].limited_amount_per_date = value;
+    temp[2].limited_amount_per_day = value;
     setSpendData(temp);
   };
   const handlerChangSaving = (value) => {
     let temp = listSaving;
 
-    console.log("temp: ", temp);
-
     temp[savingData - 1].newRate = value;
-    console.log(" temp[index - 1]: ", temp[savingData - 1]);
   };
   let temp = [];
   useEffect(() => {
@@ -101,9 +104,25 @@ export default function ConfigPage() {
 
     // FecthSaving();
   }, []);
-const handleUpdate =async()=>{
-  
-}
+  const handleUpdate = async () => {
+    axios
+      .post(
+        `${config.server}/update-term`,
+        { spendData },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((result) => {
+        alert.success("Action success");
+        setTimeout(function () {
+          history.go(0);
+        }, 1500);
+      })
+      .catch((err) => alert.error("Action error"));
+  };
   return (
     <MaganerAccountStyled>
       <SideMenu></SideMenu>
@@ -113,8 +132,8 @@ const handleUpdate =async()=>{
         </div>
         <ConfigRow
           onChange1={handleChangeSpend1}
-          onChange2={handleChangeSpend3}
-          onChange3={handleChangeSpend5}
+          onChange2={handleChangeSpend2}
+          onChange3={handleChangeSpend3}
           placeholder1={_.get(spendData[0], "limited_amount_per_transaction")}
           placeholder2={_.get(spendData[1], "limited_amount_per_transaction")}
           placeholder3={_.get(spendData[2], "limited_amount_per_transaction")}
@@ -124,8 +143,8 @@ const handleUpdate =async()=>{
           title3=" Platinum"
         ></ConfigRow>
         <ConfigRow
-          onChange1={handleChangeSpend2}
-          onChange2={handleChangeSpend4}
+          onChange1={handleChangeSpend4}
+          onChange2={handleChangeSpend5}
           onChange3={handleChangeSpend6}
           placeholder1={_.get(spendData[0], "limited_amount_per_day")}
           placeholder2={_.get(spendData[1], "limited_amount_per_day")}
@@ -156,7 +175,7 @@ const handleUpdate =async()=>{
           ></InputForm>
         </div> */}
         <Button
-        onClick={handleUpdate}
+          onClick={handleUpdate}
           Left="0px"
           title="Save"
           Width="190px"

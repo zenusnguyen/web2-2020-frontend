@@ -197,7 +197,7 @@ function SavingCard() {
   };
 
   const handleClick = async () => {
-    if (interestOption && spendAccounts.length === 0) {
+    if (paymentOption && spendAccounts.length === 0) {
       alert.error("Please choose beneficiary account");
     } else {
       await axios
