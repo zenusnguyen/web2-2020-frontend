@@ -176,7 +176,7 @@ export default function AccountDetail(props) {
           <img src={Back}></img>
           Manage accounts
         </div>
-        <div className="titleWithButton">
+        <div className="titleWithButton2">
           <p className="pageTitle">{cardInfo.card_number}</p>
           <div className="accountButton">{RenderButton()}</div>
         </div>
