@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 const MyDatePicker = styled.div`
   margin-bottom: 20px;
-  /* position: absolute; */
   display: flex;
   flex-direction: row;
-  margin-top: 0px;
+  width: 100%;
+
   p {
     font-size: 16px;
     font-weight: 500;
@@ -14,7 +14,6 @@ const MyDatePicker = styled.div`
   input {
     padding-left: 16px;
     font-size: 16px;
-    width: 160px;
     height: 48px;
     border: 1px solid #d9dadb;
     box-sizing: border-box;
@@ -25,7 +24,6 @@ const MyDatePicker = styled.div`
     height: 20px;
     margin-left: 120px;
     margin-top: 41px;
-    position: absolute;
   }
 `;
 

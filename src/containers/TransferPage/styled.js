@@ -5,10 +5,11 @@ const TransferStyled = styled.div`
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
 
   .containerForm {
-    padding: 40px 75px 0;
+    padding: 64px 75px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -22,14 +23,13 @@ const TransferStyled = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* align-items: center; */
     width: 350px;
   }
   .titleType {
     font-size: 16px;
     font-weight: 500;
   }
-  .extraBanking {
+  .extraBanking { 
     width: 350px;
     margin-bottom: 20px;
     p {

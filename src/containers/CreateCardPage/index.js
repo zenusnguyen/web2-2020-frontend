@@ -62,7 +62,6 @@ function SpendCard() {
     <div className="spendCard">
       <div className="selector">
         <p>Account type</p>
-
         <Select
           options={accountOption}
           onChange={(e) => setAccountType(e.value)}
@@ -249,30 +248,30 @@ function SavingCard() {
           title="Maturity date"
           value={moment(maturityDate).format("DD-MM-YYYY")}
         ></InputForm>
-        <p>Interest payment option </p>
-        <form className="selectCard">
-          <input
-            checked={paymentOption}
-            type="radio"
-            name="gender"
-            defaultValue="spend"
-            onChange={(e) => {
-              handlePaymentOption();
-            }}
-          />
-          Add into my Spend account
-          <br />
-          <input
-            checked={!paymentOption}
-            type="radio"
-            name="gender"
-            defaultValue="saving"
-            onChange={(e) => {
-              handlePaymentOption();
-            }}
-          />
-          Add to the balance and renew for another term
-        </form>
+        <div>
+          <p style={{ marginBottom: "4px" }}>Interest payment option </p>
+            <input
+              checked={paymentOption}
+              type="radio"
+              name="gender"
+              defaultValue="spend"
+              onChange={(e) => {
+                handlePaymentOption();
+              }}
+            />
+            Add into my Spend account
+            <br />
+            <input
+              checked={!paymentOption}
+              type="radio"
+              name="gender"
+              defaultValue="saving"
+              onChange={(e) => {
+                handlePaymentOption();
+              }}
+            />
+            Add to the balance and renew for another term
+        </div>
 
         <div className="selector" style={{ display: isHidden }}>
           <p> Select a Spend account</p>

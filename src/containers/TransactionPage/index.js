@@ -10,6 +10,7 @@ import Calendar from "../../assets/calendar.png";
 import axios from "axios";
 import { config } from "../../configs/server";
 import * as _ from "lodash";
+
 export default function TransactionHistory() {
   const [data, setData] = useState([]);
   const tempDate = new Date();
@@ -81,7 +82,7 @@ export default function TransactionHistory() {
       <div className="containerForm">
         <p className="pageTitle">Transactions history</p>
         <span className="filterSection">
-          <div className="selectInput">
+          <div className="selectInput child">
             <p>Transaction type</p>
             <Select
               options={transactionTypes}
@@ -90,32 +91,36 @@ export default function TransactionHistory() {
             />
           </div>
           <MyDatePickerStyle>
-            <div>
+            <div className="child customDatePickerWidth">
               <p>Start date</p>
               <DatePicker
+                dateFormat="dd/MM/yyyy"
                 selected={fromDate}
                 onChange={(e) => setFromDate(e)}
               ></DatePicker>
             </div>
-            <img src={Calendar}></img>
+            {/* <img src={Calendar}></img> */}
           </MyDatePickerStyle>
           <MyDatePickerStyle>
-            <div>
+            <div className="child customDatePickerWidth">
               <p>End date</p>
               <DatePicker
+                dateFormat="dd/MM/yyyy"
                 selected={toDate}
                 onChange={(e) => setToDate(e)}
               ></DatePicker>
             </div>
-            <img src={Calendar}></img>
+            {/* <img src={Calendar}></img> */}
           </MyDatePickerStyle>
-          <button
-            onClick={handleClick}
-            className="filterButton"
-            style={{ marginTop: "28px" }}
-          >
-            Apply
-          </button>
+          <div className="child1">
+            <button
+              onClick={handleClick}
+              className="filterButton"
+              style={{ marginTop: "28px" }}
+            >
+              Apply
+            </button>
+          </div>
         </span>
 
         <RenderHistory></RenderHistory>

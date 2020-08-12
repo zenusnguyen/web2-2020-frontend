@@ -23,11 +23,12 @@ export default class MyDatePicker extends React.Component {
         <div>
           <p>{this.props.title}</p>
           <DatePicker
+            dateFormat="dd/MM/yyyy"
             selected={new Date()}
             onChange={this.handleChange}
           ></DatePicker>
         </div>
-        <img src={Calendar}></img>
+        {/* <img src={Calendar}></img> */}
       </MyDatePickerStyle>
     );
   }

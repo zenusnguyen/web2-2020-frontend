@@ -249,7 +249,7 @@ export default function TransferPage() {
               type="number"
               title="Verification code"
               name={"Verification code"}
-              Width="202px"
+              Width="200px"
               // placeholder={"Enter amount"}
             ></InputForm>
             <Button
