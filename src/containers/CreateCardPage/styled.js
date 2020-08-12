@@ -7,7 +7,7 @@ const MaganerAccountStyled = styled.div`
   width: 100%;
   font-size: 16;
   font-weight: 500;
-  /* justify-content: flex-start; */
+
   .containerForm {
     padding-top: 40px;
     padding-left: 75px;

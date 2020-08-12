@@ -6,39 +6,37 @@ const SignInPageStyle = styled.div`
   align-items: center;
   justify-content: center;
   flex: 1;
+  font-family: "Inter", sans-serif;
 
   .SignInForm {
     display: flex;
     flex-direction: column;
     width: 462px;
-    min-height: 508px;
     background-color: #ffffff;
     border-radius: 15px;
     align-items: center;
   }
-  .registerButton {
-    width: 350px;
-    height: 50px;
-    background-color: #feba46;
-    border: 0px;
-    color: white;
-    border-radius: 5px;
-  }
   .SignInTitle {
     margin-top: 60px;
+    margin-bottom: 32px;
     font-size: 32px;
     font-weight: bold;
   }
   .create {
     margin-top: 32px;
+    margin-bottom: 60px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    p {
+      margin-bottom: 0;
+    }
   }
   .createHere {
     margin-left: 5px;
-    color: blue;
+    color: #3540a8;
+    font-weight: 500;
   }
 `;
 

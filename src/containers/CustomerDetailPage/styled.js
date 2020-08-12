@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const DepositStyled = styled.div`
   display: flex;
   flex-direction: row;
-  /* padding-left: 75px; */
-  /* padding-top: 40px; */
 
   .containerDeposit {
     padding-left: 75px;
@@ -74,7 +72,6 @@ const PersonalPage = styled.div`
   background-color: #f5f7f9;
   width: 100%;
   margin-bottom: 40px;
-  /* justify-content: flex-start; */
 
   .bodyContainer {
     margin-top: 65px;
@@ -123,7 +120,6 @@ export const Register = styled.div`
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
-  /* justify-content: flex-start; */
 
   .uploadImage {
     width: 350px;

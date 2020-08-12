@@ -2,23 +2,23 @@ import styled from "styled-components";
 
 const PersonalPage = styled.div`
   display: flex;
-  /* flex: 1; */
-  padding-right: 30%;
   flex-direction: row;
   background-color: #f5f7f9;
-  width: 100%;
   height: 100vh;
+  width: 100%;
+
   .bodyContainer {
-    padding-top: 40px;
+    /* margin-top: 64px; */
     display: flex;
     flex-direction: column;
-    padding-left: 75px;
-    /* margin-bottom: 60px; */
+    padding: 40px 75px 0;
+    width: 100%;
   }
 
   .pageTitle {
     font-size: 32px;
     font-weight: bold;
+    margin-bottom: 32px;
   }
   .title {
     font-size: 24px;

@@ -13,7 +13,7 @@ export default function LandingPage() {
   return (
     <LandingPageStyle>
       <Header Height="100px" Shadow="0" CTA="flex" Href="/signin"></Header>
-      <div style={{ maxWidth: "1440px", width: "100%" }}>
+      <div style={{ maxWidth: "100vw", width: "100%" }}>
         <div className="hero">
           <h1 style={{ marginTop: "80px", width: "838px", height: "200px" }}>
             Make your money move.

@@ -5,7 +5,7 @@ const SignInPageStyle = styled.div`
   padding-bottom: 90px;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(#283180 0%, #5272ff 100%);
+  background: linear-gradient(46.25deg, #283180 0%, #5272ff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,6 @@ const SignInPageStyle = styled.div`
     display: flex;
     flex-direction: column;
     width: 462px;
-    min-height: 508px;
     background-color: #ffffff;
     border-radius: 15px;
     align-items: center;
@@ -23,48 +22,43 @@ const SignInPageStyle = styled.div`
   }
   .SignInTitle {
     margin-top: 60px;
+    margin-bottom: 32px;
     font-size: 32px;
     font-weight: bold;
   }
   .create {
     margin-top: 32px;
+    margin-bottom: 60px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    p {
+      margin-bottom: 0;
+    }
   }
   .createHere {
     margin-left: 5px;
-    color: blue;
+    color: #3540a8;
+    font-weight: 500;
   }
   .dualColumn {
-    margin-top: 40px;
     width: 350px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    /* padding-top:20px; */
   }
   .uploadImage {
     width: 350px;
-    height: 100px;
     display: flex;
-    justify-content: space-around;
-    /* input{
-   width:100%;
-   height:100%;
-   #file-upload-button{
-background-color:black
-   } */
-
     button {
-      border-radius: 4px;
-      width: 130px;
-      height: 130px;
-      border: 1px;
+      border: none;
+      width: 100px;
+      height: 100px;
       background-color: white;
-      border-style: dashed;
+      background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='%23D9DADBFF' stroke-width='2' stroke-dasharray='6' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+      border-radius: 4px;
     }
     img {
       width: 30px;
@@ -72,31 +66,16 @@ background-color:black
     }
   }
   .registerButton {
+    margin-top: 32px;
     width: 350px;
-    height: 50px;
+    height: 48px;
     background-color: #feba46;
     border: 0px;
     color: white;
-    border-radius: 5px;
-  }
-  .address {
-    width: 350px;
-    height: 96px;
-    margin-bottom: 20px;
-    /* padding-bottom:20px; */
-    p {
-      font-size: 16px;
-      font-weight: 500;
-      margin-bottom: 0px;
-    }
-    textarea {
-      padding-left: 16px;
-      padding-top: 10px;
-      font-size: 16px;
-      width: 100%;
-      height: 100%;
-      resize: none;
-    }
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
   }
 `;
 

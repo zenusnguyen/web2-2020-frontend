@@ -4,8 +4,8 @@ const AccountDetailPage = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #f5f7f9;
-  width: 100%;
-  height: 100vh;
+  width: 100vw;
+  height: 100%;
   font-size: 16;
   font-weight: 500;
   .titleWithButton2 {

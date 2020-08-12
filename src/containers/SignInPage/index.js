@@ -85,9 +85,14 @@ export default function SignIn({ auth }) {
             type="password"
             title="Password "
           ></InputForm>
-          <button onClick={handleClick} className="registerButton">
-            Sign in
-          </button>
+          <Button
+            onClick={handleClick}
+            Width="350px"
+            title="Sign in"
+            Top="12px"
+            Left="0px"
+            BackgroundColor={"#feba46"}
+          ></Button>
           <div className="create">
             <p>Don’t have an account? </p>
             <p className="createHere">

@@ -11,6 +11,8 @@ import InputForm from "../../components/InputForm";
 import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
 import Calendar from "../../assets/calendar.png";
+import TextArea from "../../components/TextArea";
+
 import { useAlert } from "react-alert";
 import * as _ from "lodash";
 import { config } from "../../configs/server";
@@ -199,7 +201,7 @@ export default function Register() {
           <InputForm
             onChange={(e) => setUserName(e.target.value)}
             type="text"
-            title="User Name "
+            title="Username "
           ></InputForm>
           <InputForm
             onChange={(e) => setPassword(e.target.value)}
@@ -209,12 +211,12 @@ export default function Register() {
           <InputForm
             onChange={(e) => setConfirmPassword(e.target.value)}
             type="password"
-            title="Confirm Password "
+            title="Confirm password "
           ></InputForm>
           <InputForm
             onChange={(e) => setFullName(e.target.value)}
             type="text"
-            title="Full Name "
+            title="Fullname "
           ></InputForm>
           <div className="dualColumn">
             <InputForm
@@ -236,20 +238,22 @@ export default function Register() {
             </MyDatePickerStyle>
           </div>
 
-          <div className="address">
-            <p>Current address</p>
-            <textarea onChange={(e) => setAddress(e.target.value)}></textarea>
-          </div>
+          <TextArea
+            onChange={(e) => setAddress(e.target.value)}
+            type="text"
+            title="Current address"
+          ></TextArea>
+
           <div className="dualColumn">
             <InputForm
               onChange={(e) => setPassport(e.target.value)}
               type="number"
-              title=" ID/ Passport number  "
+              title=" ID/ Passport number"
               Width="160px"
             ></InputForm>
             <MyDatePickerStyle>
               <div>
-                <p>Date of Issue</p>
+                <p>Date of issue</p>
                 <DatePicker
                   selected={DateOfIssue || new Date()}
                   onChange={(e) => setDateOfIssue(e)}
@@ -259,10 +263,10 @@ export default function Register() {
             </MyDatePickerStyle>
           </div>
 
-          <div style={{ marginBottom: "40px" }}>
-            <p style={{ fontSize: "16px", fontWeight: "500" }}>Upload photo</p>
+          <div>
+            <p style={{ fontSize: "16px", fontWeight: "500", marginBottom: "8px" }}>Upload photo</p>
             <div className="uploadImage">
-              <div>
+              <div style={{ marginRight: "10px" }}>
                 <Button style={{ padding: "0px" }} onClick={handleClick1}>
                   <img style={getPreview(img1)}></img>
                 </Button>
@@ -274,9 +278,9 @@ export default function Register() {
                   }}
                   style={{ display: "none" }}
                 />
-                <p style={{ marginLeft: "50px", marginTop: "10px" }}>Front</p>
+                <p style={{ textAlign: "center", margin: "8px 0 0 0", color: "#828485" }}>Front</p>
               </div>
-              <div>
+              <div style={{ marginLeft: "10px" }}>
                 <Button style={{ padding: "0px" }} onClick={handleClick2}>
                   <img style={getPreview(img2)}></img>
                 </Button>
@@ -288,7 +292,7 @@ export default function Register() {
                   }}
                   style={{ display: "none" }}
                 />
-                <p style={{ marginLeft: "50px", marginTop: "10px" }}>Back</p>
+                <p style={{ textAlign: "center", margin: "8px 0 0 0", color: "#828485" }}>Back</p>
               </div>
             </div>
           </div>

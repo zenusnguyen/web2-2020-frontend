@@ -10,6 +10,7 @@ const MaganerAccountStyled = styled.div`
   min-height: 100%;
   height: 100vh;
   padding-right: 15%;
+
   /* justify-content: flex-start; */
   .containerForm {
     padding-top: 40px;

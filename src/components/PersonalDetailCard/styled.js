@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const InforLineStyled = styled.div`
   display: flex;
   flex-direction: row;
-  width: 90%;
   .title2 {
     width: 200px;
     font-size: 16px;
@@ -18,17 +17,16 @@ export const InforLineStyled = styled.div`
 `;
 
 const CardStyled = styled.div`
-  width: 1040px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
   border-radius: 16px;
   padding: 32px;
-  margin-bottom: 40px;
+  box-shadow: 0px 4px 16px rgba(35, 35, 35, 0.06);
   .groupImage {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
   }
   .identificationImage {
     width: 472px;

@@ -9,18 +9,22 @@ const SideMenuStyle = styled.div`
   /* position: absolute; */
   min-height: 508px;
   background-color: #ffffff;
-
-  /* align-items: center; */
   justify-content: flex-start;
-  align-items: center;
+  
   img {
     height: 48px;
-    width:90%;
+    width: 118px;
+    text-align: left;
   }
+
+  #logo {
+    margin-left: 24px;
+  }
+
   .listMenu {
     margin-top: 24px;
     padding-left: 24px;
-    width: 250px;
+    width: 260px;
     display: flex;
     flex-direction: column;
   }
