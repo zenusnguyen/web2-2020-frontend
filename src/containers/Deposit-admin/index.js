@@ -15,7 +15,7 @@ import Select from "react-select";
 import * as _ from "lodash";
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
-import {config} from "../../configs/server"
+import { config } from "../../configs/server";
 export default function Deposit(props) {
   let history = useHistory();
   const alert = useAlert();
@@ -31,7 +31,12 @@ export default function Deposit(props) {
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `${config.server}/spend-accounts-by-owneraccount?id=${props.accountInfo.id}`
+        `${config.server}/spend-accounts-by-owneraccount?id=${props.accountInfo.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       setListSpend(result.data);
       _.forEach(result.data, (item) => {
@@ -49,9 +54,14 @@ export default function Deposit(props) {
   async function handleDeposit(cardID, amount, remark) {
     const result = await axios
       .post(`${config.server}/spend-accounts-deposit`, {
-        remark: remark,
-        amount: amount,
-        beneficiaryAccount: cardID,
+        data: {
+          remark: remark,
+          amount: amount,
+          beneficiaryAccount: cardID,
+        },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       })
       .then((response) => {
         alert.success("Action success");
@@ -60,7 +70,7 @@ export default function Deposit(props) {
           history.go(0);
         }, 1500);
       })
-      .catch((err) => alert.error("Action Error"));
+      .catch((err) => alert.error("Action error please check again!"));
   }
 
   return (

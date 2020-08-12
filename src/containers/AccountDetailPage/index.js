@@ -12,7 +12,7 @@ import axios from "axios";
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 import * as _ from "lodash";
-import {config} from "../../configs/server"
+import { config } from "../../configs/server";
 function RenderHistory() {
   const [data, setData] = useState([]);
   return data.map((item) => (
@@ -37,7 +37,12 @@ export default function AccountDetail(props) {
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `${config.server}/term-deposits-by-account?id=${cardInfo.term_deposit_id}`
+        `${config.server}/term-deposits-by-account?id=${cardInfo.term_deposit_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       setTerm(result.data);
     }
@@ -69,15 +74,30 @@ export default function AccountDetail(props) {
 
   const handleClick = async () => {
     const result = await axios.get(
-      `${config.server}/transaction-logs-filter?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}`
+      `${
+        config.server
+      }/transaction-logs-filter?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
     );
     setHistory(result.history);
   };
   const handleBlock = async () => {
     const block = await axios
-      .put(`${config.server}/spend-accounts/${cardInfo.id}`, {
-        status: "block",
-      })
+      .put(
+        `${config.server}/spend-accounts/${cardInfo.id}`,
+        {
+          status: "block",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
       .then((result) => {
         alert.success("Action success");
 
@@ -86,15 +106,23 @@ export default function AccountDetail(props) {
         }, 1500);
       })
       .catch((err) => {
-        alert.error("Action Error");
+        alert.error("Action error please check again!");
       });
   };
 
   const handleUnBlock = async () => {
     const block = await axios
-      .put(`${config.server}/spend-accounts/${cardInfo.id}`, {
-        status: "active",
-      })
+      .put(
+        `${config.server}/spend-accounts/${cardInfo.id}`,
+        {
+          status: "active",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
       .then((result) => {
         alert.success("Action success");
 
@@ -103,7 +131,7 @@ export default function AccountDetail(props) {
         }, 1500);
       })
       .catch((err) => {
-        alert.error("Action Error");
+        alert.error("Action error please check again!");
       });
   };
 

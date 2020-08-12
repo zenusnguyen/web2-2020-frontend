@@ -20,7 +20,12 @@ export default function MaganeAccount() {
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `${config.server}/users-permissions/users-active`
+        `${config.server}/users-permissions/users-active`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       setData(result.data);
     }

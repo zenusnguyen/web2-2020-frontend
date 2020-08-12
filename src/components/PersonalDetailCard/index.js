@@ -14,16 +14,22 @@ function InforLine(props) {
 }
 export default function PersonalDetailCard(props) {
   const { accountInfo } = props;
-  console.log("accountInfo: ", accountInfo);
+
   const [userInfo, setUserInfo] = useState("");
 
   const [img1, setImg1] = useState("");
   const [img2, setImg2] = useState("");
-
+  
   useEffect(() => {
+    // console.log(localStorage.getItem("token"));
     async function Fecth() {
       const result = await axios.get(
-        `${config.server}/customer-infors/?id=${props.accountInfo.user_info}`
+        `${config.server}/customer-infors/?id=${props.accountInfo.user_info}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       setUserInfo(result.data[0]);
       setImg1(result.data[0].img1);

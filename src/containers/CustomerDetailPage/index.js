@@ -37,18 +37,34 @@ export default function Profile(props) {
     Fecth();
   }, []);
   const HandlerBlock = async () => {
-    const block = await axios.put(`${config.server}/users/${accountInfo.id}`, {
-      status: "block",
-    });
+    const block = await axios.put(
+      `${config.server}/users/${accountInfo.id}`,
+      {
+        status: "block",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
     alert.success("Action success");
     setTimeout(function () {
       history.go(0);
     }, 1500);
   };
   const HandlerUnblock = async () => {
-    const block = await axios.put(`${config.server}/users/${accountInfo.id}`, {
-      status: "active",
-    });
+    const block = await axios.put(
+      `${config.server}/users/${accountInfo.id}`,
+      {
+        status: "active",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
     alert.success("Action success");
     setTimeout(function () {
       history.go(0);

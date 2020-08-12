@@ -8,7 +8,7 @@ import SideMenu from "../../components/SideMenu";
 import Button from "../../components/Button";
 import PersonalDetailCard from "../../components/PersonalDetailCard";
 import Back from "../../assets/back.svg";
-import {config} from "../../configs/server"
+import { config } from "../../configs/server";
 import axios from "axios";
 import * as _ from "lodash";
 import { useAlert } from "react-alert";
@@ -19,9 +19,17 @@ export default function Profile(props) {
   const UserAccount = props.data;
   const HandlerAccept = async () => {
     const active = await axios
-      .put(`${config.server}/users/${UserAccount.id}`, {
-        status: "active",
-      })
+      .put(
+        `${config.server}/users/${UserAccount.id}`,
+        {
+          status: "active",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
       .then((data) => {
         console.log(data);
         alert.success("Action success");
@@ -32,14 +40,22 @@ export default function Profile(props) {
       })
       .catch((err) => {
         console.log(err);
-        alert.error("Action Error");
+        alert.error("Action error please check again!");
       });
   };
   const HandlerReject = async () => {
     const reject = await axios
-      .put(`${config.server}/users/${UserAccount.id}`, {
-        status: "reject",
-      })
+      .put(
+        `${config.server}/users/${UserAccount.id}`,
+        {
+          status: "reject",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
       .then((data) => {
         console.log(data);
         alert.success("Action success");

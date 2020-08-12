@@ -162,7 +162,7 @@ export default function Register() {
         });
 
       if (_.get(createAccount, "data.jwt")) {
-        console.log("createAccount: ", createAccount);
+     
         const createCard = await axios.post(`${config.server}/spend-accounts`, {
           balance: 0,
           card_type: "spend",

@@ -29,27 +29,35 @@ function SpendCard() {
     { label: "Platinum", value: "3" },
   ];
   const handleClick = async () => {
-    const createCard = await axios.post(`${config.server}/spend-accounts`, {
-      balance: 0,
-      card_type: "spend",
-      currency_unit: currency,
-      spend_type: accountType,
-      card_number: id.toString(),
-      account_id: JSON.parse(localStorage.getItem("userAccount")).id,
-      status: "active",
-      created_date: new Date(),
-    });
-    if (createCard.status === 200) {
-      setID(Math.floor(100000000000 + Math.random() * 900000000000));
-      alert.success("Create Card success");
-      setTimeout(function () {
-        history.go(0);
-      }, 1500);
-    } else {
-      alert.error("Create Card fail");
-    }
+    const createCard = await axios;
+    axios
+      .post(
+        `${config.server}/spend-accounts`,
+        {
+          balance: 0,
+          card_type: "spend",
+          currency_unit: currency,
+          spend_type: accountType,
+          card_number: id.toString(),
+          account_id: JSON.parse(localStorage.getItem("userAccount")).id,
+          status: "active",
+          created_date: new Date(),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((result) => {
+        setID(Math.floor(100000000000 + Math.random() * 900000000000));
+        alert.success("Create Card success");
+        setTimeout(function () {
+          history.push("/manage");
+        }, 1500);
+      })
+      .catch((err) => alert.error("Create Card fail"));
   };
-
   return (
     <div className="spendCard">
       <div className="selector">
@@ -85,17 +93,18 @@ function SavingCard() {
   const [currency, setCurrency] = useState("VND");
   const [term, setTerm] = useState(1);
   const [interest, setInterest] = useState("1");
-  const [spendAccounts, setSpendAccounts] = useState();
+  const [spendAccounts, setSpendAccounts] = useState("");
   const [spendAccountList, setSpendAccountList] = useState([]);
   const [paymentOption, setPaymentOption] = useState(true);
   const [isHidden, setIsHidden] = useState("");
-
+  const alert = useAlert();
   const [id, setID] = useState(
     Math.floor(100000000000 + Math.random() * 900000000000)
   );
   const [interestOption, setInterestOption] = useState([]);
   const [maturityDate, setMaturityDate] = useState(moment().add(1, "M"));
   const originDate = moment();
+  let history = useHistory();
   const handlePaymentOption = () => {
     if (!paymentOption) {
       setPaymentOption(!paymentOption);
@@ -116,7 +125,11 @@ function SavingCard() {
   const [interestExample, setInterestExample] = useState(4600);
   useEffect(() => {
     async function Fecth() {
-      const result = await axios.get(`${config.server}/interest-rates`);
+      const result = await axios.get(`${config.server}/interest-rates`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
       _.forEach(result.data, (item) => {
         tempOptions.push({
@@ -131,7 +144,12 @@ function SavingCard() {
       const result = await axios.get(
         `${config.server}/spend-accounts-by-owneraccount?id=${
           JSON.parse(localStorage.getItem("userAccount")).id
-        }`
+        }`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
 
       _.forEach(result.data, (item) => {
@@ -169,26 +187,38 @@ function SavingCard() {
   };
 
   const handleClick = async () => {
-    const createCard = await axios.post(
-      `${config.server}/spend-accounts-saving`,
-      {
-        card_type: "saving",
-        currency_unit: currency,
-        interest_rate_id: parseInt(term),
-        card_number: id.toString(),
-        account_id: JSON.parse(localStorage.getItem("userAccount")).id,
-        status: "pending",
-        balance: 0,
-        created_date: new Date(),
-        final_settlement_type: paymentOption,
-        beneficiary_account: spendAccounts,
-      }
-    );
-    if (createCard.status === 200) {
-      setID(Math.floor(100000000000 + Math.random() * 900000000000));
-      alert("Create Card success");
+    if (interestOption && spendAccounts.length === 0) {
+      alert.error("Please choose beneficiary account");
     } else {
-      alert("Create Card fail");
+      await axios
+        .post(
+          `${config.server}/spend-accounts-saving`,
+          {
+            card_type: "saving",
+            currency_unit: currency,
+            interest_rate_id: parseInt(term),
+            card_number: id.toString(),
+            account_id: JSON.parse(localStorage.getItem("userAccount")).id,
+            status: "pending",
+            balance: 0,
+            created_date: new Date(),
+            final_settlement_type: paymentOption,
+            beneficiary_account: spendAccounts,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then((result) => {
+          setID(Math.floor(100000000000 + Math.random() * 900000000000));
+          alert.success("Create Card success");
+          setTimeout(function () {
+            history.push("/manage");
+          }, 1500);
+        })
+        .catch((err) => alert.error("Create Card fail"));
     }
   };
 

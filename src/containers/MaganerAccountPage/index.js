@@ -7,7 +7,7 @@ import SideMenu from "../../components/SideMenu";
 import Card from "../../components/Card";
 import axios from "axios";
 import DetailCard from "../AccountDetailPage";
-import {config} from "../../configs/server"
+import { config } from "../../configs/server";
 function ShowDetail(cardInfo, HandlerClick) {
   return <DetailCard cardInfo={cardInfo} onClick={HandlerClick}></DetailCard>;
 }
@@ -23,7 +23,12 @@ export default function MaganeAccount() {
       const result = await axios.get(
         `${config.server}/spend-accounts-by-owneraccount?id=${
           JSON.parse(localStorage.getItem("userAccount")).id
-        }`
+        }`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       setData(result.data);
     }
