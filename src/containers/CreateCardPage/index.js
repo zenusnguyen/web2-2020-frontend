@@ -54,7 +54,7 @@ function SpendCard() {
 
         <Select
           options={accountOption}
-          onChange={(e) => setAccountType(e)}
+          onChange={(e) => setAccountType(e.value)}
           defaultValue={{
             label: "Silver",
             value: "1",
