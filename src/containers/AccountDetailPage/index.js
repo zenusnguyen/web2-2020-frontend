@@ -13,25 +13,13 @@ import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 import * as _ from "lodash";
 import { config } from "../../configs/server";
-function RenderHistory() {
-  const [data, setData] = useState([]);
-  return data.map((item) => (
-    <HistoryCard
-      key={item.key}
-      TransferType={item.TransferType}
-      Date={item.Date}
-      Amount={item.Amount}
-      RemainingBalance={item.RemainingBalance}
-    ></HistoryCard>
-  ));
-}
 
 export default function AccountDetail(props) {
   const { cardInfo } = props;
-  console.log("cardInfo: ", cardInfo);
+
   let historys = useHistory();
   const alert = useAlert();
-  const [history, setHistory] = useState([]);
+  const [historyLog, setHistoryLog] = useState([]);
   const [term, setTerm] = useState([{}, {}]);
   // ${config.server}/term-deposits-by-account?id=18
   useEffect(() => {
@@ -49,7 +37,32 @@ export default function AccountDetail(props) {
     if (cardInfo.card_type === "saving") {
       Fecth();
     }
+    async function FecthLogs() {
+      const result = await axios.get(
+        `${config.server}/transaction-logs-by-card?id=${cardInfo.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setHistoryLog(result.data);
+    }
+    FecthLogs();
+    // transaction-logs-by-card
   }, [cardInfo.id]);
+
+  function RenderHistory() {
+    return historyLog.map((items) => (
+      <HistoryCard
+        unit={items.unit}
+        TransferType={items.transaction_type}
+        Date={items.created_at}
+        Amount={items.amount}
+        RemainingBalance={items.remaining_balance}
+      ></HistoryCard>
+    ));
+  }
 
   const tempDate = new Date();
   const [fromDate, setFromDate] = useState(
@@ -71,19 +84,22 @@ export default function AccountDetail(props) {
     { label: "Transfer", value: "transfer" },
     { label: "Deposit", value: "deposit" },
   ];
-
+  console.log("cardInfo: ", cardInfo);
   const handleClick = async () => {
     const result = await axios.get(
       `${
         config.server
-      }/transaction-logs-filter?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}`,
+      }/transaction-logs-filter-by-account?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}&accountNumber=${
+        cardInfo.id
+      }`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
-    setHistory(result.history);
+    console.log("result: ", result.data);
+    setHistoryLog(result.data);
   };
   const handleBlock = async () => {
     const block = await axios
@@ -180,7 +196,7 @@ export default function AccountDetail(props) {
           // TotalInterest=
         ></AccountCard>
         <p className="itemTitle">History</p>
-               <span className="filterSection">
+        <span className="filterSection">
           <div className="selectInput child">
             <p>Transaction type</p>
             <Select
@@ -218,7 +234,7 @@ export default function AccountDetail(props) {
               Apply
             </button>
           </div>
-          </span>
+        </span>
         <RenderHistory></RenderHistory>
       </div>
     </AccountDetailPage>
