@@ -72,7 +72,7 @@ function App() {
             component={ProfilePage}
           />
           <ProtecedRoute
-            isAllowed={isAmin}
+            isAllowed={isLogin}
             path="/manage"
             redirect="/signin"
             component={ManageAccountPage}
