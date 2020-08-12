@@ -3,27 +3,21 @@ import styled from "styled-components";
 const MaganerAccountStyled = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #eff1f2;
+  background-color: #f5f7f9;
   width: 100%;
-  font-size: 16;
-  font-weight: 500;
+  height: 100%;
+  min-height: 100vh;
 
   .containerForm {
-    padding-top: 40px;
-    padding-left: 75px;
+    padding: 64px 75px;
     display: flex;
     flex-direction: column;
-
-    min-height: 508px;
     width: 100%;
-    border-radius: 15px;
-    /* align-items: center; */
-    padding-bottom: 100px;
-    /* justify-content: flex-start; */
   }
   .SignInTitle {
     font-size: 32px;
     font-weight: bold;
+    line-height: 48px;
   }
   .titleWithButton {
     display: flex;
@@ -41,13 +35,15 @@ const MaganerAccountStyled = styled.div`
     flex-direction: column;
   }
   .selector {
-    display: flex;
-    flex-direction: column;
     width: 350px;
+    margin-bottom: 20px;
+    p {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
     input {
-      width: 350px;
-      height: 35px;
-      padding: 10px;
+      height: 34px;
     }
   }
   .accountNumber {
@@ -72,7 +68,6 @@ const MaganerAccountStyled = styled.div`
   .selectCard {
     font-size: 16px;
     font-weight: 400;
-    
   }
   .dualColumn {
     display: flex;

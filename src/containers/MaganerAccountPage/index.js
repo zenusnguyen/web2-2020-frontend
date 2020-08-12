@@ -65,7 +65,7 @@ export default function MaganeAccount() {
       <SideMenu></SideMenu>
       <div className="containerForm" style={{ display: styled }}>
         <div className="titleWithButton">
-          <p className="SignInTitle"> Manage accounts</p>
+          <p className="pageTitle"> Manage accounts</p>
           <Link to="/create">
             <Button
               key="1"
@@ -74,6 +74,7 @@ export default function MaganeAccount() {
               Width="187px"
               Src={AddIcon}
               Display="flex"
+              BackgroundColor="#4F6EF6"
             ></Button>
           </Link>
         </div>

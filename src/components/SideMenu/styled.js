@@ -13,7 +13,7 @@ const SideMenuStyle = styled.div`
   
   img {
     height: 48px;
-    width: 118px;
+    width: 186px;
     text-align: left;
   }
 

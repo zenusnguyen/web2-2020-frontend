@@ -15,6 +15,7 @@ const SignInPageStyle = styled.div`
     background-color: #ffffff;
     border-radius: 15px;
     align-items: center;
+    justify-content: center;
   }
   .SignInTitle {
     margin-top: 60px;

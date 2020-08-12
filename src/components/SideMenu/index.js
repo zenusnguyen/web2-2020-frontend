@@ -2,7 +2,7 @@ import React from "react";
 import SideMenuStyle from "./styled";
 import { useHistory } from "react-router-dom";
 import TabMenu from "../TabMenu";
-let YellowIcon = "../../assets/yellow..svg";
+let YellowIcon = "../../assets/yellow..png";
 export default function SideMenu() {
   const UserInfo = JSON.parse(localStorage.getItem("userAccount"));
 
@@ -69,7 +69,7 @@ export default function SideMenu() {
 
   if (UserInfo.role.name === "Admin") {
     ListMenu = ListMenuAdmin;
-    YellowIcon = "../../assets/yellow. ADMIN.svg";
+    YellowIcon = "../../assets/yellow. ADMIN.png";
   }
   let history = useHistory();
   const HandlerClick = (items) => {

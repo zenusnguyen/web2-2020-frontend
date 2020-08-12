@@ -3,6 +3,7 @@ import styled from "styled-components";
 const TextAreaForm = styled.div`
   width: ${(props) => props.Width || "350px"};
   margin-bottom: 20px;
+  height: 122px;
 
   p {
     font-size: 16px;

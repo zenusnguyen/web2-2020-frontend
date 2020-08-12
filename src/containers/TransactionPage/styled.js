@@ -4,13 +4,14 @@ const TransactionHistoryPage = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #f5f7f9;
-  width: 100%;
-  height: 100vh;
   font-size: 16;
   font-weight: 500;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
 
   .containerForm {
-    padding: 40px 75px 0;
+    padding: 64px 75px;
     display: flex;
     flex-direction: column;
     min-height: 508px;
@@ -25,14 +26,14 @@ const TransactionHistoryPage = styled.div`
   }
 
   .selectInput {
-    width: 350px;
+    width: 100%;
     p {
       font-size: 16px;
       font-weight: 500;
       margin-bottom: 4px;
     }
     input {
-      height: 34px;
+      height: 33px;
     }
   }
 
@@ -41,6 +42,16 @@ const TransactionHistoryPage = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: stretch;
+  }
+
+  .child {
+    flex-grow: 2;
+    padding-right: 20px;
+  }
+
+  .child1 {
+    flex-grow: 1;
   }
 
   .filterButton {
@@ -51,25 +62,35 @@ const TransactionHistoryPage = styled.div`
     color: white;
     border-radius: 5px;
   }
+
+  .customDatePickerWidth,
+  .customDatePickerWidth > div.react-datepicker-wrapper,
+  .customDatePickerWidth
+    > div
+    > div.react-datepicker__input-container
+    .customDatePickerWidth
+    > div
+    > div.react-datepicker__input-container
+    input {
+    width: 100%;
+  }
 `;
-
-
 
 export const MyDatePickerStyle = styled.div`
   margin-bottom: 20px;
-  /* position: absolute; */
   display: flex;
   flex-direction: row;
-  margin-top: 0px;
+  width: 100%;
+
   p {
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 4px;
   }
   input {
+    width: 100%;
     padding-left: 16px;
     font-size: 16px;
-    width: 280px;
     height: 48px;
     border: 1px solid #d9dadb;
     box-sizing: border-box;
@@ -83,9 +104,5 @@ export const MyDatePickerStyle = styled.div`
     position: absolute;
   }
 `;
-
-  
-
-
 
 export default TransactionHistoryPage;
