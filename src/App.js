@@ -38,7 +38,17 @@ function SignOut() {
 }
 
 function App() {
-  const [isLogin, setIsLogin] = useState( JSON.parse(localStorage.getItem("isLogin")));
+  const authFake = () => {
+    setIsLogin(JSON.parse(localStorage.getItem("isLogin")));
+    setIsAmin(JSON.parse(localStorage.getItem("isAdmin")));
+  };
+  const [isLogin, setIsLogin] = useState(
+    JSON.parse(localStorage.getItem("isLogin"))
+  );
+  const [isAmin, setIsAmin] = useState(
+    JSON.parse(localStorage.getItem("isAdmin"))
+  );
+
   return (
     <div className="App">
       <Router>
@@ -47,7 +57,7 @@ function App() {
             <LandingPage />
           </Route>
           <Route path="/signin">
-            <SignInPage auth={setIsLogin} />
+            <SignInPage authFake={authFake} />
           </Route>
           <Route path="/signout">
             <SignOut />
@@ -61,81 +71,54 @@ function App() {
             redirect="/signin"
             component={ProfilePage}
           />
-           <ProtecedRoute
-            isAllowed={isLogin}
+          <ProtecedRoute
+            isAllowed={isAmin}
             path="/manage"
             redirect="/signin"
             component={ManageAccountPage}
           />
-           <ProtecedRoute
+          <ProtecedRoute
             isAllowed={isLogin}
             path="/create"
             redirect="/signin"
             component={CreateCardPage}
           />
-           <ProtecedRoute
+          <ProtecedRoute
             isAllowed={isLogin}
             path="/transfer"
             redirect="/signin"
             component={TransferPage}
           />
-           <ProtecedRoute
+          <ProtecedRoute
             isAllowed={isLogin}
             path="/detail"
             redirect="/signin"
             component={AccountDetailPage}
           />
-           <ProtecedRoute
-            isAllowed={isLogin}
+          <ProtecedRoute
+            isAllowed={isAmin}
             path="/all-customers"
             redirect="/signin"
             component={AllCardsPage}
           />
-           <ProtecedRoute
-            isAllowed={isLogin}
+          <ProtecedRoute
+            isAllowed={isAmin}
             path="/pending-requests"
             redirect="/signin"
             component={PendingRequestPage}
           />
-           <ProtecedRoute
-            isAllowed={isLogin}
+          <ProtecedRoute
+            isAllowed={isAmin}
             path="/configuration"
             redirect="/signin"
             component={ConfigPage}
           />
-            <ProtecedRoute
+          <ProtecedRoute
             isAllowed={isLogin}
             path="/history"
             redirect="/signin"
             component={TransactionHistoryPage}
           />
-          {/* <Route path="/manage">
-            <ManageAccountPage />
-          </Route>
-          <Route path="/profile">
-            <ProfilePage />
-          </Route>
-          <Route path="/create">
-            <CreateCardPage />
-          </Route>
-          <Route path="/transfer">
-            <TransferPage />
-          </Route>
-          <Route path="/detail">
-            <AccountDetailPage />
-          </Route>
-          <Route path="/all-customers">
-            <AllCardsPage />
-          </Route>
-          <Route path="/pending-requests">
-            <PendingRequestPage />
-          </Route>
-          <Route path="/configuration">
-            <ConfigPage />
-          </Route>{" "}
-          <Route path="/history">
-            <TransactionHistoryPage />
-          </Route> */}
         </Switch>
       </Router>
     </div>

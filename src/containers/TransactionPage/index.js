@@ -8,7 +8,7 @@ import { MyDatePickerStyle } from "./styled";
 import Button from "../../components/Button";
 import Calendar from "../../assets/calendar.png";
 import axios from "axios";
-import {config} from "../../configs/server"
+import { config } from "../../configs/server";
 import * as _ from "lodash";
 
 export default function TransactionHistory() {
@@ -32,7 +32,12 @@ export default function TransactionHistory() {
       const result = await axios.get(
         `${config.server}/transaction-logs-by-account?account_id=${
           JSON.parse(localStorage.getItem("userAccount")).id
-        }`
+        }`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       setData(result.data);
     }
@@ -41,7 +46,14 @@ export default function TransactionHistory() {
 
   const handleClick = async () => {
     const result = await axios.get(
-      `${config.server}/transaction-logs-filter?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}`
+      `${
+        config.server
+      }/transaction-logs-filter?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
     );
 
     setData(result.data);

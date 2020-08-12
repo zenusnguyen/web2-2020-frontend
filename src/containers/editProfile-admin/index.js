@@ -32,7 +32,12 @@ export default function EditProfile(props) {
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
-        `${config.server}/customer-infors/?id=${props.data.user_info}`
+        `${config.server}/customer-infors/?id=${props.data.user_info}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       setUserInfo(result.data[0]);
       setDateOfBirth(new Date(result.data[0].date_of_birth));
@@ -68,6 +73,11 @@ export default function EditProfile(props) {
           identificationNumber: passport,
           img1: uploadRes.data[0].url,
           img2: uploadRes.data[1].url,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
       alert.success("Action success");
@@ -85,6 +95,11 @@ export default function EditProfile(props) {
           date_of_birth: DateOfBirth,
           date_of_issue: DateOfIssue,
           identificationNumber: passport,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
       alert.success("Action success");

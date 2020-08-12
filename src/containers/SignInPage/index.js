@@ -9,13 +9,29 @@ import alertify from "alertifyjs";
 import axios from "axios";
 import { useAlert } from "react-alert";
 import { config } from "../../configs/server";
-export default function SignIn({ auth }) {
-  console.log("auth: ", auth);
+import * as _ from "lodash";
+export default function SignIn({ authFake }) {
+  console.log("authFake: ", authFake);
   const alert = useAlert();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
   let history = useHistory();
+  if (
+    JSON.parse(
+      localStorage.getItem("token") &&
+        _.get(JSON.parse(localStorage.getItem("userAccount")), "role.name") ===
+          "Admin"
+    )
+  ) {
+    history.push("/all-customers");
+  } else if (
+    localStorage.getItem("token") &&
+    _.get(JSON.parse(localStorage.getItem("userAccount")), "role.name") ===
+      "Authenticated"
+  ) {
+    history.push("/profile");
+  }
 
   const handleClick = async () => {
     await axios
@@ -28,7 +44,6 @@ export default function SignIn({ auth }) {
         if (response.data.user.status != "active") {
           alert.error("Your account is not active");
         } else {
-          auth(true);
           if (response.data.jwt) {
             const userTemp = await axios.get(
               `${config.server}/customer-infors/?id=${data.user.user_info}`,
@@ -43,10 +58,14 @@ export default function SignIn({ auth }) {
               "userAccount",
               JSON.stringify(data.user)
             );
-            await localStorage.setItem(
-              "isLogin",
-              JSON.stringify("true")
-            );
+            console.log("data.role.name: ", data.user.role.name);
+            if (data.user.role.name == "Admin") {
+              console.log("admin");
+              await localStorage.setItem("isAdmin", JSON.stringify("true"));
+            } else {
+              await localStorage.setItem("isLogin", JSON.stringify("true"));
+            }
+            authFake();
             await localStorage.setItem(
               "userInfo",
               JSON.stringify(userTemp.data[0])
@@ -76,7 +95,6 @@ export default function SignIn({ auth }) {
     >
       <Header></Header>
       <SignInPageStyle>
-        {/* <SignInForm></SignInForm> */}
         <div className="SignInForm">
           <p className="SignInTitle">Sign In</p>
           <InputForm

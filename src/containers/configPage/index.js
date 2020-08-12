@@ -6,7 +6,7 @@ import SideMenu from "../../components/SideMenu";
 import axios from "axios";
 import Select from "react-select";
 import * as _ from "lodash";
-import {config} from "../../configs/server"
+import { config } from "../../configs/server";
 function ConfigRow(props) {
   return (
     <ConfigRowStyled>
@@ -80,24 +80,26 @@ export default function ConfigPage() {
   let temp = [];
   useEffect(() => {
     async function FecthSpend() {
-      const result = await axios.get(
-        `${config.server}/spend-account-types`
-      );
+      const result = await axios.get(`${config.server}/spend-account-types`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setSpendData(result.data);
     }
     FecthSpend();
-    async function FecthSaving() {
-      const result = await axios.get(`${config.server}/interest-rates`);
-      _.forEach(result.data, (item) => {
-        temp.push({
-          label: ` ${item.period} month - Interest rate ${item.interest_rate} %`,
-          value: item.id,
-        });
-      });
-      setListSaving(temp);
-    }
+    // async function FecthSaving() {
+    //   const result = await axios.get(`${config.server}/interest-rates`);
+    //   _.forEach(result.data, (item) => {
+    //     temp.push({
+    //       label: ` ${item.period} month - Interest rate ${item.interest_rate} %`,
+    //       value: item.id,
+    //     });
+    //   });
+    //   setListSaving(temp);
+    // }
 
-    FecthSaving();
+    // FecthSaving();
   }, []);
   console.log("spendData: ", spendData);
   console.log("savingData: ", savingData);
@@ -132,7 +134,7 @@ export default function ConfigPage() {
           title2=" Gold"
           title3=" Platinum"
         ></ConfigRow>
-        <p style={{ fontSize: "24px", fontWeight: "600" }}>
+        {/* <p style={{ fontSize: "24px", fontWeight: "600" }}>
           Savings annual interest rates
         </p>
         <div className="dualConfig">
@@ -151,7 +153,7 @@ export default function ConfigPage() {
             onChange={(e) => handlerChangSaving(e.target.value)}
             title="Rate (%)"
           ></InputForm>
-        </div>
+        </div> */}
         <Button
           Left="0px"
           title="Save"

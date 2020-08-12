@@ -35,11 +35,22 @@ export default function TransferPage() {
     });
   }
   async function getOTP() {
-    const result = await axios.post(`${config.server}/getotp`, {
-      email: JSON.parse(localStorage.getItem("userAccount")).email,
-      card_number: currentAccount,
-    });
-    setOtp2(result.data);
+    const result = await axios
+      .post(`${config.server}/getotp`, {
+        data: {
+          email: JSON.parse(localStorage.getItem("userAccount")).email,
+          card_number: currentAccount,
+        },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+
+      .then((response) => {
+        setOtp2(response.data);
+        alert.success("please check your mail to get OTP code");
+      })
+      .catch((error) => alert.error("Action error please check again!"));
   }
 
   const submit = (fullname, amount) => {
@@ -77,7 +88,11 @@ export default function TransferPage() {
       alert.error("please check your input");
     } else {
       await axios
-        .get(`${config.server}/spend-accounts-findbycardid?id=${beneficiary}`)
+        .get(`${config.server}/spend-accounts-findbycardid?id=${beneficiary}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
         .then((response) => {
           submit(response.data[1].full_name, amount);
         })
@@ -88,15 +103,16 @@ export default function TransferPage() {
   async function handleTransfer() {
     await axios
       .post(`${config.server}/spend-accounts-transfer-intra`, {
-        currentAccount: currentAccount,
-        remark: remark,
-        amount: amount,
-        beneficiaryAccount: beneficiary,
-        otp: otp,
-        // headers: {
-        //   Authorization:
-        //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTc2OTM4MTUwLCJleHAiOjE1Nzk1MzAxNTB9.UgsjjXkAZ-anD257BF7y1hbjuY3ogNceKfTAQtzDEsU",
-        // },
+        data: {
+          currentAccount: currentAccount,
+          remark: remark,
+          amount: amount,
+          beneficiaryAccount: beneficiary,
+          otp: otp,
+        },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       })
       .then(function (response) {
         if (response.status === 200) {
@@ -113,7 +129,12 @@ export default function TransferPage() {
       const result = await axios.get(
         `${config.server}/spend-accounts-by-owneraccount?id=${
           JSON.parse(localStorage.getItem("userAccount")).id
-        }`
+        }`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       setSpendArrays(result.data);
 
@@ -157,7 +178,9 @@ export default function TransferPage() {
         <h3 className="title">Transfer funds</h3>
         <br />
         <div>
-          <p className="titleType" style={{marginBottom: "4px"}}>Transfer type </p>
+          <p className="titleType" style={{ marginBottom: "4px" }}>
+            Transfer type{" "}
+          </p>
           <input
             onChange={(e) => SetIsExtra(!isExtra)}
             defaultChecked
