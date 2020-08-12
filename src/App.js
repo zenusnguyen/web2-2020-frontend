@@ -38,7 +38,7 @@ function SignOut() {
 }
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState( JSON.parse(localStorage.getItem("isLogin")));
   return (
     <div className="App">
       <Router>

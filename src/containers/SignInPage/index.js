@@ -44,6 +44,10 @@ export default function SignIn({ auth }) {
               JSON.stringify(data.user)
             );
             await localStorage.setItem(
+              "isLogin",
+              JSON.stringify("true")
+            );
+            await localStorage.setItem(
               "userInfo",
               JSON.stringify(userTemp.data[0])
             );
