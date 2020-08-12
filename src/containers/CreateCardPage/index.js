@@ -6,12 +6,15 @@ import Select from "react-select";
 import InputForm from "../../components/InputForm";
 import moment from "moment";
 import axios from "axios";
-import {config} from "../../configs/server"
+import { config } from "../../configs/server";
 import * as _ from "lodash";
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
 function SpendCard() {
   const [accountType, setAccountType] = useState(1);
   const [currency, setCurrency] = useState("VND");
-
+  let history = useHistory();
+  const alert = useAlert();
   const [id, setID] = useState(
     Math.floor(100000000000 + Math.random() * 900000000000)
   );
@@ -26,24 +29,24 @@ function SpendCard() {
     { label: "Platinum", value: "3" },
   ];
   const handleClick = async () => {
-    const createCard = await axios.post(
-      `${config.server}/spend-accounts`,
-      {
-        balance: 0,
-        card_type: "spend",
-        currency_unit: currency,
-        spend_type: accountType,
-        card_number: id.toString(),
-        account_id: JSON.parse(localStorage.getItem("userAccount")).id,
-        status: "active",
-        created_date: new Date(),
-      }
-    );
+    const createCard = await axios.post(`${config.server}/spend-accounts`, {
+      balance: 0,
+      card_type: "spend",
+      currency_unit: currency,
+      spend_type: accountType,
+      card_number: id.toString(),
+      account_id: JSON.parse(localStorage.getItem("userAccount")).id,
+      status: "active",
+      created_date: new Date(),
+    });
     if (createCard.status === 200) {
       setID(Math.floor(100000000000 + Math.random() * 900000000000));
-      alert("Create Card success");
+      alert.success("Create Card success");
+      setTimeout(function () {
+        history.go(0);
+      }, 1500);
     } else {
-      alert("Create Card fail");
+      alert.error("Create Card fail");
     }
   };
 
