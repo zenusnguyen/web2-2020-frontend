@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import SignInPage from "./containers/SignInPage";
 import RegisterPage from "./containers/RegisterPage";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useHistory,
+  useLocation,
+} from "react-router-dom";
 import ProfilePage from "./containers/ProfilePage";
 import ManageAccountPage from "./containers/MaganerAccountPage";
 import CreateCardPage from "./containers/CreateCardPage";
@@ -14,8 +21,8 @@ import AllCardsPage from "./containers/AllCustomerPage";
 import PendingRequestPage from "./containers/PendingReqPage";
 import ConfigPage from "./containers/configPage";
 import "./App.css";
-import { transitions, positions, Provider as AlertProvider } from "react-alert";
-import AlertTemplate from "react-alert-template-basic";
+import ProtecedRoute from "./PrivateRoute";
+
 function SignOut() {
   let history = useHistory();
 
@@ -31,6 +38,7 @@ function SignOut() {
 }
 
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <div className="App">
       <Router>
@@ -39,7 +47,7 @@ function App() {
             <LandingPage />
           </Route>
           <Route path="/signin">
-            <SignInPage />
+            <SignInPage auth={setIsLogin} />
           </Route>
           <Route path="/signout">
             <SignOut />
@@ -47,7 +55,61 @@ function App() {
           <Route path="/register">
             <RegisterPage />
           </Route>
-          <Route path="/manage">
+          <ProtecedRoute
+            isAllowed={isLogin}
+            path="/profile"
+            redirect="/signin"
+            component={ProfilePage}
+          />
+           <ProtecedRoute
+            isAllowed={isLogin}
+            path="/manage"
+            redirect="/signin"
+            component={ManageAccountPage}
+          />
+           <ProtecedRoute
+            isAllowed={isLogin}
+            path="/create"
+            redirect="/signin"
+            component={CreateCardPage}
+          />
+           <ProtecedRoute
+            isAllowed={isLogin}
+            path="/transfer"
+            redirect="/signin"
+            component={TransferPage}
+          />
+           <ProtecedRoute
+            isAllowed={isLogin}
+            path="/detail"
+            redirect="/signin"
+            component={AccountDetailPage}
+          />
+           <ProtecedRoute
+            isAllowed={isLogin}
+            path="/all-customers"
+            redirect="/signin"
+            component={AllCardsPage}
+          />
+           <ProtecedRoute
+            isAllowed={isLogin}
+            path="/pending-requests"
+            redirect="/signin"
+            component={PendingRequestPage}
+          />
+           <ProtecedRoute
+            isAllowed={isLogin}
+            path="/configuration"
+            redirect="/signin"
+            component={ConfigPage}
+          />
+            <ProtecedRoute
+            isAllowed={isLogin}
+            path="/history"
+            redirect="/signin"
+            component={TransactionHistoryPage}
+          />
+          {/* <Route path="/manage">
             <ManageAccountPage />
           </Route>
           <Route path="/profile">
@@ -73,7 +135,7 @@ function App() {
           </Route>{" "}
           <Route path="/history">
             <TransactionHistoryPage />
-          </Route>
+          </Route> */}
         </Switch>
       </Router>
     </div>

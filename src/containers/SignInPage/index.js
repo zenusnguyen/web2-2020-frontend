@@ -9,7 +9,8 @@ import alertify from "alertifyjs";
 import axios from "axios";
 import { useAlert } from "react-alert";
 import { config } from "../../configs/server";
-export default function SignIn() {
+export default function SignIn({ auth }) {
+  console.log("auth: ", auth);
   const alert = useAlert();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -27,6 +28,7 @@ export default function SignIn() {
         if (response.data.user.status != "active") {
           alert.error("Your account is not active");
         } else {
+          auth(true);
           if (response.data.jwt) {
             const userTemp = await axios.get(
               `${config.server}/customer-infors/?id=${data.user.user_info}`,
@@ -45,6 +47,7 @@ export default function SignIn() {
               "userInfo",
               JSON.stringify(userTemp.data[0])
             );
+
             if (data.user.role.name === "Admin") {
               history.push("/all-customers");
             } else {
@@ -54,6 +57,7 @@ export default function SignIn() {
         }
       })
       .catch(function (error) {
+        console.log("error: ", error);
         alert.error("invalid email or password");
       });
   };
