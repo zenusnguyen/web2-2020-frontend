@@ -47,6 +47,7 @@ const TransactionHistoryPage = styled.div`
   .child {
     flex-grow: 2;
     padding-right: 20px;
+    min-width: 300px;
   }
 
   .child1 {

@@ -69,10 +69,11 @@ const MaganerAccountStyled = styled.div`
     font-size: 16px;
     font-weight: 500;
   }
-  .dualColumn {
+  .dualColumn3 {
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 1030px;
   }
   .example {
     padding: 40px 32px 20px;

@@ -9,6 +9,7 @@ const CardStyled = styled.div`
   margin-bottom: 16px;
   align-items: center;
   box-shadow: 0px 4px 16px rgba(35, 35, 35, 0.06);
+  min-width: 500px;
   .icon {
     width: 32px;
     height: 32px;

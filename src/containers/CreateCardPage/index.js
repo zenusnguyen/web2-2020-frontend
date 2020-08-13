@@ -190,7 +190,7 @@ function SavingCard() {
             value.label.trim().split(" ").length - 2
           ]
         ) /
-          100)
+          100).toFixed(10)
     );
 
     setInterest(value);
@@ -233,7 +233,7 @@ function SavingCard() {
   };
 
   return (
-    <div className="dualColumn">
+    <div className="dualColumn3">
       <div className="spendCard">
         <div className="selector">
           <p>Currency unit</p>
