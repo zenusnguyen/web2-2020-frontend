@@ -48,7 +48,9 @@ export default function TransactionHistory() {
     const result = await axios.get(
       `${
         config.server
-      }/transaction-logs-filter?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}`,
+      }/transaction-logs-filter?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&type=${type}&account_id=${
+        JSON.parse(localStorage.getItem("userAccount")).id
+      }`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
