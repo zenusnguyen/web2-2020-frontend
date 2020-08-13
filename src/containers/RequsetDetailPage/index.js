@@ -1,13 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { Component, useEffect, useState } from "react";
+import React from "react";
 import PersonalPage from "./styled";
-import InputForm from "../../components/InputForm";
-import TextArea from "../../components/TextArea";
-import PhotoUpload from "../../components/PhotoUpload";
+
 import SideMenu from "../../components/SideMenu";
 import Button from "../../components/Button";
 import PersonalDetailCard from "../../components/PersonalDetailCard";
-import Back from "../../assets/back.svg";
+
 import { config } from "../../configs/server";
 import axios from "axios";
 import * as _ from "lodash";
@@ -31,7 +29,6 @@ export default function Profile(props) {
         }
       )
       .then((data) => {
-        console.log(data);
         alert.success("Action success");
 
         setTimeout(function () {
@@ -39,7 +36,6 @@ export default function Profile(props) {
         }, 1500);
       })
       .catch((err) => {
-        console.log(err);
         alert.error("Action error please check again!");
       });
   };
@@ -57,14 +53,13 @@ export default function Profile(props) {
         }
       )
       .then((data) => {
-        console.log(data);
         alert.success("Action success");
 
         setTimeout(function () {
           history.go(0);
         }, 1500);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   };
   return (
     <PersonalPage>

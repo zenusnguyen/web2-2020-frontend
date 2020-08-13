@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { Component, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import PersonalPage from "./styled";
-import InputForm from "../../components/InputForm";
-import TextArea from "../../components/TextArea";
 import SideMenu from "../../components/SideMenu";
 import Button from "../../components/Button";
 import PersonalDetailCard from "../../components/PersonalDetailCard";

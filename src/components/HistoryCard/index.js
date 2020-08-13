@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import CardStyled from "./styled";
 import Icon from "../../assets/wallet.svg";
 
-
 function jsUcfirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 export default function HistoryCard(props) {
-  console.log('props: ', props);
-  let { Amount, Date, transferType, unit} = props;
+  let { Amount, Date, transferType, unit } = props;
   let Style;
 
   var formatter = new Intl.NumberFormat("en-US", {

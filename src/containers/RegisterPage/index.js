@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SignInPageStyle from "./styled";
-import PropTypes from "prop-types";
+
 import Header from "../../components/Header";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -10,7 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import InputForm from "../../components/InputForm";
 import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
-import Calendar from "../../assets/calendar.png";
+
 import TextArea from "../../components/TextArea";
 
 import { useAlert } from "react-alert";
@@ -174,7 +174,6 @@ export default function Register() {
         })
         .then()
         .catch((err) => {
-          console.log("err: ", err);
           alert.error("some things went wrong");
         });
 

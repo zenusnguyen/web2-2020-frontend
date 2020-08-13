@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import AccountDetailPage from "./styled";
 import SideMenu from "../../components/SideMenu";
 import AccountCard from "../../components/AccountCard";
@@ -6,7 +6,7 @@ import HistoryCard from "../../components/HistoryCard";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import { MyDatePickerStyle } from "./styled";
-import Calendar from "../../assets/calendar.png";
+
 import Back from "../../assets/back.svg";
 import axios from "axios";
 import { useAlert } from "react-alert";
@@ -20,7 +20,7 @@ export default function AccountDetail(props) {
   const alert = useAlert();
   const [historyLog, setHistoryLog] = useState([]);
   const [term, setTerm] = useState([{}, {}]);
-  // ${config.server}/term-deposits-by-account?id=18
+
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
@@ -83,7 +83,7 @@ export default function AccountDetail(props) {
     { label: "Transfer", value: "transfer" },
     { label: "Deposit", value: "deposit" },
   ];
-  console.log("cardInfo: ", cardInfo);
+
   const handleClick = async () => {
     const result = await axios.get(
       `${
@@ -97,7 +97,7 @@ export default function AccountDetail(props) {
         },
       }
     );
-    console.log("result: ", result.data);
+
     setHistoryLog(result.data);
   };
   const handleBlock = async () => {

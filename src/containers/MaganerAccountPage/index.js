@@ -1,6 +1,6 @@
-import React, { Component, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import MaganerAccountStyled from "./styled";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as  Link } from "react-router-dom";
 import Button from "../../components/Button";
 import AddIcon from "../../assets/add-circle.png";
 import SideMenu from "../../components/SideMenu";

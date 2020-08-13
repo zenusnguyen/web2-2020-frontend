@@ -4,13 +4,12 @@ import Button from "../../components/Button";
 import InputForm from "../../components/InputForm";
 import SideMenu from "../../components/SideMenu";
 import axios from "axios";
-import Select from "react-select";
+
 import * as _ from "lodash";
 import { config } from "../../configs/server";
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 function ConfigRow(props) {
-  console.log("props: ", props);
   return (
     <ConfigRowStyled>
       <div className="title">{props.title} </div>
@@ -53,7 +52,6 @@ export default function ConfigPage() {
   };
 
   const handleChangeSpend3 = (value) => {
-    console.log("value: ", value);
     let temp = spendData;
     temp[2].limited_amount_per_transaction = value;
     setSpendData(temp);

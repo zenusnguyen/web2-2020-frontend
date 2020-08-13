@@ -1,13 +1,9 @@
 import React, { Component, useEffect, useState } from "react";
 import axios from "axios";
-import styled from "styled-components";
-import AddIcon from "../../assets/add-outline.png";
-import DatePicker from "react-datepicker";
-import MyDatePickerStyle from "../../components/DatePicker/styled";
-import Calendar from "../../assets/calendar.png";
+
 import SideMenu from "../../components/SideMenu";
 import InputForm from "../../components/InputForm";
-import { DepositStyled, Register } from "./styled";
+import { DepositStyled } from "./styled";
 import Back from "../../assets/back.svg";
 import TextArea from "../../components/TextArea";
 import Button from "../../components/Button";
@@ -17,7 +13,6 @@ import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 import { config } from "../../configs/server";
 export default function Deposit(props) {
-  console.log('props: ', props);
   let history = useHistory();
   const alert = useAlert();
   const [listSpend, setListSpend] = useState([]);
@@ -80,7 +75,7 @@ export default function Deposit(props) {
       <div className="containerDeposit">
         <div onClick={props.onClick} className="back">
           <img src={Back}></img>
-          {props.backTitle||""}
+          {props.backTitle || ""}
         </div>
         <div className="titleWithButton">
           <p className="pageTitle">{props.userName || "Deposit"}</p>

@@ -1,13 +1,13 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import AddIcon from "../../assets/add-outline.png";
 import DatePicker from "react-datepicker";
-import {MyDatePickerStyle} from "./styled";
+import { MyDatePickerStyle } from "./styled";
 import Calendar from "../../assets/calendar.png";
 import SideMenu from "../../components/SideMenu";
 import InputForm from "../../components/InputForm";
-import { DepositStyled, Register } from "./styled";
+import { Register } from "./styled";
 import Back from "../../assets/back.svg";
 import TextArea from "../../components/TextArea";
 import { useAlert } from "react-alert";

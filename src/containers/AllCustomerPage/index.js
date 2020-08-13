@@ -1,7 +1,5 @@
-import React, { Component, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import MaganerAccountStyled from "./styled";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Button from "../../components/Button";
 import Search from "../../assets/search.svg";
 import SideMenu from "../../components/SideMenu";
 import CustomerCard from "../../components/CustomerCard";
@@ -43,8 +41,7 @@ export default function MaganeAccount() {
     }
     FecthSpend();
   }, []);
-  // console.log("customer: ", customer);
-  // console.log("spendAccount: ", spendAccount);
+
   const HandlerClick = (items) => {
     setcardInfo(items);
     setState("card");

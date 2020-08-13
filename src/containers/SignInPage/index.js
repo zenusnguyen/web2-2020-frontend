@@ -1,17 +1,16 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useState } from "react";
 import SignInPageStyle from "./styled";
 import Header from "../../components/Header";
 import { useHistory } from "react-router-dom";
 import InputForm from "../../components/InputForm";
 import Button from "../../components/Button";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import alertify from "alertifyjs";
+import { BrowserRouter as Link } from "react-router-dom";
+
 import axios from "axios";
 import { useAlert } from "react-alert";
 import { config } from "../../configs/server";
 import * as _ from "lodash";
 export default function SignIn({ authFake }) {
-  console.log("authFake: ", authFake);
   const alert = useAlert();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -58,9 +57,8 @@ export default function SignIn({ authFake }) {
               "userAccount",
               JSON.stringify(data.user)
             );
-            console.log("data.role.name: ", data.user.role.name);
+
             if (data.user.role.name == "Admin") {
-              console.log("admin");
               await localStorage.setItem("isAdmin", JSON.stringify("true"));
             } else {
               await localStorage.setItem("isLogin", JSON.stringify("true"));
@@ -80,7 +78,6 @@ export default function SignIn({ authFake }) {
         }
       })
       .catch(function (error) {
-        console.log("error: ", error);
         alert.error("invalid email or password");
       });
   };
