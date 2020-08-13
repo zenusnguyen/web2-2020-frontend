@@ -30,6 +30,7 @@ export default function TransferPage() {
     setCurrentAccount(cardNumber);
     _.forEach(spendArrays, (item) => {
       if (item.card_number == cardNumber) {
+        setAvailableBalance(item.balance);
       }
     });
   }
