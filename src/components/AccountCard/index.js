@@ -6,8 +6,39 @@ import SpendCardPlatinum from "../../assets/platinum.svg";
 import SavingCard from "../../assets/savings.svg";
 
 export default function AccountCard(props) {
-  console.log("props: ", props);
-
+  const status = () => {
+    if (props.Status == "active") {
+      return (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <p>Status : </p>
+          <p style={{ color: "blue", marginLeft: "29px" }}>
+            {" "}
+            {"  " + props.Status}{" "}
+          </p>
+        </div>
+      );
+    } else {
+    }
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <p>Status : </p>
+        <p style={{ color: "red", marginLeft: "29px" }}>
+          {" "}
+          {"  " + props.Status}{" "}
+        </p>
+      </div>
+    );
+  };
   let cardType = "";
   let Src = "";
   if (props.Card_type === "spend") {
@@ -36,7 +67,7 @@ export default function AccountCard(props) {
           <p>Maturity date: {props.MaturityDate} </p>
           <p>Interest rate: {props.InterestRate}% </p>
           <p> Current balance: {props.CurrentBalance} </p>
-          <p> Status: {props.Status} </p>
+
           <p></p>
         </div>
       </CardStyled>
@@ -51,7 +82,7 @@ export default function AccountCard(props) {
           <p> Account number: {props.AccountNumber} </p>
           <p> Account type: {cardType} </p>
           <p> Current balance: {props.CurrentBalance} </p>
-          <p> Status: {props.Status} </p>
+          {status()}
         </div>
       </CardStyled>
     );

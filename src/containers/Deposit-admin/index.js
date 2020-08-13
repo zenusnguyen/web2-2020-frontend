@@ -17,6 +17,7 @@ import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 import { config } from "../../configs/server";
 export default function Deposit(props) {
+  console.log('props: ', props);
   let history = useHistory();
   const alert = useAlert();
   const [listSpend, setListSpend] = useState([]);
@@ -79,7 +80,7 @@ export default function Deposit(props) {
       <div className="containerDeposit">
         <div onClick={props.onClick} className="back">
           <img src={Back}></img>
-          {props.backTitle || "Nguyễn Việt Anh"}
+          {props.backTitle||""}
         </div>
         <div className="titleWithButton">
           <p className="pageTitle">{props.userName || "Deposit"}</p>

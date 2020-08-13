@@ -100,28 +100,45 @@ export default function Register() {
     return re.test(String(email).toLowerCase());
   }
 
-  function HandlerInput() {
-    if (
-      !validateEmail(email) ||
-      userName === null ||
-      password === null ||
-      confirmPassword === null ||
-      password !== confirmPassword ||
-      fullName === null ||
-      phoneNumber === null ||
-      address === null ||
-      password === null ||
-      img1 === null ||
-      img2 === null
-    ) {
-      return false;
-    } else {
-      return true;
-    }
+  async function HandlerInput() {
+    await axios
+
+      .get(
+        `${config.server}/customer-infors-find-cmnd?identificationNumber=${passport}`
+      )
+      .then((response) => {
+        if (response.data !== []) {
+          alert.error("Identification Number has been registed");
+          return false;
+        } else {
+          if (
+            !validateEmail(email) ||
+            userName === null ||
+            password === null ||
+            confirmPassword === null ||
+            password !== confirmPassword ||
+            fullName === null ||
+            phoneNumber === null ||
+            address === null ||
+            password === null ||
+            img1 === null ||
+            img2 === null
+          ) {
+            alert.error("check your input");
+            return false;
+          } else {
+            return true;
+          }
+        }
+      })
+      .catch((error) => {
+        alert.error("server error");
+        return false;
+      });
   }
 
   async function handleSubmit() {
-    if (HandlerInput()) {
+    if (HandlerInput() === true) {
       let data = new FormData();
       data.append("files", pic1);
       data.append("files", pic2);
@@ -181,8 +198,6 @@ export default function Register() {
       } else {
         alert.error("Check your input");
       }
-    } else {
-      alert.error("check your input");
     }
   }
 

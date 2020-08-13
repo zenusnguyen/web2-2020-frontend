@@ -125,6 +125,31 @@ export default function AccountDetail(props) {
       });
   };
 
+  const handleClose = async () => {
+    const block = await axios
+      .put(
+        `${config.server}/spend-accounts/${cardInfo.id}`,
+        {
+          status: "closed",
+          closed_date: new Date(),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((result) => {
+        alert.success("Action success");
+
+        setTimeout(function () {
+          historys.go(0);
+        }, 1500);
+      })
+      .catch((err) => {
+        alert.error("Action error please check again!");
+      });
+  };
   const handleUnBlock = async () => {
     const block = await axios
       .put(
@@ -151,15 +176,20 @@ export default function AccountDetail(props) {
   };
 
   const RenderButton = () => {
-    if (cardInfo.status === "active") {
+    if (cardInfo.card_type == "saving" && cardInfo.status != "closed") {
       return (
-        <button onClick={handleBlock} className="blockButton">
+        <button onClick={handleClose} className="blockButton">
           Close account
         </button>
       );
-    } else if (
-      JSON.parse(localStorage.getItem("userAccount")).role.name === "Admin"
-    ) {
+    }
+    if (cardInfo.status === "active") {
+      return (
+        <button onClick={handleBlock} className="blockButton">
+          Block account
+        </button>
+      );
+    } else if (cardInfo.status === "block") {
       return (
         <button onClick={handleUnBlock} className="unblockButton">
           UnBlock account

@@ -29,6 +29,7 @@ const MaganerAccountStyled = styled.div`
   }
 
   .listCard {
+    margin-top: 32px;
     padding-right: 20%;
   }
   .detailCard {

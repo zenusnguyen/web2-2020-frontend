@@ -54,6 +54,7 @@ export default function MaganeAccount() {
         onClick={() => {
           HandlerClick(items);
         }}
+        unit={items.currency_unit}
         key={items.key}
         Number={items.card_number}
         Balance={items.balance || 0}

@@ -86,6 +86,7 @@ export default function Profile(props) {
         onClick={() => {
           ShowDetail(items);
         }}
+        unit={items.currency_unit}
         key={index}
         Number={items.card_number}
         Balance={items.balance || 0}
@@ -188,6 +189,7 @@ export default function Profile(props) {
   } else if (state === "deposit") {
     return (
       <Deposit
+        backTitle={accountInfo.username}
         accountInfo={accountInfo}
         onClick={() => {
           setState("detail");

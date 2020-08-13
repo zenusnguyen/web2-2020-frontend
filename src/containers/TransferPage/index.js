@@ -125,8 +125,8 @@ export default function TransferPage() {
           alert.success("Transfer Successful");
         }
       })
-      .catch(function (error) {
-        alert.error(error);
+      .catch((error) => {
+        alert.error("Transfer falied,Limited amount");
       });
   }
   let spendAccountsArray = [];

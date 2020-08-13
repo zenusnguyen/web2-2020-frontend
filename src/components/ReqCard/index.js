@@ -22,8 +22,8 @@ export default function HistoryCard(props) {
           <img src={Icon}></img>
         </div>
         <div className="detail-left">
-          <p>{props.UserName || "Nguyễn Việt Anh"} </p>
-          <p>{props.email || "Nguyễn Việt Anh"} </p>
+          <p>{props.UserName || ""} </p>
+          <p>{props.email || ""} </p>
           <p className="subtext"> {props.Date || new Date().toISOString()} </p>
         </div>
       </div>
