@@ -19,7 +19,7 @@ export default function HistoryCard(props) {
         </div>
         <div className="detail-left">
           <div className="withStatus">
-            <p>{props.username || " zenusnguyen"} </p>
+            <p>{props.username || " "} </p>
             <div className="status">
               <p>{props.Status || "Active"}</p>
             </div>

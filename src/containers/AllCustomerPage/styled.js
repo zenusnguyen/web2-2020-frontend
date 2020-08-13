@@ -19,6 +19,7 @@ const MaganerAccountStyled = styled.div`
     font-size: 32px;
     line-height: 150%;
     margin: 0;
+    min-width: 300px;
   }
   .titleWithButton {
     display: flex;

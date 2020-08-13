@@ -4,8 +4,8 @@ import Header from "../../components/Header";
 import { useHistory } from "react-router-dom";
 import InputForm from "../../components/InputForm";
 import Button from "../../components/Button";
-import { BrowserRouter as Link } from "react-router-dom";
-
+// import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAlert } from "react-alert";
 import { config } from "../../configs/server";

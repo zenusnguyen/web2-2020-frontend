@@ -9,6 +9,7 @@ const CardStyled = styled.div`
   margin-bottom: 16px;
   align-items: center;
   box-shadow: 0px 4px 16px rgba(35, 35, 35, 0.06);
+  min-width: 700px;
   .icon {
     width: 32px;
     height: 32px;
@@ -51,6 +52,7 @@ const CardStyled = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-right: auto;
+
   }
   .status {
     width: 52px;
