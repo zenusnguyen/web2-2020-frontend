@@ -158,7 +158,7 @@ export default function AccountDetail(props) {
         </button>
       );
     } else if (
-      JSON.parse(localStorage.getItem("userAccount")).role.name === "admin"
+      JSON.parse(localStorage.getItem("userAccount")).role.name === "Admin"
     ) {
       return (
         <button onClick={handleUnBlock} className="unblockButton">
