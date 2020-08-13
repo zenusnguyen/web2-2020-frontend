@@ -1,6 +1,6 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MaganerAccountStyled from "./styled";
-import { BrowserRouter as  Link } from "react-router-dom";
+import { BrowserRouter as Link, useHistory } from "react-router-dom";
 import Button from "../../components/Button";
 import AddIcon from "../../assets/add-circle.png";
 import SideMenu from "../../components/SideMenu";
@@ -13,6 +13,7 @@ function ShowDetail(cardInfo, HandlerClick) {
 }
 
 export default function MaganeAccount() {
+  let history = useHistory();
   const [data, setData] = useState([]);
   const [CardID, SetCardID] = useState("");
   const [isDetail, setIsDetail] = useState(false);
@@ -72,17 +73,19 @@ export default function MaganeAccount() {
       <div className="containerForm" style={{ display: styled }}>
         <div className="titleWithButton">
           <p className="pageTitle"> Manage accounts</p>
-          <Link to="/create">
-            <Button
-              key="1"
-              Top="0px"
-              title="Add account"
-              Width="187px"
-              Src={AddIcon}
-              Display="flex"
-              BackgroundColor="#4F6EF6"
-            ></Button>
-          </Link>
+
+          <Button
+            onClick={() => {
+              history.push("/create");
+            }}
+            key="1"
+            Top="0px"
+            title="Add account"
+            Width="187px"
+            Src={AddIcon}
+            Display="flex"
+            BackgroundColor="#4F6EF6"
+          ></Button>
         </div>
         <div className="listCard">
           <RenderCard></RenderCard>

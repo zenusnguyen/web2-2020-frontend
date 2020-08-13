@@ -5,8 +5,8 @@ const MaganerAccountStyled = styled.div`
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
-  height: 100vh;
-
+  height: 100%;
+  min-height: 100vh;
   .containerForm {
     padding: 64px 75px;
     display: flex;
@@ -26,6 +26,7 @@ const MaganerAccountStyled = styled.div`
     width: 100%;
     align-items: center;
     margin-bottom: 32px;
+    width: 948px;
   }
   .listCard {
     height: 100%;

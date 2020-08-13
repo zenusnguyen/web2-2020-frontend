@@ -89,6 +89,18 @@ const MaganerAccountStyled = styled.div`
       color: white;
     }
   }
+  .back {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+      margin-right: 10px;
+    }
+    .button {
+      border: 0px;
+      background-color: transparent;
+    }
+  }
 `;
 
 export default MaganerAccountStyled;

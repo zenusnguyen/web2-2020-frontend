@@ -329,16 +329,26 @@ function SavingCard() {
   );
 }
 
-export default function CreateCard() {
+export default function CreateCard(props) {
   const [isSaving, setIsSaving] = useState(false);
   const Handler = () => {
     setIsSaving(!isSaving);
   };
+  let history = useHistory();
   if (isSaving)
     return (
       <MaganerAccountStyled>
         <SideMenu></SideMenu>
         <div className="containerForm">
+          <div
+            onClick={() => {
+              history.push("/manage");
+            }}
+            className="back"
+          >
+            <img src={Back}></img>
+            Manage accounts
+          </div>
           <p className="SignInTitle"> Open new account</p>
           <div style={{ marginBottom: "20px" }}>
             <p className="titleType" style={{ marginBottom: "4px" }}>
@@ -371,6 +381,15 @@ export default function CreateCard() {
       <MaganerAccountStyled>
         <SideMenu></SideMenu>
         <div className="containerForm">
+          <div
+            onClick={() => {
+              history.push("/manage");
+            }}
+            className="back"
+          >
+            <img src={Back}></img>
+            Manage accounts
+          </div>
           <p className="SignInTitle"> Open new account</p>
           <div style={{ marginBottom: "20px" }}>
             <p className="titleType" style={{ marginBottom: "4px" }}>
