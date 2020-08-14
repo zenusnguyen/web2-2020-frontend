@@ -101,44 +101,34 @@ export default function Register() {
   }
 
   async function HandlerInput() {
-    await axios
-
-      .get(
-        `${config.server}/customer-infors-find-cmnd?identificationNumber=${passport}`
-      )
-      .then((response) => {
-        if (response.data !== []) {
-          alert.error("Identification Number has been registed");
-          return false;
-        } else {
-          if (
-            !validateEmail(email) ||
-            userName === null ||
-            password === null ||
-            confirmPassword === null ||
-            password !== confirmPassword ||
-            fullName === null ||
-            phoneNumber === null ||
-            address === null ||
-            password === null ||
-            img1 === null ||
-            img2 === null
-          ) {
-            alert.error("check your input");
-            return false;
-          } else {
-            return true;
-          }
-        }
-      })
-      .catch((error) => {
-        alert.error("server error");
-        return false;
-      });
+    const checkCMND = await axios.get(
+      `${config.server}/customer-infors-find-cmnd?identificationNumber=${passport}`
+    );
+    if (checkCMND.data.length !== 0) {
+      alert.error("identification number has been registed");
+      return false;
+    } else if (
+      !validateEmail(email) ||
+      userName === null ||
+      password === null ||
+      confirmPassword === null ||
+      password !== confirmPassword ||
+      fullName === null ||
+      phoneNumber === null ||
+      address === null ||
+      passport === null ||
+      img1 === null ||
+      img2 === null
+    ) {
+      alert.error("check your input");
+      return false;
+    }
+    return true;
   }
 
   async function handleSubmit() {
-    if (HandlerInput() === true) {
+    const handle = await HandlerInput();
+    if (handle === true) {
       let data = new FormData();
       data.append("files", pic1);
       data.append("files", pic2);
@@ -150,7 +140,6 @@ export default function Register() {
       })
         .then()
         .catch((err) => alert.error("some things went wrong"));
-
       const createUserInfor = await axios
         .post(`${config.server}/customer-infors`, {
           full_name: fullName,
@@ -191,7 +180,6 @@ export default function Register() {
           created_date: new Date(),
         });
         alert.success("Register Success");
-
         await sleep(1000);
         history.push("/signin");
       } else {
