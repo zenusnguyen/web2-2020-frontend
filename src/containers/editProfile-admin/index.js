@@ -58,7 +58,7 @@ export default function EditProfile(props) {
 
       uploadRes = await axios({
         method: "POST",
-        url: "${config.server}/upload",
+        url: `${config.server}/upload`,
         data,
       });
 
@@ -225,10 +225,10 @@ export default function EditProfile(props) {
         ></TextArea>
         <div className="dualColumn" style={{ marginTop: "20px" }}>
           <InputForm
-            onChange={(e) => {
-              setPassport(e.target.value);
-            }}
-            placeholder={userInfo.identificationNumber}
+            // onChange={(e) => {
+            //   setPassport(e.target.value);
+            // }}
+            value={userInfo.identificationNumber}
             pattern="[0-9]"
             type="number"
             title=" ID/ Passport number  "
@@ -237,7 +237,7 @@ export default function EditProfile(props) {
 
           <MyDatePickerStyle>
             <div>
-              <p>Date of birth</p>
+              <p>Date of Date Of Issue</p>
               <DatePicker
                 selected={DateOfIssue}
                 onChange={(e) => setDateOfIssue(e)}

@@ -135,7 +135,7 @@ export default function Register() {
 
       const uploadRes = await axios({
         method: "POST",
-        url: `${config.server}/upload`,
+        url: `https://web2-2020-back-end.herokuapp.com/upload`,
         data,
       })
         .then()
