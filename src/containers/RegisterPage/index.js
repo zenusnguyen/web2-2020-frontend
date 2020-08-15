@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import SignInPageStyle from "./styled";
-
 import Header from "../../components/Header";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -10,9 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import InputForm from "../../components/InputForm";
 import DatePicker from "react-datepicker";
 import MyDatePickerStyle from "../../components/DatePicker/styled";
-
 import TextArea from "../../components/TextArea";
-
 import { useAlert } from "react-alert";
 import * as _ from "lodash";
 import { config } from "../../configs/server";
@@ -75,7 +72,6 @@ export default function Register() {
   };
   const Button = styled.button`
     /* Insert your favorite CSS code to style a button */
-
     width: 100px;
     height: 100px;
     /* background-color: white; */
