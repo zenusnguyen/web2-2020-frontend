@@ -6,7 +6,7 @@ import Button from "../Button";
 export default function index(props) {
   var formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: props.unit||"VND",
+    currency: props.unit || "VND",
   });
 
   let Src = SpendCard;
