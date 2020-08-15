@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AccountDetailPage from "./styled";
 import SideMenu from "../../components/SideMenu";
 import AccountCard from "../../components/AccountCard";
@@ -6,7 +6,8 @@ import HistoryCard from "../../components/HistoryCard";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import { MyDatePickerStyle } from "./styled";
-
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import Back from "../../assets/back.svg";
 import axios from "axios";
 import { useAlert } from "react-alert";
@@ -20,7 +21,8 @@ export default function AccountDetail(props) {
   const alert = useAlert();
   const [historyLog, setHistoryLog] = useState([]);
   const [term, setTerm] = useState([{}, {}]);
-
+  const [listSpend, setListSpend] = useState([]);
+  const [beneficiaryAccount, setBeneficiaryAccount] = useState(null);
   useEffect(() => {
     async function Fecth() {
       const result = await axios.get(
@@ -32,6 +34,30 @@ export default function AccountDetail(props) {
         }
       );
       setTerm(result.data);
+      let spendAccountsArray = [];
+      async function FecthSpendAccount() {
+        const result = await axios.get(
+          `${config.server}/spend-accounts-by-owneraccount?id=${
+            JSON.parse(localStorage.getItem("userAccount")).id
+          }`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+
+        _.forEach(result.data, (item) => {
+          if (item.status === "active" && item.card_type === "spend") {
+            spendAccountsArray.push({
+              label: `${item.card_number}`,
+              value: `${item.card_number}`,
+            });
+          }
+          setListSpend(spendAccountsArray);
+        });
+      }
+      FecthSpendAccount();
     }
     if (cardInfo.card_type === "saving") {
       Fecth();
@@ -126,29 +152,87 @@ export default function AccountDetail(props) {
   };
 
   const handleClose = async () => {
-    const block = await axios
-      .put(
-        `${config.server}/spend-accounts/${cardInfo.id}`,
+    let beneficiaryAccount2 = null;
+    confirmAlert({
+      title: "Confirm to submit",
+      message: (
+        <div className="selector">
+          <p>Select Spend Account to receive available balance </p>
+          <Select
+            options={listSpend}
+            onChange={(e) => (beneficiaryAccount2 = e.value)}
+            // defaultValue={{ label: listSpend[0], value: listSpend[0] }}
+          />
+        </div>
+      ),
+
+      buttons: [
         {
-          status: "closed",
-          closed_date: new Date(),
+          label: "Yes",
+          onClick: () => handleBlockAccount(beneficiaryAccount2),
         },
         {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then((result) => {
-        alert.success("Action success");
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
+  };
 
-        setTimeout(function () {
-          historys.go(0);
-        }, 1500);
-      })
-      .catch((err) => {
-        alert.error("Action error please check again!");
-      });
+  const handleBlockAccount = async (beneficiaryAccount2) => {
+    if (beneficiaryAccount2 === null) {
+      alert.error("Please choose beneficiary account");
+    } else {
+      await axios
+        .post(
+          `${config.server}/spend-accounts-fromsaving`,
+          {
+            currentAccount: _.get(cardInfo, "card_number"),
+            remark: "transfer from saving",
+            amount: _.get(cardInfo, "balance"),
+            beneficiaryAccount: beneficiaryAccount2,
+
+            // otp: "1998",
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then(function (response) {
+          if (response.status === 200) {
+            alert.success("Transfer Successful");
+          }
+        })
+        .catch((error) => {
+          console.log("error: ", error);
+          alert.error("sometime when wrong ");
+        });
+      const block = await axios
+        .put(
+          `${config.server}/spend-accounts/${cardInfo.id}`,
+          {
+            status: "closed",
+            closed_date: new Date(),
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then((result) => {
+          alert.success("Action success");
+
+          setTimeout(function () {
+            historys.go(0);
+          }, 1500);
+        })
+        .catch((err) => {
+          alert.error("Action error please check again!");
+        });
+    }
   };
   const handleUnBlock = async () => {
     const block = await axios
