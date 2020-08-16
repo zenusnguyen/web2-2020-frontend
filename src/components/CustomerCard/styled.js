@@ -54,9 +54,9 @@ const CardStyled = styled.div`
     margin-right: auto;
   }
   .status {
-    width: 52px;
+    width: 92px;
     height: 24px;
-    background: #56cd67;
+    background: "yellow";
     border-radius: 4px;
     display: flex;
     justify-content: center;

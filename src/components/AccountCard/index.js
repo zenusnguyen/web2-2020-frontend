@@ -6,7 +6,6 @@ import SpendCardPlatinum from "../../assets/platinum.svg";
 import SavingCard from "../../assets/savings.svg";
 
 export default function AccountCard(props) {
-  console.log("props: ", props);
   const status = () => {
     if (props.Status == "active") {
       return (
@@ -55,12 +54,11 @@ export default function AccountCard(props) {
   const renderCloseDate = () => {
     if (props.close_date)
       return (
-        <div style={{ display: "flex", flexDirection: "row", marginTop: "12px" }}>
+        <div
+          style={{ display: "flex", flexDirection: "row", marginTop: "12px" }}
+        >
           <p style={{ margin: "0" }}>Close date: </p>
-          <p style={{ color: "red", margin: "0" }}>
-            {" "}
-            {props.close_date}
-          </p>
+          <p style={{ color: "red", margin: "0" }}> {props.close_date}</p>
         </div>
       );
   };

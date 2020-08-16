@@ -11,6 +11,37 @@ export default function HistoryCard(props) {
   } else {
     Style = "#56CD67";
   }
+
+  const status = () => {
+    if (props.Status == "active") {
+      return (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            marginBottom: "0",
+          }}
+        >
+          {/* <p style={{ margin: "0" }}>Status: </p> */}
+          <p style={{ color: "blue", margin: "0" }}> {"  " + props.Status} </p>
+        </div>
+      );
+    } else {
+    }
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          marginBottom: "0",
+        }}
+      >
+        {/* <p style={{ margin: "0" }}>Status: </p> */}
+        <p style={{ color: "red", margin: "0" }}> {"  " + props.Status} </p>
+      </div>
+    );
+  };
+
   if (props.username !== "admin") {
     return (
       <CardStyled>
@@ -20,9 +51,7 @@ export default function HistoryCard(props) {
         <div className="detail-left">
           <div className="withStatus">
             <p>{props.username || " "} </p>
-            <div className="status">
-              <p>{props.Status || "Active"}</p>
-            </div>
+            <div className="status">{status()}</div>
           </div>
           <p className="subtext"> {props.email || "zenusnguyen@gmail.com"} </p>
         </div>

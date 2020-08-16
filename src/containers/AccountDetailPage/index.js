@@ -272,13 +272,13 @@ export default function AccountDetail(props) {
     if (cardInfo.status === "active") {
       return (
         <button onClick={handleBlock} className="blockButton">
-          Clock account
+          Block account
         </button>
       );
     } else if (cardInfo.status === "block") {
       return (
         <button onClick={handleUnBlock} className="unblockButton">
-          Unclock account
+          Unlock account
         </button>
       );
     }
