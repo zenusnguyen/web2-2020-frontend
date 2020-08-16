@@ -13,8 +13,9 @@ const AccountDetailPage = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 55px;
+    align-items: center;
     width: 100%;
+    margin-bottom: 32px;
   }
   .accountButton {
     width: 187px;
@@ -39,18 +40,26 @@ const AccountDetailPage = styled.div`
     border: 0px;
     background: #bdbebf;
     border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
   }
   .unblockButton {
     width: 187px;
     height: 48px;
     border: 0px;
-    background: green;
+    background: #4f6ef6;
     border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: white;
   }
   .pageTitle {
-    font-size: 32px;
     font-weight: bold;
-    margin-bottom: 32px;
+    font-size: 32px;
+    line-height: 150%;
+    margin: 0;
   }
 
   .itemTitle {
@@ -106,6 +115,7 @@ const AccountDetailPage = styled.div`
     border: 0px;
     color: white;
     border-radius: 5px;
+    font-weight: 500;
   }
 
   .customDatePickerWidth,

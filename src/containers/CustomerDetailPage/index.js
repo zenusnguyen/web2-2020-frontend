@@ -97,7 +97,7 @@ export default function Profile(props) {
   function ListCard() {
     return (
       <ListCardStyled>
-        <p className="title"> Account</p>
+        <p style={{ marginTop: "40px "}} className="title"> Account</p>
         <div className="containerListCard">
           <RenderListCard></RenderListCard>
         </div>

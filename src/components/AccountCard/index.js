@@ -14,13 +14,11 @@ export default function AccountCard(props) {
           style={{
             display: "flex",
             flexDirection: "row",
+            marginBottom: "0",
           }}
         >
-          <p>Status : </p>
-          <p style={{ color: "blue", marginLeft: "29px" }}>
-            {" "}
-            {"  " + props.Status}{" "}
-          </p>
+          <p style={{ margin: "0" }}>Status: </p>
+          <p style={{ color: "blue", margin: "0" }}> {"  " + props.Status} </p>
         </div>
       );
     } else {
@@ -30,13 +28,11 @@ export default function AccountCard(props) {
         style={{
           display: "flex",
           flexDirection: "row",
+          marginBottom: "0",
         }}
       >
-        <p>Status : </p>
-        <p style={{ color: "red", marginLeft: "29px" }}>
-          {" "}
-          {"  " + props.Status}{" "}
-        </p>
+        <p style={{ margin: "0" }}>Status: </p>
+        <p style={{ color: "red", margin: "0" }}> {"  " + props.Status} </p>
       </div>
     );
   };
@@ -59,9 +55,9 @@ export default function AccountCard(props) {
   const renderCloseDate = () => {
     if (props.close_date)
       return (
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <p>close date : </p>
-          <p style={{ color: "red", marginLeft: "19px" }}>
+        <div style={{ display: "flex", flexDirection: "row", marginTop: "12px" }}>
+          <p style={{ margin: "0" }}>Close date: </p>
+          <p style={{ color: "red", margin: "0" }}>
             {" "}
             {props.close_date}
           </p>

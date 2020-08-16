@@ -25,8 +25,8 @@ export default function index(props) {
             flexDirection: "row",
           }}
         >
-          <p>Status : </p>
-          <p style={{ color: "blue", marginLeft: "29px" }}>
+          <p className="text">Status: </p>
+          <p className="text" style={{ color: "blue", marginLeft: "29px" }}>
             {" "}
             {"  " + props.Status}{" "}
           </p>
@@ -41,8 +41,8 @@ export default function index(props) {
           flexDirection: "row",
         }}
       >
-        <p>Status : </p>
-        <p style={{ color: "red", marginLeft: "29px" }}>
+        <p className="text">Status: </p>
+        <p className="text" style={{ color: "red", marginLeft: "29px" }}>
           {" "}
           {"  " + props.Status}{" "}
         </p>
@@ -56,14 +56,17 @@ export default function index(props) {
         <img src={Src || SpendCard}></img>
       </div>
       <div className="detail">
-        <p> Number : {props.Number} </p>
-        <p>Current balance :{` ${formatter.format(props.Balance)}`}</p>
+        <p className="text"> Number: {props.Number} </p>
+        <p className="text">
+          Current balance: {` ${formatter.format(props.Balance)}`}
+        </p>
         {status()}
         <Button
           onClick={props.onClick}
           Width="140px"
           Height="40px"
-          Top="0px"
+          Top="2px"
+          Left="0px"
           title="Details"
           BackgroundColor="#4F6EF6"
           Display="none"

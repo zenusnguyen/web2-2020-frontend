@@ -178,12 +178,12 @@ export default function EditProfile(props) {
         <InputForm
           value={accountInfo.email}
           type="email"
-          title="Email "
+          title="Email"
         ></InputForm>
         <InputForm
           type="text"
           value={accountInfo.username}
-          title="User Name "
+          title="Username"
         ></InputForm>
 
         <InputForm
@@ -192,7 +192,7 @@ export default function EditProfile(props) {
           }}
           placeholder={userInfo.full_name}
           type="text"
-          title="Full Name "
+          title="Fullname (edit)"
         ></InputForm>
         <div className="dualColumn">
           <InputForm
@@ -201,7 +201,7 @@ export default function EditProfile(props) {
             }}
             placeholder={userInfo.phone_number}
             type="number"
-            title=" Phone number  "
+            title="Phone number (edit)"
             Width="160px"
           ></InputForm>
           <MyDatePickerStyle>
@@ -212,7 +212,7 @@ export default function EditProfile(props) {
                 onChange={(e) => setDateOfBirth(e)}
               ></DatePicker>
             </div>
-            <img src={Calendar}></img>
+            {/* <img src={Calendar}></img> */}
           </MyDatePickerStyle>
         </div>
         <TextArea
@@ -221,9 +221,9 @@ export default function EditProfile(props) {
           }}
           value={userInfo.address}
           type="text"
-          title="Current address "
+          title="Current address"
         ></TextArea>
-        <div className="dualColumn" style={{ marginTop: "20px" }}>
+        <div className="dualColumn">
           <InputForm
             // onChange={(e) => {
             //   setPassport(e.target.value);
@@ -231,25 +231,32 @@ export default function EditProfile(props) {
             value={userInfo.identificationNumber}
             pattern="[0-9]"
             type="number"
-            title=" ID/ Passport number  "
+            title=" ID/ Passport number"
             Width="160px"
           ></InputForm>
-
           <MyDatePickerStyle>
             <div>
-              <p>Date of Date Of Issue</p>
+              <p>Date of Issue</p>
               <DatePicker
                 selected={DateOfIssue}
                 onChange={(e) => setDateOfIssue(e)}
               ></DatePicker>
             </div>
-            <img src={Calendar}></img>
+            {/* <img src={Calendar}></img> */}
           </MyDatePickerStyle>
         </div>
-        <div style={{ marginBottom: "40px" }}>
-          <p style={{ fontSize: "16px", fontWeight: "500" }}>Upload photo</p>
+        <div>
+          <p
+            style={{
+              fontSize: "16px",
+              fontWeight: "500",
+              marginBottom: "8px",
+            }}
+          >
+            Photos
+          </p>
           <div className="uploadImage">
-            <div>
+            <div style={{ marginRight: "10px" }}>
               <Button style={{ padding: "0px" }} onClick={handleClick1}>
                 <img style={getPreview(img1)}></img>
               </Button>
@@ -261,9 +268,17 @@ export default function EditProfile(props) {
                 }}
                 style={{ display: "none" }}
               />
-              <p style={{ marginLeft: "50px", marginTop: "10px" }}>Front</p>
+              <p
+                style={{
+                  textAlign: "center",
+                  margin: "8px 0 0 0",
+                  color: "#828485",
+                }}
+              >
+                Front
+              </p>
             </div>
-            <div>
+            <div style={{ marginLeft: "10px" }}>
               <Button style={{ padding: "0px" }} onClick={handleClick2}>
                 <img style={getPreview(img2)}></img>
               </Button>
@@ -275,12 +290,20 @@ export default function EditProfile(props) {
                 }}
                 style={{ display: "none" }}
               />
-              <p style={{ marginLeft: "50px", marginTop: "10px" }}>Back</p>
+              <p
+                style={{
+                  textAlign: "center",
+                  margin: "8px 0 0 0",
+                  color: "#828485",
+                }}
+              >
+                Back
+              </p>
             </div>
           </div>
         </div>
         <button onClick={handleSubmit} className="registerButton">
-          Request
+          Save
         </button>
       </div>
     </Register>

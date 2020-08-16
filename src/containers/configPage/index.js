@@ -14,21 +14,30 @@ function ConfigRow(props) {
     <ConfigRowStyled>
       <div className="title">{props.title} </div>
       <div className="containerInput">
-        <InputForm
-          onChange={(e) => props.onChange1(e.target.value)}
-          placeholder={props.placeholder1}
-          title={props.title1}
-        ></InputForm>
-        <InputForm
-          onChange={(e) => props.onChange2(e.target.value)}
-          placeholder={props.placeholder2}
-          title={props.title2}
-        ></InputForm>
-        <InputForm
-          onChange={(e) => props.onChange3(e.target.value)}
-          placeholder={props.placeholder3}
-          title={props.title3}
-        ></InputForm>
+        <div className="child">
+          <InputForm
+            Width="100%"
+            onChange={(e) => props.onChange1(e.target.value)}
+            placeholder={props.placeholder1}
+            title={props.title1}
+          ></InputForm>
+        </div>
+        <div className="child">
+          <InputForm
+            Width="100%"
+            onChange={(e) => props.onChange2(e.target.value)}
+            placeholder={props.placeholder2}
+            title={props.title2}
+          ></InputForm>
+        </div>
+        <div className="child">
+          <InputForm
+            Width="100%"
+            onChange={(e) => props.onChange3(e.target.value)}
+            placeholder={props.placeholder3}
+            title={props.title3}
+          ></InputForm>
+        </div>
       </div>
     </ConfigRowStyled>
   );
@@ -174,10 +183,11 @@ export default function ConfigPage() {
         </div> */}
         <Button
           onClick={handleUpdate}
-          Left="0px"
-          title="Save"
           Width="190px"
-          BackgroundColor="blue"
+          title="Save"
+          Top="0px"
+          Left="0px"
+          BackgroundColor={"#4F6EF6"}
         ></Button>
       </div>
     </MaganerAccountStyled>

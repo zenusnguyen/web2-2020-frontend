@@ -52,7 +52,7 @@ export default function MaganeAccount() {
         <SideMenu></SideMenu>
         <div className="containerForm" style={{ display: styled }}>
           <p className="SignInTitle"> Pending requests</p>
-          <div className="listCard">
+          <div>
             <RenderCard></RenderCard>
           </div>
         </div>

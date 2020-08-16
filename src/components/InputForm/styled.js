@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const InputForm = styled.div`
   width: ${(props) => props.Width || "350px"};
-  margin-bottom: 20px;
+  margin-bottom: ${(props) => props.Bottom || "20px"};
   margin-top: ${(props) => props.Top || "0px"};
   margin-right: ${(props) => props.Right || "0px"};
   p {

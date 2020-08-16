@@ -86,6 +86,7 @@ export default function Deposit(props) {
             onChange={(e) => setCardID(e.value)}
             style={{ height: "100%", fontSize: "16px", fontWeight: "500" }}
             options={spendAccounts}
+            placeholder={"Select"}
           />
         </div>
         <InputForm
@@ -93,6 +94,7 @@ export default function Deposit(props) {
           type="number"
           title="Amount"
           name={"balance"}
+          placeholder="Enter amount"
         ></InputForm>
 
         <TextArea
@@ -105,9 +107,10 @@ export default function Deposit(props) {
           onClick={() => {
             handleDeposit(cardID, amount, remark);
           }}
-          Top="55px"
-          Width="190px"
           title="Deposit"
+          Width="190px"
+          Top="32px"
+          Left="0px"
           BackgroundColor={"#4F6EF6"}
         ></Button>
       </div>

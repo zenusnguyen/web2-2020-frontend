@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CardStyled from "./styled";
-import Icon from "../../assets/wallet.svg";
+import Icon from "../../assets/person.png";
 import Button from "../Button";
 
 function ShowDetail(HandlerClick) {}
@@ -21,8 +21,7 @@ export default function HistoryCard(props) {
           <img src={Icon}></img>
         </div>
         <div className="detail-left">
-          <p>{props.UserName || ""} </p>
-          <p>{props.email || ""} </p>
+          <p>{`${props.UserName} (${props.email})` || ""} </p>
           <p className="subtext"> {props.Date || new Date().toISOString()} </p>
         </div>
       </div>
@@ -34,6 +33,7 @@ export default function HistoryCard(props) {
           BorderRadius="8px"
           Top="0px"
           Width="140px"
+          Height="40px"
           BackgroundColor="#4F6EF6"
         ></Button>
       </div>

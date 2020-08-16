@@ -33,7 +33,6 @@ const CardStyled = styled.div`
     width: 440px;
     height: 280px;
     border-radius: 8px;
-
     object-fit: cover !important;
   }
 `;

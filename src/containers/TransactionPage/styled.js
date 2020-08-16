@@ -5,7 +5,7 @@ const TransactionHistoryPage = styled.div`
   flex-direction: row;
   background-color: #f5f7f9;
   font-size: 16;
-  font-weight: 500;
+  font-weight: 500; 
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -15,7 +15,6 @@ const TransactionHistoryPage = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    border-radius: 15px;
     padding-bottom: 100px;
   }
   .pageTitle {
@@ -57,6 +56,7 @@ const TransactionHistoryPage = styled.div`
   .filterButton {
     width: 128px;
     height: 48px;
+    font-weight: 500;
     background-color: #feba46;
     border: 0px;
     color: white;

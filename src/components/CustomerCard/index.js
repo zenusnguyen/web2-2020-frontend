@@ -34,6 +34,7 @@ export default function HistoryCard(props) {
             BorderRadius="8px"
             Top="0px"
             Width="140px"
+            Height="40px"
             BackgroundColor="#4F6EF6"
           ></Button>
         </div>

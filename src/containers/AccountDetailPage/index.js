@@ -154,10 +154,12 @@ export default function AccountDetail(props) {
   const handleClose = async () => {
     let beneficiaryAccount2 = null;
     confirmAlert({
-      title: "Confirm to submit",
+      title: "Close account",
       message: (
         <div className="selector">
-          <p>Select Spend Account to receive available balance </p>
+          <p style={{ fontWeight: "600", fonSize: "32px", lineHeight: "150%" }}>
+            Select a Spend account to continue
+          </p>
           <Select
             options={listSpend}
             onChange={(e) => (beneficiaryAccount2 = e.value)}
@@ -168,12 +170,12 @@ export default function AccountDetail(props) {
 
       buttons: [
         {
-          label: "Yes",
-          onClick: () => handleBlockAccount(beneficiaryAccount2),
+          label: "Cancel",
+          onClick: () => {},
         },
         {
-          label: "No",
-          onClick: () => {},
+          label: "Done",
+          onClick: () => handleBlockAccount(beneficiaryAccount2),
         },
       ],
     });
@@ -270,13 +272,13 @@ export default function AccountDetail(props) {
     if (cardInfo.status === "active") {
       return (
         <button onClick={handleBlock} className="blockButton">
-          Block account
+          Clock account
         </button>
       );
     } else if (cardInfo.status === "block") {
       return (
         <button onClick={handleUnBlock} className="unblockButton">
-          UnBlock account
+          Unclock account
         </button>
       );
     }
