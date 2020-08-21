@@ -48,20 +48,44 @@ export default function EditProfile(props) {
 
     Fecth();
   }, []);
+  function convertBase64(file) {
+    const reader = new FileReader();
 
+    reader.addEventListener(
+      "load",
+      function () {
+        // convert image file to base64 string
+        // reader.result;
+
+        setPic1(reader.result);
+      },
+      false
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function convertBase642(file) {
+    const reader = new FileReader();
+
+    reader.addEventListener(
+      "load",
+      function () {
+        setPic2(reader.result);
+      },
+      false
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
   async function handleSubmit() {
     let data = new FormData();
     let uploadRes;
     if (pic1 && pic2) {
-      data.append("files", pic1);
-      data.append("files", pic2);
-
-      uploadRes = await axios({
-        method: "POST",
-        url: `${config.server}/upload`,
-        data,
-      });
-
       const createUserInfor = await axios.put(
         `${config.server}/customer-infors/${accountInfo.user_info}`,
         {
@@ -71,8 +95,8 @@ export default function EditProfile(props) {
           date_of_birth: DateOfBirth,
           date_of_issue: DateOfIssue,
           identificationNumber: passport,
-          img1: uploadRes.data[0].url,
-          img2: uploadRes.data[1].url,
+          img1: pic1,
+          img2: pic2,
         },
         {
           headers: {
@@ -131,16 +155,14 @@ export default function EditProfile(props) {
   const handleChangePic = (e, pic) => {
     // e.preventDefault();
 
-    if (e.target.files[0].size >= 4 * 1024 * 1024) {
-      alert("Max size of an image: 4MB");
+    if (e.target.files[0].size >= 0.5 * 1024 * 1024) {
+      alert.error("Max size of an image: 0.5 MB");
     } else {
       if (pic === "pic1") {
-        setPic1(e.target.files[0]);
-
+        convertBase64(e.target.files[0]);
         setImgUrl1(URL.createObjectURL(e.target.files[0]));
       } else if (pic === "pic2") {
-        setPic2(e.target.files[0]);
-
+        convertBase642(e.target.files[0]);
         setImgUrl2(URL.createObjectURL(e.target.files[0]));
       }
     }
