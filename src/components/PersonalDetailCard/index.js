@@ -62,13 +62,13 @@ export default function PersonalDetailCard(props) {
       <div className="groupImage">
         <img
           className="identificationImage"
-          src={`${config.server}${img1}`}
+          src={img1}
           alt=""
           style={{ marginRight: "16px" }}
         ></img>
         <img
           className="identificationImage"
-          src={`${config.server}${img2}`}
+          src={img2}
           alt=""
           style={{ marginLeft: "16px" }}
         ></img>
