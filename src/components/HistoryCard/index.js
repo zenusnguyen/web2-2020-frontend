@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CardStyled from "./styled";
 import Icon from "../../assets/wallet.svg";
-
+import * as moment from "moment";
 function jsUcfirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -29,12 +29,14 @@ export default function HistoryCard(props) {
         <img src={Icon}></img>
       </div>
       <div className="detail-left">
-        <p>{jsUcfirst(props.TransferType)} </p>
-        <p className="subtext"> {props.Date} </p>
+        <p>{jsUcfirst(props.TransferType) + " # " + props.id} </p>
+        <p className="subtext"> {moment(props.Date).format("MMMM d, YYYY")} </p>
+        <p className="subtext"> {"Remark : " + props.remark} </p>
       </div>
       <div className="detail-right">
         <p style={{ color: Style }}> {Amount} </p>
         <p className="subtext"> {formatter.format(props.RemainingBalance)} </p>
+        <p className="subtext"> {"From : " + props.account} </p>
       </div>
     </CardStyled>
   );

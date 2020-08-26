@@ -3,19 +3,28 @@ import CardStyled from "./styled";
 import SpendCard from "../../assets/spend.png";
 import SavingCard from "../../assets/deposit.png";
 import Button from "../Button";
+import SpendCardGold from "../../assets/spend-gold.svg";
+import SpendCardSilver from "../../assets/silver.svg";
+import SpendCardPlatinum from "../../assets/platinum.svg";
+
 export default function index(props) {
   var formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: props.unit || "VND",
   });
 
-  let Src = SpendCard;
+  let Src = "";
   if (props.Card_type === "spend") {
-    Src = SpendCard;
+    if (props.Spend_type == 1) {
+      Src = SpendCardSilver;
+    } else if (props.Spend_type == 2) {
+      Src = SpendCardGold;
+    } else {
+      Src = SpendCardPlatinum;
+    }
   } else {
     Src = SavingCard;
   }
-
   const status = () => {
     if (props.Status == "active") {
       return (
