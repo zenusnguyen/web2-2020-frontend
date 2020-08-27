@@ -16,28 +16,30 @@ export default function HistoryCard(props) {
     if (props.Status == "active") {
       return (
         <div
+          className="status"
           style={{
             display: "flex",
             flexDirection: "row",
             marginBottom: "0",
+            background: "#56CD67",
           }}
         >
-          {/* <p style={{ margin: "0" }}>Status: </p> */}
-          <p style={{ color: "blue", margin: "0" }}> {"  " + props.Status} </p>
+          <p style={{ color: "white", margin: "0",textTransform: "capitalize" }}> {"  " + props.Status} </p>
         </div>
       );
     } else {
     }
     return (
       <div
+        className="status"
         style={{
           display: "flex",
           flexDirection: "row",
           marginBottom: "0",
+          background: "#F45C59"
         }}
       >
-        {/* <p style={{ margin: "0" }}>Status: </p> */}
-        <p style={{ color: "red", margin: "0" }}> {"  " + props.Status} </p>
+        <p style={{ color: "white", margin: "0" }}> {"Locked"} </p>
       </div>
     );
   };
@@ -51,7 +53,7 @@ export default function HistoryCard(props) {
         <div className="detail-left">
           <div className="withStatus">
             <p>{props.username || " "} </p>
-            <div className="status">{status()}</div>
+            <div>{status()}</div>
           </div>
           <p className="subtext"> {props.email || "zenusnguyen@gmail.com"} </p>
         </div>
