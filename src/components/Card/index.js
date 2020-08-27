@@ -1,7 +1,6 @@
 import React from "react";
 import CardStyled from "./styled";
-import SpendCard from "../../assets/spend.png";
-import SavingCard from "../../assets/deposit.png";
+import SavingCard from "../../assets/savings.svg";
 import Button from "../Button";
 import SpendCardGold from "../../assets/spend-gold.svg";
 import SpendCardSilver from "../../assets/silver.svg";
@@ -47,6 +46,27 @@ export default function index(props) {
           </p>
         </div>
       );
+    } else if (props.Status == "block") {
+      return (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <p className="text">Status: </p>
+          <p
+            className="text"
+            style={{
+              color: "#F45C59",
+              marginLeft: "4px",
+              textTransform: "capitalize",
+            }}
+          >
+            Blocked
+        </p>
+        </div>
+      );
     } else {
     }
     return (
@@ -65,7 +85,7 @@ export default function index(props) {
             textTransform: "capitalize",
           }}
         >
-          {` ${props.Status}`}
+          Closed
         </p>
       </div>
     );
@@ -74,7 +94,7 @@ export default function index(props) {
   return (
     <CardStyled>
       <div className="Card">
-        <img src={Src || SpendCard}></img>
+        <img src={Src}></img>
       </div>
       <div className="detail">
         <p className="text"> Number: {props.Number} </p>

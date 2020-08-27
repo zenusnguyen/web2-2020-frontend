@@ -92,6 +92,7 @@ export default function Profile(props) {
         Status={items.status}
         Created={items.created_date}
         Card_type={items.card_type}
+        Spend_type={items.spend_type}
       ></Card>
     ));
   }
@@ -114,7 +115,7 @@ export default function Profile(props) {
         <Button
           key="1"
           Top="0px"
-          title="Lock"
+          title="Block"
           Width="187px"
           onClick={HandlerBlock}
           BackgroundColor="#F45C59"
@@ -126,7 +127,7 @@ export default function Profile(props) {
         <Button
           key="1"
           Top="0px"
-          title="Unlock"
+          title="Unblock"
           Width="187px"
           onClick={HandlerUnblock}
           BackgroundColor="#56CD67"

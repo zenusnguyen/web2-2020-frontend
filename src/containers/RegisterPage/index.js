@@ -94,7 +94,7 @@ export default function Register() {
     // e.preventDefault();
 
     if (e.target.files[0].size >= 0.5 * 1024 * 1024) {
-      alert.error("Max size of an image: 0.5 MB");
+      alert.error("Max size of image: 0.5 MB");
     } else {
       if (pic === "pic1") {
         convertBase64(e.target.files[0]);
@@ -135,7 +135,7 @@ export default function Register() {
       `${config.server}/customer-infors-find-cmnd?identificationNumber=${passport}`
     );
     if (checkCMND.data.length !== 0) {
-      alert.error("identification number has been registed");
+      alert.error("This identification number has been registed!");
       return false;
     } else if (
       !validateEmail(email) ||
@@ -151,7 +151,7 @@ export default function Register() {
       img2 === null ||
       otp != otp2
     ) {
-      alert.error("check your input");
+      alert.error("Please check your input!");
       return false;
     }
     return true;
@@ -172,7 +172,7 @@ export default function Register() {
           img2: pic2,
         })
         .then()
-        .catch((err) => alert.error("some things went wrong"));
+        .catch((err) => alert.error("Something went wrong. Please try again!"));
       const createAccount = await axios
         .post(`${config.server}/auth/local/register`, {
           status: "pending",
@@ -183,7 +183,7 @@ export default function Register() {
         })
         .then()
         .catch((err) => {
-          alert.error("some things went wrong");
+          alert.error("Something went wrong. Please try again!");
         });
 
       if (_.get(createAccount, "data.jwt")) {
@@ -199,27 +199,27 @@ export default function Register() {
           status: "active",
           created_date: new Date(),
         });
-        alert.success("Register Success");
+        alert.success("Register successful!");
         await sleep(1000);
         history.push("/signin");
       } else {
-        alert.error("Check your input");
+        alert.error("Please check your input!");
       }
     }
   }
   async function getOTP() {
     if (!validateEmail(email)) {
-      alert.error("Please check your email !");
+      alert.error("Please check your email!");
     } else {
       const result = await axios.post(`${config.server}/getotp-verify`, {
         email: email,
       });
 
       if (result.status == 200) {
-        alert.success("please check your mail to get OTP code");
+        alert.success("OTP code sent!");
         setOtp2(result.data);
       } else {
-        alert.error("Action error please check again!");
+        alert.error("Error. Please try again!");
       }
     }
   }
@@ -366,11 +366,23 @@ export default function Register() {
               type="number"
               title="Verification code"
               name={"Verification code"}
-              Width="200px"
+              Width="202px"
               Bottom="8px"
             ></InputForm>
-            <button onClick={getOTP}> Get Code</button>
+            <button onClick={getOTP}>Get code</button>
           </div>
+          <p
+            style={{
+              width: "350px",
+              fontWeight: "500",
+              fontSize: "14px",
+              lineHeight: "140%",
+              color: "#828485",
+              margin: "0",          
+            }}
+          >
+            Enter the 6-digit code we sent to your email
+          </p>
           <button onClick={handleSubmit} className="registerButton">
             Request
           </button>

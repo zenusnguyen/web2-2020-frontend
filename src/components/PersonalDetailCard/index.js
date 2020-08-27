@@ -4,6 +4,8 @@ import { config } from "../../configs/server";
 import { InforLineStyled } from "./styled";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import * as moment from "moment";
+
 function InforLine(props) {
   return (
     <InforLineStyled>
@@ -42,7 +44,7 @@ export default function PersonalDetailCard(props) {
       <InforLine title="Fullname" detail={userInfo.full_name}></InforLine>
       <InforLine
         title="Date of birth"
-        detail={userInfo.date_of_birth}
+        detail={moment(userInfo.date_of_birth).format("DD/MM/YYYY")}
       ></InforLine>
       <InforLine
         title="ID/ Passport number"
@@ -50,7 +52,7 @@ export default function PersonalDetailCard(props) {
       ></InforLine>
       <InforLine
         title=" Date of issue"
-        detail={userInfo.date_of_issue}
+        detail={moment(userInfo.date_of_issue).format("DD/MM/YYYY")}
       ></InforLine>
       <InforLine
         title="Phone number"

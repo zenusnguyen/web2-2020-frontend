@@ -33,28 +33,49 @@ export default function AccountCard(props) {
           </p>
         </div>
       );
-    } else {
-    }
-    return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          marginTop: "12px",
-        }}
-      >
-        <p>Status: </p>
-        <p
+    } else if (props.Status == "block") {
+      return (
+        <div
           style={{
-            color: "#F45C59",
-            marginLeft: "4px",
-            textTransform: "capitalize",
+            display: "flex",
+            flexDirection: "row",
+            marginTop: "12px",
           }}
         >
-          {props.Status}
+          <p>Status: </p>
+          <p
+            style={{
+              color: "#F45C59",
+              marginLeft: "4px",
+              textTransform: "capitalize",
+            }}
+          >
+            Locked
+          </p>
+        </div>
+      );
+    } else {
+      return (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            marginTop: "12px",
+          }}
+        >
+          <p>Status: </p>
+          <p
+            style={{
+              color: "#F45C59",
+              marginLeft: "4px",
+              textTransform: "capitalize",
+            }}
+          >
+            Closed
         </p>
-      </div>
-    );
+        </div>
+      );
+    };
   };
   let cardType = "";
   let Src = "";
@@ -76,10 +97,10 @@ export default function AccountCard(props) {
     if (props.close_date)
       return (
         <div
-          style={{ display: "flex", flexDirection: "row", marginTop: "12px" }}
+          style={{ display: "flex", flexDirection: "row", margin: "0" }}
         >
           <p style={{ margin: "0" }}>Close date: </p>
-          <p style={{ color: "red", margin: "0" }}> {props.close_date}</p>
+          <p style={{ marginLeft: "4px", marginBottom: "0" }}> {props.close_date}</p>
         </div>
       );
   };

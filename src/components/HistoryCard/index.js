@@ -29,17 +29,17 @@ export default function HistoryCard(props) {
         <img src={Icon}></img>
       </div>
       <div className="detail-left">
-        <p>{jsUcfirst(props.TransferType) + " # " + props.id} </p>
+        <p>{`Transaction #${props.id} (${jsUcfirst(props.TransferType)})`} </p>
         <p className="subtext">
           {" "}
-          {moment(props.Date).format("MMMM d, YYYY, h:mm:ss a")}{" "}
+          {moment(props.Date).format("DD/MM/YYYY - hh:mm:ss A")}{" "}
         </p>
-        <p className="subtext"> {"Remark : " + props.remark} </p>
+        <p className="subtext"> {"Remark: " + props.remark} </p>
       </div>
       <div className="detail-right">
         <p style={{ color: Style }}> {Amount} </p>
         <p className="subtext"> {formatter.format(props.RemainingBalance)} </p>
-        <p className="subtext"> {"From : " + props.account} </p>
+        <p className="subtext"> {"From: " + props.account} </p>
       </div>
     </CardStyled>
   );

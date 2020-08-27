@@ -228,6 +228,7 @@ export default function EditProfile(props) {
             <div>
               <p>Date of birth</p>
               <DatePicker
+                dateFormat="dd/MM/yyyy"
                 selected={DateOfBirth}
                 onChange={(e) => setDateOfBirth(e)}
               ></DatePicker>
@@ -258,6 +259,7 @@ export default function EditProfile(props) {
             <div>
               <p>Date of Issue</p>
               <DatePicker
+                dateFormat="dd/MM/yyyy"
                 selected={DateOfIssue}
                 onChange={(e) => setDateOfIssue(e)}
               ></DatePicker>
