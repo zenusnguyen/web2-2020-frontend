@@ -211,7 +211,7 @@ export default function AccountDetail(props) {
           }
         })
         .catch((error) => {
-          console.log("error: ", error);
+        
           alert.error("sometime when wrong ");
         });
       const block = await axios

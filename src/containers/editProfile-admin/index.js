@@ -56,7 +56,6 @@ export default function EditProfile(props) {
       function () {
         // convert image file to base64 string
         // reader.result;
-        console.log("reader.result: ", reader.result);
 
         setPic1(reader.result);
       },
@@ -75,7 +74,6 @@ export default function EditProfile(props) {
       "load",
       function () {
         setPic2(reader.result);
-        console.log("reader.result: ", reader.result);
       },
       false
     );

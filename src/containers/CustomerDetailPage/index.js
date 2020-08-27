@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PersonalPage from "./styled";
 import SideMenu from "../../components/SideMenu";
 import Button from "../../components/Button";
@@ -11,6 +11,7 @@ import Select from "react-select";
 import axios from "axios";
 import EditProfile from "../editProfile-admin";
 import Deposit from "../Deposit-admin";
+import Withdraw from "../WithDraw-admin";
 import Card from "../../components/Card";
 import DetailCard from "../AccountDetailPage";
 import { useHistory } from "react-router-dom";
@@ -98,7 +99,10 @@ export default function Profile(props) {
   function ListCard() {
     return (
       <ListCardStyled>
-        <p style={{ marginTop: "40px "}} className="title"> Account</p>
+        <p style={{ marginTop: "40px " }} className="title">
+          {" "}
+          Account
+        </p>
         <div className="containerListCard">
           <RenderListCard></RenderListCard>
         </div>
@@ -200,12 +204,22 @@ export default function Profile(props) {
   } else if (state === "deposit") {
     return (
       <Deposit
-        backTitle={accountInfo.username}
+        backTitle="Profile"
         accountInfo={accountInfo}
         onClick={() => {
           setState("detail");
         }}
       ></Deposit>
+    );
+  } else if (state === "withdraw") {
+    return (
+      <Withdraw
+        backTitle="Profile"
+        accountInfo={accountInfo}
+        onClick={() => {
+          setState("detail");
+        }}
+      ></Withdraw>
     );
   } else if (state === "cardDetail") {
     return (

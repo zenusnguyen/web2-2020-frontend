@@ -126,8 +126,9 @@ export default function TransferPage() {
         }
       })
       .catch((response) => {
-        console.log('error: ', response);
-        alert.error("Transfer failed!");
+
+        alert.error("Transfer falied");
+
       });
   }
   let spendAccountsArray = [];
@@ -267,7 +268,17 @@ export default function TransferPage() {
               BackgroundColor=" #FEBA46"
             ></Button>
           </div>
-          <p style={{fontWeight:"500",fontSize:"14px",lineHeight:"140%",color:"#828485",margin:"0"}}>Enter the 6-digit code we sent to your email</p>
+          <p
+            style={{
+              fontWeight: "500",
+              fontSize: "14px",
+              lineHeight: "140%",
+              color: "#828485",
+              margin: "0",
+            }}
+          >
+            Enter the 6-digit code we sent to your email
+          </p>
           <Button
             onClick={handlerConfirm}
             Width="190px"

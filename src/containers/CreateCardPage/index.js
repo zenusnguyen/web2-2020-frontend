@@ -117,7 +117,9 @@ function SavingCard() {
   );
   const [interestOption, setInterestOption] = useState([]);
   const [maturityDate, setMaturityDate] = useState(moment().add(1, "M"));
+  const [isNone, setisNone] = useState(false);
   const originDate = moment();
+  const [month, setMonth] = useState(1);
   let history = useHistory();
   const handlePaymentOption = () => {
     if (!paymentOption) {
@@ -181,24 +183,45 @@ function SavingCard() {
   // eslint-disable-next-line no-extend-native
 
   const handlerDate = (value) => {
-    setMaturityDate(
-      new Date(
-        moment(originDate).add(parseInt(value.label.trim().split(" ")[0])),
-        "M"
-      )
+    const termString = parseFloat(
+      value.label.trim().split(" ")[value.label.trim().split(" ").length - 2]
     );
-    setInterestExample(
-      1000000 *
-        (parseFloat(
-          value.label.trim().split(" ")[
-            value.label.trim().split(" ").length - 2
-          ]
-        ) /
-          100).toFixed(10)
-    );
+    console.log("termString: ", termString);
+    if (termString != 5) {
+      setisNone(false);
+      setInterestExample(
+        1000000 *
+          (
+            parseFloat(
+              value.label.trim().split(" ")[
+                value.label.trim().split(" ").length - 2
+              ]
+            ) / 100
+          ).toFixed(10)
+      );
 
-    setInterest(value);
+      const hihi = parseFloat(value.label.trim().split(" ")[0]);
+
+      setMonth(hihi);
+
+      setInterest(value.value);
+
+      setMaturityDate(
+        moment(originDate).add(parseInt(value.label.trim().split(" ")[0]), "M")
+      );
+    } else {
+      setisNone(true);
+      setMaturityDate(moment(originDate).add(1200, "M"));
+    }
+    const hihi = parseFloat(value.label.trim().split(" ")[0]);
+    setMonth(hihi);
+
+    setInterest(value.value);
   };
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "VND",
+  });
 
   const handleClick = async () => {
     if (paymentOption && spendAccounts.length === 0) {
@@ -210,7 +233,7 @@ function SavingCard() {
           {
             card_type: "saving",
             currency_unit: currency,
-            interest_rate_id: parseInt(term),
+            interest_rate_id: parseInt(interest),
             card_number: id.toString(),
             account_id: JSON.parse(localStorage.getItem("userAccount")).id,
             status: "pending",
@@ -235,7 +258,18 @@ function SavingCard() {
         .catch((err) => alert.error("Create Card failed!"));
     }
   };
-
+  const renderMaDate = () => {
+    if (!isNone) {
+      return (
+        <InputForm
+          title="Maturity date"
+          value={moment(maturityDate).format("DD-MM-YYYY")}
+        ></InputForm>
+      );
+    } else {
+      return <div></div>;
+    }
+  };
   return (
     <div className="dualColumn3">
       <div className="spendCard">
@@ -258,10 +292,7 @@ function SavingCard() {
             }}
           />
         </div>
-        <InputForm
-          title="Maturity date"
-          value={moment(maturityDate).format("DD-MM-YYYY")}
-        ></InputForm>
+        {renderMaDate()}
         <div style={{ width: "450px", marginBottom: "20px" }}>
           <p className="titleType" style={{ marginBottom: "4px" }}>
             Interest payment option{" "}
@@ -321,12 +352,16 @@ function SavingCard() {
           value="₫1,000,000"
         ></InputForm>
         <InputForm
-          title="So the total interest will be"
+
+          title="So the interest per month will be"
+
           value={formatter.format(interestExample)}
         ></InputForm>
         <InputForm
           title="And your balance at maturity date will be"
-          value={formatter.format(interestExample + 1000000)}
+
+          value={formatter.format(interestExample * month + 1000000)}
+
         ></InputForm>
       </div>
     </div>
