@@ -12,7 +12,7 @@ import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 import Back from "../../assets/back.svg";
 
-function SpendCard() {  
+function SpendCard() {
   const [accountType, setAccountType] = useState(1);
   const [currency, setCurrency] = useState("VND");
   let history = useHistory();
@@ -218,10 +218,6 @@ function SavingCard() {
 
     setInterest(value.value);
   };
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "VND",
-  });
 
   const handleClick = async () => {
     if (paymentOption && spendAccounts.length === 0) {
@@ -352,16 +348,12 @@ function SavingCard() {
           value="₫1,000,000"
         ></InputForm>
         <InputForm
-
           title="So the interest per month will be"
-
           value={formatter.format(interestExample)}
         ></InputForm>
         <InputForm
           title="And your balance at maturity date will be"
-
           value={formatter.format(interestExample * month + 1000000)}
-
         ></InputForm>
       </div>
     </div>
