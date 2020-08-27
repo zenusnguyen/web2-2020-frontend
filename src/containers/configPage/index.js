@@ -47,10 +47,31 @@ export default function ConfigPage() {
   let history = useHistory();
   const alert = useAlert();
   const [spendData, setSpendData] = useState([]);
-  const [savingData, setSavingData] = useState(0);
-  const [listSaving, setListSaving] = useState([]);
+  useEffect(() => {
+    async function FecthSpend() {
+      const result = await axios.get(`${config.server}/spend-account-types`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      // temp = result.data;
+      // _.forEach(temp, (item) => {
+      //   item.limited_amount_per_transaction = formatter.format(
+      //     item.limited_amount_per_transaction
+      //   );
+
+      //   item.limited_amount_per_day = formatter.format(
+      //     item.limited_amount_per_day
+      //   );
+      // });
+
+      setSpendData(result.data);
+    }
+    FecthSpend();
+  }, []);
   const handleChangeSpend1 = (value) => {
     let temp = spendData;
+
     temp[0].limited_amount_per_transaction = value;
     setSpendData(temp);
   };
@@ -82,39 +103,13 @@ export default function ConfigPage() {
     temp[2].limited_amount_per_day = value;
     setSpendData(temp);
   };
-  const handlerChangSaving = (value) => {
-    let temp = listSaving;
 
-    temp[savingData - 1].newRate = value;
-  };
   let temp = [];
   var formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "VND",
   });
 
-  useEffect(() => {
-    async function FecthSpend() {
-      const result = await axios.get(`${config.server}/spend-account-types`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      temp = result.data;
-      _.forEach(temp, (item) => {
-        item.limited_amount_per_transaction = formatter.format(
-          item.limited_amount_per_transaction
-        );
-
-        item.limited_amount_per_day = formatter.format(
-          item.limited_amount_per_day
-        );
-      });
-
-      setSpendData(temp);
-    }
-    FecthSpend();
-  }, []);
   const handleUpdate = async () => {
     axios
       .post(
