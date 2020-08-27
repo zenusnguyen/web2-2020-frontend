@@ -114,6 +114,7 @@ function SavingCard() {
   const [interestOption, setInterestOption] = useState([]);
   const [maturityDate, setMaturityDate] = useState(moment().add(1, "M"));
   const originDate = moment();
+  const [month, setMonth] = useState(1);
   let history = useHistory();
   const handlePaymentOption = () => {
     if (!paymentOption) {
@@ -185,16 +186,25 @@ function SavingCard() {
     );
     setInterestExample(
       1000000 *
-        (parseFloat(
-          value.label.trim().split(" ")[
-            value.label.trim().split(" ").length - 2
-          ]
-        ) /
-          100).toFixed(10)
+        (
+          parseFloat(
+            value.label.trim().split(" ")[
+              value.label.trim().split(" ").length - 2
+            ]
+          ) / 100
+        ).toFixed(10)
     );
 
-    setInterest(value);
+    const hihi = parseFloat(value.label.trim().split(" ")[0]);
+
+    setMonth(hihi);
+
+    setInterest(value.value);
   };
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "VND",
+  });
 
   const handleClick = async () => {
     if (paymentOption && spendAccounts.length === 0) {
@@ -206,7 +216,7 @@ function SavingCard() {
           {
             card_type: "saving",
             currency_unit: currency,
-            interest_rate_id: parseInt(term),
+            interest_rate_id: parseInt(interest),
             card_number: id.toString(),
             account_id: JSON.parse(localStorage.getItem("userAccount")).id,
             status: "pending",
@@ -317,12 +327,12 @@ function SavingCard() {
           value="₫ 1,000,000"
         ></InputForm>
         <InputForm
-          title="So the total interest will be"
-          value={interestExample}
+          title="So the interest per month will be"
+          value={formatter.format(interestExample)}
         ></InputForm>
         <InputForm
           title="And your balance at maturity date will be"
-          value={interestExample + 1000000}
+          value={formatter.format(interestExample * month + 1000000)}
         ></InputForm>
       </div>
     </div>

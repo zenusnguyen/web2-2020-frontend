@@ -21,12 +21,13 @@ const SignInPageStyle = styled.div`
     /* justify-content: center; */
   }
   .verify {
+    margin-top: 32px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 350px;
-    
+
     button {
       margin-top: 20px;
       background-color: #feba46;
