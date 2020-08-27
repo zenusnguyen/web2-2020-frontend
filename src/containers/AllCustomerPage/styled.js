@@ -46,7 +46,8 @@ const MaganerAccountStyled = styled.div`
     }
     img {
       position: relative;
-      left: 30px;
+      left: 32px;
+      bottom: 2px;
     }
   }
 `;

@@ -267,6 +267,7 @@ export default function Register() {
               <div>
                 <p>Date of birth</p>
                 <DatePicker
+                  dateFormat="dd/MM/yyyy"
                   selected={DateOfBirth}
                   onChange={(e) => setDateOfBirth(e)}
                 ></DatePicker>
@@ -292,6 +293,7 @@ export default function Register() {
               <div>
                 <p>Date of issue</p>
                 <DatePicker
+                  dateFormat="dd/MM/yyyy"
                   selected={DateOfIssue || new Date()}
                   onChange={(e) => setDateOfIssue(e)}
                 ></DatePicker>
