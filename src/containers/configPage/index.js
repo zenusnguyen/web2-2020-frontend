@@ -20,6 +20,7 @@ function ConfigRow(props) {
             onChange={(e) => props.onChange1(e.target.value)}
             placeholder={props.placeholder1}
             title={props.title1}
+            type="number"
           ></InputForm>
         </div>
         <div className="child">
@@ -28,6 +29,7 @@ function ConfigRow(props) {
             onChange={(e) => props.onChange2(e.target.value)}
             placeholder={props.placeholder2}
             title={props.title2}
+            type="number"
           ></InputForm>
         </div>
         <div className="child">
@@ -36,6 +38,7 @@ function ConfigRow(props) {
             onChange={(e) => props.onChange3(e.target.value)}
             placeholder={props.placeholder3}
             title={props.title3}
+            type="number"
           ></InputForm>
         </div>
       </div>
