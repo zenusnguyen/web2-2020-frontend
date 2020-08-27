@@ -58,16 +58,22 @@ export default function HistoryCard(props) {
           <p className="subtext"> {props.email || "zenusnguyen@gmail.com"} </p>
         </div>
         <div className="detail-right">
-          <Button
+          <button
             onClick={props.onClick}
-            Color="white"
-            title="Details"
-            BorderRadius="8px"
-            Top="0px"
-            Width="140px"
-            Height="40px"
-            BackgroundColor="#4F6EF6"
-          ></Button>
+            style={{
+              width: "140px",
+              height: "40px",
+              backgroundColor: "#4F6EF6",
+              border: "0px",
+              color: "white",
+              borderRadius: "8px",
+              fontWeight: "500",
+              fontSize: "14px",
+              lineHeight: "140%",
+            }}
+          >
+            Details
+          </button>
         </div>
       </CardStyled>
     );

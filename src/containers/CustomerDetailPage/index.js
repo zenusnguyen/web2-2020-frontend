@@ -110,10 +110,10 @@ export default function Profile(props) {
         <Button
           key="1"
           Top="0px"
-          title="Block"
+          title="Lock"
           Width="187px"
           onClick={HandlerBlock}
-          BackgroundColor="#BDBEBF"
+          BackgroundColor="#F45C59"
           Display="none"
         ></Button>
       );
@@ -122,10 +122,10 @@ export default function Profile(props) {
         <Button
           key="1"
           Top="0px"
-          title="unlock"
+          title="Unlock"
           Width="187px"
           onClick={HandlerUnblock}
-          BackgroundColor="green"
+          BackgroundColor="#56CD67"
           Display="none"
         ></Button>
       );
@@ -161,6 +161,18 @@ export default function Profile(props) {
                 Width="187px"
                 onClick={() => {
                   setState("deposit");
+                }}
+                // Src={AddIcon}
+                BackgroundColor="#4F6EF6"
+                Display="none"
+              ></Button>
+              <Button
+                key="1"
+                Top="0px"
+                title="Withdraw"
+                Width="187px"
+                onClick={() => {
+                  setState("withdraw");
                 }}
                 // Src={AddIcon}
                 BackgroundColor="#4F6EF6"
