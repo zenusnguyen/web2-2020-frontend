@@ -20,6 +20,22 @@ const SignInPageStyle = styled.div`
     align-items: center;
     /* justify-content: center; */
   }
+  .verify {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 350px;
+    
+    button {
+      margin-top: 20px;
+      background-color: #feba46;
+      width: 128px;
+      height: 48px;
+      border: 0px;
+      border-radius: 8px;
+    }
+  }
   .SignInTitle {
     margin-top: 60px;
     margin-bottom: 32px;

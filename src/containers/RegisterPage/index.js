@@ -14,7 +14,7 @@ import { useAlert } from "react-alert";
 import * as _ from "lodash";
 import { config } from "../../configs/server";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import Button from "../../components/Button";
 export default function Register() {
   const alert = useAlert();
   let history = useHistory();
@@ -38,6 +38,8 @@ export default function Register() {
   const [pic2, setPic2] = useState(null);
   const [img1, setImgUrl1] = useState(null);
   const [img2, setImgUrl2] = useState(null);
+  const [otp, setOtp] = useState("");
+  const [otp2, setOtp2] = useState("");
   const getPreview = (img) =>
     img !== null
       ? {
@@ -146,7 +148,8 @@ export default function Register() {
       address === null ||
       passport === null ||
       img1 === null ||
-      img2 === null
+      img2 === null ||
+      otp != otp2
     ) {
       alert.error("check your input");
       return false;
@@ -201,6 +204,22 @@ export default function Register() {
         history.push("/signin");
       } else {
         alert.error("Check your input");
+      }
+    }
+  }
+  async function getOTP() {
+    if (!validateEmail(email)) {
+      alert.error("Please check your email !");
+    } else {
+      const result = await axios.post(`${config.server}/getotp-verify`, {
+        email: email,
+      });
+
+      if (result.status == 200) {
+        alert.success("please check your mail to get OTP code");
+        setOtp2(result.data);
+      } else {
+        alert.error("Action error please check again!");
       }
     }
   }
@@ -338,7 +357,18 @@ export default function Register() {
               </div>
             </div>
           </div>
-
+          <div className="verify">
+            <InputForm
+              onChange={(e) => setOtp(e.target.value)}
+              defaultValue={0}
+              type="number"
+              title="Verification code"
+              name={"Verification code"}
+              Width="200px"
+              Bottom="8px"
+            ></InputForm>
+            <button onClick={getOTP}> Get Code</button>
+          </div>
           <button onClick={handleSubmit} className="registerButton">
             Request
           </button>
