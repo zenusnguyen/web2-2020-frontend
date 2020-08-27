@@ -304,7 +304,7 @@ export default function AccountDetail(props) {
           Term={_.get(term[1], "period")}
           AccountNumber={cardInfo.card_number}
           CurrentBalance={
-            _.get(cardInfo, "balance") + " " + cardInfo.currency_unit || 0
+            _.get(cardInfo, "balance") || 0
           }
           Status={cardInfo.status}
           Spend_type={cardInfo.spend_type}
