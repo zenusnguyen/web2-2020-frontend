@@ -26,7 +26,7 @@ const SignInPageStyle = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 350px;
-    
+
     button {
       margin-top: 20px;
       background-color: #feba46;
