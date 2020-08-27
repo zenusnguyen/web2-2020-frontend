@@ -35,9 +35,15 @@ export default function index(props) {
           }}
         >
           <p className="text">Status: </p>
-          <p className="text" style={{ color: "blue", marginLeft: "29px" }}>
-            {" "}
-            {"  " + props.Status}{" "}
+          <p
+            className="text"
+            style={{
+              color: "#6CD089",
+              marginLeft: "4px",
+              textTransform: "capitalize",
+            }}
+          >
+            {` ${props.Status}`}
           </p>
         </div>
       );
@@ -51,9 +57,15 @@ export default function index(props) {
         }}
       >
         <p className="text">Status: </p>
-        <p className="text" style={{ color: "red", marginLeft: "29px" }}>
-          {" "}
-          {"  " + props.Status}{" "}
+        <p
+          className="text"
+          style={{
+            color: "#F45C59",
+            marginLeft: "4px",
+            textTransform: "capitalize",
+          }}
+        >
+          {` ${props.Status}`}
         </p>
       </div>
     );

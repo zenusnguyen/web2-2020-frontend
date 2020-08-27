@@ -6,6 +6,11 @@ import SpendCardPlatinum from "../../assets/platinum.svg";
 import SavingCard from "../../assets/savings.svg";
 
 export default function AccountCard(props) {
+    var formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: props.unit || "VND",
+    });
+  
   const status = () => {
     if (props.Status == "active") {
       return (
@@ -13,11 +18,19 @@ export default function AccountCard(props) {
           style={{
             display: "flex",
             flexDirection: "row",
-            marginBottom: "0",
+            marginTop: "12px",
           }}
         >
-          <p style={{ margin: "0" }}>Status: </p>
-          <p style={{ color: "blue", margin: "0" }}> {"  " + props.Status} </p>
+          <p>Status: </p>
+          <p
+            style={{
+              color: "#6CD089",
+              marginLeft: "4px",
+              textTransform: "capitalize",
+            }}
+          >
+            {props.Status}
+          </p>
         </div>
       );
     } else {
@@ -27,11 +40,19 @@ export default function AccountCard(props) {
         style={{
           display: "flex",
           flexDirection: "row",
-          marginBottom: "0",
+          marginTop: "12px",
         }}
       >
-        <p style={{ margin: "0" }}>Status: </p>
-        <p style={{ color: "red", margin: "0" }}> {"  " + props.Status} </p>
+        <p>Status: </p>
+        <p
+          style={{
+            color: "#F45C59",
+            marginLeft: "4px",
+            textTransform: "capitalize",
+          }}
+        >
+          {props.Status}
+        </p>
       </div>
     );
   };
@@ -73,7 +94,7 @@ export default function AccountCard(props) {
           <p> Term: {props.Term} month</p>
           <p>Maturity date: {props.MaturityDate} </p>
           <p>Interest rate: {props.InterestRate}% </p>
-          <p> Current balance: {props.CurrentBalance} </p>
+          Current balance: {` ${formatter.format(props.CurrentBalance)}`}
           {status()}
           {renderCloseDate()}
           <p></p>
@@ -88,8 +109,24 @@ export default function AccountCard(props) {
         </div>
         <div className="detail">
           <p> Account number: {props.AccountNumber} </p>
-          <p> Account type: {cardType} </p>
-          <p> Current balance: {props.CurrentBalance} </p>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginTop: "0",
+            }}
+          >
+            <p>Account type: </p>
+            <p
+              style={{
+                marginLeft: "4px",
+                textTransform: "capitalize",
+              }}
+            >
+              {cardType}
+            </p>
+          </div>
+          Current balance: {` ${formatter.format(props.CurrentBalance)}`}{" "}
           {status()}
         </div>
       </CardStyled>
