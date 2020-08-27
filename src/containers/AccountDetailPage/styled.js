@@ -6,6 +6,7 @@ const AccountDetailPage = styled.div`
   background-color: #f5f7f9;
   width: 100vw;
   height: 100%;
+  min-height: 100vh;
   font-size: 16;
   font-weight: 500;
 
@@ -23,7 +24,7 @@ const AccountDetailPage = styled.div`
   }
 
   .containerForm {
-    padding: 40px 75px 0;
+    padding: 64px 75px;
     display: flex;
     flex-direction: column;
 
@@ -38,7 +39,8 @@ const AccountDetailPage = styled.div`
     width: 187px;
     height: 48px;
     border: 0px;
-    background: #bdbebf;
+    background: #f45c59;
+    color: white;
     border-radius: 8px;
     font-weight: 500;
     font-size: 16px;
@@ -48,7 +50,8 @@ const AccountDetailPage = styled.div`
     width: 187px;
     height: 48px;
     border: 0px;
-    background: #4f6ef6;
+    background: #56cd67;
+    color: white;
     border-radius: 8px;
     font-weight: 500;
     font-size: 16px;
@@ -71,6 +74,10 @@ const AccountDetailPage = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #828485;
+    line-height: 24px;
     img {
       margin-right: 10px;
     }

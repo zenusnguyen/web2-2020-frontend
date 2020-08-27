@@ -51,15 +51,15 @@ export default function TransferPage() {
 
       .then((response) => {
         setOtp2(response.data);
-        alert.success("please check your mail to get OTP code");
+        alert.success("OTP code sent!");
       })
-      .catch((error) => alert.error("Action error please check again!"));
+      .catch((error) => alert.error("Error. Please try again!"));
   }
 
   const submit = (fullname, amount) => {
     confirmAlert({
-      title: "Confirm to submit",
-      message: `Are you sure to do transfer to ${fullname}. Amount: ${amount} .`,
+      title: "Confirmation",
+      message: `Are you sure you want to transfer ${amount} to ${fullname}?`,
       buttons: [
         {
           label: "Yes",
@@ -75,7 +75,7 @@ export default function TransferPage() {
 
   const handlerAmount = (value) => {
     if (value > availableBalance) {
-      alert.error("your amount is lager than current balance");
+      alert.error("Your remaining balance is not enough to do this transaction!");
       setAmount(0);
     }
     setAmount(value);
@@ -88,7 +88,7 @@ export default function TransferPage() {
       amount <= 0 ||
       otp.length < 5
     ) {
-      alert.error("please check your input");
+      alert.error("Please check your input!");
     } else {
       await axios
         .get(`${config.server}/spend-accounts-findbycardid?id=${beneficiary}`, {
@@ -99,7 +99,7 @@ export default function TransferPage() {
         .then((response) => {
           submit(response.data[1].full_name, amount);
         })
-        .catch((error) => alert.error(" beneficiary account invalid"));
+        .catch((error) => alert.error("Invalid beneficiary account. Please try again!"));
     }
   }
 
@@ -122,12 +122,12 @@ export default function TransferPage() {
       )
       .then(function (response) {
         if (response.status === 200) {
-          alert.success("Transfer Successful");
+          alert.success("Transfer successful!");
         }
       })
       .catch((response) => {
         console.log('error: ', response);
-        alert.error("Transfer falied");
+        alert.error("Transfer failed!");
       });
   }
   let spendAccountsArray = [];

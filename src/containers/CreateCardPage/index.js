@@ -12,7 +12,7 @@ import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 import Back from "../../assets/back.svg";
 
-function SpendCard() {
+function SpendCard() {  
   const [accountType, setAccountType] = useState(1);
   const [currency, setCurrency] = useState("VND");
   let history = useHistory();
@@ -53,12 +53,12 @@ function SpendCard() {
       )
       .then((result) => {
         setID(Math.floor(100000000000 + Math.random() * 900000000000));
-        alert.success("Create Card success");
+        alert.success("Create card successful!");
         setTimeout(function () {
           history.push("/manage");
         }, 1500);
       })
-      .catch((err) => alert.error("Create Card fail"));
+      .catch((err) => alert.error("Create card failed!"));
   };
   return (
     <div className="spendCard">
@@ -100,6 +100,10 @@ function SpendCard() {
 }
 
 function SavingCard() {
+  var formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "VND",
+  });
   const [currency, setCurrency] = useState("VND");
   const [term, setTerm] = useState(1);
   const [interest, setInterest] = useState("1");
@@ -223,12 +227,12 @@ function SavingCard() {
         )
         .then((result) => {
           setID(Math.floor(100000000000 + Math.random() * 900000000000));
-          alert.success("Create Card success");
+          alert.success("Create Card successful!");
           setTimeout(function () {
             history.push("/manage");
           }, 1500);
         })
-        .catch((err) => alert.error("Create Card fail"));
+        .catch((err) => alert.error("Create Card failed!"));
     }
   };
 
@@ -314,15 +318,15 @@ function SavingCard() {
       <div className="example">
         <InputForm
           title="Example, if you want to deposit"
-          value="₫ 1,000,000"
+          value="₫1,000,000"
         ></InputForm>
         <InputForm
           title="So the total interest will be"
-          value={interestExample}
+          value={formatter.format(interestExample)}
         ></InputForm>
         <InputForm
           title="And your balance at maturity date will be"
-          value={interestExample + 1000000}
+          value={formatter.format(interestExample + 1000000)}
         ></InputForm>
       </div>
     </div>

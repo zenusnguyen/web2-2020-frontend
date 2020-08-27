@@ -143,14 +143,14 @@ export default function AccountDetail(props) {
         }
       )
       .then((result) => {
-        alert.success("Action success");
+        alert.success("Action successful!");
 
         setTimeout(function () {
           historys.go(0);
         }, 1500);
       })
       .catch((err) => {
-        alert.error("Action error please check again!");
+        alert.error("Error. Please try again!");
       });
   };
 
@@ -275,7 +275,7 @@ export default function AccountDetail(props) {
     if (cardInfo.status === "active") {
       return (
         <button onClick={handleBlock} className="blockButton">
-          Block account
+          Lock account
         </button>
       );
     } else if (cardInfo.status === "block") {

@@ -39,7 +39,7 @@ export default function HistoryCard(props) {
           background: "#F45C59"
         }}
       >
-        <p style={{ color: "white", margin: "0" }}> {"Locked"} </p>
+        <p style={{ color: "white", margin: "0" }}> {"Blocked"} </p>
       </div>
     );
   };
