@@ -113,6 +113,7 @@ function SavingCard() {
   );
   const [interestOption, setInterestOption] = useState([]);
   const [maturityDate, setMaturityDate] = useState(moment().add(1, "M"));
+  const [isNone, setisNone] = useState(false);
   const originDate = moment();
   const [month, setMonth] = useState(1);
   let history = useHistory();
@@ -178,25 +179,37 @@ function SavingCard() {
   // eslint-disable-next-line no-extend-native
 
   const handlerDate = (value) => {
-    setMaturityDate(
-      new Date(
-        moment(originDate).add(parseInt(value.label.trim().split(" ")[0])),
-        "M"
-      )
+    const termString = parseFloat(
+      value.label.trim().split(" ")[value.label.trim().split(" ").length - 2]
     );
-    setInterestExample(
-      1000000 *
-        (
-          parseFloat(
-            value.label.trim().split(" ")[
-              value.label.trim().split(" ").length - 2
-            ]
-          ) / 100
-        ).toFixed(10)
-    );
+    console.log("termString: ", termString);
+    if (termString != 5) {
+      setisNone(false);
+      setInterestExample(
+        1000000 *
+          (
+            parseFloat(
+              value.label.trim().split(" ")[
+                value.label.trim().split(" ").length - 2
+              ]
+            ) / 100
+          ).toFixed(10)
+      );
 
+      const hihi = parseFloat(value.label.trim().split(" ")[0]);
+
+      setMonth(hihi);
+
+      setInterest(value.value);
+
+      setMaturityDate(
+        moment(originDate).add(parseInt(value.label.trim().split(" ")[0]), "M")
+      );
+    } else {
+      setisNone(true);
+      setMaturityDate(moment(originDate).add(1200, "M"));
+    }
     const hihi = parseFloat(value.label.trim().split(" ")[0]);
-
     setMonth(hihi);
 
     setInterest(value.value);
@@ -241,7 +254,18 @@ function SavingCard() {
         .catch((err) => alert.error("Create Card fail"));
     }
   };
-
+  const renderMaDate = () => {
+    if (!isNone) {
+      return (
+        <InputForm
+          title="Maturity date"
+          value={moment(maturityDate).format("DD-MM-YYYY")}
+        ></InputForm>
+      );
+    } else {
+      return <div></div>;
+    }
+  };
   return (
     <div className="dualColumn3">
       <div className="spendCard">
@@ -264,10 +288,7 @@ function SavingCard() {
             }}
           />
         </div>
-        <InputForm
-          title="Maturity date"
-          value={moment(maturityDate).format("DD-MM-YYYY")}
-        ></InputForm>
+        {renderMaDate()}
         <div style={{ width: "450px", marginBottom: "20px" }}>
           <p className="titleType" style={{ marginBottom: "4px" }}>
             Interest payment option{" "}
