@@ -34,7 +34,7 @@ export default function SideMenu() {
     {
       key: 5,
       title: "Sign out",
-      src: "../../assets/signout.png",
+      src: "../../assets/signout.svg",
       link: "/signout",
     },
   ];
@@ -55,13 +55,13 @@ export default function SideMenu() {
     {
       key: 3,
       title: "Configuration",
-      src: "../../assets/all-cus.svg",
+      src: "../../assets/settings.svg",
       link: "/configuration",
     },
     {
       key: 4,
       title: "Sign out",
-      src: "../../assets/signout.png",
+      src: "../../assets/signout.svg",
       link: "/signout",
     },
   ];

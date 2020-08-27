@@ -13,13 +13,11 @@ export default function AccountCard(props) {
           style={{
             display: "flex",
             flexDirection: "row",
+            marginBottom: "0",
           }}
         >
-          <p>Status : </p>
-          <p style={{ color: "blue", marginLeft: "29px" }}>
-            {" "}
-            {"  " + props.Status}{" "}
-          </p>
+          <p style={{ margin: "0" }}>Status: </p>
+          <p style={{ color: "blue", margin: "0" }}> {"  " + props.Status} </p>
         </div>
       );
     } else {
@@ -29,13 +27,11 @@ export default function AccountCard(props) {
         style={{
           display: "flex",
           flexDirection: "row",
+          marginBottom: "0",
         }}
       >
-        <p>Status : </p>
-        <p style={{ color: "red", marginLeft: "29px" }}>
-          {" "}
-          {"  " + props.Status}{" "}
-        </p>
+        <p style={{ margin: "0" }}>Status: </p>
+        <p style={{ color: "red", margin: "0" }}> {"  " + props.Status} </p>
       </div>
     );
   };
@@ -55,6 +51,17 @@ export default function AccountCard(props) {
   } else {
     Src = SavingCard;
   }
+  const renderCloseDate = () => {
+    if (props.close_date)
+      return (
+        <div
+          style={{ display: "flex", flexDirection: "row", marginTop: "12px" }}
+        >
+          <p style={{ margin: "0" }}>Close date: </p>
+          <p style={{ color: "red", margin: "0" }}> {props.close_date}</p>
+        </div>
+      );
+  };
   if (props.Card_type === "saving") {
     return (
       <CardStyled>
@@ -67,7 +74,8 @@ export default function AccountCard(props) {
           <p>Maturity date: {props.MaturityDate} </p>
           <p>Interest rate: {props.InterestRate}% </p>
           <p> Current balance: {props.CurrentBalance} </p>
-
+          {status()}
+          {renderCloseDate()}
           <p></p>
         </div>
       </CardStyled>

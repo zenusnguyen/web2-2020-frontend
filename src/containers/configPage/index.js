@@ -14,21 +14,30 @@ function ConfigRow(props) {
     <ConfigRowStyled>
       <div className="title">{props.title} </div>
       <div className="containerInput">
-        <InputForm
-          onChange={(e) => props.onChange1(e.target.value)}
-          placeholder={props.placeholder1}
-          title={props.title1}
-        ></InputForm>
-        <InputForm
-          onChange={(e) => props.onChange2(e.target.value)}
-          placeholder={props.placeholder2}
-          title={props.title2}
-        ></InputForm>
-        <InputForm
-          onChange={(e) => props.onChange3(e.target.value)}
-          placeholder={props.placeholder3}
-          title={props.title3}
-        ></InputForm>
+        <div className="child">
+          <InputForm
+            Width="100%"
+            onChange={(e) => props.onChange1(e.target.value)}
+            placeholder={props.placeholder1}
+            title={props.title1}
+          ></InputForm>
+        </div>
+        <div className="child">
+          <InputForm
+            Width="100%"
+            onChange={(e) => props.onChange2(e.target.value)}
+            placeholder={props.placeholder2}
+            title={props.title2}
+          ></InputForm>
+        </div>
+        <div className="child">
+          <InputForm
+            Width="100%"
+            onChange={(e) => props.onChange3(e.target.value)}
+            placeholder={props.placeholder3}
+            title={props.title3}
+          ></InputForm>
+        </div>
       </div>
     </ConfigRowStyled>
   );
@@ -79,6 +88,11 @@ export default function ConfigPage() {
     temp[savingData - 1].newRate = value;
   };
   let temp = [];
+  var formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "VND",
+  });
+
   useEffect(() => {
     async function FecthSpend() {
       const result = await axios.get(`${config.server}/spend-account-types`, {
@@ -86,21 +100,20 @@ export default function ConfigPage() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      setSpendData(result.data);
+      temp = result.data;
+      _.forEach(temp, (item) => {
+        item.limited_amount_per_transaction = formatter.format(
+          item.limited_amount_per_transaction
+        );
+
+        item.limited_amount_per_day = formatter.format(
+          item.limited_amount_per_day
+        );
+      });
+
+      setSpendData(temp);
     }
     FecthSpend();
-    // async function FecthSaving() {
-    //   const result = await axios.get(`${config.server}/interest-rates`);
-    //   _.forEach(result.data, (item) => {
-    //     temp.push({
-    //       label: ` ${item.period} month - Interest rate ${item.interest_rate} %`,
-    //       value: item.id,
-    //     });
-    //   });
-    //   setListSaving(temp);
-    // }
-
-    // FecthSaving();
   }, []);
   const handleUpdate = async () => {
     axios
@@ -152,32 +165,14 @@ export default function ConfigPage() {
           title2=" Gold"
           title3=" Platinum"
         ></ConfigRow>
-        {/* <p style={{ fontSize: "24px", fontWeight: "600" }}>
-          Savings annual interest rates
-        </p>
-        <div className="dualConfig">
-          <div className="selectTerm">
-            <p>Term</p>
-            <Select
-              options={listSaving}
-              onChange={(e) => setSavingData(e.value)}
-              defaultValue={{
-                label: " 1 month - Interest rate 4.6%",
-                value: "1",
-              }}
-            />
-          </div>
-          <InputForm
-            onChange={(e) => handlerChangSaving(e.target.value)}
-            title="Rate (%)"
-          ></InputForm>
-        </div> */}
+
         <Button
           onClick={handleUpdate}
-          Left="0px"
-          title="Save"
           Width="190px"
-          BackgroundColor="blue"
+          title="Save"
+          Top="0px"
+          Left="0px"
+          BackgroundColor={"#4F6EF6"}
         ></Button>
       </div>
     </MaganerAccountStyled>

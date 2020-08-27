@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
 const CardStyled = styled.div`
-  width: 950px;
-  height: 210px;
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
-  padding: 16px;
+  padding: 24px;
   border-radius: 16px;
-  margin-bottom:40px;
+  margin-bottom: 20px;
+  align-items: center;
+  box-shadow: 0px 4px 16px rgba(35, 35, 35, 0.06);
+
   .Card {
     width: 240px;
     height: 150px;
@@ -22,10 +23,13 @@ const CardStyled = styled.div`
     margin-left: 32px;
     display: flex;
     flex-direction: column;
-    p {
-      font-size: 14px;
+  }
+
+  .text {
+      font-size: 16px;
       font-weight: 500;
-    }
+      line-height: 150%;
+      margin-bottom: 12px;
   }
 `;
 

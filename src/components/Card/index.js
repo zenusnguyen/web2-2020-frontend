@@ -3,19 +3,28 @@ import CardStyled from "./styled";
 import SpendCard from "../../assets/spend.png";
 import SavingCard from "../../assets/deposit.png";
 import Button from "../Button";
+import SpendCardGold from "../../assets/spend-gold.svg";
+import SpendCardSilver from "../../assets/silver.svg";
+import SpendCardPlatinum from "../../assets/platinum.svg";
+
 export default function index(props) {
   var formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: props.unit||"VND",
+    currency: props.unit || "VND",
   });
 
-  let Src = SpendCard;
+  let Src = "";
   if (props.Card_type === "spend") {
-    Src = SpendCard;
+    if (props.Spend_type == 1) {
+      Src = SpendCardSilver;
+    } else if (props.Spend_type == 2) {
+      Src = SpendCardGold;
+    } else {
+      Src = SpendCardPlatinum;
+    }
   } else {
     Src = SavingCard;
   }
-
   const status = () => {
     if (props.Status == "active") {
       return (
@@ -25,8 +34,8 @@ export default function index(props) {
             flexDirection: "row",
           }}
         >
-          <p>Status : </p>
-          <p style={{ color: "blue", marginLeft: "29px" }}>
+          <p className="text">Status: </p>
+          <p className="text" style={{ color: "blue", marginLeft: "29px" }}>
             {" "}
             {"  " + props.Status}{" "}
           </p>
@@ -41,8 +50,8 @@ export default function index(props) {
           flexDirection: "row",
         }}
       >
-        <p>Status : </p>
-        <p style={{ color: "red", marginLeft: "29px" }}>
+        <p className="text">Status: </p>
+        <p className="text" style={{ color: "red", marginLeft: "29px" }}>
           {" "}
           {"  " + props.Status}{" "}
         </p>
@@ -56,14 +65,17 @@ export default function index(props) {
         <img src={Src || SpendCard}></img>
       </div>
       <div className="detail">
-        <p> Number : {props.Number} </p>
-        <p>Current balance :{` ${formatter.format(props.Balance)}`}</p>
+        <p className="text"> Number: {props.Number} </p>
+        <p className="text">
+          Current balance: {` ${formatter.format(props.Balance)}`}
+        </p>
         {status()}
         <Button
           onClick={props.onClick}
           Width="140px"
           Height="40px"
-          Top="0px"
+          Top="2px"
+          Left="0px"
           title="Details"
           BackgroundColor="#4F6EF6"
           Display="none"

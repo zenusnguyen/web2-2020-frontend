@@ -19,18 +19,17 @@ const CardStyled = styled.div`
     }
   }
 
-  p {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 150%;
-    margin-bottom: 0;
-    color: #333435;
-  }
-
   .detail-left {
     margin-left: 24px;
     display: flex;
     flex-direction: column;
+    p {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 150%;
+      margin-bottom: 0;
+      color: #333435;
+    }
   }
 
   .detail-right {
@@ -38,6 +37,7 @@ const CardStyled = styled.div`
     flex-direction: column;
     text-align: right;
     margin-left: auto;
+    font-size: 16px;
   }
 
   p.subtext {
@@ -52,12 +52,11 @@ const CardStyled = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-right: auto;
-
   }
   .status {
-    width: 52px;
+    width: 92px;
     height: 24px;
-    background: #56cd67;
+    background: "yellow";
     border-radius: 4px;
     display: flex;
     justify-content: center;

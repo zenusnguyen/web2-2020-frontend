@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MaganerAccountStyled from "./styled";
 import Search from "../../assets/search.svg";
 import SideMenu from "../../components/SideMenu";
@@ -51,7 +51,7 @@ export default function MaganeAccount() {
     let data = [];
 
     _.forEach(customer, (item) => {
-      if (item.username == text) {
+      if (item.username.toLowerCase() == text.toLowerCase()) {
         data.push(item);
       }
     });
@@ -62,7 +62,7 @@ export default function MaganeAccount() {
     let data = [];
 
     _.forEach(customer, (item) => {
-      if (item.email == text) {
+      if (item.email.toLowerCase() == text.toLowerCase()) {
         data.push(item);
       }
     });
@@ -75,7 +75,7 @@ export default function MaganeAccount() {
     _.forEach(spendAccount, (item) => {
       if (item.card_number == text) {
         _.forEach(customer, (item2) => {
-          if (item2.id == item.account_id) {
+          if (item2.id.toLowerCase() == item.account_id.toLowerCase()) {
             data.push(item2);
           }
         });

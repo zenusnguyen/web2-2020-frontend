@@ -17,6 +17,7 @@ import { config } from "../../configs/server";
 
 export default function AccountDetail(props) {
   const { cardInfo } = props;
+
   let historys = useHistory();
   const alert = useAlert();
   const [historyLog, setHistoryLog] = useState([]);
@@ -37,9 +38,7 @@ export default function AccountDetail(props) {
       let spendAccountsArray = [];
       async function FecthSpendAccount() {
         const result = await axios.get(
-          `${config.server}/spend-accounts-by-owneraccount?id=${
-            JSON.parse(localStorage.getItem("userAccount")).id
-          }`,
+          `${config.server}/spend-accounts-by-owneraccount?id=${cardInfo.account_id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -80,11 +79,14 @@ export default function AccountDetail(props) {
   function RenderHistory() {
     return historyLog.map((items) => (
       <HistoryCard
+        account={items.from_account}
+        id={items.id}
         unit={items.unit}
         TransferType={items.transaction_type}
         Date={items.created_at}
         Amount={items.amount}
         RemainingBalance={items.remaining_balance}
+        remark={items.remark}
       ></HistoryCard>
     ));
   }
@@ -132,6 +134,7 @@ export default function AccountDetail(props) {
         `${config.server}/spend-accounts/${cardInfo.id}`,
         {
           status: "block",
+          closed_date: new Date(),
         },
         {
           headers: {
@@ -154,10 +157,12 @@ export default function AccountDetail(props) {
   const handleClose = async () => {
     let beneficiaryAccount2 = null;
     confirmAlert({
-      title: "Confirm to submit",
+      title: "Close account",
       message: (
         <div className="selector">
-          <p>Select Spend Account to receive available balance </p>
+          <p style={{ fontWeight: "600", fonSize: "32px", lineHeight: "150%" }}>
+            Select a Spend account to continue
+          </p>
           <Select
             options={listSpend}
             onChange={(e) => (beneficiaryAccount2 = e.value)}
@@ -168,12 +173,12 @@ export default function AccountDetail(props) {
 
       buttons: [
         {
-          label: "Yes",
-          onClick: () => handleBlockAccount(beneficiaryAccount2),
+          label: "Cancel",
+          onClick: () => {},
         },
         {
-          label: "No",
-          onClick: () => {},
+          label: "Done",
+          onClick: () => handleBlockAccount(beneficiaryAccount2),
         },
       ],
     });
@@ -276,7 +281,7 @@ export default function AccountDetail(props) {
     } else if (cardInfo.status === "block") {
       return (
         <button onClick={handleUnBlock} className="unblockButton">
-          UnBlock account
+          Unlock account
         </button>
       );
     }
@@ -306,7 +311,7 @@ export default function AccountDetail(props) {
           Card_type={cardInfo.card_type}
           InterestRate={_.get(term[1], "interest_rate")}
           MaturityDate={_.get(term[0], "maturity_date")}
-          // TotalInterest=
+          close_date={_.get(cardInfo, "closed_date")}
         ></AccountCard>
         <p className="itemTitle">History</p>
         <span className="filterSection">

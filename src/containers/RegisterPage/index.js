@@ -14,6 +14,7 @@ import { useAlert } from "react-alert";
 import * as _ from "lodash";
 import { config } from "../../configs/server";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 export default function Register() {
   const alert = useAlert();
   let history = useHistory();
@@ -53,28 +54,59 @@ export default function Register() {
           border: "0px",
         };
 
+  function convertBase64(file) {
+    const reader = new FileReader();
+
+    reader.addEventListener(
+      "load",
+      function () {
+        // convert image file to base64 string
+        // reader.result;
+
+        setPic1(reader.result);
+      },
+      false
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function convertBase642(file) {
+    const reader = new FileReader();
+
+    reader.addEventListener(
+      "load",
+      function () {
+        setPic2(reader.result);
+      },
+      false
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
   const handleChangePic = (e, pic) => {
     // e.preventDefault();
 
-    if (e.target.files[0].size >= 4 * 1024 * 1024) {
-      alert.error("Max size of an image: 4MB");
+    if (e.target.files[0].size >= 0.5 * 1024 * 1024) {
+      alert.error("Max size of an image: 0.5 MB");
     } else {
       if (pic === "pic1") {
-        setPic1(e.target.files[0]);
-
+        convertBase64(e.target.files[0]);
         setImgUrl1(URL.createObjectURL(e.target.files[0]));
       } else if (pic === "pic2") {
-        setPic2(e.target.files[0]);
-
+        convertBase642(e.target.files[0]);
         setImgUrl2(URL.createObjectURL(e.target.files[0]));
       }
     }
   };
   const Button = styled.button`
-    /* Insert your favorite CSS code to style a button */
     width: 100px;
     height: 100px;
-    /* background-color: white; */
+
     border-style: dashed;
   `;
 
@@ -125,17 +157,6 @@ export default function Register() {
   async function handleSubmit() {
     const handle = await HandlerInput();
     if (handle === true) {
-      let data = new FormData();
-      data.append("files", pic1);
-      data.append("files", pic2);
-
-      const uploadRes = await axios({
-        method: "POST",
-        url: `https://web2-2020-back-end.herokuapp.com/upload`,
-        data,
-      })
-        .then()
-        .catch((err) => alert.error("some things went wrong"));
       const createUserInfor = await axios
         .post(`${config.server}/customer-infors`, {
           full_name: fullName,
@@ -144,8 +165,8 @@ export default function Register() {
           date_of_birth: DateOfBirth,
           date_of_issue: DateOfIssue,
           identificationNumber: passport,
-          img1: uploadRes.data[0].url,
-          img2: uploadRes.data[1].url,
+          img1: pic1,
+          img2: pic2,
         })
         .then()
         .catch((err) => alert.error("some things went wrong"));

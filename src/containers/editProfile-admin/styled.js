@@ -1,79 +1,24 @@
 import styled from "styled-components";
 
-export const DepositStyled = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  /* padding-left: 75px; */
-  /* padding-top: 40px; */
-
-  .containerDeposit {
-    padding-left: 75px;
-    padding-top: 40px;
-  }
-
-  .selectAccount {
-    p {
-      /* font-family: Inter; */
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 150%;
-      /* identical to box height, or 24px */
-
-      display: flex;
-      align-items: center;
-
-      /* Grayscale / Black */
-
-      color: #333435;
-    }
-  }
-  .back {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    img {
-      margin-right: 10px;
-    }
-    .button {
-      border: 0px;
-      background-color: transparent;
-    }
-  }
-  .titleWithButton {
-    padding-right: 0px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 55px;
-    width: 100%;
-  }
-  .pageTitle {
-    font-size: 32px;
-    font-weight: bold;
-  }
-`;
-
 const PersonalPage = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
-  margin-bottom: 40px;
+  height: 100%;
+  min-height: 100vh;
 
-  /* justify-content: flex-start; */
   .bodyContainer {
-    margin-top: 65px;
+    padding: 64px 75px;
     display: flex;
     flex-direction: column;
-    padding-left: 75px;
-    margin-bottom: 60px;
+    width: 100%;
   }
-
   .pageTitle {
-    font-size: 32px;
     font-weight: bold;
+    font-size: 32px;
+    line-height: 150%;
+    margin: 0;
   }
   .title {
     font-size: 24px;
@@ -83,6 +28,10 @@ const PersonalPage = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #828485;
     img {
       margin-right: 10px;
     }
@@ -92,12 +41,12 @@ const PersonalPage = styled.div`
     }
   }
   .titleWithButton {
-    padding-right: 0px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 55px;
     width: 100%;
+    align-items: center;
+    margin-bottom: 32px;
   }
   .buttonGroup {
     display: flex;
@@ -110,7 +59,6 @@ export const MyDatePickerStyle = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 0px;
-  /* justify-content: space-around; */
   p {
     font-size: 16px;
     font-weight: 500;
@@ -139,31 +87,53 @@ export const Register = styled.div`
   flex-direction: row;
   background-color: #f5f7f9;
   width: 100%;
+  min-height: 100vh;
+  height: 100%;
 
-  /* justify-content: flex-start; */
-
-  .uploadImage {
+.uploadImage {
     width: 350px;
-    height: 100px;
     display: flex;
-    justify-content: space-around;
+    button {
+      border: none;
+      width: 100px;
+      height: 100px;
+      background-color: white;
+      background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='%23D9DADBFF' stroke-width='2' stroke-dasharray='6' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+      border-radius: 4px;
+    }
+    img {
+      width: 30px;
+      height: 30px;
+    }
   }
   .containerForm {
-    padding-top: 40px;
-    padding-left: 75px;
+    padding: 64px 75px;
     display: flex;
     flex-direction: column;
-
-    min-height: 508px;
     width: 350px;
-    border-radius: 15px;
-    /* align-items: center; */
     padding-bottom: 100px;
-    /* justify-content: flex-start; */
   }
   .SignInTitle {
-    font-size: 32px;
     font-weight: bold;
+    font-size: 32px;
+    line-height: 150%;
+    margin-bottom: 32px;
+  }
+    .back {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #828485;
+    img {
+      margin-right: 10px;
+    }
+    .button {
+      border: 0px;
+      background-color: transparent;
+    }
   }
   .create {
     margin-top: 32px;
@@ -182,15 +152,18 @@ export const Register = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    /* padding-top:20px; */
   }
   .registerButton {
-    width: 350px;
-    height: 50px;
-    background-color: #feba46;
+    margin-top: 32px;
+    width: 187px;
+    height: 48px;
     border: 0px;
     color: white;
-    border-radius: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    background: #4F6EF6;
+    border-radius: 8px;
   }
 `;
 

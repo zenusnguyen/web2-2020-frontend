@@ -9,8 +9,8 @@ const CardStyled = styled.div`
   margin-bottom: 16px;
   align-items: center;
   box-shadow: 0px 4px 16px rgba(35, 35, 35, 0.06);
-  height: 90px;
   min-width: 700px;
+  width: 100%;
   justify-content: space-between;
   .icon {
     width: 32px;
@@ -21,23 +21,17 @@ const CardStyled = styled.div`
     }
   }
 
-  p {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 140%;
-    /* color: #333435; */
-    padding: 0px;
-    margin: 2px;
-  }
-
   .detail-left {
-    /* top: 10px; */
     margin-left: 24px;
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
-    justify-content: space-around;
+    p {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 150%;
+      margin-bottom: 0;
+      color: #333435;
+    }
   }
 
   .detail-right {
