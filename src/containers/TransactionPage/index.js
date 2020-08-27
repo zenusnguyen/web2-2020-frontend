@@ -64,11 +64,14 @@ export default function TransactionHistory() {
   function RenderHistory() {
     return data.map((items) => (
       <HistoryCard
+        account={items.from_account}
+        id={items.id}
         unit={items.unit}
         TransferType={items.transaction_type}
         Date={items.created_at}
         Amount={items.amount}
         RemainingBalance={items.remaining_balance}
+        remark={items.remark}
       ></HistoryCard>
     ));
   }

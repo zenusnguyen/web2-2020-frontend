@@ -30,7 +30,10 @@ export default function HistoryCard(props) {
       </div>
       <div className="detail-left">
         <p>{jsUcfirst(props.TransferType) + " # " + props.id} </p>
-        <p className="subtext"> {moment(props.Date).format("MMMM d, YYYY")} </p>
+        <p className="subtext">
+          {" "}
+          {moment(props.Date).format("MMMM d, YYYY, h:mm:ss a")}{" "}
+        </p>
         <p className="subtext"> {"Remark : " + props.remark} </p>
       </div>
       <div className="detail-right">
