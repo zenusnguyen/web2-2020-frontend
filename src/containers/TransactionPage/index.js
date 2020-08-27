@@ -79,6 +79,7 @@ export default function TransactionHistory() {
     { label: "All types", value: "all" },
     { label: "Transfer", value: "transfer" },
     { label: "Deposit", value: "deposit" },
+    { label: "Withdraw", value: "withdraw" },
   ];
 
   return (

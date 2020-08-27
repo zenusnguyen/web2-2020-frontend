@@ -110,6 +110,7 @@ export default function AccountDetail(props) {
     { label: "All types", value: "all" },
     { label: "Transfer", value: "transfer" },
     { label: "Deposit", value: "deposit" },
+    { label: "Withdraw", value: "withdraw" },
   ];
 
   const handleClick = async () => {
@@ -211,7 +212,6 @@ export default function AccountDetail(props) {
           }
         })
         .catch((error) => {
-        
           alert.error("sometime when wrong ");
         });
       const block = await axios
@@ -303,9 +303,7 @@ export default function AccountDetail(props) {
         <AccountCard
           Term={_.get(term[1], "period")}
           AccountNumber={cardInfo.card_number}
-          CurrentBalance={
-            _.get(cardInfo, "balance") || 0
-          }
+          CurrentBalance={_.get(cardInfo, "balance") || 0}
           Status={cardInfo.status}
           Spend_type={cardInfo.spend_type}
           Card_type={cardInfo.card_type}
