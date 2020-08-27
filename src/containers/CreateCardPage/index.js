@@ -178,7 +178,6 @@ function SavingCard() {
   // eslint-disable-next-line no-extend-native
 
   const handlerDate = (value) => {
-    console.log("value: ", value);
     setMaturityDate(
       new Date(
         moment(originDate).add(parseInt(value.label.trim().split(" ")[0])),
