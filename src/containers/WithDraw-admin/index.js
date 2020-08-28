@@ -97,7 +97,7 @@ export default function Deposit(props) {
           {props.backTitle || ""}
         </div>
         <div className="titleWithButton">
-          <p className="pageTitle">{props.userName || "Deposit"}</p>
+          <p className="pageTitle">{ "Withdraw"}</p>
         </div>
         <div className="selectAccount">
           <p>Select an account</p>
