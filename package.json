@@ -13,7 +13,7 @@
     "fuctbase64": "^1.4.0",
     "image-to-base64": "^2.1.1",
     "lodash": "^4.17.15",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "react": "^16.13.1",
     "react-alert": "^7.0.2",
     "react-alert-template-basic": "^1.0.0",
